@@ -1,0 +1,14 @@
+diff a/code/.idea/workspace.xml b/code/.idea/workspace.xml	(rejected hunks)
+@@ -188,6 +188,12 @@
+       <sortByType />
+     </navigator>
+     <panes>
++<<<<<<< HEAD
++=======
++      <pane id="Scope" />
++      <pane id="Scratches" />
++      <pane id="PackagesPane" />
++>>>>>>> a37417ae4f3e3ced0a471f764d3760792821b1b7
+       <pane id="ProjectPane">
+         <subPane>
+           <PATH>
