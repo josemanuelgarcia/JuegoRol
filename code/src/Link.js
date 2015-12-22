@@ -1,7 +1,7 @@
 var Link=cc.Class.extend({
 //Variables de clase
-animacionArriba:null,
-animacionAbajo:null,
+caminarArriba:null,
+caminarAbajo:null,
 space:null,
 layer:null,
 sprite:null,
@@ -38,21 +38,33 @@ ctor:function (posicion, layer) {
             var frame = cc.spriteFrameCache.getSpriteFrame(str);
             framesAnimacion.push(frame);
         }
-     this.animacionAbajo = new cc.Animation(framesAnimacion, 0.2);
-
+     var animacionAbajo = new cc.Animation(framesAnimacion, 0.2);
+     this.caminarAbajo=new cc.Repeat(new cc.Animate(animacionAbajo),1);
+     this.caminarAbajo.retain();
      //Guardamos la variable caminar arriba en una variable
          var framesAnimacion2 = [];
              for (var i = 0; i <= 6; i++) {
                  var str = "zelda_arriba" + i + ".png";
                  var frame = cc.spriteFrameCache.getSpriteFrame(str);
-                 framesAnimacion.push(frame);
+                 framesAnimacion2.push(frame);
              }
-          this.animacionArriba = new cc.Animation(framesAnimacion2, 0.2);
+          var animacionArriba = new cc.Animation(framesAnimacion2, 0.2);
+          this.caminarArriba=new cc.Repeat(new cc.Animate(animacionArriba),1);
+           this.caminarArriba.retain();
            layer.addChild(this.sprite,10);
            return true;
 },moverArriba:function(){
-    this.sprite.runAction(this.animacionArriba);
+    this.sprite.runAction(this.caminarArriba);
+    var size = cc.winSize;
+    //Si no se sale de la pantalla por arriba lo mueve
+    if(this.sprite.y+10<size.height){
+        this.sprite.y=this.sprite.y+10;
+        }
 },moverAbajo:function(){
-    this.sprite.runAction(this.animacionAbajo);
+    this.sprite.runAction(this.caminarAbajo);
+    //Si no se sale de la pantalla por abajo lo mueve
+    if(this.sprite.y-10>0){
+        this.sprite.y=this.sprite.y-10;
+        }
 }
 });

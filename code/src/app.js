@@ -17,12 +17,12 @@ var GameLayer = cc.Layer.extend({
                     onKeyPressed:this.procesarEventosKeyboard,
                     onKeyReleased:this.dejarProcesarEventosKeyboard
                     },this);
+        this.scheduleUpdate();
         return true;
     },procesarEventosKeyboard:function(keyCode, event){
         //Metodo que maneja los eventos de teclado
         if(keyCode==87 || keyCode==119){
         //W mover hacia arriba
-        console.log("W pulsada");
         var instancia = event.getCurrentTarget();
         instancia.link.moverArriba();
         }
@@ -32,6 +32,12 @@ var GameLayer = cc.Layer.extend({
         instancia.link.moverAbajo();
         }
     },dejarProcesarEventosKeyboard:function(keyCode, event){
+        //Si se suelta alguna de las teclas de movimiento se eliminan todas las acciones
+        if(keyCode==87 || keyCode==119 || keyCode==83 || keyCode==115)
+        {
+            var instancia = event.getCurrentTarget();
+            cc.director.getActionManager().removeAllActionsFromTarget(instancia.link.sprite, true);
+        }
     }
 });
 
