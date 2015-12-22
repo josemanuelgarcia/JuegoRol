@@ -1,77 +1,44 @@
-
-var HelloWorldLayer = cc.Layer.extend({
-    sprite:null,
+var space=null;
+var GameLayer = cc.Layer.extend({
+    link:null,
     ctor:function () {
-        //////////////////////////////
-        // 1. super init first
         this._super();
-
-        /////////////////////////////
-        // 2. add a menu item with "X" image, which is clicked to quit the program
-        //    you may modify it.
-        // ask the window size
         var size = cc.winSize;
-
-        // add a "close" icon to exit the progress. it's an autorelease object
-        var closeItem = new cc.MenuItemImage(
-            res.CloseNormal_png,
-            res.CloseSelected_png,
-            function () {
-                cc.log("Menu is clicked!");
-            }, this);
-        closeItem.attr({
-            x: size.width - 20,
-            y: 20,
-            anchorX: 0.5,
-            anchorY: 0.5
-        });
-
-        var menu = new cc.Menu(closeItem);
-        menu.x = 0;
-        menu.y = 0;
-        this.addChild(menu, 1);
-
-        /////////////////////////////
-        // 3. add your codes below...
-        // add a label shows "Hello World"
-        // create and initialize a label
-        var helloLabel = new cc.LabelTTF("Hello World", "Arial", 38);
-        // position the label on the center of the screen
-        helloLabel.x = size.width / 2;
-        helloLabel.y = 0;
-        // add the label as a child to this layer
-        this.addChild(helloLabel, 5);
-
-        // add "HelloWorld" splash screen"
-        this.sprite = new cc.Sprite(res.HelloWorld_png);
-        this.sprite.attr({
-            x: size.width / 2,
-            y: size.height / 2,
-            scale: 0.5,
-            rotation: 180
-        });
-        this.addChild(this.sprite, 0);
-
-        this.sprite.runAction(
-            cc.sequence(
-                cc.rotateTo(2, 0),
-                cc.scaleTo(2, 1, 1)
-            )
-        );
-        helloLabel.runAction(
-            cc.spawn(
-                cc.moveBy(2.5, cc.p(0, size.height - 40)),
-                cc.tintTo(2.5,255,125,0)
-            )
-        );
+        //Cachear recursos del juego
+        cc.spriteFrameCache.addSpriteFrames(res.link_plist);
+        //Creación del espacio del juego
+         space = new cp.Space();
+         space.gravity = cp.v(0, -350);
+         //Creación del personaje link
+        this.link=new Link( cc.p(200,200),this);
+        //Manejo de eventos de TECLADO
+        cc.eventManager.addListener({
+                    event: cc.EventListener.KEYBOARD,
+                    onKeyPressed:this.procesarEventosKeyboard,
+                    onKeyReleased:this.dejarProcesarEventosKeyboard
+                    },this);
         return true;
+    },procesarEventosKeyboard:function(keyCode, event){
+        //Metodo que maneja los eventos de teclado
+        if(keyCode==87 || keyCode==119){
+        //W mover hacia arriba
+        console.log("W pulsada");
+        var instancia = event.getCurrentTarget();
+        instancia.link.moverArriba();
+        }
+        if(keyCode==83 || keyCode==115){
+        //S mover hacia abajo
+        var instancia = event.getCurrentTarget();
+        instancia.link.moverAbajo();
+        }
+    },dejarProcesarEventosKeyboard:function(keyCode, event){
     }
 });
 
-var HelloWorldScene = cc.Scene.extend({
+var GameScene = cc.Scene.extend({
     onEnter:function () {
         this._super();
-        var layer = new HelloWorldLayer();
+        var layer = new GameLayer();
         this.addChild(layer);
     }
 });
