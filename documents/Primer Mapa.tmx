@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<map version="1.0" orientation="orthogonal" renderorder="right-down" width="100" height="100" tilewidth="32" tileheight="32" nextobjectid="13">
+ <tileset firstgid="1" name="Outside_B" tilewidth="32" tileheight="32" tilecount="256">
+  <image source="../Documents/RPGVXAce/Project1/Graphics/Tilesets/Outside_B.png" width="512" height="512"/>
+ </tileset>
+ <tileset firstgid="257" name="grass-tiles-2-small" tilewidth="32" tileheight="32" tilecount="72">
+  <image source="../Downloads/tileset/tileset/grass-tiles-2-small.png" width="384" height="192"/>
+ </tileset>
+ <tileset firstgid="329" name="tree2-final" tilewidth="32" tileheight="32" tilecount="64">
+  <image source="../Downloads/tileset/tileset/tree2-final.png" width="256" height="256"/>
+ </tileset>
+ <layer name="Background" width="100" height="100">
+  <data encoding="base64" compression="zlib">
+   eJzt2EtOwzAUBdAaia9UPhUgAZ0wgHYCC6Bz2P+OeINYWFYcWjkwOke6em3aTlzfJEpKi8VRI+vIWeQpkoZjrbmMXEbok9dxLNvIbWRTrHe9/vVx+qTUzlg/6v+hnvSZOv9M9aM16dPa53U/fuuFfsyjPD/V+z33Y5/ruX7MY5l+Uu/33I9N43P9mN/Ufl8X/Wh9Rz/mNbXft0U/Wt/Rj3nV+/068hJ5jayGftwM7/PxK/34M/V+/4g8Ry4i58XMr+8iO/34M/V6fg5rfl/N8nXuS9mZPOlTr+dqpBtT83S4xuRJn3o9x7oxNY8jj5GHYdKnXMuTA3qR5y55vjun+lr+dkA/3iNfruezqu9Xc1f2neVv3e/22/c5SOuZSjn1AwAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAD4D9/dEBVX
+  </data>
+ </layer>
+ <layer name="Foreground" width="100" height="100">
+  <data encoding="base64" compression="zlib">
+   eJzt08ttwlAQBVDTHi0FCBKBXoAKCBWEVBGgAT4FcNlh5Bi8wZY4R7p6C89Io5FnVxTFPtndvdui7K+i5lEPzZ2Sc8V7vKs71NT+10Nzz/7r7uM13Ee3uI9ucR/dct3zseJtUlvXAwBAvX6v7Qne10d2P0iGySj5TMbJPN8WybLtAd/MJLv/SqbJ7OYuVsl3sm5rMEp+kk3y2/YgAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAABAyQVY5XbM
+  </data>
+ </layer>
+ <layer name="Top" width="100" height="100">
+  <data encoding="base64" compression="zlib">
+   eJzt0TdOBAEQRcHZ8+ECnPDee4+4L0cg5yVEJBvNBlslvbz1exgAAGA+LUyGYbGWarlWJrO+aL6ttv9arddGbfrHTGy1+3bt1G7t1X4d1KGfjO6ozY/rpE7rrM7roi79Y3RXbX5dN3Vbd3VfD/XoH6N7avPneqnXeqv3+qhP/5iJL7vDP99TxHh+pggAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAP78Am5GIYo=
+  </data>
+ </layer>
+ <layer name="Top Up" width="100" height="100">
+  <data encoding="base64" compression="zlib">
+   eJzt0bEJgFAMBNAPbi+I1oK4kiM4iilsRGxNxPfgipDm4FoDAACAuy27ABf2qMUetezZBeCDuuwCP9VHhsj48LfLu+bIElnPe0rsAgAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAABAPQfEuQdj
+  </data>
+ </layer>
+ <objectgroup name="Colisiones">
+  <object id="1" x="219" y="425" width="132" height="56"/>
+  <object id="2" x="322" y="1" width="316" height="182"/>
+  <object id="8" x="354" y="185" width="252" height="31"/>
+  <object id="11" x="3" y="176" width="185" height="45"/>
+  <object id="12" x="1" y="1" width="218" height="175"/>
+ </objectgroup>
+</map>
