@@ -32,39 +32,38 @@ ctor:function (posicion, layer) {
         // forma dinamica
         this.space.addShape(this.shape);
     //Guardamos la variable caminar abajo en una variable
-    var framesAnimacion = [];
-        for (var i = 0; i <= 6; i++) {
-            var str = "zelda_abajo" + i + ".png";
-            var frame = cc.spriteFrameCache.getSpriteFrame(str);
-            framesAnimacion.push(frame);
-        }
-     var animacionAbajo = new cc.Animation(framesAnimacion, 0.2);
-     this.caminarAbajo=new cc.Repeat(new cc.Animate(animacionAbajo),1);
+     var framesCaminarAbajo = this.getAnimacion("zelda_abajo",6);
+     var animacionAbajo = new cc.Animation(framesCaminarAbajo, 0.2);
+     this.caminarAbajo=new cc.RepeatForever(new cc.Animate(animacionAbajo),1);
      this.caminarAbajo.retain();
+
      //Guardamos la variable caminar arriba en una variable
-         var framesAnimacion2 = [];
-             for (var i = 0; i <= 6; i++) {
-                 var str = "zelda_arriba" + i + ".png";
-                 var frame = cc.spriteFrameCache.getSpriteFrame(str);
-                 framesAnimacion2.push(frame);
-             }
-          var animacionArriba = new cc.Animation(framesAnimacion2, 0.2);
-          this.caminarArriba=new cc.Repeat(new cc.Animate(animacionArriba),1);
-           this.caminarArriba.retain();
-           layer.addChild(this.sprite,10);
-           return true;
+      var framesCaminarArriba = this.getAnimacion("zelda_arriba",6);
+      var animacionArriba = new cc.Animation(framesCaminarArriba, 0.2);
+      this.caminarArriba=new cc.RepeatForever(new cc.Animate(animacionArriba),1);
+      this.caminarArriba.retain();
+      layer.addChild(this.sprite,10);
+      return true;
+
+},getAnimacion:function(nombreAnimacion, numFrames){
+     var framesAnimacion = [];
+     for (var i = 0; i <= numFrames; i++) {
+                var str = nombreAnimacion + i + ".png";
+                var frame = cc.spriteFrameCache.getSpriteFrame(str);
+                framesAnimacion.push(frame);
+      }
+      return framesAnimacion;
+
 },moverArriba:function(){
-    this.sprite.runAction(this.caminarArriba);
-    var size = cc.winSize;
-    //Si no se sale de la pantalla por arriba lo mueve
-    if(this.sprite.y+10<size.height){
-        this.sprite.y=this.sprite.y+10;
-        }
+
+    var moverArriba = cc.MoveBy.create(1, cc.p(0,50))
+    var spawn = cc.Spawn.create(this.caminarArriba,moverArriba);
+    this.sprite.runAction(spawn);
+
 },moverAbajo:function(){
-    this.sprite.runAction(this.caminarAbajo);
-    //Si no se sale de la pantalla por abajo lo mueve
-    if(this.sprite.y-10>0){
-        this.sprite.y=this.sprite.y-10;
-        }
+     var moverAbajo = cc.MoveBy.create(1, cc.p(0,-50))
+     var spawn = cc.Spawn.create(this.caminarAbajo,moverAbajo);
+     this.sprite.runAction(spawn);
+
 }
 });
