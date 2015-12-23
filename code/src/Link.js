@@ -34,13 +34,15 @@ ctor:function (posicion, layer) {
     //Guardamos la variable caminar abajo en una variable
      var framesCaminarAbajo = this.getAnimacion("zelda_abajo",6);
      var animacionAbajo = new cc.Animation(framesCaminarAbajo, 0.2);
-     this.caminarAbajo=new cc.RepeatForever(new cc.Animate(animacionAbajo),1);
+     var moverAbajo = cc.MoveBy.create(1, cc.p(0,-50))
+     this.caminarAbajo=new cc.RepeatForever(cc.Spawn.create(new cc.Animate(animacionAbajo),moverAbajo));
      this.caminarAbajo.retain();
 
      //Guardamos la variable caminar arriba en una variable
       var framesCaminarArriba = this.getAnimacion("zelda_arriba",6);
       var animacionArriba = new cc.Animation(framesCaminarArriba, 0.2);
-      this.caminarArriba=new cc.RepeatForever(new cc.Animate(animacionArriba),1);
+      var moverArriba = cc.MoveBy.create(1, cc.p(0,50));
+      this.caminarArriba=new cc.RepeatForever(cc.Spawn.create(new cc.Animate(animacionArriba),moverArriba));
       this.caminarArriba.retain();
       layer.addChild(this.sprite,10);
       return true;
@@ -55,15 +57,10 @@ ctor:function (posicion, layer) {
       return framesAnimacion;
 
 },moverArriba:function(){
-
-    var moverArriba = cc.MoveBy.create(1, cc.p(0,50))
-    var spawn = cc.Spawn.create(this.caminarArriba,moverArriba);
-    this.sprite.runAction(spawn);
+    this.sprite.runAction(this.caminarArriba);
 
 },moverAbajo:function(){
-     var moverAbajo = cc.MoveBy.create(1, cc.p(0,-50))
-     var spawn = cc.Spawn.create(this.caminarAbajo,moverAbajo);
-     this.sprite.runAction(spawn);
+     this.sprite.runAction(this.caminarAbajo);
 
 }
 });

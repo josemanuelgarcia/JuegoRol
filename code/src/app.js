@@ -1,7 +1,7 @@
 var space=null;
 var GameLayer = cc.Layer.extend({
     link:null,
-    keyPulsada:null
+    keyPulsada:null,
     ctor:function () {
 
         this._super();
