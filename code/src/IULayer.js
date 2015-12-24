@@ -10,7 +10,7 @@ var IULayer = cc.Layer.extend({
 
         // spriteBotonMenu
         this.spriteBotonMenu = cc.Sprite.create(res.boton_saltar_png);
-        this.spriteBotonMenu.setPosition(cc.p(200,200));
+        this.spriteBotonMenu.setPosition(cc.p(200,400));
 
         this.addChild(this.spriteBotonMenu);
 
