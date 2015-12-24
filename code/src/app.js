@@ -44,9 +44,19 @@ var GameLayer = cc.Layer.extend({
             //S mover hacia abajo
             instancia.link.moverAbajo();
         }
+        //Mover derecha
+        if(keyCode==68 || keyCode==100)
+        {
+            instancia.link.moverDerecha();
+        }
+        //Mover izquierda
+        if(keyCode==65 || keyCode==97)
+        {
+            instancia.link.moverIzquierda();
+        }
     },dejarProcesarEventosKeyboard:function(keyCode, event){
         //Si se suelta alguna de las teclas de movimiento se eliminan todas las acciones
-        if(keyCode==87 || keyCode==119 || keyCode==83 || keyCode==115)
+        if(keyCode==87 || keyCode==119 || keyCode==83 || keyCode==115 || keyCode==68 || keyCode==100 || keyCode==65 || keyCode==97)
         {
             var instancia = event.getCurrentTarget();
             instancia.keyPulsada = null;

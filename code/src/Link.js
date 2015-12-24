@@ -2,6 +2,7 @@ var Link=cc.Class.extend({
 //Variables de clase
 animCaminarAbajo:null,
 animCaminarArriba:null,
+animCaminarDerecha:null,
 space:null,
 layer:null,
 sprite:null,
@@ -41,7 +42,10 @@ ctor:function (posicion, layer) {
       var framesCaminarArriba = this.getAnimacion("link_arriba",12);
       var animacionArriba = new cc.Animation(framesCaminarArriba, 0.1);
       this.animCaminarArriba = cc.RepeatForever.create(new cc.Animate(animacionArriba));
-
+      //Animacion Caminar Derecha
+      var framesCaminarDerecha= this.getAnimacion("link_lado",12);
+      var animacionDerecha=new cc.Animation(framesCaminarDerecha,0.1);
+      this.animCaminarDerecha=cc.RepeatForever.create(new cc.Animate(animacionDerecha));
       layer.addChild(this.sprite,10);
       return true;
 
@@ -64,5 +68,19 @@ ctor:function (posicion, layer) {
      var vMoverAbajo =cc.RepeatForever.create(cc.MoveBy.create(1, cc.p(0,-50)));
      this.sprite.runAction(vMoverAbajo);
 
+},moverDerecha:function(){
+
+    //Se escala a 1 en la x
+    this.sprite.scaleX=1;
+    this.sprite.runAction(this.animCaminarDerecha);
+    var vMoverDerecha =cc.RepeatForever.create(cc.MoveBy.create(1, cc.p(50,0)));
+    this.sprite.runAction(vMoverDerecha);
+},moverIzquierda:function(){
+
+    //Si va a la izquierda se escala a -1 para hacer flip a la animacion
+    this.sprite.scaleX=-1;
+    this.sprite.runAction(this.animCaminarDerecha);
+    var vMoverIzquierda =cc.RepeatForever.create(cc.MoveBy.create(1, cc.p(-50,0)));
+    this.sprite.runAction(vMoverIzquierda);
 }
 });
