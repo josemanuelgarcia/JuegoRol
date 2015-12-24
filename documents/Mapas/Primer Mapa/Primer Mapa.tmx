@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.0" orientation="orthogonal" renderorder="right-down" width="100" height="100" tilewidth="32" tileheight="32" nextobjectid="13">
+<map version="1.0" orientation="orthogonal" renderorder="right-down" width="100" height="100" tilewidth="32" tileheight="32" nextobjectid="25">
  <tileset firstgid="1" name="Outside_B" tilewidth="32" tileheight="32" tilecount="256">
-  <image source="../Documents/RPGVXAce/Project1/Graphics/Tilesets/Outside_B.png" width="512" height="512"/>
+  <image source="Outside_B.png" width="512" height="512"/>
  </tileset>
  <tileset firstgid="257" name="grass-tiles-2-small" tilewidth="32" tileheight="32" tilecount="72">
-  <image source="../Downloads/tileset/tileset/grass-tiles-2-small.png" width="384" height="192"/>
+  <image source="grass-tiles-2-small.png" width="384" height="192"/>
  </tileset>
  <tileset firstgid="329" name="tree2-final" tilewidth="32" tileheight="32" tilecount="64">
-  <image source="../Downloads/tileset/tileset/tree2-final.png" width="256" height="256"/>
+  <image source="tree2-final.png" width="256" height="256"/>
  </tileset>
  <layer name="Background" width="100" height="100">
   <data encoding="base64" compression="zlib">
@@ -35,5 +35,10 @@
   <object id="8" x="354" y="185" width="252" height="31"/>
   <object id="11" x="3" y="176" width="185" height="45"/>
   <object id="12" x="1" y="1" width="218" height="175"/>
+  <object id="13" x="126" y="517" width="290" height="24"/>
+  <object id="15" x="446" y="510">
+   <polyline points="0,0 -28,-1 -30,-62 65,-60 64,-1 35,0 33,-26 5,-26 2,-25 2,1"/>
+  </object>
+  <object id="22" x="511" y="490" width="34" height="21"/>
  </objectgroup>
 </map>
