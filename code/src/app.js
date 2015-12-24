@@ -1,11 +1,18 @@
 var space=null;
+var idCapaJuego = 1;
+var idCapaControles = 2;
 var GameLayer = cc.Layer.extend({
     link:null,
     keyPulsada:null,
     ctor:function () {
 
+
+
         this._super();
         var size = cc.winSize;
+
+
+
         //Cachear recursos del juego
         cc.spriteFrameCache.addSpriteFrames(res.link_plist);
         //Creación del espacio del juego
@@ -52,7 +59,9 @@ var GameScene = cc.Scene.extend({
     onEnter:function () {
         this._super();
         var layer = new GameLayer();
-        this.addChild(layer);
+         this.addChild(layer, 0, idCapaJuego);
+         var iuLayer = new IULayer();
+             this.addChild(iuLayer, 0, idCapaControles);
     }
 });
 
