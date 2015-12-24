@@ -11,7 +11,7 @@ ctor:function (posicion, layer) {
     this.space = space;
     this.layer = layer;
     //Sprite inicial de link
-    this.sprite = new cc.PhysicsSprite("#zelda_abajo0.png");
+    this.sprite = new cc.PhysicsSprite("#link_abajo0.png");
         // Cuerpo dinamico, SI le afectan las fuerzas
         this.body = new cp.Body(5, cp.momentForBox(1,
             this.sprite.getContentSize().width,
@@ -33,12 +33,12 @@ ctor:function (posicion, layer) {
         this.space.addShape(this.shape);
 
     //Animacion Caminar Abajo
-     var framesCaminarAbajo = this.getAnimacion("zelda_abajo",6);
+     var framesCaminarAbajo = this.getAnimacion("link_abajo",12);
      var animacionAbajo = new cc.Animation(framesCaminarAbajo, 0.1);
      this.animCaminarAbajo=cc.RepeatForever.create(new cc.Animate(animacionAbajo));
 
      //Animacion Caminar Arriba
-      var framesCaminarArriba = this.getAnimacion("zelda_arriba",6);
+      var framesCaminarArriba = this.getAnimacion("link_arriba",12);
       var animacionArriba = new cc.Animation(framesCaminarArriba, 0.1);
       this.animCaminarArriba = cc.RepeatForever.create(new cc.Animate(animacionArriba));
 
@@ -47,7 +47,7 @@ ctor:function (posicion, layer) {
 
 },getAnimacion:function(nombreAnimacion, numFrames){
      var framesAnimacion = [];
-     for (var i = 0; i <= numFrames; i++) {
+     for (var i = 0; i < numFrames; i++) {
                 var str = nombreAnimacion + i + ".png";
                 var frame = cc.spriteFrameCache.getSpriteFrame(str);
                 framesAnimacion.push(frame);
