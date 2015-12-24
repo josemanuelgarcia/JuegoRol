@@ -1,8 +1,7 @@
 var Link=cc.Class.extend({
 //Variables de clase
-caminarArriba:null,
-caminarAbajo:null,
-animacionAbajo:null,
+animCaminarAbajo:null,
+animCaminarArriba:null,
 space:null,
 layer:null,
 sprite:null,
@@ -32,20 +31,17 @@ ctor:function (posicion, layer) {
             this.sprite.getContentSize().height - 16);
         // forma dinamica
         this.space.addShape(this.shape);
-    //Guardamos la variable caminar abajo en una variable
-     var framesCaminarAbajo = this.getAnimacion("zelda_abajo",6);
-     var animacionAbajo = new cc.Animation(framesCaminarAbajo, 0.2);
-     var moverAbajo = cc.MoveBy.create(1, cc.p(0,-50));
-     this.caminarAbajo= cc.RepeatForever.create(moverAbajo);
-     this.animacionAbajo=cc.RepeatForever.create(new cc.Animate(animacionAbajo));
-     this.caminarAbajo.retain();
 
-     //Guardamos la variable caminar arriba en una variable
+    //Animacion Caminar Abajo
+     var framesCaminarAbajo = this.getAnimacion("zelda_abajo",6);
+     var animacionAbajo = new cc.Animation(framesCaminarAbajo, 0.1);
+     this.animCaminarAbajo=cc.RepeatForever.create(new cc.Animate(animacionAbajo));
+
+     //Animacion Caminar Arriba
       var framesCaminarArriba = this.getAnimacion("zelda_arriba",6);
-      var animacionArriba = new cc.Animation(framesCaminarArriba, 0.2);
-      var moverArriba = cc.MoveBy.create(1, cc.p(0,50));
-      this.caminarArriba=new cc.RepeatForever(cc.Spawn.create(moverArriba,animacionArriba));
-      this.caminarArriba.retain();
+      var animacionArriba = new cc.Animation(framesCaminarArriba, 0.1);
+      this.animCaminarArriba = cc.RepeatForever.create(new cc.Animate(animacionArriba));
+
       layer.addChild(this.sprite,10);
       return true;
 
@@ -59,11 +55,14 @@ ctor:function (posicion, layer) {
       return framesAnimacion;
 
 },moverArriba:function(){
-    this.sprite.runAction(this.caminarArriba);
+    this.sprite.runAction(this.animCaminarArriba);
+    var vMoverArriba = cc.RepeatForever.create(cc.MoveBy.create(1, cc.p(0,50)));
+    this.sprite.runAction(vMoverArriba);
 
 },moverAbajo:function(){
-     this.sprite.runAction(this.animacionAbajo);
-     this.sprite.runAction(this.caminarAbajo);
+     this.sprite.runAction(this.animCaminarAbajo);
+     var vMoverAbajo =cc.RepeatForever.create(cc.MoveBy.create(1, cc.p(0,-50)));
+     this.sprite.runAction(vMoverAbajo);
 
 }
 });
