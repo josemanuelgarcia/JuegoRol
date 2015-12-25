@@ -82,10 +82,10 @@ var MenuObjetosLayer = cc.LayerColor.extend({
 
 });
 
-var MenuScene = cc.Scene.extend({
+var MenuObjetosScene = cc.Scene.extend({
     onEnter:function () {
         this._super();
-        var layer = new MenuLayer();
+        var layer = new MenuObjetosLayer();
         this.addChild(layer);
     }
 });

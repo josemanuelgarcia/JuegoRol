@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<map version="1.0" orientation="orthogonal" renderorder="right-down" width="50" height="50" tilewidth="32" tileheight="32" nextobjectid="31">
+ <tileset firstgid="1" name="Outside_A5" tilewidth="32" tileheight="32" tilecount="128">
+  <image source="Outside_A5.png" width="256" height="512"/>
+ </tileset>
+ <tileset firstgid="129" name="tileb" tilewidth="32" tileheight="32" tilecount="256">
+  <image source="tileb.png" width="512" height="512"/>
+ </tileset>
+ <layer name="Background" width="50" height="50">
+  <data encoding="base64" compression="zlib">
+   eJztkukKwjAQBvd11HfyiGdVEC0i9cBXd4sN1JCDStyV8g3Mr2xgh4QIAAAAAAAAAPQYs5PMTiUDGlbsOrMb0YI3tsMFHURn+vxnEvziX7miAx3f+GAPETU76t3uid33rGHn7CWiBDPPjna3ATsMOGru2tlnRKkO47FrhxHaN0TBbj3uKN1RtGa1O47syWPJLsj/VrXL1t3SOdOgYq8ebxRusFbOrCapXbuoSc4OzRZ0/E9H7oa+vIcm6EAHAAAAAEBfeAHq0rw+
+  </data>
+ </layer>
+ <layer name="Background UP" width="50" height="50">
+  <data encoding="base64" compression="zlib">
+   eJzt0sEJgDAQRcFNX9qBthFbsEMtyxwEPXoIkoQZ+OQWeLARAAAAANCnKUXMqc5fR9n5ev+0lIa1Ugd8kcu97fdyx7enoy062jJKx+i29KxnOgAAaMkF3EwSXQ==
+  </data>
+ </layer>
+ <layer name="Foreground" width="50" height="50">
+  <data encoding="base64" compression="zlib">
+   eJzt1UsKwjAUBdB04AdFcKz42YsOdROuyCW4BHehCxB0onWmEz8znQheoUKVCE1SfK9wD1wyqfDiTVpjiIiIiIiIiD5tkR0SI3vZUYKckDNyQa7Cs4R4ILXImDpikKn0QJ4amL2FtJEmMpMeyFMHs3eRHtJH5tIDUbAFspQeIgcH5GhZi+aG3C3rv1Vwv6uR/++19uG6Ly19ZFXC3sqW/Un2kf7PQ8+Vlj5WybpGNhme/35O6/1wpaUPF+8uBjiHw+Qsso/8+N6JNI19TDzeWxr6cDHCHsfKvh+ufu3hpWh9EBEREYV6AlzDZtU=
+  </data>
+ </layer>
+ <layer name="Top" width="50" height="50">
+  <data encoding="base64" compression="zlib">
+   eJzt0z0KgDAMQOH2LHoD3dRLeGld/Nm8julQEKlgpdAU3wfZOiQ8agwAAAAAIJVFZpXZZPbMuwAA/mPKvUAiR+4FEqGHLhp7uJ3myHel96isMbXV2eMN36KRG1pbfg9PS48vf+JKa4/Rxr3X0iNGJzcOtzu19njSB25wSuwRUloPAACAFE5zthhS
+  </data>
+ </layer>
+ <objectgroup name="Colisiones" visible="0">
+  <object id="1" x="161" y="957">
+   <polyline points="0,0 221,2 222,-157 219,-156"/>
+  </object>
+  <object id="2" x="160" y="953">
+   <polyline points="0,0 5,-441 642,-438 700,-440 702,-345 798,-343"/>
+  </object>
+  <object id="4" x="378" y="889">
+   <polyline points="0,0 -213,1"/>
+  </object>
+  <object id="5" x="645" y="804">
+   <polyline points="0,0 -3,153 92,153 91,-39 313,-37"/>
+  </object>
+  <object id="6" x="647" y="892">
+   <polyline points="0,0 86,-1"/>
+  </object>
+  <object id="10" x="544" y="1217" width="62" height="28"/>
+  <object id="11" x="577" y="1185" width="60" height="28"/>
+  <object id="12" x="672" y="1056" width="61" height="31"/>
+  <object id="13" x="765.95" y="827">
+   <polyline points="0,1 0.05,426"/>
+  </object>
+  <object id="14" x="766" y="829">
+   <polyline points="0,0 -28,1"/>
+  </object>
+  <object id="15" x="222" y="1120" width="64" height="31"/>
+  <object id="16" x="321" y="992" width="62" height="31"/>
+  <object id="17" x="256" y="1000" width="29" height="23"/>
+  <object id="20" x="170" y="966" width="43" height="20"/>
+  <object id="21" x="260" y="965" width="51" height="22"/>
+  <object id="22" x="388" y="900" width="54" height="24"/>
+  <object id="23" x="584" y="932" width="44" height="25"/>
+  <object id="24" x="548" y="1118" width="52" height="33"/>
+  <object id="25" x="614" y="1054" width="47" height="31"/>
+  <object id="26" x="644" y="991" width="49" height="31"/>
+  <object id="27" x="225" y="800" width="62" height="33"/>
+  <object id="28" x="224" y="577" width="126" height="157"/>
+  <object id="29" x="352" y="641" width="31" height="94"/>
+  <object id="30" x="349" y="1153" width="33" height="26"/>
+ </objectgroup>
+</map>

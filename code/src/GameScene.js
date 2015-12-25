@@ -50,6 +50,11 @@ var GameLayer = cc.Layer.extend({
         {
             instancia.link.moverIzquierda();
         }
+        //barra espaciadora seria abrir el menu de objetos
+        if(keyCode==32){
+             cc.director.resume();
+             cc.director.runScene(new MenuObjetosScene());
+        }
     },dejarProcesarEventosKeyboard:function(keyCode, event){
         //Si se suelta alguna de las teclas de movimiento se eliminan todas las acciones
         if(keyCode==87 || keyCode==119 || keyCode==83 || keyCode==115 || keyCode==68 || keyCode==100 || keyCode==65 || keyCode==97)
