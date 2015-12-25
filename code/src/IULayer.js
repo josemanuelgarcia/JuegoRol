@@ -32,8 +32,10 @@ console.log("Boton creado");
         if (cc.rectContainsPoint(areaBoton,
             cc.p(event.getLocationX(), event.getLocationY()) )){
 
-console.log("Has pinchado en el boton");
-
+        cc.director.pause();
+         var gameScene = instancia.getParent();
+          // tenemos el objeto GameScene y le añadimos la nueva layer
+         gameScene.addChild(new MenuObjetosLayer());
 
 
         }
