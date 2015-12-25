@@ -1,8 +1,10 @@
 
 var MenuObjetosLayer = cc.LayerColor.extend({
-    ctor:function () {
+scene:null,
+    ctor:function (scene) {
         this._super();
         var size = cc.winSize;
+        this.scene=scene;
 
 // Fondo
         var spriteFondoTitulo= new cc.Sprite(res.fondomenu2_png);
@@ -68,25 +70,20 @@ var MenuObjetosLayer = cc.LayerColor.extend({
         return true;
     }, pulsarBotonArco : function(){
                 cc.director.resume();
-               cc.director.runScene(new GameScene());
+               this.scene.removeChild(this);
+
     }, pulsarBotonEspada : function(){
                           cc.director.resume();
-                         cc.director.runScene(new GameScene());
-    }, menuBoomeranSprite : function(){
+                          this.scene.removeChild(this);
+    }, pulsarBotonBoomeran : function(){
                      cc.director.resume();
-                    cc.director.runScene(new GameScene());
+                     this.scene.removeChild(this);
     }, pulsarBotonBombas : function(){
                       cc.director.resume();
-                     cc.director.runScene(new GameScene());
+                      this.scene.removeChild(this);
     }
 
 });
 
-var MenuScene = cc.Scene.extend({
-    onEnter:function () {
-        this._super();
-        var layer = new MenuLayer();
-        this.addChild(layer);
-    }
-});
+
 
