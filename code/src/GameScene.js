@@ -1,9 +1,11 @@
-var space=null;
 var idCapaJuego = 1;
 var idCapaControles = 2;
 var GameLayer = cc.Layer.extend({
+    space:null,
     link:null,
     keyPulsada:null,
+    disparosEnemigos:[],
+    enemigos:[],
     ctor:function () {
 
         this._super();
@@ -12,11 +14,17 @@ var GameLayer = cc.Layer.extend({
         //Cachear recursos del juego
         cc.spriteFrameCache.addSpriteFrames(res.link_plist);
         //Creación del espacio del juego
-         space = new cp.Space();
+         this.space = new cp.Space();
          //La gravedad en este juego da igual.
-         space.gravity = cp.v(0, -50);
+         this.space.gravity = cp.v(0, -50);
          //Creación del personaje link
-        this.link=new Link( cc.p(200,200),this);
+        this.link=new Link(this.space, cc.p(200,200),this);
+
+
+        //Creacion enemigo prueba
+        var octorok = new Octorock(this.space, cc.p(300,250),this);
+        this.enemigos.push(octorok);
+
         //Manejo de eventos de TECLADO
         cc.eventManager.addListener({
                     event: cc.EventListener.KEYBOARD,
@@ -24,9 +32,21 @@ var GameLayer = cc.Layer.extend({
                     onKeyReleased:this.dejarProcesarEventosKeyboard
                     },this);
         this.scheduleUpdate();
+
         return true;
 
-    },procesarEventosKeyboard:function(keyCode, event){
+    }, update:function(dt) {
+
+        for (var i = 0; i < this.enemigos.length; i++) {
+             this.enemigos[i].update(dt);
+        }
+
+        for ( var i=0; i< this.disparosEnemigos.length; i++) {
+            this.disparosEnemigos[i].update(dt);
+        }
+
+
+    }, procesarEventosKeyboard:function(keyCode, event){
         var instancia = event.getCurrentTarget();
         if(instancia.keyPulsada == keyCode)
               return;

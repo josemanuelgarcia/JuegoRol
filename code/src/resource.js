@@ -12,6 +12,7 @@ var res = {
     boomeran_png : "res/boomeran.png",
     espada_png : "res/espada.png",
     bomba_png : "res/bomba.png",
+    corazon_png : "res/corazon.png",
     link_plist: "res/link.plist"
 };
 

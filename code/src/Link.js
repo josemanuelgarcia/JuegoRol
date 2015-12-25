@@ -8,7 +8,7 @@ layer:null,
 sprite:null,
 body:null,
 shape:null,
-ctor:function (posicion, layer) {
+ctor:function (space, posicion, layer) {
     this.space = space;
     this.layer = layer;
     //Sprite inicial de link
