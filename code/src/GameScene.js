@@ -36,17 +36,17 @@ var GameLayer = cc.Layer.extend({
             //W mover hacia arriba
             instancia.link.moverArriba();
         }
-        if(keyCode==83 || keyCode==115){
+        else if(keyCode==83 || keyCode==115){
             //S mover hacia abajo
             instancia.link.moverAbajo();
         }
         //Mover derecha
-        if(keyCode==68 || keyCode==100)
+        else if(keyCode==68 || keyCode==100)
         {
             instancia.link.moverDerecha();
         }
         //Mover izquierda
-        if(keyCode==65 || keyCode==97)
+        else if(keyCode==65 || keyCode==97)
         {
             instancia.link.moverIzquierda();
         }
