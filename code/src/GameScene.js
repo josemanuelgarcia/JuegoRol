@@ -1,5 +1,8 @@
 var idCapaJuego = 1;
 var idCapaControles = 2;
+var tipoLink=1;
+var tipoOctorock=2;
+var iuLayer=null;
 var GameLayer = cc.Layer.extend({
     space:null,
     link:null,
@@ -11,6 +14,7 @@ var GameLayer = cc.Layer.extend({
     keyPulsada:null,
     disparosEnemigos:[],
     enemigos:[],
+    depuracion:null,
     ctor:function () {
 
         this._super();
@@ -22,14 +26,15 @@ var GameLayer = cc.Layer.extend({
          this.space = new cp.Space();
          //La gravedad en este juego da igual.
          this.space.gravity = cp.v(0, 0);
+         //Add the Debug Layer:
          //Creación del personaje link
         this.link=new Link(this.space, cc.p(400,400),this);
-
 
         //Creacion enemigo prueba
         var octorok = new Octorock(this.space, cc.p(300,250),this);
         this.enemigos.push(octorok);
-
+        this.depuracion = new cc.PhysicsDebugNode(this.space);
+        this.addChild(this.depuracion,10);
         //Manejo de eventos de TECLADO
         cc.eventManager.addListener({
                     event: cc.EventListener.KEYBOARD,
@@ -40,7 +45,7 @@ var GameLayer = cc.Layer.extend({
         this.ultimaYConocida=-this.link.body.p.y+300;
         this.cargarMapa();
         this.scheduleUpdate();
-
+        this.space.addCollisionHandler(tipoLink,tipoOctorock,null,null,null,this.reducirVidas.bind(this));
         return true;
 
     }, update:function(dt) {
@@ -124,6 +129,9 @@ var GameLayer = cc.Layer.extend({
            this.ultimaYConocida=-this.link.body.p.y+300;
            this.setPosition(-this.link.body.p.x+300,-this.link.body.p.y+300);
         }
+    },reducirVidas:function(arbiter,space){
+        console.log("llega");
+        iuLayer.quitarVidas();
     }
 });
 
@@ -132,7 +140,7 @@ var GameScene = cc.Scene.extend({
         this._super();
         var layer = new GameLayer();
          this.addChild(layer, 0, idCapaJuego);
-         var iuLayer = new IULayer();
-             this.addChild(iuLayer, 0, idCapaControles);
+         iuLayer = new IULayer();
+         this.addChild(iuLayer, 0, idCapaControles);
     }
 });
