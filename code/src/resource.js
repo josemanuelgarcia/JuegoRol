@@ -19,6 +19,7 @@ var res = {
     rupia_png : "res/rupia.png",
     rupiaazul_png : "res/rupiaazul.png",
     corazon_png : "res/corazon.png",
+    corazonnegro_png : "res/corazonnegro.png",
     link_plist: "res/link.plist",
     Outside_A5_png:"res/Outside_A5.png",
     octorok_png: "res/octorok.png",

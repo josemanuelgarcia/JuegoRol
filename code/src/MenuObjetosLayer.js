@@ -72,41 +72,35 @@ scene:null,
         return true;
     }, pulsarBotonArco : function(){
                 cc.director.resume();
-                var IULayer = this.scene.getChildByTag(2);
-                IULayer.removeChild(IULayer.spriteArmaElegida);
-                 //Sprite en el que se muestra el arma elegida
-                IULayer.spriteArmaElegida = cc.Sprite.create(res.arco_reducido_png);
-                 IULayer.spriteArmaElegida.setPosition(cc.p(cc.winSize.width-40,cc.winSize.height-40));
-                IULayer.addChild(IULayer.spriteArmaElegida);
-               this.scene.removeChild(this);
+                 var IULayer = this.scene.getChildByTag(2);
+                  //Sprite en el que se muestra el arma elegida
+                   IULayer.spriteArmaElegida.setTexture(res.arco_reducido_png);
+                    this.scene.removeChild(this);
+
+
 
     }, pulsarBotonEspada : function(){
                           cc.director.resume();
                            var IULayer = this.scene.getChildByTag(2);
-                            IULayer.removeChild(IULayer.spriteArmaElegida);
                             //Sprite en el que se muestra el arma elegida
-                            IULayer.spriteArmaElegida = cc.Sprite.create(res.espada_reducida_png);
-                             IULayer.spriteArmaElegida.setPosition(cc.p(cc.winSize.width-40,cc.winSize.height-40));
-                             IULayer.addChild(IULayer.spriteArmaElegida);
+                            IULayer.spriteArmaElegida.setTexture(res.espada_reducida_png);
                           this.scene.removeChild(this);
     }, pulsarBotonBoomeran : function(){
                      cc.director.resume();
                      var IULayer = this.scene.getChildByTag(2);
-                     IULayer.removeChild(IULayer.spriteArmaElegida);
-                     //Sprite en el que se muestra el arma elegida
-                     IULayer.spriteArmaElegida = cc.Sprite.create(res.boomeran_reducido_png);
-                     IULayer.spriteArmaElegida.setPosition(cc.p(cc.winSize.width-40,cc.winSize.height-40));
-                     IULayer.addChild(IULayer.spriteArmaElegida);
-                     this.scene.removeChild(this);
+                      //Sprite en el que se muestra el arma elegida
+                       IULayer.spriteArmaElegida.setTexture(res.boomeran_reducido_png);
+                       this.scene.removeChild(this);
+
+
     }, pulsarBotonBombas : function(){
                       cc.director.resume();
                        var IULayer = this.scene.getChildByTag(2);
-                                      IULayer.removeChild(IULayer.spriteArmaElegida);
-                                       //Sprite en el que se muestra el arma elegida
-                                       IULayer.spriteArmaElegida = cc.Sprite.create(res.bomba_reducida_png);
-                                        IULayer.spriteArmaElegida.setPosition(cc.p(cc.winSize.width-40,cc.winSize.height-40));
-                                      IULayer.addChild(IULayer.spriteArmaElegida);
-                      this.scene.removeChild(this);
+                         //Sprite en el que se muestra el arma elegida
+                        IULayer.spriteArmaElegida.setTexture(res.bomba_reducida_png);
+                        this.scene.removeChild(this);
+
+
     }
 
 });
