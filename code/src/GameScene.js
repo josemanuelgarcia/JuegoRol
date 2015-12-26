@@ -1,18 +1,12 @@
 var idCapaJuego = 1;
 var idCapaControles = 2;
-<<<<<<< HEAD
 
 //Tipos para las colisiones
 var tipoNoPasable=1;
 var tipoJugador=2;
-var tipoEnemogo=3;
+var tipoEnemigo=3;
 var tipoDisparo=4;
 
-=======
-var tipoLink=1;
-var tipoOctorock=2;
-var iuLayer=null;
->>>>>>> origin/master
 var GameLayer = cc.Layer.extend({
     space:null,
     link:null,
@@ -41,16 +35,13 @@ var GameLayer = cc.Layer.extend({
         this.link=new Link(this.space, cc.p(400,400),this);
 
         //Creacion enemigo prueba
-<<<<<<< HEAD
         //var octorok = new Octorok(this.space, cc.p(300,250),this);
         //this.enemigos.push(octorok);
 
-=======
-        var octorok = new Octorock(this.space, cc.p(300,250),this);
-        this.enemigos.push(octorok);
         this.depuracion = new cc.PhysicsDebugNode(this.space);
         this.addChild(this.depuracion,10);
->>>>>>> origin/master
+
+
         //Manejo de eventos de TECLADO
         cc.eventManager.addListener({
                     event: cc.EventListener.KEYBOARD,
@@ -61,15 +52,14 @@ var GameLayer = cc.Layer.extend({
         this.ultimaYConocida=-this.link.body.p.y+300;
         this.cargarMapa();
         this.scheduleUpdate();
-<<<<<<< HEAD
 
         //Colisiones entre elementos
         this.space.addCollisionHandler(tipoNoPasable, tipoJugador,
                       null, null, this.collisionObjetoConJugador.bind(this), null);
 
-=======
-        this.space.addCollisionHandler(tipoLink,tipoOctorock,null,null,null,this.reducirVidas.bind(this));
->>>>>>> origin/master
+        this.space.addCollisionHandler(
+            tipoJugador,tipoEnemigo,null,null,null,this.reducirVidas.bind(this));
+
         return true;
 
     },collisionObjetoConJugador:function(arbiter, space){
@@ -196,9 +186,11 @@ var GameLayer = cc.Layer.extend({
            this.ultimaYConocida=-this.link.body.p.y+300;
            this.setPosition(-this.link.body.p.x+300,-this.link.body.p.y+300);
         }
+
     },reducirVidas:function(arbiter,space){
         console.log("llega");
         iuLayer.quitarVidas();
+        //TODO las vidas hay que quitarselas a link no a la interfaz xD
     }
 });
 
