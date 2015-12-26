@@ -16,6 +16,8 @@ var res = {
     boomeran_reducido_png : "res/boomeran_reducido.png",
     espada_reducida_png : "res/espada_reducida.png",
     bomba_reducida_png : "res/bomba_reducida.png",
+    rupia_png : "res/rupia.png",
+    rupiaazul_png : "res/rupiaazul.png",
     corazon_png : "res/corazon.png",
     link_plist: "res/link.plist",
     Outside_A5_png:"res/Outside_A5.png",
