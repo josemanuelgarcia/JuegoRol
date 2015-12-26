@@ -12,6 +12,10 @@ var res = {
     boomeran_png : "res/boomeran.png",
     espada_png : "res/espada.png",
     bomba_png : "res/bomba.png",
+    arco_reducido_png : "res/arco_reducido.png",
+    boomeran_reducido_png : "res/boomeran_reducido.png",
+    espada_reducida_png : "res/espada_reducida.png",
+    bomba_reducida_png : "res/bomba_reducida.png",
     corazon_png : "res/corazon.png",
     link_plist: "res/link.plist",
     Outside_A5_png:"res/Outside_A5.png",
@@ -19,6 +23,7 @@ var res = {
     octorok_plist: "res/Octorok.plist",
     tileb_png:"res/tileb.png",
     mapa_inicial_tmx:"res/mapa_inicial.tmx"
+
 };
 
 var g_resources = [];

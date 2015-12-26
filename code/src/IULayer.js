@@ -1,6 +1,7 @@
 var IULayer = cc.Layer.extend({
     spriteBotonMenu:null,
     spriteBSumarVidas:null,
+    spriteArmaElegida:null,
      corazones:1,
      posicionSpriteCorazones:0,
     ctor:function () {
@@ -23,6 +24,18 @@ var IULayer = cc.Layer.extend({
         this.spriteBotonMenu.setPosition(cc.p(80,80));
 
         this.addChild(this.spriteBotonMenu);
+
+        //Sprite en el que se muestra el arma elegida
+                this.spriteArmaElegida = cc.Sprite.create(res.espada_reducida_png);
+                this.spriteArmaElegida.setPosition(cc.p(size.width-40,size.height-40));
+
+                this.addChild(this.spriteArmaElegida);
+
+
+
+
+
+
 
         // Registrar Mouse Down
         cc.eventManager.addListener({
