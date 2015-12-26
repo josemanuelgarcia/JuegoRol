@@ -2,6 +2,8 @@ var IULayer = cc.Layer.extend({
     spriteBotonMenu:null,
     spriteBSumarVidas:null,
     spriteArmaElegida:null,
+    spriteRupias:null,
+    rupias:0,
      corazones:1,
      posicionSpriteCorazones:0,
     ctor:function () {
@@ -18,6 +20,18 @@ var IULayer = cc.Layer.extend({
                    this.spriteBSumarVidas.setPosition(cc.p(30,150));
                    this.addChild(this.spriteBSumarVidas);
 
+
+
+
+          // Contador Rupias
+          this.spriteRupias = cc.Sprite.create(res.rupiaazul_png);
+          this.spriteRupias.setPosition(cc.p(size.width-55,28));
+           this.addChild(this.spriteRupias);
+
+            this.etiquetaMonedas = new cc.LabelTTF("0", "Helvetica", 20);
+            this.etiquetaMonedas.setPosition(cc.p((size.width)-30, 25));
+            this.etiquetaMonedas.fillStyle = new cc.Color(255, 255, 255, 255);
+            this.addChild(this.etiquetaMonedas);
 
         // spriteBotonMenu
         this.spriteBotonMenu = cc.Sprite.create(res.boton_saltar_png);
@@ -69,11 +83,17 @@ onMouseDown: this.procesarMouseDown
                    // Metodo que suma una vida
                 instanciaIU.darVidas();
 
+                instanciaIU.agregarRupia();
+
                 //Metodo que repinta las nuevas vidas
                instanciaIU.pintarVidas();
                 }
 
-    },darVidas:function(){
+    },agregarRupia:function(){
+               this.rupias++;
+               this.etiquetaMonedas.setString(""+this.rupias);
+
+     },darVidas:function(){
 
                this.corazones = this.corazones+1;
 
