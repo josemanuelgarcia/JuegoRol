@@ -74,25 +74,30 @@ var GameLayer = cc.Layer.extend({
         instancia.keyPulsada = keyCode;
         //Utilizar la espada tecla m
         if(keyCode==77 ||keyCode==109){
+            cc.director.getActionManager().removeAllActionsFromTarget(instancia.link.sprite, true);
             instancia.link.utilizarEspada();
         }
         //Metodo que maneja los eventos de teclado
         if(keyCode==87 || keyCode==119){
             //W mover hacia arriba
+            cc.director.getActionManager().removeAllActionsFromTarget(instancia.link.sprite, true);
             instancia.link.moverArriba();
         }
         else if(keyCode==83 || keyCode==115){
             //S mover hacia abajo
+            cc.director.getActionManager().removeAllActionsFromTarget(instancia.link.sprite, true);
             instancia.link.moverAbajo();
         }
         //Mover derecha
         else if(keyCode==68 || keyCode==100)
         {
+            cc.director.getActionManager().removeAllActionsFromTarget(instancia.link.sprite, true);
             instancia.link.moverDerecha();
         }
         //Mover izquierda
         else if(keyCode==65 || keyCode==97)
         {
+            cc.director.getActionManager().removeAllActionsFromTarget(instancia.link.sprite, true);
             instancia.link.moverIzquierda();
         }
         //barra espaciadora seria abrir el menu de objetos
