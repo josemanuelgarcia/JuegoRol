@@ -15,8 +15,8 @@
         "src/app.js",
         "src/Link.js",
         "src/IULayer.js",
-        "src/Octorock.js",
-        "src/DisparoOctorock.js",
+        "src/Octorok.js",
+        "src/DisparoOctorok.js",
         "src/MenuObjetosLayer.js",
         "src/GameScene.js"
     ]

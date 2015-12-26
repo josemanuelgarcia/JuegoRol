@@ -3,6 +3,9 @@ var MenuLayer = cc.Layer.extend({
         this._super();
         var size = cc.winSize;
 
+        //Cacheo de recursos graficos
+        cc.spriteFrameCache.addSpriteFrames(res.octorok_plist);
+
         // Fondo
         var spriteFondoTitulo= new cc.Sprite(res.menu_titulo_png);
         // Asigno posición central

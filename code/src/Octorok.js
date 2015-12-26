@@ -1,11 +1,11 @@
-var Octorock = cc.Class.extend({
+var Octorok = cc.Class.extend({
 	//Variables de clase
 	animMoverArriba: null,
 	animMoverAbajo: null,
 	animMoverDerecha: null,
 	animMoverIzquierda: null,
 	tiempoEntreDisparos: null,
-	tiempoUltimoDisparo: null,
+	tiempoUltimoDisparo: 0,
 	space: null,
 	layer: null,
 	sprite: null,
@@ -23,9 +23,9 @@ var Octorock = cc.Class.extend({
 		this.layer = layer;
 
 		//Primera prueba: que dispare cada cierto tiempo
-		this.tiempoEntreDisparos=2+Math.floor(Math.random()*2);
+		this.tiempoEntreDisparos=5+Math.floor(Math.random()*2);
 
-		this.sprite = new cc.PhysicsSprite("#link_abajo0.png");//TODO cambiar animacion
+		this.sprite = new cc.PhysicsSprite("#Octorok_abajo0.png");
         // Cuerpo dinamico, SI le afectan las fuerzas
         this.body = new cp.Body(5, cp.momentForBox(1,
             this.sprite.getContentSize().width,
@@ -41,21 +41,21 @@ var Octorock = cc.Class.extend({
 
         // forma
         this.shape = new cp.BoxShape(this.body,
-            this.sprite.getContentSize().width - 16,
-            this.sprite.getContentSize().height - 16);
+            this.sprite.getContentSize().width ,
+            this.sprite.getContentSize().height );
         // forma dinamica
         this.space.addShape(this.shape);
 
 
 		//Animacion Mover Abajo
-		var framesCaminarAbajo = this.getAnimacion("link_abajo", 6);
+		var framesCaminarAbajo = this.getAnimacion("Octorok_abajo", 2);
 		var animacionAbajo = new cc.Animation(framesCaminarAbajo, 0.1);
-		this.animCaminarAbajo = cc.RepeatForever.create(new cc.Animate(animacionAbajo));
+		this.animMoverAbajo = cc.RepeatForever.create(new cc.Animate(animacionAbajo));
 
 		//Animacion Mover Arriba
-		var framesCaminarArriba = this.getAnimacion("link_arriba", 6);
+		var framesCaminarArriba = this.getAnimacion("Octorok_arriba", 6);
 		var animacionArriba = new cc.Animation(framesCaminarArriba, 0.1);
-		this.animCaminarArriba = cc.RepeatForever.create(new cc.Animate(animacionArriba));
+		this.animMoverArriba = cc.RepeatForever.create(new cc.Animate(animacionArriba));
 
 
 		layer.addChild(this.sprite, 10);
@@ -63,17 +63,15 @@ var Octorock = cc.Class.extend({
 
 
 	}, update: function (dt) {
-
              // aumentar el tiempo que ha pasado desde el ultimo disparo
-             this.tiempoEntreDisparos = this.tiempoEntreDisparos + dt;
+             this.tiempoUltimoDisparo = this.tiempoUltimoDisparo + dt;
 
-             // Dispara si el tiempo ha pasado y el jugador está cerca
-             if (this.tiempoUtimoDisparo > this.tiempoEntreDisparos) {
-
-                //TODO crear disparo
-                 this.tiempoUtimoDisparo = 0;
-				 this.layer.dispaoEnemigos.push(new DisparoOctorock(this.space, this.posicion, this.layer,this.sentido));
-
+             // Dispara si el tiempo ha pasado
+             if (this.tiempoUltimoDisparo > this.tiempoEntreDisparos) {
+                 this.tiempoUltimoDisparo = 0;
+                 var disparo=new DisparoOctorok(this.space,
+                             		cc.p(this.body.p.x,this.body.p.y), this.layer, this.sentido);
+				 this.layer.disparosEnemigos.push(disparo);
              }
 
              // TODO Hacer que se mueva siguiendo algun algoritmo

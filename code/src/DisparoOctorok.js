@@ -1,4 +1,4 @@
-var DisparoOctorock = cc.Class.extend ({
+var DisparoOctorok = cc.Class.extend ({
      space:null,
      sprite:null,
      shape:null,
@@ -9,8 +9,8 @@ var DisparoOctorock = cc.Class.extend ({
 
         // Crear animación
         var framesAnimacion = [];
-        for (var i = 1; i <= 6; i++) {
-            var str = "moneda" + i + ".png";
+        for (var i = 1; i <= 3; i++) {
+            var str = "octorok_bala" + i + ".png";
             var frame = cc.spriteFrameCache.getSpriteFrame(str);
             framesAnimacion.push(frame);
         }
@@ -19,32 +19,37 @@ var DisparoOctorock = cc.Class.extend ({
             new cc.RepeatForever(new cc.Animate(animacion));
 
         // Crear Sprite - Cuerpo y forma
-        this.sprite = new cc.PhysicsSprite("#moneda1.png");
-        // Cuerpo estática , no le afectan las fuerzas
-        var body = new cp.StaticBody();
-        body.setPos(posicion);
-        this.sprite.setBody(body);
-        // Los cuerpos estáticos nunca se añaden al Space
+        this.sprite = new cc.PhysicsSprite("#Octorok_bala0.png");
+
+        this.body = new cp.Body(1, cp.momentForBox(1,
+                       this.sprite.getContentSize().width,
+                       this.sprite.getContentSize().height));
+        this.body.setPos(posicion);
+
+        //Aplicar impulso
+        //TODO cambiar sentido
+        var impulsoY = -300 ;
+        // Colocar en angulo del cuerpo a 0
+        this.body.setAngle(0);
+        this.body.applyImpulse(cp.v(0, impulsoY), cp.v(0, 0));
+
+        this.sprite.setBody(this.body);
+        this.space.addBody(this.body);
+
         var radio = this.sprite.getContentSize().width / 2;
         // forma
-        this.shape = new cp.CircleShape(body, radio , cp.vzero);
-        this.shape.setCollisionType(tipoMoneda);
-        // Nunca genera colisiones reales
-        this.shape.setSensor(true);
-        // forma estática
-        this.space.addStaticShape(this.shape);
-        // añadir sprite a la capa
+        this.shape = new cp.CircleShape(this.body, radio , cp.vzero);
+        this.space.addShape(this.shape);
+
 
         // ejecutar la animación
         this.sprite.runAction(actionAnimacionBucle);
 
         layer.addChild(this.sprite,10);
+        return true;
 
     }, getShape: function () {
          return this.shape;
-
-    }, update : function (dt){
-
 
     }, eliminar: function () {
          // quita la forma
