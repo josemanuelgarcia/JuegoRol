@@ -112,6 +112,7 @@ ctor:function (space, posicion, layer) {
 },parado:function(){
      this.body.setVel(cp.v(0,0));
 },utilizarEspada:function(){
+    console.log("ESPADA");
     if(this.orientacion=="ARRIBA"){
         this.sprite.runAction(this.animEspadaArriba);
     }

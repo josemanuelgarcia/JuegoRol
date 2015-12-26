@@ -69,9 +69,6 @@ var GameLayer = cc.Layer.extend({
 
     }, procesarEventosKeyboard:function(keyCode, event){
         var instancia = event.getCurrentTarget();
-        if(instancia.keyPulsada == keyCode)
-              return;
-        instancia.keyPulsada = keyCode;
         //Utilizar la espada tecla m
         if(keyCode==77 ||keyCode==109){
             cc.director.getActionManager().removeAllActionsFromTarget(instancia.link.sprite, true);
@@ -108,7 +105,7 @@ var GameLayer = cc.Layer.extend({
         }
     },dejarProcesarEventosKeyboard:function(keyCode, event){
         //Si se suelta alguna de las teclas de movimiento se eliminan todas las acciones
-        if(keyCode==87 || keyCode==119 || keyCode==83 || keyCode==115 || keyCode==68 || keyCode==100 || keyCode==65 || keyCode==97 )
+        if(keyCode==87 || keyCode==119 || keyCode==83 || keyCode==115 || keyCode==68 || keyCode==100 || keyCode==65 || keyCode==97)
         {
             var instancia = event.getCurrentTarget();
             instancia.keyPulsada = null;
