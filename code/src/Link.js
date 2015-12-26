@@ -18,9 +18,7 @@ ctor:function (space, posicion, layer) {
     //Sprite inicial de link
     this.sprite = new cc.PhysicsSprite("#link_abajo0.png");
         // Cuerpo dinamico, SI le afectan las fuerzas
-        this.body = new cp.Body(5, cp.momentForBox(1,
-            this.sprite.getContentSize().width,
-            this.sprite.getContentSize().height));
+        this.body = new cp.Body(5, Infinity);
 
         this.body.setPos(posicion);
         //body.w_limit = 0.02;
@@ -32,8 +30,8 @@ ctor:function (space, posicion, layer) {
 
         // forma
         this.shape = new cp.BoxShape(this.body,
-            this.sprite.getContentSize().width - 16,
-            this.sprite.getContentSize().height - 16);
+            this.sprite.getContentSize().width - 2,
+            this.sprite.getContentSize().height - 2);
         // forma dinamica
         this.shape.setCollisionType(tipoJugador);
         this.space.addShape(this.shape);
@@ -84,8 +82,9 @@ ctor:function (space, posicion, layer) {
     this.orientacion="ARRIBA";
 },moverAbajo:function(){
      this.sprite.runAction(this.animCaminarAbajo);
-     var vMoverAbajo =cc.RepeatForever.create(cc.MoveBy.create(1, cc.p(0,-50)));
-     this.sprite.runAction(vMoverAbajo);
+     //var vMoverAbajo =cc.RepeatForever.create(cc.MoveBy.create(1, cc.p(0,-50)));
+     //this.sprite.runAction(vMoverAbajo);
+     this.body.setVel(cp.v(this.body.getVel().x,-10));
      this.orientacion="ABAJO";
 },moverDerecha:function(){
 
