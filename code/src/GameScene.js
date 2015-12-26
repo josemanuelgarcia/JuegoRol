@@ -69,6 +69,10 @@ var GameLayer = cc.Layer.extend({
 
     }, procesarEventosKeyboard:function(keyCode, event){
         var instancia = event.getCurrentTarget();
+        if(instancia.keyPulsada==keyCode && (keyCode!=77 && keyCode!=109)){
+            return;
+        }
+        instancia.keyPulsada=keyCode;
         //Utilizar la espada tecla m
         if(keyCode==77 ||keyCode==109){
             instancia.link.utilizarEspada();
