@@ -38,6 +38,7 @@ ctor:function (space, posicion, layer) {
         this.shape.setFriction(1);
         this.shape.setCollisionType(tipoJugador);
         this.space.addShape(this.shape);
+
     //Animacion Simple Arriba
     var framesSimple=this.getAnimacion("link_arriba",1);
     var animacionSimple=new cc.Animation(framesSimple,0.05);

@@ -4,7 +4,7 @@ var idCapaControles = 2;
 //Tipos para las colisiones
 var tipoNoPasable=1;
 var tipoJugador=2;
-var tipoEnemigo=3;
+var tipoOctorok=3;
 var tipoDisparo=4;
 
 var GameLayer = cc.Layer.extend({
@@ -17,7 +17,7 @@ var GameLayer = cc.Layer.extend({
     ultimaYConocida:null,
     keyPulsada:null,
     disparosEnemigos:[],
-    enemigos:[],
+    octorock:null,
     depuracion:null,
     ctor:function () {
 
@@ -26,6 +26,7 @@ var GameLayer = cc.Layer.extend({
 
         //Cachear recursos del juego
         cc.spriteFrameCache.addSpriteFrames(res.link_plist);
+
         //Creación del espacio del juego
          this.space = new cp.Space();
          //La gravedad en este juego da igual.
@@ -35,8 +36,7 @@ var GameLayer = cc.Layer.extend({
         this.link=new Link(this.space, cc.p(400,400),this);
 
         //Creacion enemigo prueba
-        var octorok = new Octorok(this.space, cc.p(300,250),this);
-        this.enemigos.push(octorok);
+        this.octorok = new Octorok(this.space, cc.p(600,250),this);
 
         this.depuracion = new cc.PhysicsDebugNode(this.space);
         this.addChild(this.depuracion,10);
@@ -54,8 +54,12 @@ var GameLayer = cc.Layer.extend({
         this.scheduleUpdate();
 
         //Colisiones entre elementos
-               this.space.addCollisionHandler(
-            tipoJugador,tipoEnemigo,null,null,null,this.reducirVidas.bind(this));
+         this.space.addCollisionHandler(tipoNoPasable, tipoOctorok,
+                             null, null, this.collisionObjetoConOctorok.bind(this), null);
+
+          this.space.addCollisionHandler(
+            tipoJugador,tipoOctorok,null,null,null,this.reducirVidas.bind(this));
+
 
         return true;
 
@@ -63,9 +67,7 @@ var GameLayer = cc.Layer.extend({
         //Camara mapa inicial del personaje
         this.space.step(dt);
         this.actualizarCamara();
-        for (var i = 0; i < this.enemigos.length; i++) {
-             this.enemigos[i].update(dt);
-        }
+        this.octorok.update(dt);
 
     }, procesarEventosKeyboard:function(keyCode, event){
         var instancia = event.getCurrentTarget();
@@ -102,7 +104,7 @@ var GameLayer = cc.Layer.extend({
              cc.director.pause();
              gameScene.addChild(new MenuObjetosLayer(gameScene),0,3);
         }
-    },dejarProcesarEventosKeyboard:function(keyCode, event){
+    }, dejarProcesarEventosKeyboard:function(keyCode, event){
         //Si se suelta alguna de las teclas de movimiento se eliminan todas las acciones
         if(keyCode==87 || keyCode==119 || keyCode==83 || keyCode==115 || keyCode==68 || keyCode==100 || keyCode==65 || keyCode==97)
         {
@@ -156,7 +158,7 @@ var GameLayer = cc.Layer.extend({
 
 
 
-    },actualizarCamara:function(){
+    }, actualizarCamara:function(){
         var size=cc.winSize;
          //X
         if(this.link.body.p.x>=(this.mapaAncho-(size.width)+300) || this.link.body.p.x<=size.width/2){
@@ -183,6 +185,9 @@ var GameLayer = cc.Layer.extend({
         console.log("llega");
         iuLayer.quitarVidas();
         //TODO las vidas hay que quitarselas a link no a la interfaz xD
+
+    }, collisionObjetoConOctorok:function(arbiter, space){
+      //  this.octorok.haChocado();
     }
 });
 

@@ -21,8 +21,8 @@ var res = {
     corazon_png : "res/corazon.png",
     link_plist: "res/link.plist",
     Outside_A5_png:"res/Outside_A5.png",
-    octorok_png: "res/Octorok.png",
-    octorok_plist: "res/Octorok.plist",
+    octorok_png: "res/octorok.png",
+    octorok_plist: "res/octorok.plist",
     tileb_png:"res/tileb.png",
     mapa_inicial_tmx:"res/mapa_inicial.tmx"
 
