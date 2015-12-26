@@ -24,6 +24,7 @@ ctor:function (space, posicion, layer) {
         this.body.setPos(posicion);
         //body.w_limit = 0.02;
         this.body.setAngle(0);
+        this.body.e = 0;
         this.sprite.setBody(this.body);
 
         // Se añade el cuerpo al espacio
