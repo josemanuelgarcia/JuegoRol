@@ -34,6 +34,7 @@ ctor:function (space, posicion, layer) {
             this.sprite.getContentSize().width - 2,
             this.sprite.getContentSize().height - 2);
         // forma dinamica
+        this.shape.setFriction(1);
         this.shape.setCollisionType(tipoJugador);
         this.space.addShape(this.shape);
 

@@ -138,6 +138,7 @@ var GameLayer = cc.Layer.extend({
                            parseInt(suelo.y) - parseInt(puntos[j + 1].y)),
                            10);
                       shapeSuelo.setCollisionType(tipoNoPasable);
+                      shapeSuelo.setFriction(1);
                       this.space.addStaticShape(shapeSuelo);
                }
             } else {
@@ -145,6 +146,7 @@ var GameLayer = cc.Layer.extend({
                  bodySuelo.setPos(cc.p(parseInt(suelo.x)+parseInt(suelo.width/2),parseInt(suelo.y)+parseInt(suelo.height/2)));
                 var shapeSuelo= new cp.BoxShape(bodySuelo,parseInt(suelo.width),parseInt(suelo.height),10);
                 shapeSuelo.setCollisionType(tipoNoPasable);
+                shapeSuelo.setFriction(1);
                 this.space.addStaticShape(shapeSuelo);
             }
         }
