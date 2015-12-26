@@ -19,7 +19,7 @@ ctor:function (space, posicion, layer) {
     //Sprite inicial de link
     this.sprite = new cc.PhysicsSprite("#link_abajo0.png");
         // Cuerpo dinamico, SI le afectan las fuerzas
-        this.body = new cp.Body(5, Infinity);
+        this.body = new cp.Body(100, Infinity);
 
         this.body.setPos(posicion);
         //body.w_limit = 0.02;
@@ -38,7 +38,15 @@ ctor:function (space, posicion, layer) {
         this.shape.setFriction(1);
         this.shape.setCollisionType(tipoJugador);
         this.space.addShape(this.shape);
-
+    //Animacion Simple Arriba
+    var framesSimple=this.getAnimacion("link_arriba",1);
+    var animacionSimple=new cc.Animation(framesSimple,0.05);
+    //Animacion Simple Abajo
+    var framesSimpleAbajo=this.getAnimacion("link_abajo",1);
+    var animacionSimpleAbajo=new cc.Animation(framesSimpleAbajo,0.05);
+    //Animacion Simple Lado
+    var framesSimpleLado=this.getAnimacion("link_lado",1);
+    var animacionSimpleLado=new cc.Animation(framesSimpleLado,0.05);
     //Animacion Caminar Abajo
      var framesCaminarAbajo = this.getAnimacion("link_abajo",12);
      var animacionAbajo = new cc.Animation(framesCaminarAbajo, 0.05);
@@ -55,16 +63,16 @@ ctor:function (space, posicion, layer) {
       //Animacion Espada Arriba
       var framesEspadaArriba=this.getAnimacion("Link_espadazo_arriba",9);
       var animacionEspArriba=new cc.Animation(framesEspadaArriba,0.03);
-      this.animEspadaArriba=cc.RepeatForever.create(new cc.Animate(animacionEspArriba));
+      this.animEspadaArriba=new cc.Sequence(new cc.Animate(animacionEspArriba),new cc.Animate(animacionSimple));
 
       //Animacion Espada Abajo
       var framesEspadaAbajo=this.getAnimacion("Link_espadazo_abajo",6);
       var animacionEspAbajo=new cc.Animation(framesEspadaAbajo,0.03);
-      this.animEspadaAbajo=cc.RepeatForever.create(new cc.Animate(animacionEspAbajo));
+      this.animEspadaAbajo=new cc.Sequence(new cc.Animate(animacionEspAbajo),new cc.Animate(animacionSimpleAbajo));
       //Animacion Espada Lado
       var framesEspadaDerecha=this.getAnimacion("Link_espadazo_derecha",9);
       var animacionEspDerecha=new cc.Animation(framesEspadaDerecha,0.03);
-      this.animEspadaLado=cc.RepeatForever.create(new cc.Animate(animacionEspDerecha));
+      this.animEspadaLado=new cc.Sequence(new cc.Animate(animacionEspDerecha),new cc.Animate(animacionSimpleLado));
 
       layer.addChild(this.sprite,10);
       return true;
