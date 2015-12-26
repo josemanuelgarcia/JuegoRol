@@ -1,5 +1,6 @@
 var idCapaJuego = 1;
 var idCapaControles = 2;
+<<<<<<< HEAD
 
 //Tipos para las colisiones
 var tipoNoPasable=1;
@@ -7,6 +8,11 @@ var tipoJugador=2;
 var tipoEnemogo=3;
 var tipoDisparo=4;
 
+=======
+var tipoLink=1;
+var tipoOctorock=2;
+var iuLayer=null;
+>>>>>>> origin/master
 var GameLayer = cc.Layer.extend({
     space:null,
     link:null,
@@ -18,6 +24,7 @@ var GameLayer = cc.Layer.extend({
     keyPulsada:null,
     disparosEnemigos:[],
     enemigos:[],
+    depuracion:null,
     ctor:function () {
 
         this._super();
@@ -29,14 +36,21 @@ var GameLayer = cc.Layer.extend({
          this.space = new cp.Space();
          //La gravedad en este juego da igual.
          this.space.gravity = cp.v(0, 0);
+         //Add the Debug Layer:
          //Creación del personaje link
         this.link=new Link(this.space, cc.p(400,400),this);
 
-
         //Creacion enemigo prueba
+<<<<<<< HEAD
         //var octorok = new Octorok(this.space, cc.p(300,250),this);
         //this.enemigos.push(octorok);
 
+=======
+        var octorok = new Octorock(this.space, cc.p(300,250),this);
+        this.enemigos.push(octorok);
+        this.depuracion = new cc.PhysicsDebugNode(this.space);
+        this.addChild(this.depuracion,10);
+>>>>>>> origin/master
         //Manejo de eventos de TECLADO
         cc.eventManager.addListener({
                     event: cc.EventListener.KEYBOARD,
@@ -47,11 +61,15 @@ var GameLayer = cc.Layer.extend({
         this.ultimaYConocida=-this.link.body.p.y+300;
         this.cargarMapa();
         this.scheduleUpdate();
+<<<<<<< HEAD
 
         //Colisiones entre elementos
         this.space.addCollisionHandler(tipoNoPasable, tipoJugador,
                       null, null, this.collisionObjetoConJugador.bind(this), null);
 
+=======
+        this.space.addCollisionHandler(tipoLink,tipoOctorock,null,null,null,this.reducirVidas.bind(this));
+>>>>>>> origin/master
         return true;
 
     },collisionObjetoConJugador:function(arbiter, space){
@@ -70,6 +88,10 @@ var GameLayer = cc.Layer.extend({
         if(instancia.keyPulsada == keyCode)
               return;
         instancia.keyPulsada = keyCode;
+        //Utilizar la espada tecla m
+        if(keyCode==77 ||keyCode==109){
+            instancia.link.utilizarEspada();
+        }
         //Metodo que maneja los eventos de teclado
         if(keyCode==87 || keyCode==119){
             //W mover hacia arriba
@@ -96,7 +118,7 @@ var GameLayer = cc.Layer.extend({
         }
     },dejarProcesarEventosKeyboard:function(keyCode, event){
         //Si se suelta alguna de las teclas de movimiento se eliminan todas las acciones
-        if(keyCode==87 || keyCode==119 || keyCode==83 || keyCode==115 || keyCode==68 || keyCode==100 || keyCode==65 || keyCode==97)
+        if(keyCode==87 || keyCode==119 || keyCode==83 || keyCode==115 || keyCode==68 || keyCode==100 || keyCode==65 || keyCode==97 || keyCode==77 ||keyCode==109)
         {
             var instancia = event.getCurrentTarget();
             instancia.keyPulsada = null;
@@ -174,6 +196,9 @@ var GameLayer = cc.Layer.extend({
            this.ultimaYConocida=-this.link.body.p.y+300;
            this.setPosition(-this.link.body.p.x+300,-this.link.body.p.y+300);
         }
+    },reducirVidas:function(arbiter,space){
+        console.log("llega");
+        iuLayer.quitarVidas();
     }
 });
 
@@ -182,7 +207,7 @@ var GameScene = cc.Scene.extend({
         this._super();
         var layer = new GameLayer();
          this.addChild(layer, 0, idCapaJuego);
-         var iuLayer = new IULayer();
-             this.addChild(iuLayer, 0, idCapaControles);
+         iuLayer = new IULayer();
+         this.addChild(iuLayer, 0, idCapaControles);
     }
 });

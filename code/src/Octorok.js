@@ -35,7 +35,6 @@ var Octorok = cc.Class.extend({
         //body.w_limit = 0.02;
         this.body.setAngle(0);
         this.sprite.setBody(this.body);
-
         // Se añade el cuerpo al espacio
         this.space.addBody(this.body);
 
@@ -44,6 +43,7 @@ var Octorok = cc.Class.extend({
             this.sprite.getContentSize().width ,
             this.sprite.getContentSize().height );
         // forma dinamica
+        this.shape.setCollisionType(tipoOctorock);
         this.space.addShape(this.shape);
 
 
