@@ -97,8 +97,9 @@ var GameLayer = cc.Layer.extend({
         }
         //barra espaciadora seria abrir el menu de objetos
         if(keyCode==32){
-             cc.director.resume();
-             cc.director.runScene(new MenuObjetosLayer());
+         var gameScene = instancia.getParent();
+             cc.director.pause();
+             gameScene.addChild(new MenuObjetosLayer(gameScene),0,3);
         }
     },dejarProcesarEventosKeyboard:function(keyCode, event){
         //Si se suelta alguna de las teclas de movimiento se eliminan todas las acciones
