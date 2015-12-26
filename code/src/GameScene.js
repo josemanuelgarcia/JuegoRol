@@ -54,16 +54,10 @@ var GameLayer = cc.Layer.extend({
         this.scheduleUpdate();
 
         //Colisiones entre elementos
-        this.space.addCollisionHandler(tipoNoPasable, tipoJugador,
-                      null, null, this.collisionObjetoConJugador.bind(this), null);
-
-        this.space.addCollisionHandler(
+               this.space.addCollisionHandler(
             tipoJugador,tipoEnemigo,null,null,null,this.reducirVidas.bind(this));
 
         return true;
-
-    },collisionObjetoConJugador:function(arbiter, space){
-            this.link.sprite.stopAllActions();
 
     }, update:function(dt) {
         //Camara mapa inicial del personaje
@@ -104,7 +98,7 @@ var GameLayer = cc.Layer.extend({
         //barra espaciadora seria abrir el menu de objetos
         if(keyCode==32){
              cc.director.resume();
-             cc.director.runScene(new MenuObjetosScene());
+             cc.director.runScene(new MenuObjetosLayer());
         }
     },dejarProcesarEventosKeyboard:function(keyCode, event){
         //Si se suelta alguna de las teclas de movimiento se eliminan todas las acciones
@@ -146,15 +140,8 @@ var GameLayer = cc.Layer.extend({
                }
             } else {
                 var bodySuelo= new cp.StaticBody();
-
-                var cp1= cp.v(parseInt(suelo.x),parseInt(suelo.y));
-                var cp2= cp.v(parseInt(suelo.x),parseInt(suelo.y)+parseInt(suelo.height));
-                var cp3= cp.v(parseInt(suelo.x)+parseInt(suelo.width),parseInt(suelo.y));
-                var cp4= cp.v(parseInt(suelo.x)+parseInt(suelo.width), parseInt(suelo.y)+parseInt(suelo.height))
-                var standVerts = {cp1,cp2,cp3,cp4};
-
-                var shapeSuelo= new cp.PolyShape(bodySuelo,{cp1,cp2,cp3,cp4},10);
-
+                 bodySuelo.setPos(cc.p(parseInt(suelo.x)+parseInt(suelo.width/2),parseInt(suelo.y)+parseInt(suelo.height/2)));
+                var shapeSuelo= new cp.BoxShape(bodySuelo,parseInt(suelo.width),parseInt(suelo.height),10);
                 shapeSuelo.setCollisionType(tipoNoPasable);
                 this.space.addStaticShape(shapeSuelo);
             }
