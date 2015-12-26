@@ -35,7 +35,7 @@ ctor:function (space, posicion, layer) {
             this.sprite.getContentSize().width - 16,
             this.sprite.getContentSize().height - 16);
         // forma dinamica
-        this.shape.setCollisionType(tipoLink);
+        this.shape.setCollisionType(tipoJugador);
         this.space.addShape(this.shape);
 
     //Animacion Caminar Abajo

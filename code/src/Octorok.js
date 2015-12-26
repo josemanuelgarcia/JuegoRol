@@ -43,7 +43,7 @@ var Octorok = cc.Class.extend({
             this.sprite.getContentSize().width ,
             this.sprite.getContentSize().height );
         // forma dinamica
-        this.shape.setCollisionType(tipoOctorock);
+        this.shape.setCollisionType(tipoEnemigo);
         this.space.addShape(this.shape);
 
 
