@@ -15,6 +15,8 @@ var Octorok = cc.Class.extend({
 	sprite: null,
 	body: null,
 	shape: null,
+	velMovimiento:70,
+	tiempoMovimiento: 0,
 	//Orientacion hacia el que esta mirando y a donde va a disparar
 	orientacion: "ABAJO",
 
@@ -28,11 +30,11 @@ var Octorok = cc.Class.extend({
 		this.sprite = new cc.PhysicsSprite("#Octorok_abajo0.png");
 
         // Cuerpo dinamico, SI le afectan las fuerzas
-        this.body = new cp.Body(5, cp.momentForBox(1,
-            this.sprite.getContentSize().width,
-            this.sprite.getContentSize().height));
+        this.body = new cp.Body(5, Infinity);
 
         this.body.setPos(posicion);
+        this.body.setAngle(0);
+        this.body.e = 0;
 
         this.sprite.setBody(this.body);
         // Se añade el cuerpo al espacio
@@ -68,8 +70,8 @@ var Octorok = cc.Class.extend({
         this.animMoverIzquierda = cc.RepeatForever.create(new cc.Animate(animacionIzquierda));
 
 		//Animacion disparar hacia abajo
-		var framesDispararArriba = this.getAnimacion("Octorok_disparo_abajo", 2);
-        var animacionDisparoAbajo = new cc.Animation(framesDispararArriba, 0.1);
+		var framesDispararAbajo = this.getAnimacion("Octorok_disparo_abajo", 2);
+        var animacionDisparoAbajo = new cc.Animation(framesDispararAbajo, 0.1);
         this.animDispararAbajo = cc.RepeatForever.create(new cc.Animate(animacionDisparoAbajo));
 
         //Animacion disparar hacia arriba
@@ -89,6 +91,7 @@ var Octorok = cc.Class.extend({
 
 
 		layer.addChild(this.sprite, 10);
+		this.moverAbajo();
 		return true;
 
 
@@ -102,6 +105,21 @@ var Octorok = cc.Class.extend({
                  this.disparar();
              }
 
+			 /*
+			 //aumentamos el tiempo del movimiento
+			 this.tiempoMovimiento= this.tiempoMovimiento+dt;
+			 if(this.tiempoMovimiento > 5000){
+			 	if(this.orientacion=="ARRIBA"){
+			 		this.moverDerecha();
+			 	} else if(this.orientacion=="DERECHA") {
+			 		this.moverAbajo();
+			 	} else if(this.orientacion=="ABAJO") {
+			 		this.moverIzquierda();
+			 	} else {
+			 		this.moverArriba();
+			 	}
+			 	this.tiempoMovimiento=0;
+			 }*/
              // TODO Hacer que se mueva siguiendo algun algoritmo
 
     }, getAnimacion: function (nombreAnimacion, numFrames) {
@@ -115,29 +133,23 @@ var Octorok = cc.Class.extend({
 
 	}, moverArriba: function () {
 		this.orientacion="ARRIBA";
-		this.sprite.runAction(this.animMoverrriba);
-		var vMoverArriba = cc.RepeatForever.create(cc.MoveBy.create(1, cc.p(0, 50)));
-		this.sprite.runAction(vMoverArriba);
+		this.sprite.runAction(this.animMoverArriba);
+		this.body.setVel(cp.v(this.body.getVel().x,this.velMovimiento));
 
 	}, moverAbajo: function () {
 		this.orientacion="ABAJO";
 		this.sprite.runAction(this.animMoverAbajo);
-		var vMoverAbajo = cc.RepeatForever.create(cc.MoveBy.create(1, cc.p(0, -50)));
-		this.sprite.runAction(vMoverAbajo);
+		this.body.setVel(cp.v(this.body.getVel().x,-this.velMovimiento));
 
 	}, moverDerecha:function () {
 		this.orientacion="DERECHA";
-		//Se escala a 1 en la x
-            this.sprite.scaleX=1;
-            this.sprite.runAction(this.animCaminarDerecha);
-            var vMoverDerecha =cc.RepeatForever.create(cc.MoveBy.create(1, cc.p(50,0)));
-            this.sprite.runAction(vMoverDerecha);
+        this.sprite.runAction(this.animMoverDerecha);
+		this.body.setVel(cp.v(this.velMovimiento,this.body.getVel().y));
 
-	}, moverIquierda:function () {
+	}, moverIzquierda:function () {
 			this.orientacion="IZQUIERDA";
-            this.sprite.runAction(this.animCaminarIzquierda);
-            var vMoverIzquierda =cc.RepeatForever.create(cc.MoveBy.create(1, cc.p(-50,0)));
-            this.sprite.runAction(vMoverIzquierda);
+            this.sprite.runAction(this.animMoverIzquierda);
+ 			this.body.setVel(cp.v(-this.velMovimiento,this.body.getVel().y));
 
 	}, disparar: function (){
 		if(this.orientacion=="ARRIBA"){
@@ -158,6 +170,8 @@ var Octorok = cc.Class.extend({
 		var disparo=new DisparoOctorok(this.space,
                                      		cc.p(this.body.p.x,this.body.p.y), this.layer, this.orientacion);
         this.layer.disparosEnemigos.push(disparo);
+
+
 	}
 
 });

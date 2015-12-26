@@ -35,8 +35,8 @@ var GameLayer = cc.Layer.extend({
         this.link=new Link(this.space, cc.p(400,400),this);
 
         //Creacion enemigo prueba
-        //var octorok = new Octorok(this.space, cc.p(300,250),this);
-        //this.enemigos.push(octorok);
+        var octorok = new Octorok(this.space, cc.p(300,250),this);
+        this.enemigos.push(octorok);
 
         this.depuracion = new cc.PhysicsDebugNode(this.space);
         this.addChild(this.depuracion,10);

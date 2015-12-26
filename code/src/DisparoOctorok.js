@@ -10,7 +10,7 @@ var DisparoOctorok = cc.Class.extend ({
         // Crear animación
         var framesAnimacion = [];
         for (var i = 1; i <= 3; i++) {
-            var str = "octorok_bala" + i + ".png";
+            var str = "Octorok_bala" + i + ".png";
             var frame = cc.spriteFrameCache.getSpriteFrame(str);
             framesAnimacion.push(frame);
         }

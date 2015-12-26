@@ -109,7 +109,7 @@ ctor:function (space, posicion, layer) {
     this.sprite.runAction(this.animCaminarDerecha);
     this.body.setVel(cp.v(-this.velMovimiento,this.body.getVel().y));
     this.orientacion="IZQUIERDA";
-},parado:function(){
+}, parado:function(){
      this.body.setVel(cp.v(0,0));
 },utilizarEspada:function(){
     console.log("ESPADA");
