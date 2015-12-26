@@ -12,6 +12,7 @@ sprite:null,
 body:null,
 shape:null,
 orientacion:null,
+velMovimiento:70,
 ctor:function (space, posicion, layer) {
     this.space = space;
     this.layer = layer;
@@ -38,16 +39,16 @@ ctor:function (space, posicion, layer) {
 
     //Animacion Caminar Abajo
      var framesCaminarAbajo = this.getAnimacion("link_abajo",12);
-     var animacionAbajo = new cc.Animation(framesCaminarAbajo, 0.1);
+     var animacionAbajo = new cc.Animation(framesCaminarAbajo, 0.05);
      this.animCaminarAbajo=cc.RepeatForever.create(new cc.Animate(animacionAbajo));
 
      //Animacion Caminar Arriba
       var framesCaminarArriba = this.getAnimacion("link_arriba",12);
-      var animacionArriba = new cc.Animation(framesCaminarArriba, 0.1);
+      var animacionArriba = new cc.Animation(framesCaminarArriba, 0.05);
       this.animCaminarArriba = cc.RepeatForever.create(new cc.Animate(animacionArriba));
       //Animacion Caminar Derecha
       var framesCaminarDerecha= this.getAnimacion("link_lado",12);
-      var animacionDerecha=new cc.Animation(framesCaminarDerecha,0.1);
+      var animacionDerecha=new cc.Animation(framesCaminarDerecha,0.05);
       this.animCaminarDerecha=cc.RepeatForever.create(new cc.Animate(animacionDerecha));
       //Animacion Espada Arriba
       var framesEspadaArriba=this.getAnimacion("Link_espadazo_arriba",9);
@@ -77,30 +78,29 @@ ctor:function (space, posicion, layer) {
 
 },moverArriba:function(){
     this.sprite.runAction(this.animCaminarArriba);
-    var vMoverArriba = cc.RepeatForever.create(cc.MoveBy.create(1, cc.p(0,50)));
-    this.sprite.runAction(vMoverArriba);
+    //var vMoverArriba = cc.RepeatForever.create(cc.MoveBy.create(1, cc.p(0,50)));
+    //this.sprite.runAction(vMoverArriba);
+    this.body.setVel(cp.v(this.body.getVel().x,this.velMovimiento));
     this.orientacion="ARRIBA";
 },moverAbajo:function(){
      this.sprite.runAction(this.animCaminarAbajo);
-     //var vMoverAbajo =cc.RepeatForever.create(cc.MoveBy.create(1, cc.p(0,-50)));
-     //this.sprite.runAction(vMoverAbajo);
-     this.body.setVel(cp.v(this.body.getVel().x,-10));
+     this.body.setVel(cp.v(this.body.getVel().x,-this.velMovimiento));
      this.orientacion="ABAJO";
 },moverDerecha:function(){
 
     //Se escala a 1 en la x
     this.sprite.scaleX=1;
     this.sprite.runAction(this.animCaminarDerecha);
-    var vMoverDerecha =cc.RepeatForever.create(cc.MoveBy.create(1, cc.p(50,0)));
-    this.sprite.runAction(vMoverDerecha);
+    this.body.setVel(cp.v(this.velMovimiento,this.body.getVel().y));
     this.orientacion="DERECHA";
 },moverIzquierda:function(){
     //Si va a la izquierda se escala a -1 para hacer flip a la animacion
     this.sprite.scaleX=-1;
     this.sprite.runAction(this.animCaminarDerecha);
-    var vMoverIzquierda =cc.RepeatForever.create(cc.MoveBy.create(1, cc.p(-50,0)));
-    this.sprite.runAction(vMoverIzquierda);
+    this.body.setVel(cp.v(-this.velMovimiento,this.body.getVel().y));
     this.orientacion="IZQUIERDA";
+},parado:function(){
+     this.body.setVel(cp.v(0,0));
 },utilizarEspada:function(){
     if(this.orientacion=="ARRIBA"){
         this.sprite.runAction(this.animEspadaArriba);

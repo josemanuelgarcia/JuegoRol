@@ -107,6 +107,7 @@ var GameLayer = cc.Layer.extend({
         {
             var instancia = event.getCurrentTarget();
             instancia.keyPulsada = null;
+            instancia.link.parado();
             cc.director.getActionManager().removeAllActionsFromTarget(instancia.link.sprite, true);
         }
     },cargarMapa:function(){
