@@ -3,6 +3,7 @@ var idCapaControles = 2;
 var GameLayer = cc.Layer.extend({
     space:null,
     link:null,
+    mapa:null,
     keyPulsada:null,
     disparosEnemigos:[],
     enemigos:[],
@@ -31,12 +32,14 @@ var GameLayer = cc.Layer.extend({
                     onKeyPressed:this.procesarEventosKeyboard,
                     onKeyReleased:this.dejarProcesarEventosKeyboard
                     },this);
+        this.cargarMapa();
         this.scheduleUpdate();
 
         return true;
 
     }, update:function(dt) {
-
+        //Camara mapa inicial del personaje
+        this.link.update(dt);
         for (var i = 0; i < this.enemigos.length; i++) {
              this.enemigos[i].update(dt);
         }
@@ -44,7 +47,6 @@ var GameLayer = cc.Layer.extend({
         for ( var i=0; i< this.disparosEnemigos.length; i++) {
             this.disparosEnemigos[i].update(dt);
         }
-
 
     }, procesarEventosKeyboard:function(keyCode, event){
         var instancia = event.getCurrentTarget();
@@ -83,6 +85,10 @@ var GameLayer = cc.Layer.extend({
             instancia.keyPulsada = null;
             cc.director.getActionManager().removeAllActionsFromTarget(instancia.link.sprite, true);
         }
+    },cargarMapa:function(){
+        this.mapa=new cc.TMXTiledMap(res.mapa_inicial_tmx);
+        // Añadirlo a la Layer
+        this.addChild(this.mapa);
     }
 });
 

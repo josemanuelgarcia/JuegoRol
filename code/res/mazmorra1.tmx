@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<map version="1.0" orientation="orthogonal" renderorder="right-down" width="20" height="100" tilewidth="32" tileheight="32" nextobjectid="1">
+ <tileset firstgid="1" name="tilea2" tilewidth="32" tileheight="32" tilecount="192">
+  <image source="tilea2.png" width="512" height="384"/>
+ </tileset>
+ <layer name="top" width="20" height="100">
+  <properties>
+   <property name="derecha" value="res/mazmorra2.tmx"/>
+  </properties>
+  <data encoding="base64" compression="zlib">
+   eJzt1FEKgCAQhOG9Xd5g9/4nyQcD2RBCBxH6PxjoIUpnSzMAAAAAAAAAAADsdNUUYbwmhPG2xtV4eqYiea2q/tQdfnnfaH/5fuW6QjTbfr6q2fYzUP4ff+tv9B2dcr48599sZ27v/lZ6jHR9A9ricYA=
+  </data>
+ </layer>
+</map>

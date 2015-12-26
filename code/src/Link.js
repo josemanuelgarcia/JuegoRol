@@ -82,5 +82,9 @@ ctor:function (space, posicion, layer) {
     this.sprite.runAction(this.animCaminarDerecha);
     var vMoverIzquierda =cc.RepeatForever.create(cc.MoveBy.create(1, cc.p(-50,0)));
     this.sprite.runAction(vMoverIzquierda);
+},update: function(dt){
+       var posicionXJugador = this.body.p.x - 100;
+       var posicionYJugador=this.body.p.y-100;
+       this.layer.setPosition(cc.p( -posicionXJugador,-posicionYJugador));
 }
 });

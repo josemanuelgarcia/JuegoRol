@@ -13,7 +13,10 @@ var res = {
     espada_png : "res/espada.png",
     bomba_png : "res/bomba.png",
     corazon_png : "res/corazon.png",
-    link_plist: "res/link.plist"
+    link_plist: "res/link.plist",
+    Outside_A5_png:"res/Outside_A5.png",
+    tileb_png:"res/tileb.png",
+    mapa_inicial_tmx:"res/mapa_inicial.tmx"
 };
 
 var g_resources = [];
