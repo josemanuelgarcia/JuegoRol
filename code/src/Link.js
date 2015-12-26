@@ -59,32 +59,35 @@ ctor:function (space, posicion, layer) {
       return framesAnimacion;
 
 },moverArriba:function(){
+    if(this.body.p.y<this.layer.mapaAlto){
     this.sprite.runAction(this.animCaminarArriba);
     var vMoverArriba = cc.RepeatForever.create(cc.MoveBy.create(1, cc.p(0,50)));
     this.sprite.runAction(vMoverArriba);
+    }
 
 },moverAbajo:function(){
+    if(this.body.p.y>0){
      this.sprite.runAction(this.animCaminarAbajo);
      var vMoverAbajo =cc.RepeatForever.create(cc.MoveBy.create(1, cc.p(0,-50)));
      this.sprite.runAction(vMoverAbajo);
+     }
 
 },moverDerecha:function(){
 
     //Se escala a 1 en la x
+    if(this.body.p.x<this.layer.mapaAncho){
     this.sprite.scaleX=1;
     this.sprite.runAction(this.animCaminarDerecha);
     var vMoverDerecha =cc.RepeatForever.create(cc.MoveBy.create(1, cc.p(50,0)));
     this.sprite.runAction(vMoverDerecha);
+    }
 },moverIzquierda:function(){
-
+    if(this.body.p.x>0){
     //Si va a la izquierda se escala a -1 para hacer flip a la animacion
     this.sprite.scaleX=-1;
     this.sprite.runAction(this.animCaminarDerecha);
     var vMoverIzquierda =cc.RepeatForever.create(cc.MoveBy.create(1, cc.p(-50,0)));
     this.sprite.runAction(vMoverIzquierda);
-},update: function(dt){
-       var posicionXJugador = this.body.p.x - 100;
-       var posicionYJugador=this.body.p.y-100;
-       this.layer.setPosition(cc.p( -posicionXJugador,-posicionYJugador));
+    }
 }
 });

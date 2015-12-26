@@ -4,6 +4,10 @@ var GameLayer = cc.Layer.extend({
     space:null,
     link:null,
     mapa:null,
+    mapaAncho:null,
+    mapaAlto:null,
+    ultimaXConocida:null,
+    ultimaYConocida:null,
     keyPulsada:null,
     disparosEnemigos:[],
     enemigos:[],
@@ -17,9 +21,9 @@ var GameLayer = cc.Layer.extend({
         //Creación del espacio del juego
          this.space = new cp.Space();
          //La gravedad en este juego da igual.
-         this.space.gravity = cp.v(0, -50);
+         this.space.gravity = cp.v(0, 0);
          //Creación del personaje link
-        this.link=new Link(this.space, cc.p(200,200),this);
+        this.link=new Link(this.space, cc.p(400,400),this);
 
 
         //Creacion enemigo prueba
@@ -32,6 +36,8 @@ var GameLayer = cc.Layer.extend({
                     onKeyPressed:this.procesarEventosKeyboard,
                     onKeyReleased:this.dejarProcesarEventosKeyboard
                     },this);
+        this.ultimaXConocida=-this.link.body.p.x+300;
+        this.ultimaYConocida=-this.link.body.p.y+300;
         this.cargarMapa();
         this.scheduleUpdate();
 
@@ -39,7 +45,8 @@ var GameLayer = cc.Layer.extend({
 
     }, update:function(dt) {
         //Camara mapa inicial del personaje
-        this.link.update(dt);
+        this.space.step(dt);
+        this.actualizarCamara();
         for (var i = 0; i < this.enemigos.length; i++) {
              this.enemigos[i].update(dt);
         }
@@ -89,6 +96,30 @@ var GameLayer = cc.Layer.extend({
         this.mapa=new cc.TMXTiledMap(res.mapa_inicial_tmx);
         // Añadirlo a la Layer
         this.addChild(this.mapa);
+        this.mapaAncho = this.mapa.getContentSize().width;
+        this.mapaAlto = this.mapa.getContentSize().height;
+    },actualizarCamara:function(){
+        var size=cc.winSize;
+         //X
+        if(this.link.body.p.x>=(this.mapaAncho-(size.width)+300) || this.link.body.p.x<=size.width/2){
+            if(this.link.body.p.y>=size.height/2 && this.link.body.p.y<=(this.mapaAlto-(size.height)+300)){
+                this.ultimaYConocida=-this.link.body.p.y+300;
+                this.setPosition(this.ultimaXConocida,-this.link.body.p.y+300);
+            }
+        }
+        //Y
+        else if(this.link.body.p.y<=size.height/2 || this.link.body.p.y>=(this.mapaAlto-(size.height)+300)){
+            if(this.link.body.p.x<=(this.mapaAncho-(size.width)+300) && this.link.body.p.x>=size.width/2){
+                this.ultimaXConocida=-this.link.body.p.x+300;
+                this.setPosition(-this.link.body.p.x+300,this.ultimaYConocida);
+            }
+        }
+        //NO SE SALE NI POR X NI POR Y ACTUALIZAR NORMAL
+        else{
+           this.ultimaXConocida=-this.link.body.p.x+300;
+           this.ultimaYConocida=-this.link.body.p.y+300;
+           this.setPosition(-this.link.body.p.x+300,-this.link.body.p.y+300);
+        }
     }
 });
 
