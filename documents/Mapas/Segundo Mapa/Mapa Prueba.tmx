@@ -3,11 +3,8 @@
  <tileset firstgid="1" name="Outside_A5" tilewidth="32" tileheight="32" tilecount="128">
   <image source="Outside_A5.png" width="256" height="512"/>
  </tileset>
- <tileset firstgid="129" name="tileb" tilewidth="32" tileheight="32" tilecount="512">
+ <tileset firstgid="129" name="tileb" tilewidth="32" tileheight="32" tilecount="256">
   <image source="tileb.png" width="512" height="512"/>
- </tileset>
- <tileset firstgid="641" name="Captura" tilewidth="32" tileheight="32" tilecount="192">
-  <image source="../../../../../../Desktop/Captura.PNG" width="512" height="404"/>
  </tileset>
  <layer name="Background" width="50" height="50">
   <data encoding="base64" compression="zlib">
