@@ -59,15 +59,17 @@ var Link = cc.Class.extend({
         var framesCaminarAbajo = this.getAnimacion("link_abajo", 12);
         var animacionAbajo = new cc.Animation(framesCaminarAbajo, 0.05);
         this.animCaminarAbajo = cc.RepeatForever.create(new cc.Animate(animacionAbajo));
-
+        this.animCaminarAbajo.setTag(1);
         //Animacion Caminar Arriba
         var framesCaminarArriba = this.getAnimacion("link_arriba", 12);
         var animacionArriba = new cc.Animation(framesCaminarArriba, 0.05);
         this.animCaminarArriba = cc.RepeatForever.create(new cc.Animate(animacionArriba));
+        this.animCaminarArriba.setTag(2);
         //Animacion Caminar Derecha
         var framesCaminarDerecha = this.getAnimacion("link_lado", 12);
         var animacionDerecha = new cc.Animation(framesCaminarDerecha, 0.05);
         this.animCaminarDerecha = cc.RepeatForever.create(new cc.Animate(animacionDerecha));
+        this.animCaminarDerecha.setTag(3);
         //Animacion Espada Arriba
         var framesEspadaArriba = this.getAnimacion("Link_espadazo_arriba", 9);
         var animacionEspArriba = new cc.Animation(framesEspadaArriba, 0.03);
