@@ -17,6 +17,7 @@ var Link = cc.Class.extend({
     shape: null,
     orientacion: null,
     inMovement:null,
+    usingSword:null,
     velMovimiento: 70,
     ctor: function (space, posicion, layer) {
         this.space = space;
@@ -31,7 +32,7 @@ var Link = cc.Class.extend({
         this.body.setAngle(0);
         this.body.e = 0;
         this.sprite.setBody(this.body);
-
+        this.usingSword=Date.now();
         // Se añade el cuerpo al espacio
         this.space.addBody(this.body);
 
@@ -136,6 +137,8 @@ var Link = cc.Class.extend({
         this.inMovement=null;
     }, utilizarEspada: function () {
         console.log("ESPADA");
+        if(Date.now()-this.usingSword>=550){
+        this.usingSword=Date.now();
         if (this.orientacion == "ARRIBA") {
             this.sprite.runAction(this.animEspadaArriba);
         }
@@ -149,6 +152,7 @@ var Link = cc.Class.extend({
         }
         if (this.orientacion == "ABAJO") {
             this.sprite.runAction(this.animEspadaAbajo);
+        }
         }
     },basico: function(){
         this.body.setVel(cp.v(0, 0));
