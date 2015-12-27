@@ -9,7 +9,7 @@ var MenuObjetosLayer = cc.LayerColor.extend({
 
 
         // Fondo
-        var spriteFondoTitulo = new cc.Sprite(res.fondomenu2_png);
+        var spriteFondoTitulo = new cc.Sprite(res.fondomenu4_png);
         // Asigno posición central
         spriteFondoTitulo.setPosition(cc.p(size.width / 2, size.height / 2));
         // Lo escalo porque es más pequeño que la pantalla
@@ -44,19 +44,19 @@ var MenuObjetosLayer = cc.LayerColor.extend({
 
         // creo el menú pasándole el boton del arco
         var menuArco = new cc.Menu(menuArcoSprite);
-        menuArco.setPosition(cc.p((size.width / 2) - 40, (size.height * 0.25) + 60));
+        menuArco.setPosition(cc.p((size.width / 2) - 60, (size.height * 0.25) + 210));
 
         // creo el menú pasándole el boton de la espada
         var menuEspada = new cc.Menu(menuEspadaSprite);
-        menuEspada.setPosition(cc.p((size.width / 2) + 40, (size.height * 0.25) + 60));
+        menuEspada.setPosition(cc.p((size.width / 2) + 180, (size.height * 0.25) + 210));
 
         // creo el menú pasándole el boton del boomerán
         var menuBoomeran = new cc.Menu(menuBoomeranSprite);
-        menuBoomeran.setPosition(cc.p((size.width / 2) - 40, (size.height * 0.25) + 140));
+        menuBoomeran.setPosition(cc.p((size.width / 2) - 180, (size.height * 0.25)+210));
 
         // creo el menú pasándole el boton de las bombas
         var menuBombas = new cc.Menu(menuBombaSprite);
-        menuBombas.setPosition(cc.p((size.width / 2) + 40, (size.height * 0.25) + 140));
+        menuBombas.setPosition(cc.p((size.width / 2) + 60, (size.height * 0.25) + 210));
 
 
 

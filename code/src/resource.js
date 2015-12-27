@@ -8,6 +8,8 @@ var res = {
     boton_saltar_png: "res/boton_saltar.png",
     fondomenu_png: "res/fondomenu.png",
     fondomenu2_png: "res/fondomenu2.png",
+    fondomenu3_png: "res/fondomenu3.png",
+    fondomenu4_png: "res/fondomenu4.png",
     arco_png: "res/arco.png",
     boomeran_png: "res/boomeran.png",
     espada_png: "res/espada.png",
