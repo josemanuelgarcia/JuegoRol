@@ -8,6 +8,7 @@ var tipoOctorok = 3;
 var tipoDisparo = 4;
 var tipoBoomerang=5;
 var weapon="ARCO";
+
 var GameLayer = cc.Layer.extend({
     space: null,
     link: null,
@@ -191,10 +192,6 @@ var GameLayer = cc.Layer.extend({
                 this.space.addStaticShape(shapeSuelo);
             }
         }
-        //TODO cuadrados y rectangulos
-
-
-
 
     }, actualizarCamara: function () {
         var size = cc.winSize;
@@ -229,18 +226,20 @@ var GameLayer = cc.Layer.extend({
     }, collisionObjetoConDisparo: function (arbiter, space) {
         var shapes = arbiter.getShapes();
         this.shapesToRemove.push(shapes[1]);
-    },collisionBoomerangConJugador: function (arbiter, space) {
-        if(this.link.boomerang.canBeDeleted)
-        {
+
+    }, collisionBoomerangConJugador: function (arbiter, space) {
+        if(this.link.boomerang.canBeDeleted) {
             var shapes = arbiter.getShapes();
             this.shapesToRemove.push(shapes[0]);
          }
     },collisionBoomerangConNoPasable: function (arbiter, space) {
         this.link.boomerang.choco=true;
+
     },collisionBoomerangConOctorock: function (arbiter, space) {
            var shapes = arbiter.getShapes();
            this.shapesToRemove.push(shapes[1]);
-          }
+           //TODO quitar vida a octorok
+    }
 });
 
 var GameScene = cc.Scene.extend({

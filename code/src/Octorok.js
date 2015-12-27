@@ -106,10 +106,10 @@ var Octorok = cc.Class.extend({
             this.disparar();
         }
 
-
         //aumentamos el tiempo del movimiento
         this.tiempoMovimiento = this.tiempoMovimiento + dt;
         if (this.tiempoMovimiento > this.tiempoEntreMovimientos) {
+             this.sprite.stopAllActions();
             if (this.orientacion == "ARRIBA") {
                 this.moverDerecha();
             } else if (this.orientacion == "DERECHA") {
@@ -188,10 +188,10 @@ var Octorok = cc.Class.extend({
 
         this.tiempoEntreMovimientos = 0;
     },eliminar:function () {
-             // quita la forma
-             this.space.removeShape(this.shape);
+        // quita la forma
+        this.space.removeShape(this.shape);
 
-             // quita el sprite
-             this.layer.removeChild(this.sprite);
-         }
+        // quita el sprite
+        this.layer.removeChild(this.sprite);
+     }
 });
