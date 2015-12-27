@@ -148,14 +148,19 @@ var GameLayer = cc.Layer.extend({
             gameScene.addChild(new MenuObjetosLayer(gameScene), 0, 3);
         }
     }, dejarProcesarEventosKeyboard: function (keyCode, event) {
+        var instancia = event.getCurrentTarget();
         //Si se suelta alguna de las teclas de movimiento se eliminan todas las acciones
-        if (keyCode == 87 || keyCode == 119 || keyCode == 83 || keyCode == 115 || keyCode == 68 || keyCode == 100 || keyCode == 65 || keyCode == 97) {
-            var instancia = event.getCurrentTarget();
+        if (keyCode == 87 || keyCode == 119 || keyCode == 65 || keyCode == 97
+        || keyCode == 68 || keyCode == 100 || keyCode == 83 || keyCode == 115) {
             instancia.keyPulsada = null;
             instancia.link.parado();
             instancia.link.sprite.stopActionByTag(1);
             instancia.link.sprite.stopActionByTag(2);
             instancia.link.sprite.stopActionByTag(3);
+        }
+        if(keyCode == 77 || keyCode == 109)
+        {
+            instancia.link.isSwordPress=false;
         }
     }, cargarMapa: function () {
 

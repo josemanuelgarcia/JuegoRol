@@ -18,6 +18,7 @@ var Link = cc.Class.extend({
     orientacion: null,
     inMovement:null,
     usingSword:null,
+    isSwordPress:null,
     velMovimiento: 70,
     ctor: function (space, posicion, layer) {
         this.space = space;
@@ -34,6 +35,7 @@ var Link = cc.Class.extend({
         this.body.e = 0;
         this.sprite.setBody(this.body);
         this.usingSword=Date.now();
+        this.isSwordPress=false;
         // Se añade el cuerpo al espacio
         this.space.addBody(this.body);
 
@@ -140,9 +142,10 @@ var Link = cc.Class.extend({
         this.body.setVel(cp.v(0, 0));
         this.inMovement=null;
     }, utilizarEspada: function () {
-        console.log("ESPADA");
-        if(Date.now()-this.usingSword>=550){
+        //isSwordPress mira que no se mantenga pulsado el boton m
+        if(Date.now()-this.usingSword>=550 && !this.isSwordPress){
         this.usingSword=Date.now();
+        this.isSwordPress=true;
         if (this.orientacion == "ARRIBA") {
             this.sprite.runAction(this.animEspadaArriba);
         }
