@@ -7,6 +7,7 @@ var tipoJugador = 2;
 var tipoOctorok = 3;
 var tipoDisparo = 4;
 var tipoBoomerang=5;
+var weapon="ARCO";
 var GameLayer = cc.Layer.extend({
     space: null,
     link: null,
@@ -38,7 +39,7 @@ var GameLayer = cc.Layer.extend({
 
         //Creacion enemigo prueba
         this.octorok = new Octorok(this.space, cc.p(600, 250), this);
-
+        //ARMA INICIAL
         //this.depuracion = new cc.PhysicsDebugNode(this.space);
         //this.addChild(this.depuracion, 10);
 
@@ -113,7 +114,11 @@ var GameLayer = cc.Layer.extend({
         //Utilizar tecla n boomerang
         else if( keyCode==107 || keyCode==75)
         {
-            instancia.link.utilizarBoomerang();
+            console.log(weapon);
+           if(weapon=="BOOMERANG")
+           {
+                instancia.link.utilizarBoomerang();
+           }
         }
         //Metodo que maneja los eventos de teclado
        else if (keyCode == 87 || keyCode == 119) {
