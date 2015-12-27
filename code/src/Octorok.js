@@ -92,7 +92,7 @@ var Octorok = cc.Class.extend({
         this.animDispararIzquierda = new cc.Sequence(new cc.Animate(animacionDisparoIzquierda), new cc.Animate(animacionIzquierda));
 
 
-        layer.addChild(this.sprite, 10);
+        this.layer.mapa.addChild(this.sprite, 2);
         return true;
 
 

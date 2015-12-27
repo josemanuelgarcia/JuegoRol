@@ -24,6 +24,7 @@ var Link = cc.Class.extend({
         this.layer = layer;
         //Sprite inicial de link
         this.sprite = new cc.PhysicsSprite("#link_abajo0.png");
+        this.sprite.setVertexZ(-100);
         // Cuerpo dinamico, SI le afectan las fuerzas
         this.body = new cp.Body(100, Infinity);
 
@@ -81,7 +82,8 @@ var Link = cc.Class.extend({
         var animacionEspDerecha = new cc.Animation(framesEspadaDerecha, 0.03);
         this.animEspadaLado = new cc.Sequence(new cc.Animate(animacionEspDerecha), new cc.Animate(this.animacionSimpleLado));
 
-        layer.addChild(this.sprite, 10);
+
+        this.layer.mapa.addChild(this.sprite, 2);
         return true;
 
     }, getAnimacion: function (nombreAnimacion, numFrames) {

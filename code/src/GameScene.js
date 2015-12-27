@@ -35,6 +35,9 @@ var GameLayer = cc.Layer.extend({
         //La gravedad en este juego da igual.
         this.space.gravity = cp.v(0, 0);
         //Add the Debug Layer:
+
+        //Cargamos el Mapa
+        this.cargarMapa();
         //Creación del personaje link
         this.link = new Link(this.space, cc.p(400, 400), this);
 
@@ -53,7 +56,7 @@ var GameLayer = cc.Layer.extend({
         }, this);
         this.ultimaXConocida = -this.link.body.p.x + 300;
         this.ultimaYConocida = -this.link.body.p.y + 300;
-        this.cargarMapa();
+
         this.scheduleUpdate();
 
         //Colisiones entre elementos
@@ -157,6 +160,7 @@ var GameLayer = cc.Layer.extend({
         this.mapa = new cc.TMXTiledMap(res.mapa_inicial_tmx);
         // Añadirlo a la Layer
         this.addChild(this.mapa);
+
         this.mapaAncho = this.mapa.getContentSize().width;
         this.mapaAlto = this.mapa.getContentSize().height;
 
@@ -191,6 +195,8 @@ var GameLayer = cc.Layer.extend({
                 shapeSuelo.setFriction(1);
                 this.space.addStaticShape(shapeSuelo);
             }
+
+
         }
 
     }, actualizarCamara: function () {
