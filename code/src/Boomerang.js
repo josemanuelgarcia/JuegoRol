@@ -3,14 +3,16 @@ var Boomerang = cc.Class.extend({
     sprite: null,
     shape: null,
     layer: null,
+    choco:null,
     sentido:null,
     canBeDeleted:null,
-    velDisparo: 50,
+    velDisparo: 100,
     timeToChange:null,
     ctor: function (space, posicion, layer, sentido) {
         this.space = space;
         this.layer = layer;
         this.sentido=sentido;
+        this.choco=false;
         // Crear animación
         var framesAnimacion = [];
         for (var i = 0; i <= 5; i++) {
@@ -73,10 +75,11 @@ var Boomerang = cc.Class.extend({
         // quita el sprite
         this.layer.removeChild(this.sprite);
     },update:function(dt){
-        if(Date.now()-this.timeToChange>=1500)
+    //Si pasa el tiempo o si choca da la vuelta
+        if(Date.now()-this.timeToChange>=1500 || this.choco)
         {
             this.canBeDeleted=true;
-            if (this.sentido == "ARRIBA") {
+            /*if (this.sentido == "ARRIBA") {
                         this.body.setVel(cp.v(0, -this.velDisparo));
                     } else if (this.sentido == "DERECHA") {
                         this.body.setVel(cp.v(-this.velDisparo, 0));
@@ -84,7 +87,9 @@ var Boomerang = cc.Class.extend({
                         this.body.setVel(cp.v(0, this.velDisparo));
                     } else {
                         this.body.setVel(cp.v(this.velDisparo, 0));
-                    }
+                    }*/
+
+             this.sprite.runAction(cc.MoveTo.create(3, cc.p(this.layer.link.body.p.x,this.layer.link.body.p.y)) );
         }
     }
 

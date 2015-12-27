@@ -187,6 +187,11 @@ var Octorok = cc.Class.extend({
         }
 
         this.tiempoEntreMovimientos = 0;
-    }
+    },eliminar:function () {
+             // quita la forma
+             this.space.removeShape(this.shape);
 
+             // quita el sprite
+             this.layer.removeChild(this.sprite);
+         }
 });

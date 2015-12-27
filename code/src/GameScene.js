@@ -39,8 +39,8 @@ var GameLayer = cc.Layer.extend({
         //Creacion enemigo prueba
         this.octorok = new Octorok(this.space, cc.p(600, 250), this);
 
-        this.depuracion = new cc.PhysicsDebugNode(this.space);
-        this.addChild(this.depuracion, 10);
+        //this.depuracion = new cc.PhysicsDebugNode(this.space);
+        //this.addChild(this.depuracion, 10);
 
 
         //Manejo de eventos de TECLADO
@@ -61,6 +61,10 @@ var GameLayer = cc.Layer.extend({
             null, null, this.collisionObjetoConDisparo.bind(this), null);
          this.space.addCollisionHandler(tipoBoomerang, tipoJugador,
                     null,this.collisionBoomerangConJugador.bind(this), null, null);
+         this.space.addCollisionHandler(tipoBoomerang, tipoNoPasable,
+                             null,this.collisionBoomerangConNoPasable.bind(this), null, null);
+          this.space.addCollisionHandler(tipoBoomerang, tipoOctorok,
+                                      null,this.collisionBoomerangConOctorock.bind(this), null, null);
         this.space.addCollisionHandler(
             tipoJugador, tipoOctorok, null, null, null, this.reducirVidas.bind(this));
 
@@ -82,6 +86,11 @@ var GameLayer = cc.Layer.extend({
             {
                 this.link.boomerang.eliminar();
             }
+            }
+            //Eliminar octorock si impacta, mas adelante se recorreran todos los enemigos
+            if(this.octorok.shape==shape)
+            {
+                this.octorok.eliminar();
             }
             for (var i = 0; i < this.disparosEnemigos.length; i++) {
                 if (this.disparosEnemigos[i].shape === shape) {
@@ -218,11 +227,15 @@ var GameLayer = cc.Layer.extend({
     },collisionBoomerangConJugador: function (arbiter, space) {
         if(this.link.boomerang.canBeDeleted)
         {
-            console.log("HOLA");
             var shapes = arbiter.getShapes();
             this.shapesToRemove.push(shapes[0]);
          }
-    }
+    },collisionBoomerangConNoPasable: function (arbiter, space) {
+        this.link.boomerang.choco=true;
+    },collisionBoomerangConOctorock: function (arbiter, space) {
+           var shapes = arbiter.getShapes();
+           this.shapesToRemove.push(shapes[1]);
+          }
 });
 
 var GameScene = cc.Scene.extend({
