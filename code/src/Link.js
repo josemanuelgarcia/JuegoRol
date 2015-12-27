@@ -16,6 +16,7 @@ var Link = cc.Class.extend({
     body: null,
     shape: null,
     orientacion: null,
+    inMovement:null,
     velMovimiento: 70,
     ctor: function (space, posicion, layer) {
         this.space = space;
@@ -92,30 +93,47 @@ var Link = cc.Class.extend({
         return framesAnimacion;
 
     }, moverArriba: function () {
-        this.sprite.runAction(this.animCaminarArriba);
+        if(this.inMovement==null)
+        {
+            this.sprite.runAction(this.animCaminarArriba);
+            this.inMovement=true;
+            this.orientacion = "ARRIBA";
+        }
         //var vMoverArriba = cc.RepeatForever.create(cc.MoveBy.create(1, cc.p(0,50)));
         //this.sprite.runAction(vMoverArriba);
         this.body.setVel(cp.v(this.body.getVel().x, this.velMovimiento));
-        this.orientacion = "ARRIBA";
     }, moverAbajo: function () {
-        this.sprite.runAction(this.animCaminarAbajo);
+        if(this.inMovement==null)
+                {
+                    this.sprite.runAction(this.animCaminarAbajo);
+                    this.inMovement=true;
+                    this.orientacion = "ABAJO";
+                }
         this.body.setVel(cp.v(this.body.getVel().x, -this.velMovimiento));
-        this.orientacion = "ABAJO";
     }, moverDerecha: function () {
-
+         console.log("DERECHA");
         //Se escala a 1 en la x
-        this.sprite.scaleX = 1;
-        this.sprite.runAction(this.animCaminarDerecha);
+        if(this.inMovement==null)
+                {
+                    this.sprite.scaleX = 1;
+                    this.sprite.runAction(this.animCaminarDerecha);
+                    this.inMovement=true;
+                    this.orientacion = "DERECHA";
+                }
         this.body.setVel(cp.v(this.velMovimiento, this.body.getVel().y));
-        this.orientacion = "DERECHA";
     }, moverIzquierda: function () {
         //Si va a la izquierda se escala a -1 para hacer flip a la animacion
-        this.sprite.scaleX = -1;
-        this.sprite.runAction(this.animCaminarDerecha);
+         if(this.inMovement==null)
+                        {
+                            this.sprite.scaleX = -1;
+                            this.sprite.runAction(this.animCaminarDerecha);
+                            this.inMovement=true;
+                            this.orientacion = "IZQUIERDA";
+                        }
         this.body.setVel(cp.v(-this.velMovimiento, this.body.getVel().y));
-        this.orientacion = "IZQUIERDA";
     }, parado: function () {
         this.body.setVel(cp.v(0, 0));
+        this.inMovement=null;
     }, utilizarEspada: function () {
         console.log("ESPADA");
         if (this.orientacion == "ARRIBA") {
