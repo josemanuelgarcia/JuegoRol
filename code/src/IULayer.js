@@ -5,7 +5,8 @@ var IULayer = cc.Layer.extend({
     spriteArmaElegida: null,
     spriteRupias: null,
     rupias: 0,
-    corazones: 1,
+    corazones: 100,
+    corazonesBlancos:999,
     posicionSpriteCorazones: 0,
     alturaSpriteCOrazones: 30,
     ctor: function () {
@@ -128,7 +129,7 @@ var IULayer = cc.Layer.extend({
             eval("variable" + this.corazones).setPosition(cc.p(this.posicionSpriteCorazones, cc.winSize.height - this.alturaSpriteCOrazones));
 
             //y lo añadimos
-            this.addChild(eval("variable" + this.corazones));
+            this.addChild(eval("variable" + this.corazones),0,this.corazones);
             console.log("Si he llegado al limite" + this.posicionSpriteCorazones);
         } else {
 
@@ -137,32 +138,48 @@ var IULayer = cc.Layer.extend({
             eval("variable" + this.corazones).setPosition(cc.p(this.posicionSpriteCorazones, cc.winSize.height - this.alturaSpriteCOrazones));
 
             //y lo añadimos
-            this.addChild(eval("variable" + this.corazones));
+            this.addChild(eval("variable" + this.corazones),0,this.corazones);
             console.log("variable" + this.corazones);
+
+
 
         }
 
 
-
+ this.corazones = this.corazones+1;
 
 
     }, quitarVidas: function () {
 
-        //obtenemos los hijos de la layer
-        var childNode = this._children;
-        for (var i = 0; i < childNode.length; i++) {
-            var child = childNode[i];
+        //Entraria siempre que haya algun corazon
+        if(this.posicionSpriteCorazones>=30 || this.alturaSpriteCOrazones>30){
+        //creamos el nuevo sprite del corazon blanco
+         var corazonblanco = cc.Sprite.create(res.corazonblanco_png);
 
-            //eliminamos el ultimo sprite añadido (osea el corazon)
-            if (i == childNode.length - 1 && childNode[i].getPosition().x < cc.winSize.width - 70) {
-                this.removeChild(childNode[i]);
+         //le asignamos la posicion del corazon lleno de vida
+         corazonblanco.setPosition(cc.p(this.getChildByTag(this.corazones-1).getPosition().x,this.getChildByTag(this.corazones-1).getPosition().y));
 
-                //Actualizamos la posicion de los corazones
-                this.posicionSpriteCorazones = this.posicionSpriteCorazones - 30;
-            }
-            console.log(child);
+        //eliminamos el corazon lleno de vida y asiganmos el blanco
+        this.removeChild(this.getChildByTag(this.corazones-1));
+        this.addChild(corazonblanco,0,this.corazonesBlancos);
+
+       //Si no ha llegado al ultimo corazon por la izquierda
+        if(this.posicionSpriteCorazones>=30){
+         //actualizamos la posicion de los corazones llenos de vida
+        this.posicionSpriteCorazones = this.posicionSpriteCorazones - 30;
+       }
+       //Si ha llegado al ultimo corazon por la izquierda entonces modificamos la altura
+       else if(this.alturaSpriteCOrazones>30){
+        this.posicionSpriteCorazones=690;
+        this.alturaSpriteCOrazones=this.alturaSpriteCOrazones - 30;
         }
 
+        //Actualizamos el identificador de los sprite de los sprite de los corazones
+        this.corazones = this.corazones-1;
+
+        //Actualizamos el identificador de los sprite de los corazones blancos
+        this.corazonesBlancos = this.corazonesBlancos+1;
+        }
     }, pintarVidas() {
 
 
