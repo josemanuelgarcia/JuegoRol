@@ -89,7 +89,7 @@ var Boomerang = cc.Class.extend({
                         this.body.setVel(cp.v(this.velDisparo, 0));
                     }*/
 
-             this.sprite.runAction(cc.MoveTo.create(3, cc.p(this.layer.link.body.p.x,this.layer.link.body.p.y)) );
+             this.sprite.runAction(cc.MoveTo.create(1.5, cc.p(this.layer.link.body.p.x,this.layer.link.body.p.y)) );
         }
     }
 
