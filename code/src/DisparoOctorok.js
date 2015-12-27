@@ -1,10 +1,10 @@
-var DisparoOctorok = cc.Class.extend ({
-     space:null,
-     sprite:null,
-     shape:null,
-     layer:null,
-     velDisparo: 50,
-    ctor:function (space, posicion, layer, sentido) {
+var DisparoOctorok = cc.Class.extend({
+    space: null,
+    sprite: null,
+    shape: null,
+    layer: null,
+    velDisparo: 50,
+    ctor: function (space, posicion, layer, sentido) {
         this.space = space;
         this.layer = layer;
 
@@ -27,14 +27,14 @@ var DisparoOctorok = cc.Class.extend ({
 
         //Poner la direccion del disparo en función de la de Octorok
 
-        if(sentido=="ARRIBA") {
-            this.body.setVel(cp.v(0,this.velDisparo));
-        } else if (sentido=="DERECHA") {
-            this.body.setVel(cp.v(this.velDisparo,0));
-        } else if (sentido=="ABAJO") {
-            this.body.setVel(cp.v(0,-this.velDisparo));
+        if (sentido == "ARRIBA") {
+            this.body.setVel(cp.v(0, this.velDisparo));
+        } else if (sentido == "DERECHA") {
+            this.body.setVel(cp.v(this.velDisparo, 0));
+        } else if (sentido == "ABAJO") {
+            this.body.setVel(cp.v(0, -this.velDisparo));
         } else {
-            this.body.setVel(cp.v(-this.velDisparo,0));
+            this.body.setVel(cp.v(-this.velDisparo, 0));
         }
 
         // Colocar en angulo del cuerpo a 0
@@ -45,7 +45,7 @@ var DisparoOctorok = cc.Class.extend ({
 
         var radio = this.sprite.getContentSize().width / 2;
         // forma
-        this.shape = new cp.CircleShape(this.body, radio , cp.vzero);
+        this.shape = new cp.CircleShape(this.body, radio, cp.vzero);
         this.shape.setCollisionType(tipoDisparo);
 
         this.space.addShape(this.shape);
@@ -53,19 +53,19 @@ var DisparoOctorok = cc.Class.extend ({
         // ejecutar la animación
         this.sprite.runAction(actionAnimacionBucle);
 
-        layer.addChild(this.sprite,10);
+        layer.addChild(this.sprite, 10);
         return true;
 
     }, getShape: function () {
-         return this.shape;
+        return this.shape;
 
     }, eliminar: function () {
-         // quita la forma
-         this.space.removeShape(this.shape);
+        // quita la forma
+        this.space.removeShape(this.shape);
 
-         // quita el sprite
-         this.layer.removeChild(this.sprite);
-     }
+        // quita el sprite
+        this.layer.removeChild(this.sprite);
+    }
 
 
 });

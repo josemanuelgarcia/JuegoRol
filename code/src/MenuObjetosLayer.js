@@ -1,15 +1,15 @@
 
 var MenuObjetosLayer = cc.LayerColor.extend({
-scene:null,
+    scene: null,
 
-    ctor:function (scene) {
+    ctor: function (scene) {
         this._super();
         var size = cc.winSize;
-        this.scene=scene;
+        this.scene = scene;
 
 
-// Fondo
-        var spriteFondoTitulo= new cc.Sprite(res.fondomenu2_png);
+        // Fondo
+        var spriteFondoTitulo = new cc.Sprite(res.fondomenu2_png);
         // Asigno posición central
         spriteFondoTitulo.setPosition(cc.p(size.width / 2, size.height / 2));
         // Lo escalo porque es más pequeño que la pantalla
@@ -24,39 +24,39 @@ scene:null,
             this.pulsarBotonArco, this);
 
         //MenuItemSprite para boton espada
-                var menuEspadaSprite = new cc.MenuItemSprite(
-                    new cc.Sprite(res.espada_png), // IMG estado normal
-                    new cc.Sprite(res.espada_png), // IMG estado pulsado
-                    this.pulsarBotonEspada, this);
+        var menuEspadaSprite = new cc.MenuItemSprite(
+            new cc.Sprite(res.espada_png), // IMG estado normal
+            new cc.Sprite(res.espada_png), // IMG estado pulsado
+            this.pulsarBotonEspada, this);
 
         //MenuItemSprite para boton boomerán
-                var menuBoomeranSprite = new cc.MenuItemSprite(
-                    new cc.Sprite(res. boomeran_png), // IMG estado normal
-                    new cc.Sprite(res. boomeran_png), // IMG estado pulsado
-                    this.pulsarBotonBoomeran, this);
+        var menuBoomeranSprite = new cc.MenuItemSprite(
+            new cc.Sprite(res.boomeran_png), // IMG estado normal
+            new cc.Sprite(res.boomeran_png), // IMG estado pulsado
+            this.pulsarBotonBoomeran, this);
 
         //MenuItemSprite para boton bombas
-                var menuBombaSprite = new cc.MenuItemSprite(
-                    new cc.Sprite(res.bomba_png), // IMG estado normal
-                    new cc.Sprite(res.bomba_png), // IMG estado pulsado
-                    this.pulsarBotonBombas, this);
+        var menuBombaSprite = new cc.MenuItemSprite(
+            new cc.Sprite(res.bomba_png), // IMG estado normal
+            new cc.Sprite(res.bomba_png), // IMG estado pulsado
+            this.pulsarBotonBombas, this);
 
 
         // creo el menú pasándole el boton del arco
         var menuArco = new cc.Menu(menuArcoSprite);
-        menuArco.setPosition(cc.p((size.width / 2)-40, (size.height * 0.25)+60));
+        menuArco.setPosition(cc.p((size.width / 2) - 40, (size.height * 0.25) + 60));
 
-         // creo el menú pasándole el boton de la espada
-         var menuEspada = new cc.Menu(menuEspadaSprite);
-         menuEspada.setPosition(cc.p((size.width / 2)+40, (size.height * 0.25)+60));
+        // creo el menú pasándole el boton de la espada
+        var menuEspada = new cc.Menu(menuEspadaSprite);
+        menuEspada.setPosition(cc.p((size.width / 2) + 40, (size.height * 0.25) + 60));
 
-          // creo el menú pasándole el boton del boomerán
-          var menuBoomeran = new cc.Menu(menuBoomeranSprite);
-          menuBoomeran.setPosition(cc.p((size.width / 2)-40, (size.height * 0.25)+140));
+        // creo el menú pasándole el boton del boomerán
+        var menuBoomeran = new cc.Menu(menuBoomeranSprite);
+        menuBoomeran.setPosition(cc.p((size.width / 2) - 40, (size.height * 0.25) + 140));
 
-           // creo el menú pasándole el boton de las bombas
-           var menuBombas = new cc.Menu(menuBombaSprite);
-           menuBombas.setPosition(cc.p((size.width / 2)+40, (size.height * 0.25)+140));
+        // creo el menú pasándole el boton de las bombas
+        var menuBombas = new cc.Menu(menuBombaSprite);
+        menuBombas.setPosition(cc.p((size.width / 2) + 40, (size.height * 0.25) + 140));
 
 
 
@@ -70,35 +70,35 @@ scene:null,
 
 
         return true;
-    }, pulsarBotonArco : function(){
-                cc.director.resume();
-                 var IULayer = this.scene.getChildByTag(2);
-                  //Sprite en el que se muestra el arma elegida
-                   IULayer.spriteArmaElegida.setTexture(res.arco_reducido_png);
-                    this.scene.removeChild(this);
+    }, pulsarBotonArco: function () {
+        cc.director.resume();
+        var IULayer = this.scene.getChildByTag(2);
+        //Sprite en el que se muestra el arma elegida
+        IULayer.spriteArmaElegida.setTexture(res.arco_reducido_png);
+        this.scene.removeChild(this);
 
 
 
-    }, pulsarBotonEspada : function(){
-                          cc.director.resume();
-                           var IULayer = this.scene.getChildByTag(2);
-                            //Sprite en el que se muestra el arma elegida
-                            IULayer.spriteArmaElegida.setTexture(res.espada_reducida_png);
-                          this.scene.removeChild(this);
-    }, pulsarBotonBoomeran : function(){
-                     cc.director.resume();
-                     var IULayer = this.scene.getChildByTag(2);
-                      //Sprite en el que se muestra el arma elegida
-                       IULayer.spriteArmaElegida.setTexture(res.boomeran_reducido_png);
-                       this.scene.removeChild(this);
+    }, pulsarBotonEspada: function () {
+        cc.director.resume();
+        var IULayer = this.scene.getChildByTag(2);
+        //Sprite en el que se muestra el arma elegida
+        IULayer.spriteArmaElegida.setTexture(res.espada_reducida_png);
+        this.scene.removeChild(this);
+    }, pulsarBotonBoomeran: function () {
+        cc.director.resume();
+        var IULayer = this.scene.getChildByTag(2);
+        //Sprite en el que se muestra el arma elegida
+        IULayer.spriteArmaElegida.setTexture(res.boomeran_reducido_png);
+        this.scene.removeChild(this);
 
 
-    }, pulsarBotonBombas : function(){
-                      cc.director.resume();
-                       var IULayer = this.scene.getChildByTag(2);
-                         //Sprite en el que se muestra el arma elegida
-                        IULayer.spriteArmaElegida.setTexture(res.bomba_reducida_png);
-                        this.scene.removeChild(this);
+    }, pulsarBotonBombas: function () {
+        cc.director.resume();
+        var IULayer = this.scene.getChildByTag(2);
+        //Sprite en el que se muestra el arma elegida
+        IULayer.spriteArmaElegida.setTexture(res.bomba_reducida_png);
+        this.scene.removeChild(this);
 
 
     }
