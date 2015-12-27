@@ -6,7 +6,7 @@ var tipoNoPasable = 1;
 var tipoJugador = 2;
 var tipoOctorok = 3;
 var tipoDisparo = 4;
-
+var tipoBoomerang=5;
 var GameLayer = cc.Layer.extend({
     space: null,
     link: null,
@@ -27,7 +27,7 @@ var GameLayer = cc.Layer.extend({
 
         //Cachear recursos del juego
         cc.spriteFrameCache.addSpriteFrames(res.link_plist);
-
+         cc.spriteFrameCache.addSpriteFrames(res.boomerang_plist);
         //Creación del espacio del juego
         this.space = new cp.Space();
         //La gravedad en este juego da igual.
@@ -59,7 +59,8 @@ var GameLayer = cc.Layer.extend({
             null, null, this.collisionObjetoConOctorok.bind(this), null);
         this.space.addCollisionHandler(tipoNoPasable, tipoDisparo,
             null, null, this.collisionObjetoConDisparo.bind(this), null);
-
+         this.space.addCollisionHandler(tipoBoomerang, tipoJugador,
+                    null,this.collisionBoomerangConJugador.bind(this), null, null);
         this.space.addCollisionHandler(
             tipoJugador, tipoOctorok, null, null, null, this.reducirVidas.bind(this));
 
@@ -71,10 +72,17 @@ var GameLayer = cc.Layer.extend({
         this.space.step(dt);
         this.actualizarCamara();
         this.octorok.update(dt);
-
+        this.link.update(dt);
         //Eliminar los disparos que han impactado
         for (var i = 0; i < this.shapesToRemove.length; i++) {
             var shape = this.shapesToRemove[i];
+            //Eliminar boomerang si dicho boomerang es distinto de null
+            if(this.link.boomerang!=null){
+            if(this.link.boomerang.shape==shape)
+            {
+                this.link.boomerang.eliminar();
+            }
+            }
             for (var i = 0; i < this.disparosEnemigos.length; i++) {
                 if (this.disparosEnemigos[i].shape === shape) {
                     this.disparosEnemigos[i].eliminar();
@@ -93,8 +101,13 @@ var GameLayer = cc.Layer.extend({
         if (keyCode == 77 || keyCode == 109) {
             instancia.link.utilizarEspada();
         }
+        //Utilizar tecla n boomerang
+        else if( keyCode==107 || keyCode==75)
+        {
+            instancia.link.utilizarBoomerang();
+        }
         //Metodo que maneja los eventos de teclado
-        if (keyCode == 87 || keyCode == 119) {
+       else if (keyCode == 87 || keyCode == 119) {
             //W mover hacia arriba
             instancia.link.moverArriba();
         }
@@ -193,7 +206,6 @@ var GameLayer = cc.Layer.extend({
         }
 
     }, reducirVidas: function (arbiter, space) {
-        console.log("llega");
         iuLayer.quitarVidas();
         //TODO las vidas hay que quitarselas a link no a la interfaz xD
 
@@ -203,6 +215,13 @@ var GameLayer = cc.Layer.extend({
     }, collisionObjetoConDisparo: function (arbiter, space) {
         var shapes = arbiter.getShapes();
         this.shapesToRemove.push(shapes[1]);
+    },collisionBoomerangConJugador: function (arbiter, space) {
+        if(this.link.boomerang.canBeDeleted)
+        {
+            console.log("HOLA");
+            var shapes = arbiter.getShapes();
+            this.shapesToRemove.push(shapes[0]);
+         }
     }
 });
 

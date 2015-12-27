@@ -6,6 +6,10 @@ var Link = cc.Class.extend({
     animEspadaArriba: null,
     animEspadaAbajo: null,
     animEspadaLado: null,
+    animacionSimple:null,
+    animacionSimpleAbajo:null,
+    animacionSimpleLado:null,
+    boomerang:null,
     space: null,
     layer: null,
     sprite: null,
@@ -41,13 +45,13 @@ var Link = cc.Class.extend({
 
         //Animacion Simple Arriba
         var framesSimple = this.getAnimacion("link_arriba", 1);
-        var animacionSimple = new cc.Animation(framesSimple, 0.05);
+        this.animacionSimple = new cc.Animation(framesSimple, 0.05);
         //Animacion Simple Abajo
         var framesSimpleAbajo = this.getAnimacion("link_abajo", 1);
-        var animacionSimpleAbajo = new cc.Animation(framesSimpleAbajo, 0.05);
+        this.animacionSimpleAbajo = new cc.Animation(framesSimpleAbajo, 0.05);
         //Animacion Simple Lado
         var framesSimpleLado = this.getAnimacion("link_lado", 1);
-        var animacionSimpleLado = new cc.Animation(framesSimpleLado, 0.05);
+        this.animacionSimpleLado = new cc.Animation(framesSimpleLado, 0.05);
         //Animacion Caminar Abajo
         var framesCaminarAbajo = this.getAnimacion("link_abajo", 12);
         var animacionAbajo = new cc.Animation(framesCaminarAbajo, 0.05);
@@ -64,16 +68,16 @@ var Link = cc.Class.extend({
         //Animacion Espada Arriba
         var framesEspadaArriba = this.getAnimacion("Link_espadazo_arriba", 9);
         var animacionEspArriba = new cc.Animation(framesEspadaArriba, 0.03);
-        this.animEspadaArriba = new cc.Sequence(new cc.Animate(animacionEspArriba), new cc.Animate(animacionSimple));
+        this.animEspadaArriba = new cc.Sequence(new cc.Animate(animacionEspArriba), new cc.Animate(this.animacionSimple));
 
         //Animacion Espada Abajo
         var framesEspadaAbajo = this.getAnimacion("Link_espadazo_abajo", 6);
         var animacionEspAbajo = new cc.Animation(framesEspadaAbajo, 0.03);
-        this.animEspadaAbajo = new cc.Sequence(new cc.Animate(animacionEspAbajo), new cc.Animate(animacionSimpleAbajo));
+        this.animEspadaAbajo = new cc.Sequence(new cc.Animate(animacionEspAbajo), new cc.Animate(this.animacionSimpleAbajo));
         //Animacion Espada Lado
         var framesEspadaDerecha = this.getAnimacion("Link_espadazo_derecha", 9);
         var animacionEspDerecha = new cc.Animation(framesEspadaDerecha, 0.03);
-        this.animEspadaLado = new cc.Sequence(new cc.Animate(animacionEspDerecha), new cc.Animate(animacionSimpleLado));
+        this.animEspadaLado = new cc.Sequence(new cc.Animate(animacionEspDerecha), new cc.Animate(this.animacionSimpleLado));
 
         layer.addChild(this.sprite, 10);
         return true;
@@ -127,6 +131,40 @@ var Link = cc.Class.extend({
         }
         if (this.orientacion == "ABAJO") {
             this.sprite.runAction(this.animEspadaAbajo);
+        }
+    },basico: function(){
+        this.body.setVel(cp.v(0, 0));
+        if(this.orientacion==null){
+             this.sprite.runAction(this.animacionSimpleAbajo);
+        }
+        else{
+        if(this.orientacion=="DERECHA")
+        {
+            this.sprite.scaleX=1;
+            this.sprite.runAction(this.animacionSimpleLado);
+        }
+        if(this.orientacion=="IZQUIERDA")
+        {
+            this.sprite.scaleX=-1;
+            this.sprite.runAction(this.animacionSimpleLado);
+        }
+        if(this.orientacion=="ARRIBA")
+        {
+            this.sprite.runAction(this.animacionSimple);
+        }
+        if(this.orientacion=="ABAJO")
+        {
+            this.sprite.runAction(this.animacionSimpleAbajo);
+        }
+        }
+    },utilizarBoomerang:function(){
+        if(this.boomerang==null)
+        {
+            this.boomerang=new Boomerang(this.space,cc.p(this.body.p.x, this.body.p.y), this.layer, this.orientacion);
+        }
+    },update:function(dt){
+       if(this.boomerang!=null){
+        this.boomerang.update(dt);
         }
     }
 });
