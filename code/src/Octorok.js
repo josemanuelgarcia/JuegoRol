@@ -165,13 +165,13 @@ var Octorok = cc.Class.extend({
 		if(this.orientacion=="ABAJO"){
 			this.sprite.runAction(this.animDispararAbajo);
 		}
-/*
+
 		//Crear el disparo
 		var disparo=new DisparoOctorok(this.space,
                                      		cc.p(this.body.p.x,this.body.p.y), this.layer, this.orientacion);
         this.layer.disparosEnemigos.push(disparo);
 
-*/
+
 	}, haChocado: function(){
 		if(this.orientacion=="ARRIBA"){
 			this.moverAbajo();

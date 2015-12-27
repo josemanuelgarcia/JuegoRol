@@ -19,6 +19,7 @@ var GameLayer = cc.Layer.extend({
     disparosEnemigos:[],
     octorock:null,
     depuracion:null,
+    shapesToRemove: [],
     ctor:function () {
 
         this._super();
@@ -56,8 +57,10 @@ var GameLayer = cc.Layer.extend({
         //Colisiones entre elementos
          this.space.addCollisionHandler(tipoNoPasable, tipoOctorok,
                              null, null, this.collisionObjetoConOctorok.bind(this), null);
+         this.space.addCollisionHandler(tipoNoPasable, tipoDisparo,
+                                      null,null, this.collisionObjetoConDisparo.bind(this),null);
 
-          this.space.addCollisionHandler(
+         this.space.addCollisionHandler(
             tipoJugador,tipoOctorok,null,null,null,this.reducirVidas.bind(this));
 
 
@@ -68,6 +71,17 @@ var GameLayer = cc.Layer.extend({
         this.space.step(dt);
         this.actualizarCamara();
         this.octorok.update(dt);
+
+        //Eliminar los disparos que han impactado 
+        for(var i = 0; i < this.shapesToRemove.length; i++) {
+            var shape = this.shapesToRemove[i];
+            for(var i=0; i< this.disparosEnemigos.length;i++) {
+                if(this.disparosEnemigos[i].shape === shape) {
+                    this.disparosEnemigos[i].eliminar();
+                }
+            }
+        }
+        this.shapesToRemove = [];
 
     }, procesarEventosKeyboard:function(keyCode, event){
         var instancia = event.getCurrentTarget();
@@ -188,6 +202,10 @@ var GameLayer = cc.Layer.extend({
 
     }, collisionObjetoConOctorok:function(arbiter, space){
       //  this.octorok.haChocado();
+
+    }, collisionObjetoConDisparo: function(arbiter, space) {
+        var shapes=arbiter.getShapes();
+        this.shapesToRemove.push(shapes[1]);
     }
 });
 
