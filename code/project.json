@@ -14,12 +14,12 @@
         "src/resource.js",
         "src/app.js",
         "src/Link.js",
-        "src/IULayer.js",
-        "src/Octorok.js",
-        "src/DisparoOctorok.js",
-        "src/MenuObjetosLayer.js",
+        "src/Layers/IULayer.js",
+        "src/Enemigos/Octorok.js",
+        "src/Enemigos/DisparoOctorok.js",
+        "src/Layers/MenuObjetosLayer.js",
         "src/GameScene.js",
-        "src/Boomerang.js",
-        "src/HistoryLayer.js"
+        "src/Armas/Boomerang.js",
+        "src/Layers/HistoryLayer.js"
     ]
 }

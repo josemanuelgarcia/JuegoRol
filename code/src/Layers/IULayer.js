@@ -52,11 +52,6 @@ var IULayer = cc.Layer.extend({
         this.addChild(this.spriteArmaElegida);
 
 
-
-
-
-
-
         // Registrar Mouse Down
         cc.eventManager.addListener({
             event: cc.EventListener.MOUSE,
