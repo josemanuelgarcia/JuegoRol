@@ -17,8 +17,6 @@ var GameLayer = cc.Layer.extend({
     mapa: null,
     mapaAncho: null,
     mapaAlto: null,
-    ultimaXConocida: null,
-    ultimaYConocida: null,
     keyPulsada: null,
     disparosEnemigos: [],
     octorock: null,
@@ -69,8 +67,6 @@ var GameLayer = cc.Layer.extend({
             onKeyPressed: this.procesarEventosKeyboard,
             onKeyReleased: this.dejarProcesarEventosKeyboard
         }, this);
-        this.ultimaXConocida = -this.link.body.p.x + 300;
-        this.ultimaYConocida = -this.link.body.p.y + 300;
         this.scheduleUpdate();
 
         //Colisiones entre elementos
@@ -209,27 +205,18 @@ var GameLayer = cc.Layer.extend({
         }
 
     }, actualizarCamara: function () {
-        var size = cc.winSize;
-        //X
-        if (this.link.body.p.x >= (this.mapaAncho - (size.width) + 300) || this.link.body.p.x <= size.width / 2) {
-            if (this.link.body.p.y >= size.height / 2 && this.link.body.p.y <= (this.mapaAlto - (size.height) + 300)) {
-                this.ultimaYConocida = -this.link.body.p.y + 300;
-                this.setPosition(this.ultimaXConocida, -this.link.body.p.y + 300);
-            }
-        }
-        //Y
-        else if (this.link.body.p.y <= size.height / 2 || this.link.body.p.y >= (this.mapaAlto - (size.height) + 300)) {
-            if (this.link.body.p.x <= (this.mapaAncho - (size.width) + 300) && this.link.body.p.x >= size.width / 2) {
-                this.ultimaXConocida = -this.link.body.p.x + 300;
-                this.setPosition(-this.link.body.p.x + 300, this.ultimaYConocida);
-            }
-        }
-        //NO SE SALE NI POR X NI POR Y ACTUALIZAR NORMAL
-        else {
-            this.ultimaXConocida = -this.link.body.p.x + 300;
-            this.ultimaYConocida = -this.link.body.p.y + 300;
-            this.setPosition(-this.link.body.p.x + 300, -this.link.body.p.y + 300);
-        }
+        var winSize = cc.winSize;
+
+        var x = Math.max(this.link.body.p.x, winSize.width/2);
+        var y = Math.max(this.link.body.p.y, winSize.height/2);
+
+        x = Math.min(x, (this.mapa.getMapSize().width * this.mapa.getTileSize().width) - winSize.width / 2);
+        y = Math.min(y, (this.mapa.getMapSize().height *this.mapa.getTileSize().height) - winSize.height/2);
+        var actualPosition = cc.p(x, y);
+
+        var centerOfView = cc.p(winSize.width/2, winSize.height/2);
+        var viewPoint = cc.pSub(centerOfView, actualPosition);
+        this.setPosition(viewPoint);
 
     },useWeapon: function(keyCode,instancia){
         if (keyCode == 77 || keyCode == 109) {
