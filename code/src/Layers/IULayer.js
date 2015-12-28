@@ -40,8 +40,9 @@ var IULayer = cc.Layer.extend({
         this.addChild(this.etiquetaMonedas);
 
         // spriteBotonMenu
-        this.spriteBotonMenu = cc.Sprite.create(res.boton_saltar_png);
-        this.spriteBotonMenu.setPosition(cc.p(80, 80));
+        this.spriteBotonMenu = cc.Sprite.create(res.boton_menu_png);
+        this.spriteBotonMenu.setPosition(cc.p(90,40));
+        this.spriteBotonMenu.setOpacity(190);
 
         this.addChild(this.spriteBotonMenu);
 

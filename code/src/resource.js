@@ -5,6 +5,7 @@ var res = {
     boton_jugar_png: "res/boton_jugar.png",
     link_png: "res/Animaciones/link.png",
     boton_saltar_png: "res/IULayer/boton_saltar.png",
+    boton_menu_png: "res/IULayer/boton_menu.png",
     fondomenu_png: "res/Fondos/Fondo_Inicio.png",
     fondomenu3_png: "res/Fondos/Fondo_menu.png",
     fondomenu4_png: "res/Fondos/Fondo_menu2.png",
