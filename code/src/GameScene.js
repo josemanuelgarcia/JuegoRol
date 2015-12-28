@@ -7,6 +7,8 @@ var tipoJugador = 2;
 var tipoOctorok = 3;
 var tipoDisparo = 4;
 var tipoBoomerang=5;
+var tipoCorazon=6;
+var tipoRupia=7;
 var weapon="ARCO";
 
 var GameLayer = cc.Layer.extend({
@@ -21,6 +23,8 @@ var GameLayer = cc.Layer.extend({
     disparosEnemigos: [],
     octorock: null,
     depuracion: null,
+    corazon:null,
+    rupia:null,
     shapesToRemove: [],
     ctor: function () {
 
@@ -41,8 +45,15 @@ var GameLayer = cc.Layer.extend({
         //Creación del personaje link
         this.link = new Link(this.space, cc.p(400, 400), this);
 
+
         //Creacion enemigo prueba
         this.octorok = new Octorok(this.space, cc.p(600, 250), this);
+        //creacion de corazon de prueba
+        this.corazon = new Corazon(this.space,cc.p(550,200),this);
+        //Creacion de rupia de prueba
+        this.rupia = new Rupia(this.space,cc.p(700,200),this);
+
+
         //ARMA INICIAL
         //this.depuracion = new cc.PhysicsDebugNode(this.space);
         //this.addChild(this.depuracion, 10);
@@ -73,6 +84,10 @@ var GameLayer = cc.Layer.extend({
                              null,this.collisionBoomerangConNoPasable.bind(this), null, null);
           this.space.addCollisionHandler(tipoBoomerang, tipoOctorok,
                                       null,this.collisionBoomerangConOctorock.bind(this), null, null);
+         this.space.addCollisionHandler(tipoJugador, tipoCorazon,
+                                               null,this.collisionJugadorConCorazon.bind(this), null, null);
+           this.space.addCollisionHandler(tipoJugador, tipoRupia,
+                                                         null,this.collisionJugadorConRupia.bind(this), null, null);
         this.space.addCollisionHandler(
             tipoJugador, tipoOctorok, null, null, null, this.reducirVidas.bind(this));
 
@@ -100,6 +115,16 @@ var GameLayer = cc.Layer.extend({
             {
                 this.octorok.eliminar();
             }
+            if(this.corazon.shape==shape)
+                        {
+                            this.corazon.eliminar();
+                        }
+
+
+             if(this.rupia.shape==shape)
+                         {
+                             this.rupia.eliminar();
+                         }
             for (var i = 0; i < this.disparosEnemigos.length; i++) {
                 if (this.disparosEnemigos[i].shape === shape) {
                     this.disparosEnemigos[i].eliminar();
@@ -262,7 +287,17 @@ var GameLayer = cc.Layer.extend({
            var shapes = arbiter.getShapes();
            this.shapesToRemove.push(shapes[1]);
            //TODO quitar vida a octorok
-    }
+    },collisionJugadorConCorazon:function(arbiter,space)
+    {
+    iuLayer.darVidas();
+     var shapes = arbiter.getShapes();
+               this.shapesToRemove.push(shapes[1]);
+    },collisionJugadorConRupia:function(arbiter,space)
+    {
+     iuLayer.agregarRupia();
+      var shapes = arbiter.getShapes();
+      this.shapesToRemove.push(shapes[1]);
+      }
 });
 
 var GameScene = cc.Scene.extend({

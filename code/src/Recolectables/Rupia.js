@@ -1,4 +1,4 @@
-var Corazon = cc.Class.extend({
+var Rupia = cc.Class.extend({
     space:null,
     sprite:null,
     shape:null,
@@ -9,7 +9,7 @@ ctor:function (space, posicion, layer) {
 
 
     // Crear Sprite - Cuerpo y forma
-    this.sprite = new cc.PhysicsSprite(res.corazon_salvaje_png);
+    this.sprite = new cc.PhysicsSprite(res.rupiaazul_colectable_png);
     // Cuerpo estática , no le afectan las fuerzas
     var body = new cp.StaticBody();
     body.setPos(posicion);
@@ -20,7 +20,7 @@ ctor:function (space, posicion, layer) {
     this.shape = new cp.BoxShape(body,
                 this.sprite.getContentSize().width,
                 this.sprite.getContentSize().height);
-    this.shape.setCollisionType(tipoCorazon);
+    this.shape.setCollisionType(tipoRupia);
     // Nunca genera colisiones reales
     this.shape.setSensor(true);
     // forma estática
