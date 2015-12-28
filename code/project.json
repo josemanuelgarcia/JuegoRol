@@ -20,6 +20,7 @@
         "src/Layers/MenuObjetosLayer.js",
         "src/GameScene.js",
         "src/Armas/Boomerang.js",
+        "src/Recolectables/Corazon.js",
         "src/Layers/HistoryLayer.js"
     ]
 }

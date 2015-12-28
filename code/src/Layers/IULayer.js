@@ -9,6 +9,7 @@ var IULayer = cc.Layer.extend({
     corazonesBlancos:999,
     posicionSpriteCorazones: 0,
     alturaSpriteCOrazones: 30,
+    entrar:true,
     ctor: function () {
         this._super();
         var size = cc.winSize;
@@ -67,21 +68,24 @@ var IULayer = cc.Layer.extend({
         var areaBoton = instancia.spriteBotonMenu.getBoundingBox();
         var areaCorazon = instancia.spriteBSumarVidas.getBoundingBox();
         var areaQuitarCorazon = instancia.spriteBQuitarVidas.getBoundingBox();
-
+ var gameScene = instancia.getParent();
+  var instanciaIU = event.getCurrentTarget();
         // La pulsación cae dentro del botón de menu
+        console.log(instanciaIU.entrar);
+        if(instanciaIU.entrar){
         if (cc.rectContainsPoint(areaBoton, cc.p(event.getLocationX(), event.getLocationY()))) {
             cc.director.pause();
-            var gameScene = instancia.getParent();
 
+            instanciaIU.entrar=false;
             // tenemos el objeto GameScene y le añadimos la nueva layer
             gameScene.addChild(new MenuObjetosLayer(gameScene), 0, 3);
 
         }
-
+}
         //Pulsacion dentro de corazon lo cual añade una vida
         if (cc.rectContainsPoint(areaCorazon,
             cc.p(event.getLocationX(), event.getLocationY()))) {
-            var instanciaIU = event.getCurrentTarget();
+
 
             // Metodo que suma una vida
             instanciaIU.darVidas();

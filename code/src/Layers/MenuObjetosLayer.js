@@ -15,8 +15,6 @@ var MenuObjetosLayer = cc.LayerColor.extend({
         // Lo escalo porque es más pequeño que la pantalla
         spriteFondoTitulo.setScale(size.height / spriteFondoTitulo.height);
         // Añado Sprite a la escena
-         this.setOpacity(160);
-        spriteFondoTitulo.setOpacity(160);
         this.addChild(spriteFondoTitulo);
 
         //MenuItemSprite para boton arco
@@ -24,28 +22,28 @@ var MenuObjetosLayer = cc.LayerColor.extend({
             new cc.Sprite(res.arco_png), // IMG estado normal
             new cc.Sprite(res.arco_png), // IMG estado pulsado
             this.pulsarBotonArco, this);
-            menuArcoSprite.setOpacity(160);
+           // menuArcoSprite.setOpacity(160);
 
         //MenuItemSprite para boton espada
         var menuEspadaSprite = new cc.MenuItemSprite(
             new cc.Sprite(res.espada_png), // IMG estado normal
             new cc.Sprite(res.espada_png), // IMG estado pulsado
             this.pulsarBotonEspada, this);
-            menuEspadaSprite.setOpacity(160);
+         //   menuEspadaSprite.setOpacity(160);
 
         //MenuItemSprite para boton boomerán
         var menuBoomeranSprite = new cc.MenuItemSprite(
             new cc.Sprite(res.boomeran_png), // IMG estado normal
             new cc.Sprite(res.boomeran_png), // IMG estado pulsado
             this.pulsarBotonBoomeran, this);
-            menuBoomeranSprite.setOpacity(160);
+          //  menuBoomeranSprite.setOpacity(160);
 
         //MenuItemSprite para boton bombas
         var menuBombaSprite = new cc.MenuItemSprite(
             new cc.Sprite(res.bomba_png), // IMG estado normal
             new cc.Sprite(res.bomba_png), // IMG estado pulsado
             this.pulsarBotonBombas, this);
-        menuBombaSprite.setOpacity(160);
+   //     menuBombaSprite.setOpacity(160);
 
         // creo el menú pasándole el boton del arco
         var menuArco = new cc.Menu(menuArcoSprite);
@@ -81,6 +79,7 @@ var MenuObjetosLayer = cc.LayerColor.extend({
         weapon="ARCO";
         //Sprite en el que se muestra el arma elegida
         IULayer.spriteArmaElegida.setTexture(res.arco_reducido_png);
+        this.scene.getChildByTag(2).entrar=true;
         this.scene.removeChild(this);
 
 

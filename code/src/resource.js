@@ -20,6 +20,7 @@ var res = {
     rupia_png: "res/Colectables/rupia.png",
     rupiaazul_png: "res/IULayer/rupiaazul.png",
     corazon_png: "res/IULayer/corazon.png",
+    corazon_salvaje_png: "res/IULayer/corazon_salvaje.png",
     corazonnegro_png: "res/IULayer/corazonnegro.png",
     corazonblanco_png : "res/IULayer/corazonblanco.png",
     link_plist: "res/Animaciones/link.plist",
