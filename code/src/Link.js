@@ -100,48 +100,43 @@ var Link = cc.Class.extend({
         return framesAnimacion;
 
     }, moverArriba: function () {
-        if(this.inMovement==null)
+        if(!this.layer.isMovementKeyPressed())
         {
             this.sprite.runAction(this.animCaminarArriba);
-            this.inMovement=true;
             this.orientacion = "ARRIBA";
         }
         //var vMoverArriba = cc.RepeatForever.create(cc.MoveBy.create(1, cc.p(0,50)));
         //this.sprite.runAction(vMoverArriba);
         this.body.setVel(cp.v(this.body.getVel().x, this.velMovimiento));
     }, moverAbajo: function () {
-        if(this.inMovement==null)
+        if(!this.layer.isMovementKeyPressed())
                 {
                     this.sprite.runAction(this.animCaminarAbajo);
-                    this.inMovement=true;
                     this.orientacion = "ABAJO";
                 }
         this.body.setVel(cp.v(this.body.getVel().x, -this.velMovimiento));
     }, moverDerecha: function () {
          console.log("DERECHA");
         //Se escala a 1 en la x
-        if(this.inMovement==null)
+        if(!this.layer.isMovementKeyPressed())
                 {
                     this.sprite.scaleX = 1;
                     this.sprite.runAction(this.animCaminarDerecha);
-                    this.inMovement=true;
                     this.orientacion = "DERECHA";
                 }
         this.body.setVel(cp.v(this.velMovimiento, this.body.getVel().y));
     }, moverIzquierda: function () {
         //Si va a la izquierda se escala a -1 para hacer flip a la animacion
         //el inMovement impide que se ejecute otra animacion de movimiento
-         if(this.inMovement==null)
+         if(!this.layer.isMovementKeyPressed())
                         {
                             this.sprite.scaleX = -1;
                             this.sprite.runAction(this.animCaminarDerecha);
-                            this.inMovement=true;
                             this.orientacion = "IZQUIERDA";
                         }
         this.body.setVel(cp.v(-this.velMovimiento, this.body.getVel().y));
     }, parado: function () {
         this.body.setVel(cp.v(0, 0));
-        this.inMovement=null;
     }, utilizarEspada: function () {
         //isSwordPress mira que no se mantenga pulsado el boton m
         if(Date.now()-this.usingSword>=550 && !this.isSwordPress)

@@ -24,6 +24,7 @@ var GameLayer = cc.Layer.extend({
     corazon:null,
     rupia:null,
     shapesToRemove: [],
+    movementKeysPressed:[],
     ctor: function () {
 
         this._super();
@@ -147,14 +148,20 @@ var GameLayer = cc.Layer.extend({
         }
     }, dejarProcesarEventosKeyboard: function (keyCode, event) {
         var instancia = event.getCurrentTarget();
+        instancia.movementKeysPressed[keyCode]=false;
         //Si se suelta alguna de las teclas de movimiento se eliminan todas las acciones
         if (keyCode == 87 || keyCode == 119 || keyCode == 65 || keyCode == 97
         || keyCode == 68 || keyCode == 100 || keyCode == 83 || keyCode == 115) {
             instancia.keyPulsada = null;
+            //Si ninguna tecla de movimiento esta pulsada se para
+            if(!instancia.isMovementKeyPressed())
+            {
             instancia.link.parado();
             instancia.link.sprite.stopActionByTag(1);
             instancia.link.sprite.stopActionByTag(2);
             instancia.link.sprite.stopActionByTag(3);
+            }
+
         }
         if(keyCode == 77 || keyCode == 109)
         {
@@ -235,21 +242,26 @@ var GameLayer = cc.Layer.extend({
         {
             //W mover hacia arriba
             instancia.link.moverArriba();
+            //Añadir tecla pulsada
+            instancia.movementKeysPressed[keyCode]=true;
         }
         else if (keyCode == 83 || keyCode == 115)
         {
           //S mover hacia abajo
           instancia.link.moverAbajo();
+          instancia.movementKeysPressed[keyCode]=true;
         }
                 //Mover derecha
         else if (keyCode == 68 || keyCode == 100)
         {
           instancia.link.moverDerecha();
+           instancia.movementKeysPressed[keyCode]=true;
         }
                 //Mover izquierda
         else if (keyCode == 65 || keyCode == 97)
         {
          instancia.link.moverIzquierda();
+          instancia.movementKeysPressed[keyCode]=true;
         }
     }, reducirVidas: function (arbiter, space) {
         iuLayer.quitarVidas();
@@ -284,6 +296,15 @@ var GameLayer = cc.Layer.extend({
      iuLayer.agregarRupia();
       var shapes = arbiter.getShapes();
       this.shapesToRemove.push(shapes[1]);
+      },isMovementKeyPressed:function(){
+            for(var i=0;i<this.movementKeysPressed.length;i++)
+            {
+            if(this.movementKeysPressed[i])
+            {
+                return true;
+            }
+            }
+            return false;
       }
 });
 
