@@ -6,153 +6,6 @@
  <tileset firstgid="129" name="tileb" tilewidth="32" tileheight="32" tilecount="256">
   <image source="tileb.png" width="512" height="512"/>
  </tileset>
- <tileset firstgid="385" name="Dungeon_A1" tilewidth="32" tileheight="32" tilecount="192">
-  <image source="Dungeon_A1.png" width="512" height="384"/>
-  <tile id="14">
-   <animation>
-    <frame tileid="14" duration="100"/>
-    <frame tileid="30" duration="100"/>
-    <frame tileid="46" duration="100"/>
-   </animation>
-  </tile>
-  <tile id="15">
-   <animation>
-    <frame tileid="15" duration="100"/>
-    <frame tileid="31" duration="100"/>
-   </animation>
-  </tile>
-  <tile id="24">
-   <animation>
-    <frame tileid="24" duration="100"/>
-    <frame tileid="26" duration="100"/>
-    <frame tileid="28" duration="100"/>
-   </animation>
-  </tile>
-  <tile id="25">
-   <animation>
-    <frame tileid="25" duration="100"/>
-    <frame tileid="27" duration="100"/>
-    <frame tileid="29" duration="100"/>
-   </animation>
-  </tile>
-  <tile id="40">
-   <animation>
-    <frame tileid="40" duration="100"/>
-    <frame tileid="42" duration="100"/>
-    <frame tileid="44" duration="100"/>
-   </animation>
-  </tile>
-  <tile id="41">
-   <animation>
-    <frame tileid="41" duration="100"/>
-    <frame tileid="43" duration="100"/>
-    <frame tileid="45" duration="100"/>
-   </animation>
-  </tile>
-  <tile id="72">
-   <animation>
-    <frame tileid="72" duration="150"/>
-    <frame tileid="74" duration="150"/>
-    <frame tileid="76" duration="150"/>
-   </animation>
-  </tile>
-  <tile id="73">
-   <animation>
-    <frame tileid="73" duration="150"/>
-    <frame tileid="75" duration="150"/>
-    <frame tileid="77" duration="150"/>
-   </animation>
-  </tile>
-  <tile id="88">
-   <animation>
-    <frame tileid="88" duration="150"/>
-    <frame tileid="90" duration="150"/>
-    <frame tileid="92" duration="150"/>
-   </animation>
-  </tile>
-  <tile id="89">
-   <animation>
-    <frame tileid="89" duration="150"/>
-    <frame tileid="91" duration="150"/>
-    <frame tileid="93" duration="150"/>
-   </animation>
-  </tile>
-  <tile id="104">
-   <animation>
-    <frame tileid="104" duration="100"/>
-    <frame tileid="106" duration="100"/>
-    <frame tileid="108" duration="100"/>
-   </animation>
-  </tile>
-  <tile id="110">
-   <animation>
-    <frame tileid="110" duration="100"/>
-    <frame tileid="126" duration="100"/>
-   </animation>
-  </tile>
-  <tile id="111">
-   <animation>
-    <frame tileid="111" duration="100"/>
-    <frame tileid="127" duration="100"/>
-   </animation>
-  </tile>
-  <tile id="120">
-   <animation>
-    <frame tileid="120" duration="100"/>
-    <frame tileid="122" duration="100"/>
-    <frame tileid="124" duration="100"/>
-   </animation>
-  </tile>
-  <tile id="121">
-   <animation>
-    <frame tileid="121" duration="100"/>
-    <frame tileid="123" duration="100"/>
-    <frame tileid="125" duration="100"/>
-   </animation>
-  </tile>
-  <tile id="136">
-   <animation>
-    <frame tileid="136" duration="100"/>
-    <frame tileid="138" duration="100"/>
-    <frame tileid="140" duration="100"/>
-   </animation>
-  </tile>
-  <tile id="137">
-   <animation>
-    <frame tileid="137" duration="100"/>
-    <frame tileid="139" duration="100"/>
-    <frame tileid="141" duration="100"/>
-   </animation>
-  </tile>
-  <tile id="168">
-   <animation>
-    <frame tileid="168" duration="100"/>
-    <frame tileid="170" duration="100"/>
-    <frame tileid="172" duration="100"/>
-   </animation>
-  </tile>
-  <tile id="169">
-   <animation>
-    <frame tileid="169" duration="100"/>
-    <frame tileid="171" duration="100"/>
-    <frame tileid="173" duration="100"/>
-   </animation>
-  </tile>
-  <tile id="184">
-   <animation>
-    <frame tileid="184" duration="100"/>
-    <frame tileid="186" duration="100"/>
-    <frame tileid="188" duration="100"/>
-   </animation>
-  </tile>
-  <tile id="185">
-   <animation>
-    <frame tileid="185" duration="100"/>
-    <frame tileid="187" duration="100"/>
-    <frame tileid="189" duration="100"/>
-   </animation>
-  </tile>
- </tileset>
  <layer name="Background" width="50" height="50">
   <data encoding="base64" compression="zlib">
    eJztmstyEzEQRfULU1TKKwq2wD+BMQE7QIEhCTiQhz8dTTFdXN90S63HJF6wuGVbmtH0UT8kTTKEEIYKfYhaT7qMevMIWkatJhtqGEZ9ifraoGuYh1ptOnD8bBT606PXii96cNw1ijkWUU+mT/mO/Xz9phNH6XyyLA7RQrke2x+C4yb8y4MSDvSJ5g/s78Uheb6Nehr1jNp+hMM8EDstjnU4jCuNG33Wi0Ps3AEHtt2GwzzgOS6NS+EQMUdt7RY798CBbWyvzKO0e+u2N8/nFj4f40V8563PzL0ljrnXMuYQFvGdtz4jt/gcOaTPOz/aXGEdYQ6cx+twP76888DczCHt3vnR5sqq+TyPXHNK43JN93nr1ckkzxqS4tDW8BQ7cyA3Xp/jOCFZXJpdKX9wjCE/f7I/tD4vR47N2ltgG8Yrxxgzaz5K1edtgmO0kfeWli4MDiv2rRjjMbz1eZfxhzwDeZbGc7X5THHk9u28v0rVn73BITEjz8BnbRwcmh1WjOX2JZ6aJufQpcKB/sDY3HbgQHHcr+m3p5bhHGv5oa2hO+f8eZ/Ncf883F9jvesMc3BcYRzsOzJwzt9NHNoaa+3jcxwlZz2MoZK9htcfOEep8XP+8MSRNT6eCTV5OTw+KfXHaFtqjzv2fw5/a+G7YNd9bV+a4rCEZ3Utz98q94htL6JeGno13SvXpvaYt40cGAsaxwC2sEo5Vsb4re8xONYsf5xFfVT0ycFxBtfOyeHxx7eo74rOo07BP1IX5Pd7uPecfPnQHKNdV1G/FP0m25hjBffKta3+SK1LubjSckOTxsFq4citr+KPS4Nj6MhRy4Lvq3Lr8CIxjnZuYpvn5ijZT2hjpGw5Jg7x1Y2TAe1Bu4+Fw6q7Vi5gvOH3VgbtHK3VV2bIrR9sd6qvB4cnp63cyHEgg+YDrAc9OEr3/rl9SS5HMC96c5T4A2VxWNLqcE6l/qg5k9VyaFwtHLV/w15PnykOzzvFXhw17/r5zFLqh5ytpQxDJYNwyLmsJK4sv3DfoLTPxVHijxyHlTPe8Wr/l6C3P6w9Zc3Yo7znhta9T88cf0yOufWf4/hUyvEHsiGhnw==
@@ -160,7 +13,7 @@
  </layer>
  <layer name="Background UP" width="50" height="50">
   <data encoding="base64" compression="zlib">
-   eJztmM1uwjAMx+kTshPrAcFO7MQVOCDebYN9Sj2w23gabKkWUbXUTRMnDstPsirSkvofx47VySQ8dSUwacL3ELPI70tF7HWVpGnN/I3kFsuGf0QlQ9Y5B219Pnb3mGaG+vqoPD+ajmniJ7UDhYIjeOafHf+zYWpErDzgapXtPvrPaYgF+ngvfZf2s4OYg59TsEUm/tpYgv9rsKfMdezB/wewQ+Y6/jtYx7Dvz6UO2KirW1121aKpB6RYzDI/Y1L6/gH2aVwL+jmmdsCDd8u4WVcl82EFc+9aW1V+vTLF4WSMSX9/I3+7OsZy4h/x5q/1pTFOx5jY2PaYJKHigQyNST0wX1zWMKQO4q3nnnl2c72IS65K6MiVGDk+lufqZhykg9snrn0t7qkvsG+PfeKiQwrU8Qt2uQMdWr5f+RBbh1Sex9bx2l5D91KkY2ux0Ej16bF1SFF06IJ0cBaSvt5wLCl0EC8y0xYKXlwBt7phLA==
+   eJztmDsOwjAMhtsTwgQdEDDBxAoMiLvxZukAJyKRahFVpG4eTpyST7Iq0pL6j2vHSlH4pyoJJo34HmAS+H2xCL2ulNSNqb8lqcWyxh9hSZ91TkFbl4/tb4wzfX2dMs+PumWceMd2IJMxRO75L8P/bJEaESoPsFqluy/9xzSEQvo4lL6L+94BzISfI2HzRPzVsRD+b4QtE9dxEP6PhR0T1/HvyDom+/5U6oCOqvzWZVMtnHpAiMUk8T0mpu8PYU/lmuHPJbYDDtw142pdpcyHlZh739iqdOuVIQ5XZYz6/A38beuw5Yo/4syv9YUxTIdNbHTfGCW+4iHpG5OqZ76YrKFPHcCt4566d2O9iEmuUuhIlRA5bsu6/BoG6MC+E9O+1sdZiYkOKoakg8v5lQuhdVDleWgd5+bqu5cCHTuN+YaqTw+tg4qsgxegAzOfdPWGtsTQAZxops1knPgATQBd4g==
   </data>
  </layer>
  <layer name="Transiciones" width="50" height="50">
@@ -378,6 +231,5 @@
   <object id="193" x="1597.33" y="1087.33">
    <polyline points="0,0 0.666667,31.3333"/>
   </object>
-  <object id="194" x="128" y="1153" width="61" height="61"/>
  </objectgroup>
 </map>
