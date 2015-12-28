@@ -30,7 +30,8 @@ var res = {
     tileb_png: "res/tileb.png",
     mapa_inicial_tmx: "res/mapa_inicial.tmx",
     boomerang_png:"res/boomerang.png",
-    boomerang_plist:"res/boomerang.plist"
+    boomerang_plist:"res/boomerang.plist",
+    Ravenna_ttf:"res/ravenna.ttf"
 
 };
 

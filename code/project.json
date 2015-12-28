@@ -19,6 +19,7 @@
         "src/DisparoOctorok.js",
         "src/MenuObjetosLayer.js",
         "src/GameScene.js",
-        "src/Boomerang.js"
+        "src/Boomerang.js",
+        "src/HistoryLayer.js"
     ]
 }

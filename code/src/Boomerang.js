@@ -79,17 +79,7 @@ var Boomerang = cc.Class.extend({
         if(Date.now()-this.timeToChange>=1500 || this.choco)
         {
             this.canBeDeleted=true;
-            /*if (this.sentido == "ARRIBA") {
-                        this.body.setVel(cp.v(0, -this.velDisparo));
-                    } else if (this.sentido == "DERECHA") {
-                        this.body.setVel(cp.v(-this.velDisparo, 0));
-                    } else if (this.sentido == "ABAJO") {
-                        this.body.setVel(cp.v(0, this.velDisparo));
-                    } else {
-                        this.body.setVel(cp.v(this.velDisparo, 0));
-                    }*/
-
-             this.sprite.runAction(cc.MoveTo.create(1.5, cc.p(this.layer.link.body.p.x,this.layer.link.body.p.y)) );
+            this.sprite.runAction(cc.MoveTo.create(1.5, cc.p(this.layer.link.body.p.x,this.layer.link.body.p.y)) );
         }
     }
 

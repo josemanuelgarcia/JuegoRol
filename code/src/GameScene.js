@@ -1,6 +1,6 @@
 var idCapaJuego = 1;
 var idCapaControles = 2;
-
+var idCapaHistoria=3;
 //Tipos para las colisiones
 var tipoNoPasable = 1;
 var tipoJugador = 2;
@@ -46,8 +46,12 @@ var GameLayer = cc.Layer.extend({
         //ARMA INICIAL
         //this.depuracion = new cc.PhysicsDebugNode(this.space);
         //this.addChild(this.depuracion, 10);
-
-
+        //----------------------------------------------------------------
+        //Ejemplo de uso de capa historia comentado quedaria
+        //solo añadir en dicha capa que el texto lo ponga sobre una imagen como de cuadro de  dialogo
+        /*this.addChild(new HistoryLayer(this,"Prueba"),0,4);
+        cc.director.pause();*/
+        //----------------------------------------------------------------
         //Manejo de eventos de TECLADO
         cc.eventManager.addListener({
             event: cc.EventListener.KEYBOARD,
@@ -56,7 +60,6 @@ var GameLayer = cc.Layer.extend({
         }, this);
         this.ultimaXConocida = -this.link.body.p.x + 300;
         this.ultimaYConocida = -this.link.body.p.y + 300;
-
         this.scheduleUpdate();
 
         //Colisiones entre elementos
@@ -115,10 +118,9 @@ var GameLayer = cc.Layer.extend({
         if (keyCode == 77 || keyCode == 109) {
             instancia.link.utilizarEspada();
         }
-        //Utilizar tecla n boomerang
+        //Utilizar tecla k boomerang
         else if( keyCode==107 || keyCode==75)
         {
-            console.log(weapon);
            if(weapon=="BOOMERANG")
            {
                 instancia.link.utilizarBoomerang();
