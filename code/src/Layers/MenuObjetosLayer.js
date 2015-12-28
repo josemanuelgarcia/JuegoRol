@@ -90,6 +90,7 @@ var MenuObjetosLayer = cc.LayerColor.extend({
         //Sprite en el que se muestra el arma elegida
         weapon="ESPADA";
         IULayer.spriteArmaElegida.setTexture(res.espada_reducida_png);
+         this.scene.getChildByTag(2).entrar=true;
         this.scene.removeChild(this);
     }, pulsarBotonBoomeran: function () {
         cc.director.resume();
@@ -97,6 +98,7 @@ var MenuObjetosLayer = cc.LayerColor.extend({
         //Sprite en el que se muestra el arma elegida
        weapon="BOOMERANG";
         IULayer.spriteArmaElegida.setTexture(res.boomeran_reducido_png);
+         this.scene.getChildByTag(2).entrar=true;
         this.scene.removeChild(this);
 
 
@@ -106,6 +108,7 @@ var MenuObjetosLayer = cc.LayerColor.extend({
         //Sprite en el que se muestra el arma elegida
         weapon="BOMBAS";
         IULayer.spriteArmaElegida.setTexture(res.bomba_reducida_png);
+         this.scene.getChildByTag(2).entrar=true;
         this.scene.removeChild(this);
 
 
