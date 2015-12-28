@@ -90,10 +90,10 @@ var GameLayer = cc.Layer.extend({
             var shape = this.shapesToRemove[i];
             //Eliminar boomerang si dicho boomerang es distinto de null
             if(this.link.boomerang!=null){
-            if(this.link.boomerang.shape==shape)
-            {
-                this.link.boomerang.eliminar();
-            }
+                if(this.link.boomerang.shape==shape)
+                    {
+                        this.link.boomerang.eliminar();
+                    }
             }
             //Eliminar octorock si impacta, mas adelante se recorreran todos los enemigos
             if(this.octorok.shape==shape)
@@ -114,35 +114,10 @@ var GameLayer = cc.Layer.extend({
             return;
         }
         instancia.keyPulsada = keyCode;
-        //Utilizar la espada tecla m
-        if (keyCode == 77 || keyCode == 109) {
-            instancia.link.utilizarEspada();
-        }
-        //Utilizar tecla k boomerang
-        else if( keyCode==107 || keyCode==75)
-        {
-           if(weapon=="BOOMERANG")
-           {
-                instancia.link.utilizarBoomerang();
-           }
-        }
-        //Metodo que maneja los eventos de teclado
-       else if (keyCode == 87 || keyCode == 119) {
-            //W mover hacia arriba
-            instancia.link.moverArriba();
-        }
-        else if (keyCode == 83 || keyCode == 115) {
-            //S mover hacia abajo
-            instancia.link.moverAbajo();
-        }
-        //Mover derecha
-        else if (keyCode == 68 || keyCode == 100) {
-            instancia.link.moverDerecha();
-        }
-        //Mover izquierda
-        else if (keyCode == 65 || keyCode == 97) {
-            instancia.link.moverIzquierda();
-        }
+        //Utilizar armas
+        instancia.useWeapon(keyCode,instancia);
+        //Metodo que maneja los eventos de teclado de movimiento
+        instancia.movementLink(keyCode,instancia);
         //barra espaciadora seria abrir el menu de objetos
         if (keyCode == 32) {
             var gameScene = instancia.getParent();
@@ -231,6 +206,39 @@ var GameLayer = cc.Layer.extend({
             this.setPosition(-this.link.body.p.x + 300, -this.link.body.p.y + 300);
         }
 
+    },useWeapon: function(keyCode,instancia){
+        if (keyCode == 77 || keyCode == 109) {
+                    instancia.link.utilizarEspada();
+                }
+                //Utilizar tecla k boomerang
+        else if( keyCode==107 || keyCode==75)
+          {
+            if(weapon=="BOOMERANG")
+            {
+             instancia.link.utilizarBoomerang();
+            }
+          }
+    },movementLink: function(keyCode,instancia){
+        if (keyCode == 87 || keyCode == 119)
+        {
+            //W mover hacia arriba
+            instancia.link.moverArriba();
+        }
+        else if (keyCode == 83 || keyCode == 115)
+        {
+          //S mover hacia abajo
+          instancia.link.moverAbajo();
+        }
+                //Mover derecha
+        else if (keyCode == 68 || keyCode == 100)
+        {
+          instancia.link.moverDerecha();
+        }
+                //Mover izquierda
+        else if (keyCode == 65 || keyCode == 97)
+        {
+         instancia.link.moverIzquierda();
+        }
     }, reducirVidas: function (arbiter, space) {
         iuLayer.quitarVidas();
         //TODO las vidas hay que quitarselas a link no a la interfaz xD

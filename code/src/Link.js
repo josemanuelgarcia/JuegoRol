@@ -130,6 +130,7 @@ var Link = cc.Class.extend({
         this.body.setVel(cp.v(this.velMovimiento, this.body.getVel().y));
     }, moverIzquierda: function () {
         //Si va a la izquierda se escala a -1 para hacer flip a la animacion
+        //el inMovement impide que se ejecute otra animacion de movimiento
          if(this.inMovement==null)
                         {
                             this.sprite.scaleX = -1;
@@ -143,48 +144,24 @@ var Link = cc.Class.extend({
         this.inMovement=null;
     }, utilizarEspada: function () {
         //isSwordPress mira que no se mantenga pulsado el boton m
-        if(Date.now()-this.usingSword>=550 && !this.isSwordPress){
-        this.usingSword=Date.now();
-        this.isSwordPress=true;
-        if (this.orientacion == "ARRIBA") {
-            this.sprite.runAction(this.animEspadaArriba);
-        }
-        if (this.orientacion == "DERECHA") {
-            this.sprite.scaleX = 1;
-            this.sprite.runAction(this.animEspadaLado);
-        }
-        if (this.orientacion == "IZQUIERDA") {
-            this.sprite.scaleX = -1;
-            this.sprite.runAction(this.animEspadaLado);
-        }
-        if (this.orientacion == "ABAJO") {
-            this.sprite.runAction(this.animEspadaAbajo);
-        }
-        }
-    },basico: function(){
-        this.body.setVel(cp.v(0, 0));
-        if(this.orientacion==null){
-             this.sprite.runAction(this.animacionSimpleAbajo);
-        }
-        else{
-        if(this.orientacion=="DERECHA")
+        if(Date.now()-this.usingSword>=550 && !this.isSwordPress)
         {
-            this.sprite.scaleX=1;
-            this.sprite.runAction(this.animacionSimpleLado);
-        }
-        if(this.orientacion=="IZQUIERDA")
-        {
-            this.sprite.scaleX=-1;
-            this.sprite.runAction(this.animacionSimpleLado);
-        }
-        if(this.orientacion=="ARRIBA")
-        {
-            this.sprite.runAction(this.animacionSimple);
-        }
-        if(this.orientacion=="ABAJO")
-        {
-            this.sprite.runAction(this.animacionSimpleAbajo);
-        }
+            this.usingSword=Date.now();
+            this.isSwordPress=true;
+            if (this.orientacion == "ARRIBA") {
+                this.sprite.runAction(this.animEspadaArriba);
+            }
+            if (this.orientacion == "DERECHA") {
+                this.sprite.scaleX = 1;
+                this.sprite.runAction(this.animEspadaLado);
+            }
+            if (this.orientacion == "IZQUIERDA") {
+                this.sprite.scaleX = -1;
+                this.sprite.runAction(this.animEspadaLado);
+            }
+            if (this.orientacion == "ABAJO") {
+                this.sprite.runAction(this.animEspadaAbajo);
+            }
         }
     },utilizarBoomerang:function(){
         if(this.boomerang==null)
@@ -192,8 +169,10 @@ var Link = cc.Class.extend({
             this.boomerang=new Boomerang(this.space,cc.p(this.body.p.x, this.body.p.y), this.layer, this.orientacion);
         }
     },update:function(dt){
-       if(this.boomerang!=null){
-        this.boomerang.update(dt);
+        //Se hace el update del boomerang si este existe
+       if(this.boomerang!=null)
+       {
+            this.boomerang.update(dt);
         }
     }
 });
