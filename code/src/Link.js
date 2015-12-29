@@ -11,6 +11,7 @@ var Link = cc.Class.extend({
     shape: null,
     orientacion: null,
     usingSword:null,
+    isStopping:null,
     atackIsDone:null,
     isMoving:null,
     attackSensor:null,
@@ -59,18 +60,22 @@ var Link = cc.Class.extend({
     }, moverArriba: function () {
         this.orientacion="ARRIBA";
         this.isMoving=true;
+        this.animacionCaminar();
         this.body.setVel(cp.v(this.body.getVel().x, this.velMovimiento));
     }, moverAbajo: function () {
         this.orientacion="ABAJO";
         this.isMoving=true;
+        this.animacionCaminar();
         this.body.setVel(cp.v(this.body.getVel().x, -this.velMovimiento));
     }, moverDerecha: function () {
         this.orientacion="DERECHA";
         this.isMoving=true;
+        this.animacionCaminar();
         this.body.setVel(cp.v(this.velMovimiento, this.body.getVel().y));
     }, moverIzquierda: function () {
         this.orientacion="IZQUIERDA";
         this.isMoving=true;
+        this.animacionCaminar();
         this.body.setVel(cp.v(-this.velMovimiento, this.body.getVel().y));
     }, parado: function ()
     {
@@ -97,24 +102,28 @@ var Link = cc.Class.extend({
        {
             this.bombs[i].update(dt);
        }
-       //Solucion al problema del TODO?
-       if(this.sprite.getNumberOfRunningActions()==0)
+       if(!this.usingSword && !this.isMoving)
        {
-        this.atackIsDone=true;
+        //AnimacionParado
+        this.sprite.scaleX=(this.orientacion=="IZQUIERDA"? -1:1);
+        this.sprite.stopAllActions();
+        this.sprite.runAction(this.animationManager.obtainAnimation("SIMPLE_"+this.orientacion));
        }
        if(this.usingSword && this.atackIsDone)
        {
             //Establecer la escala
             this.atackIsDone=false;
-            //TODO en raros casos se queda pillado sin hacer el callback de la accion de atacar y no activar nunca el semaforo
-            this.sprite.stopAllActions();
             this.sprite.scaleX=(this.orientacion=="IZQUIERDA"? -1:1);
             this.sprite.runAction(this.animationManager.obtainAnimation("ESPADA_"+this.orientacion));
        }
-      if(this.isMoving && this.atackIsDone)
-      {
-        this.sprite.scaleX=(this.orientacion=="IZQUIERDA"? -1:1);
-        this.sprite.runAction(this.animationManager.obtainAnimation("CAMINAR_"+this.orientacion));
-      }
+    },animacionCaminar:function()
+    {
+        if(this.isMoving && this.atackIsDone)
+              {
+
+                this.sprite.scaleX=(this.orientacion=="IZQUIERDA"? -1:1);
+                this.sprite.stopAllActions();
+                this.sprite.runAction(this.animationManager.obtainAnimation("CAMINAR_"+this.orientacion));
+              }
     }
 });

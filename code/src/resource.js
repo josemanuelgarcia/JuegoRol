@@ -33,8 +33,8 @@ var res = {
     Ravenna_ttf:"res/ravenna.ttf",
     bomb_plist:"res/Armas/bomb.plist",
     bomb_png:"res/Armas/bomb.png",
-    link_png:"res/Animaciones/Link.png",
-    link_plist:"res/Animaciones/Link.plist"
+    link_png:"res/Animaciones/link.png",
+    link_plist:"res/Animaciones/link.plist"
 
 };
 
