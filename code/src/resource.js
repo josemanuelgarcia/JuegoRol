@@ -3,7 +3,6 @@ var res = {
     CloseNormal_png: "res/CloseNormal.png",
     CloseSelected_png: "res/CloseSelected.png",
     boton_jugar_png: "res/boton_jugar.png",
-    link_png: "res/Animaciones/link.png",
     boton_saltar_png: "res/IULayer/boton_saltar.png",
     boton_menu_png: "res/IULayer/boton_menu.png",
     fondomenu_png: "res/Fondos/Fondo_Inicio.png",
@@ -24,7 +23,6 @@ var res = {
     corazon_salvaje_png: "res/Colectables/corazon_salvaje.png",
     corazonnegro_png: "res/IULayer/corazonnegro.png",
     corazonblanco_png : "res/IULayer/corazonblanco.png",
-    link_plist: "res/Animaciones/link.plist",
     Outside_A5_png: "res/Mapas/MapaA/Outside_A5.png",
     octorok_png: "res/Animaciones/octorok.png",
     octorok_plist: "res/Animaciones/octorok.plist",
@@ -34,7 +32,9 @@ var res = {
     boomerang_plist:"res/Animaciones/boomerang.plist",
     Ravenna_ttf:"res/ravenna.ttf",
     bomb_plist:"res/Armas/bomb.plist",
-    bomb_png:"res/Armas/bomb.png"
+    bomb_png:"res/Armas/bomb.png",
+    link_png:"res/Animaciones/Link.png",
+    link_plist:"res/Animaciones/Link.plist"
 
 };
 

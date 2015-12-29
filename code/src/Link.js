@@ -21,8 +21,8 @@ var Link = cc.Class.extend({
         //Orientacion inicial
         this.orientacion="ABAJO";
         //Sprite inicial de link
-        this.sprite = new cc.PhysicsSprite("#link_abajo0.png");
-        this.sprite.setVertexZ(-100);
+        this.sprite = new cc.PhysicsSprite("#link_caminar_abajo0.png");
+
         // Cuerpo dinamico, SI le afectan las fuerzas
         this.body = new cp.Body(100, Infinity);
 

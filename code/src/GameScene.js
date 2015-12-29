@@ -36,6 +36,7 @@ var GameLayer = cc.Layer.extend({
         cc.spriteFrameCache.addSpriteFrames(res.link_plist);
          cc.spriteFrameCache.addSpriteFrames(res.boomerang_plist);
          cc.spriteFrameCache.addSpriteFrames(res.bomb_plist);
+
         //Creación del espacio del juego
         this.space = new cp.Space();
         //La gravedad en este juego da igual.
