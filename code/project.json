@@ -24,6 +24,7 @@
         "src/Recolectables/Rupia.js",
         "src/Layers/HistoryLayer.js",
         "src/Manager/AnimationManager.js",
-        "src/Armas/Bomba.js"
+        "src/Armas/Bomba.js",
+        "src/Util/MathUtil.js"
     ]
 }

@@ -32,7 +32,6 @@ ctor: function (space, posicion, layer) {
     this.body.setPos(posicion);
     this.body.setAngle(0);
     this.sprite.setBody(this.body);
-    //this.space.addBody(this.body);
     var radio = this.sprite.getContentSize().width / 2;
     this.shape = new cp.BoxShape(this.body,
     this.sprite.getContentSize().width - 2,
@@ -47,7 +46,6 @@ ctor: function (space, posicion, layer) {
     {
         this.shape.setCollisionType(tipoBomba);
         this.sprite.runAction(this.animacionExplosion);
-        //this.eliminar();
     }
 }, eliminar: function () {
          // quita la forma
@@ -59,7 +57,6 @@ ctor: function (space, posicion, layer) {
                 this.layer.link.bombs.splice(i,1);
             }
          }
-         //TODO no se porque da error al eliminarla pasado el tiempo
          this.space.removeShape(this.shape);
          this.layer.removeChild(this.sprite);
      }

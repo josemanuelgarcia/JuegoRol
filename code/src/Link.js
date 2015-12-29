@@ -2,6 +2,7 @@ var Link = cc.Class.extend({
     //Variables de clase
     animaciones:[],
     bombs:[],
+    animationManager:null,
     boomerang:null,
     space: null,
     layer: null,
@@ -12,6 +13,7 @@ var Link = cc.Class.extend({
     usingSword:null,
     atackIsDone:null,
     isMoving:null,
+    attackSensor:null,
     velMovimiento: 70,
     ctor: function (space, posicion, layer) {
         this.space = space;
@@ -42,9 +44,15 @@ var Link = cc.Class.extend({
         this.shape.setFriction(1);
         this.shape.setCollisionType(tipoJugador);
         this.space.addShape(this.shape);
+        //Sensor de atacar
+        this.attackSensor = new cp.CircleShape(this.body, 18, cp.vzero);
+        this.attackSensor.setFriction(1);
+        this.attackSensor.setCollisionType(tipoEspada);
+        this.attackSensor.sensor=true;
+        this.space.addShape(this.attackSensor);
         //Añadir las animaciones de link
-        new AnimationManager(this).addAnimationsLink();
-
+        this.animationManager=new AnimationManager(this);
+        this.animationManager.addAnimationsLink();
         this.layer.mapa.addChild(this.sprite, 2);
         return true;
 
@@ -101,15 +109,12 @@ var Link = cc.Class.extend({
             //TODO en raros casos se queda pillado sin hacer el callback de la accion de atacar y no activar nunca el semaforo
             this.sprite.stopAllActions();
             this.sprite.scaleX=(this.orientacion=="IZQUIERDA"? -1:1);
-            this.sprite.runAction(this.obtainAnimation("ESPADA_"+this.orientacion));
+            this.sprite.runAction(this.animationManager.obtainAnimation("ESPADA_"+this.orientacion));
        }
       if(this.isMoving && this.atackIsDone)
       {
         this.sprite.scaleX=(this.orientacion=="IZQUIERDA"? -1:1);
-        this.sprite.runAction(this.obtainAnimation("CAMINAR_"+this.orientacion));
+        this.sprite.runAction(this.animationManager.obtainAnimation("CAMINAR_"+this.orientacion));
       }
-    },obtainAnimation: function(key)
-    {
-        return this.animaciones[key];
     }
 });

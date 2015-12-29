@@ -10,6 +10,7 @@ var tipoBoomerang=5;
 var tipoCorazon=6;
 var tipoRupia=7;
 var tipoBomba=8;
+var tipoEspada=9;
 var weapon="ARCO";
 
 var GameLayer = cc.Layer.extend({
@@ -40,7 +41,7 @@ var GameLayer = cc.Layer.extend({
         //La gravedad en este juego da igual.
         this.space.gravity = cp.v(0, 0);
         //Add the Debug Layer:
-
+     
         //Cargamos el Mapa
         this.cargarMapa();
         //Creación del personaje link
@@ -53,7 +54,6 @@ var GameLayer = cc.Layer.extend({
         this.corazon = new Corazon(this.space,cc.p(550,200),this);
         //Creacion de rupia de prueba
         this.rupia = new Rupia(this.space,cc.p(700,200),this);
-
 
         //ARMA INICIAL
         //this.depuracion = new cc.PhysicsDebugNode(this.space);
@@ -87,6 +87,8 @@ var GameLayer = cc.Layer.extend({
                                                null,this.collisionJugadorConCorazon.bind(this), null, null);
            this.space.addCollisionHandler(tipoJugador, tipoRupia,
                                                          null,this.collisionJugadorConRupia.bind(this), null, null);
+            this.space.addCollisionHandler(tipoEspada, tipoOctorok,
+                                                                     null,this.collisionEspadaConEnemigo.bind(this), null, null);
         this.space.addCollisionHandler(
             tipoJugador, tipoOctorok, null, null, null, this.reducirVidas.bind(this));
          this.space.addCollisionHandler(
@@ -115,6 +117,7 @@ var GameLayer = cc.Layer.extend({
             //Eliminar octorock si impacta, mas adelante se recorreran todos los enemigos
             else if(this.octorok.shape==shape)
             {
+                console.log("OCTOROCK MATADO");
                 this.octorok.eliminar();
             }
             else if(this.corazon.shape==shape)
@@ -299,6 +302,16 @@ var GameLayer = cc.Layer.extend({
                 }
             }
             return false;
+      },collisionEspadaConEnemigo:function(arbiter,space)
+      {
+        var shapes = arbiter.getShapes();
+        if(this.link.usingSword)
+        {
+            if(new MathUtil().isInViewCone(this.link.body.p,shapes[1].body.p,0.5,this))
+            {
+                this.shapesToRemove.push(shapes[1]);
+            }
+        }
       }
 });
 

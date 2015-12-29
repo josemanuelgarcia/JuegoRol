@@ -192,6 +192,6 @@ var Octorok = cc.Class.extend({
         this.space.removeShape(this.shape);
 
         // quita el sprite
-        this.layer.removeChild(this.sprite);
+        this.layer.mapa.removeChild(this.sprite);
      }
 });
