@@ -7,7 +7,6 @@ var DisparoOctorok = cc.Class.extend({
     ctor: function (space, posicion, layer, sentido) {
         this.space = space;
         this.layer = layer;
-
         // Crear animación
         var framesAnimacion = [];
         for (var i = 0; i <= 2; i++) {
@@ -15,7 +14,7 @@ var DisparoOctorok = cc.Class.extend({
             var frame = cc.spriteFrameCache.getSpriteFrame(str);
             framesAnimacion.push(frame);
         }
-        var animacion = new cc.Animation(framesAnimacion, 0.05);
+        var animacion = new cc.Animation(framesAnimacion, 0.5);
         var actionAnimacionBucle =
             new cc.RepeatForever(new cc.Animate(animacion));
 

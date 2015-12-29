@@ -53,43 +53,47 @@ var Octorok = cc.Class.extend({
 
         //Animacion Mover Abajo
         var framesCaminarAbajo = this.getAnimacion("Octorok_abajo", 1);
-        var animacionAbajo = new cc.Animation(framesCaminarAbajo, 0.05);
+        var animacionAbajo = new cc.Animation(framesCaminarAbajo, 0.5);
         this.animMoverAbajo = cc.RepeatForever.create(new cc.Animate(animacionAbajo));
 
         //Animacion Mover Arriba
         var framesCaminarArriba = this.getAnimacion("Octorok_arriba", 1);
-        var animacionArriba = new cc.Animation(framesCaminarArriba, 0.05);
+        var animacionArriba = new cc.Animation(framesCaminarArriba, 0.5);
         this.animMoverArriba = cc.RepeatForever.create(new cc.Animate(animacionArriba));
 
         //Animacion Mover Derecha
         var framesCaminarDerecha = this.getAnimacion("Octorok_derecha", 1);
-        var animacionDerecha = new cc.Animation(framesCaminarDerecha, 0.05);
+        var animacionDerecha = new cc.Animation(framesCaminarDerecha, 0.5);
         this.animMoverDerecha = cc.RepeatForever.create(new cc.Animate(animacionDerecha));
 
         //Animacion mover izquierda
         var framesCaminarIzquierda = this.getAnimacion("Octorok_izquierda", 1);
-        var animacionIzquierda = new cc.Animation(framesCaminarIzquierda, 0.05);
+        var animacionIzquierda = new cc.Animation(framesCaminarIzquierda, 0.5);
         this.animMoverIzquierda = cc.RepeatForever.create(new cc.Animate(animacionIzquierda));
 
         //Animacion disparar hacia abajo
         var framesDispararAbajo = this.getAnimacion("Octorok_disparo_abajo", 1);
-        var animacionDisparoAbajo = new cc.Animation(framesDispararAbajo, 0.02);
-        this.animDispararAbajo = new cc.Sequence(new cc.Animate(animacionDisparoAbajo), new cc.Animate(animacionAbajo));
+        var animacionDisparoAbajo = new cc.Animation(framesDispararAbajo,0.5);
+        this.animDispararAbajo = new cc.Sequence(new cc.Animate(animacionDisparoAbajo)
+            ,new cc.callFunc(this.crearDisparo,this), new cc.Animate(animacionAbajo));
 
         //Animacion disparar hacia arriba
         var framesDispararArriba = this.getAnimacion("Octorok_disparo_arriba", 1);
-        var animacionDispararArriba = new cc.Animation(framesDispararArriba, 0.02);
-        this.animDispararArriba = new cc.Sequence(new cc.Animate(animacionDispararArriba), new cc.Animate(animacionArriba));
+        var animacionDispararArriba = new cc.Animation(framesDispararArriba, 0.5);
+        this.animDispararArriba = new cc.Sequence(new cc.Animate(animacionDispararArriba),
+           new cc.callFunc(this.crearDisparo,this),  new cc.Animate(animacionArriba));
 
         //Animacion disparar hacia la drecha
         var framesDispararDerecha = this.getAnimacion("Octorok_disparo_derecha", 1);
-        var animacionDisparoDerecha = new cc.Animation(framesDispararDerecha, 0.02);
-        this.animDispararDerecha = new cc.Sequence(new cc.Animate(animacionDisparoDerecha), new cc.Animate(animacionDerecha));
+        var animacionDisparoDerecha = new cc.Animation(framesDispararDerecha, 0.5);
+        this.animDispararDerecha = new cc.Sequence(new cc.Animate(animacionDisparoDerecha),
+           new cc.callFunc(this.crearDisparo,this), new cc.Animate(animacionDerecha));
 
         //Animacion disparar hacia la izquierda
         var framesDispararIzquierda = this.getAnimacion("Octorok_disparo_izquierda", 1);
-        var animacionDisparoIzquierda = new cc.Animation(framesDispararIzquierda, 0.02);
-        this.animDispararIzquierda = new cc.Sequence(new cc.Animate(animacionDisparoIzquierda), new cc.Animate(animacionIzquierda));
+        var animacionDisparoIzquierda = new cc.Animation(framesDispararIzquierda, 0.5);
+        this.animDispararIzquierda = new cc.Sequence(new cc.Animate(animacionDisparoIzquierda),
+            new cc.callFunc(this.crearDisparo,this), new cc.Animate(animacionIzquierda));
 
 
         this.layer.mapa.addChild(this.sprite, 2);
@@ -101,7 +105,7 @@ var Octorok = cc.Class.extend({
         this.tiempoUltimoDisparo = this.tiempoUltimoDisparo + dt;
 
         // Dispara si el tiempo ha pasado
-        if (this.tiempoUltimoDisparo > this.tiempoEntreDisparos) {
+        if (this.tiempoUltimoDisparo > this.tiempoEntreDisparos && this.shape !=null) {
             this.tiempoUltimoDisparo = 0;
             this.disparar();
         }
@@ -121,7 +125,6 @@ var Octorok = cc.Class.extend({
             }
             this.tiempoMovimiento = 0;
         }
-        // TODO Hacer que se mueva siguiendo algun algoritmo
 
     }, getAnimacion: function (nombreAnimacion, numFrames) {
         var framesAnimacion = [];
@@ -166,12 +169,25 @@ var Octorok = cc.Class.extend({
             this.sprite.runAction(this.animDispararAbajo);
         }
 
+    }, crearDisparo:function(){
         //Crear el disparo
-        var disparo = new DisparoOctorok(this.space,
-            cc.p(this.body.p.x, this.body.p.y), this.layer, this.orientacion);
-        this.layer.disparosEnemigos.push(disparo);
+        var disparo;
+            if (this.orientacion == "ARRIBA") {
+                 disparo = new DisparoOctorok(this.space,
+                                    cc.p(this.body.p.x, this.body.p.y+this.sprite.getContentSize().height/2), this.layer, this.orientacion);
+            } else if (this.orientacion == "DERECHA") {
+                var disparo = new DisparoOctorok(this.space,
+                                   cc.p(this.body.p.x+this.sprite.getContentSize().width/2, this.body.p.y), this.layer, this.orientacion);
+            } else if (this.orientacion == "IZQUIERDA") {
+                 var disparo = new DisparoOctorok(this.space,
+                                    cc.p(this.body.p.x-this.sprite.getContentSize().width/2, this.body.p.y), this.layer, this.orientacion);
+            } else if (this.orientacion == "ABAJO") {
+                 var disparo = new DisparoOctorok(this.space,
+                                    cc.p(this.body.p.x, this.body.p.y-this.sprite.getContentSize().height/2), this.layer, this.orientacion);
+            }
 
 
+            this.layer.disparosEnemigos.push(disparo);
     }, haChocado: function () {
         if (this.orientacion == "ARRIBA") {
             this.moverAbajo();
