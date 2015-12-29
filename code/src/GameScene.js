@@ -148,20 +148,18 @@ var GameLayer = cc.Layer.extend({
         var instancia = event.getCurrentTarget();
         instancia.movementKeysPressed[keyCode]=false;
         //Si se suelta alguna de las teclas de movimiento se eliminan todas las acciones
-        if (keyCode == 87 || keyCode == 119 || keyCode == 65 || keyCode == 97
-        || keyCode == 68 || keyCode == 100 || keyCode == 83 || keyCode == 115) {
+        if (keyCode == cc.KEY.W || keyCode == cc.KEY.w || keyCode == cc.KEY.s || keyCode == cc.KEY.S
+        || keyCode == cc.KEY.A || keyCode == cc.KEY.a || keyCode == cc.KEY.D || keyCode == cc.KEY.d) {
             instancia.keyPulsada = null;
             //Si ninguna tecla de movimiento esta pulsada se para
             if(!instancia.isMovementKeyPressed())
             {
+                console.log("PARAR");
                 instancia.link.parado();
-                instancia.link.sprite.stopActionByTag(1);
-                instancia.link.sprite.stopActionByTag(2);
-                instancia.link.sprite.stopActionByTag(3);
+                instancia.link.sprite.stopAllActions();
             }
-
         }
-        if(keyCode == 77 || keyCode == 109)
+        if(keyCode == cc.KEY.M || keyCode == cc.KEY.m)
         {
             instancia.link.isSwordPress=false;
         }
@@ -294,7 +292,7 @@ var GameLayer = cc.Layer.extend({
      iuLayer.agregarRupia();
       var shapes = arbiter.getShapes();
       this.shapesToRemove.push(shapes[1]);
-      },isMovementKeyPressed:function(){
+      },isMovementKeyPressed:function(keyCode){
             for(var i=0;i<this.movementKeysPressed.length;i++)
             {
                 if(this.movementKeysPressed[i])
