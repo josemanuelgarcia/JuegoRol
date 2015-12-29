@@ -32,7 +32,9 @@ var res = {
     mapa_inicial_tmx: "res/Mapas/MapaA/mapa_inicial.tmx",
     boomerang_png:"res/Animaciones/boomerang.png",
     boomerang_plist:"res/Animaciones/boomerang.plist",
-    Ravenna_ttf:"res/ravenna.ttf"
+    Ravenna_ttf:"res/ravenna.ttf",
+    bomb_plist:"res/Armas/bomb.plist",
+    bomb_png:"res/Armas/bomb.png"
 
 };
 

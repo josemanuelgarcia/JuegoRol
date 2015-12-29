@@ -1,6 +1,7 @@
 var Link = cc.Class.extend({
     //Variables de clase
     animaciones:[],
+    bombs:[],
     boomerang:null,
     space: null,
     layer: null,
@@ -74,11 +75,19 @@ var Link = cc.Class.extend({
         {
             this.boomerang=new Boomerang(this.space,cc.p(this.body.p.x, this.body.p.y), this.layer, this.orientacion);
         }
+    },utilizarBombas: function()
+    {
+        this.bombs.push(new Bomba(this.space,cc.p(this.body.p.x, this.body.p.y), this.layer));
     },update:function(dt){
         //Se hace el update del boomerang si este existe
        if(this.boomerang!=null)
        {
             this.boomerang.update(dt);
+       }
+       //Actualizar bombas
+       for(var i=0;i<this.bombs.length;i++)
+       {
+            this.bombs[i].update(dt);
        }
        //Solucion al problema del TODO?
        if(this.sprite.getNumberOfRunningActions()==0)

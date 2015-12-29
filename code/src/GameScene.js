@@ -9,6 +9,7 @@ var tipoDisparo = 4;
 var tipoBoomerang=5;
 var tipoCorazon=6;
 var tipoRupia=7;
+var tipoBomba=8;
 var weapon="ARCO";
 
 var GameLayer = cc.Layer.extend({
@@ -33,6 +34,7 @@ var GameLayer = cc.Layer.extend({
         //Cachear recursos del juego
         cc.spriteFrameCache.addSpriteFrames(res.link_plist);
          cc.spriteFrameCache.addSpriteFrames(res.boomerang_plist);
+         cc.spriteFrameCache.addSpriteFrames(res.bomb_plist);
         //Creación del espacio del juego
         this.space = new cp.Space();
         //La gravedad en este juego da igual.
@@ -87,6 +89,8 @@ var GameLayer = cc.Layer.extend({
                                                          null,this.collisionJugadorConRupia.bind(this), null, null);
         this.space.addCollisionHandler(
             tipoJugador, tipoOctorok, null, null, null, this.reducirVidas.bind(this));
+         this.space.addCollisionHandler(
+                    tipoJugador, tipoBomba, null, null, null, this.reducirVidas.bind(this));
 
 
         return true;
@@ -107,6 +111,7 @@ var GameLayer = cc.Layer.extend({
                         this.link.boomerang.eliminar();
                     }
             }
+
             //Eliminar octorock si impacta, mas adelante se recorreran todos los enemigos
             else if(this.octorok.shape==shape)
             {
@@ -138,12 +143,6 @@ var GameLayer = cc.Layer.extend({
         instancia.useWeapon(keyCode,instancia);
         //Metodo que maneja los eventos de teclado de movimiento
         instancia.movementLink(keyCode,instancia);
-        //barra espaciadora seria abrir el menu de objetos
-        if (keyCode == 32) {
-            var gameScene = instancia.getParent();
-            cc.director.pause();
-            gameScene.addChild(new MenuObjetosLayer(gameScene), 0, 3);
-        }
     }, dejarProcesarEventosKeyboard: function (keyCode, event) {
         var instancia = event.getCurrentTarget();
         instancia.movementKeysPressed[keyCode]=false;
@@ -154,14 +153,9 @@ var GameLayer = cc.Layer.extend({
             //Si ninguna tecla de movimiento esta pulsada se para
             if(!instancia.isMovementKeyPressed())
             {
-                console.log("PARAR");
                 instancia.link.parado();
                 instancia.link.sprite.stopAllActions();
             }
-        }
-        if(keyCode == cc.KEY.M || keyCode == cc.KEY.m)
-        {
-            instancia.link.isSwordPress=false;
         }
     }, cargarMapa: function () {
 
@@ -225,12 +219,16 @@ var GameLayer = cc.Layer.extend({
         if (keyCode == cc.KEY.M || keyCode == cc.KEY.m) {
              instancia.link.utilizarEspada();
          }
-                //Utilizar tecla k boomerang
+                //Utilizar tecla k arma seleccionada
         else if( keyCode==cc.KEY.K || keyCode==cc.KEY.k)
           {
             if(weapon=="BOOMERANG")
             {
              instancia.link.utilizarBoomerang();
+            }
+            if(weapon=="BOMBAS")
+            {
+              instancia.link.utilizarBombas();
             }
           }
     },movementLink: function(keyCode,instancia){

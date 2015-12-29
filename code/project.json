@@ -23,6 +23,7 @@
         "src/Recolectables/Corazon.js",
         "src/Recolectables/Rupia.js",
         "src/Layers/HistoryLayer.js",
-        "src/Manager/AnimationManager.js"
+        "src/Manager/AnimationManager.js",
+        "src/Armas/Bomba.js"
     ]
 }
