@@ -48,7 +48,14 @@ var Link = cc.Class.extend({
         this.shape.setCollisionType(tipoJugador);
         this.space.addShape(this.shape);
 
-        //Animacion Simple Arriba
+        this.addAnimations();
+
+        this.layer.mapa.addChild(this.sprite, 2);
+        return true;
+
+    },addAnimations:function()
+    {
+     //Animacion Simple Arriba
         var framesSimple = this.getAnimacion("link_arriba", 1);
         this.animacionSimple = new cc.Animation(framesSimple, 0.05);
         //Animacion Simple Abajo
@@ -87,10 +94,8 @@ var Link = cc.Class.extend({
         this.animEspadaLado = new cc.Sequence(new cc.Animate(animacionEspDerecha), new cc.Animate(this.animacionSimpleLado));
 
 
-        this.layer.mapa.addChild(this.sprite, 2);
-        return true;
-
-    }, getAnimacion: function (nombreAnimacion, numFrames) {
+    }
+    , getAnimacion: function (nombreAnimacion, numFrames) {
         var framesAnimacion = [];
         for (var i = 0; i < numFrames; i++) {
             var str = nombreAnimacion + i + ".png";

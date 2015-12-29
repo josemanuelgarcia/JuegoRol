@@ -108,20 +108,18 @@ var GameLayer = cc.Layer.extend({
                     }
             }
             //Eliminar octorock si impacta, mas adelante se recorreran todos los enemigos
-            if(this.octorok.shape==shape)
+            else if(this.octorok.shape==shape)
             {
                 this.octorok.eliminar();
             }
-            if(this.corazon.shape==shape)
-                        {
+            else if(this.corazon.shape==shape)
+            {
                             this.corazon.eliminar();
-                        }
-
-
-             if(this.rupia.shape==shape)
-                         {
+            }
+            else if(this.rupia.shape==shape)
+            {
                              this.rupia.eliminar();
-                         }
+            }
             for (var i = 0; i < this.disparosEnemigos.length; i++) {
                 if (this.disparosEnemigos[i].shape === shape) {
                     this.disparosEnemigos[i].eliminar();
@@ -156,10 +154,10 @@ var GameLayer = cc.Layer.extend({
             //Si ninguna tecla de movimiento esta pulsada se para
             if(!instancia.isMovementKeyPressed())
             {
-            instancia.link.parado();
-            instancia.link.sprite.stopActionByTag(1);
-            instancia.link.sprite.stopActionByTag(2);
-            instancia.link.sprite.stopActionByTag(3);
+                instancia.link.parado();
+                instancia.link.sprite.stopActionByTag(1);
+                instancia.link.sprite.stopActionByTag(2);
+                instancia.link.sprite.stopActionByTag(3);
             }
 
         }
@@ -226,11 +224,11 @@ var GameLayer = cc.Layer.extend({
         this.setPosition(viewPoint);
 
     },useWeapon: function(keyCode,instancia){
-        if (keyCode == 77 || keyCode == 109) {
-                    instancia.link.utilizarEspada();
-                }
+        if (keyCode == cc.KEY.M || keyCode == cc.KEY.m) {
+             instancia.link.utilizarEspada();
+         }
                 //Utilizar tecla k boomerang
-        else if( keyCode==107 || keyCode==75)
+        else if( keyCode==cc.KEY.K || keyCode==cc.KEY.k)
           {
             if(weapon=="BOOMERANG")
             {
@@ -238,27 +236,27 @@ var GameLayer = cc.Layer.extend({
             }
           }
     },movementLink: function(keyCode,instancia){
-        if (keyCode == 87 || keyCode == 119)
+        if (keyCode == cc.KEY.W || keyCode == cc.KEY.w)
         {
             //W mover hacia arriba
             instancia.link.moverArriba();
             //Añadir tecla pulsada
             instancia.movementKeysPressed[keyCode]=true;
         }
-        else if (keyCode == 83 || keyCode == 115)
+        else if (keyCode == cc.KEY.S || keyCode == cc.KEY.s)
         {
           //S mover hacia abajo
           instancia.link.moverAbajo();
           instancia.movementKeysPressed[keyCode]=true;
         }
                 //Mover derecha
-        else if (keyCode == 68 || keyCode == 100)
+        else if (keyCode == cc.KEY.D || keyCode == cc.KEY.d)
         {
           instancia.link.moverDerecha();
            instancia.movementKeysPressed[keyCode]=true;
         }
                 //Mover izquierda
-        else if (keyCode == 65 || keyCode == 97)
+        else if (keyCode == cc.KEY.A || keyCode == cc.KEY.a)
         {
          instancia.link.moverIzquierda();
           instancia.movementKeysPressed[keyCode]=true;
@@ -299,10 +297,10 @@ var GameLayer = cc.Layer.extend({
       },isMovementKeyPressed:function(){
             for(var i=0;i<this.movementKeysPressed.length;i++)
             {
-            if(this.movementKeysPressed[i])
-            {
-                return true;
-            }
+                if(this.movementKeysPressed[i])
+                {
+                    return true;
+                }
             }
             return false;
       }
