@@ -41,7 +41,7 @@ var GameLayer = cc.Layer.extend({
         //La gravedad en este juego da igual.
         this.space.gravity = cp.v(0, 0);
         //Add the Debug Layer:
-     
+
         //Cargamos el Mapa
         this.cargarMapa();
         //Creación del personaje link
@@ -307,7 +307,7 @@ var GameLayer = cc.Layer.extend({
         var shapes = arbiter.getShapes();
         if(this.link.usingSword)
         {
-            if(new MathUtil().isInViewCone(this.link.body.p,shapes[1].body.p,0.5,this))
+            if(new MathUtil().isInViewCone(this.link.body.p,shapes[1].body.p,0.7,this))
             {
                 this.shapesToRemove.push(shapes[1]);
             }

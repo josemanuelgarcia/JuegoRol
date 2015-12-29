@@ -29,7 +29,7 @@ isInViewCone:function(viewer, obj, coneSize,layer) {
     normalize: function()
     {
         var pot=Math.sqrt(coneVec.x*coneVec.x+coneVec.y*coneVec.y);
-        coneVec.x=1/pot;
-        coneVec.y=1/pot;
+        coneVec.x=1/Math.abs(pot);
+        coneVec.y=1/Math.abs(pot);
     }
     });
