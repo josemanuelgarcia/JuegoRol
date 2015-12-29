@@ -1,21 +1,26 @@
 var IULayer = cc.Layer.extend({
+    vidasIniciales:3,
     spriteBotonMenu: null,
     spriteBSumarVidas: null,
     spriteBQuitarVidas: null,
     spriteArmaElegida: null,
     spriteRupias: null,
     rupias: 0,
-    corazones: 100,
+    corazones: 103,
     corazonesBlancos:999,
     posicionSpriteCorazones: 0,
     alturaSpriteCOrazones: 30,
+    vidasQuitadas:0,
     entrar:true,
     ctor: function () {
         this._super();
         var size = cc.winSize;
 
         //se llama par pintar las vidas iniciales
-        this.pintarVidas();
+        this.darVidas();
+
+
+
 
 
 
@@ -113,6 +118,31 @@ var IULayer = cc.Layer.extend({
 
     }, darVidas: function () {
 
+
+
+
+
+
+      console.log(this.vidasIniciales);
+      // Vidas iniciales
+       for(i=0;i < this.vidasIniciales;i++){
+
+       console.log("he llegado");
+       this.posicionSpriteCorazones=this.posicionSpriteCorazones+30;
+        eval("var variable" + 100+i + "= cc.Sprite.create(res.corazon_png)");
+                   eval("variable" +100+i).setPosition(cc.p(this.posicionSpriteCorazones, cc.winSize.height - this.alturaSpriteCOrazones));
+                   //y lo añadimos
+                   this.addChild(eval("variable" +100+i),0,100+i);
+}
+//solo se ponen una vez
+this.vidasIniciales=0;
+            //Si le han quitado vidas se las devolvemos
+          if(this.vidasQuitadas>0)
+          {
+          this.vidasQuitadas=this.vidasQuitadas-1;
+
+
+
         //actualizamos la posicion de la nueva vida
         this.posicionSpriteCorazones = this.posicionSpriteCorazones + 30;
 
@@ -141,16 +171,17 @@ var IULayer = cc.Layer.extend({
             this.addChild(eval("variable" + this.corazones),0,this.corazones);
             console.log("variable" + this.corazones);
 
-
-
+}
+this.corazones = this.corazones+1;
         }
 
 
- this.corazones = this.corazones+1;
+
 
 
     }, quitarVidas: function () {
 
+        this.vidasQuitadas = this.vidasQuitadas+1;
         //Entraria siempre que haya algun corazon
         if(this.posicionSpriteCorazones>=30 || this.alturaSpriteCOrazones>30){
         //creamos el nuevo sprite del corazon blanco
