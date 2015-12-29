@@ -9,8 +9,8 @@ var Link = cc.Class.extend({
     shape: null,
     orientacion: null,
     usingSword:null,
+    atackIsDone:null,
     isMoving:null,
-    isSwordPress:null,
     velMovimiento: 70,
     ctor: function (space, posicion, layer) {
         this.space = space;
@@ -29,7 +29,7 @@ var Link = cc.Class.extend({
         this.body.e = 0;
         this.sprite.setBody(this.body);
         this.usingSword=false;
-        this.isSwordPress=false;
+        this.atackIsDone=true;
         // Se añade el cuerpo al espacio
         this.space.addBody(this.body);
 
@@ -41,65 +41,11 @@ var Link = cc.Class.extend({
         this.shape.setFriction(1);
         this.shape.setCollisionType(tipoJugador);
         this.space.addShape(this.shape);
-
-        this.addAnimations();
+        //Añadir las animaciones de link
+        new AnimationManager(this).addAnimationsLink();
 
         this.layer.mapa.addChild(this.sprite, 2);
         return true;
-
-    },addAnimations:function()
-    {
-     //Animacion Simple Arriba
-        var framesSimple = this.getAnimacion("link_arriba", 1);
-        this.animaciones["SIMPLE_ARRIBA"] = cc.Animate.create(new cc.Animation(framesSimple, 0.05));
-        //Animacion Simple Abajo
-        var framesSimpleAbajo = this.getAnimacion("link_abajo", 1);
-        this.animaciones["SIMPLE_ABAJO"] = cc.Animate.create(new cc.Animation(framesSimpleAbajo, 0.05));
-        //Animacion Simple Lado
-        var framesSimpleLado = this.getAnimacion("link_lado", 1);
-        this.animaciones["SIMPLE_LADO"] = cc.Animate.create(new cc.Animation(framesSimpleLado, 0.05));
-        //Animacion Caminar Abajo
-        var framesCaminarAbajo = this.getAnimacion("link_abajo", 12);
-        var animacionAbajo = new cc.Animation(framesCaminarAbajo, 0.05);
-        this.animaciones["CAMINAR_ABAJO"] = cc.RepeatForever.create(new cc.Animate(animacionAbajo));
-        //Animacion Caminar Arriba
-        var framesCaminarArriba = this.getAnimacion("link_arriba", 12);
-        var animacionArriba = new cc.Animation(framesCaminarArriba, 0.05);
-        this.animaciones["CAMINAR_ARRIBA"] =cc.RepeatForever.create(new cc.Animate(animacionArriba));
-        //Animacion Caminar Derecha
-        var framesCaminarDerecha = this.getAnimacion("link_lado", 12);
-        var animacionDerecha = new cc.Animation(framesCaminarDerecha, 0.05);
-        this.animaciones["CAMINAR_DERECHA"] =cc.RepeatForever.create(new cc.Animate(animacionDerecha));
-        this.animaciones["CAMINAR_IZQUIERDA"] =cc.RepeatForever.create(new cc.Animate(animacionDerecha));
-        //Animacion Espada Arriba
-        var framesEspadaArriba = this.getAnimacion("Link_espadazo_arriba", 9);
-        var animacionEspArriba = new cc.Animation(framesEspadaArriba, 0.03);
-        this.animaciones["ESPADA_ARRIBA"]  = new cc.Sequence(new cc.Animate(animacionEspArriba), this.obtainAnimation("SIMPLE_ARRIBA"),cc.CallFunc.create(this.lock, this));
-
-        //Animacion Espada Abajo
-        var framesEspadaAbajo = this.getAnimacion("Link_espadazo_abajo", 6);
-        var animacionEspAbajo = new cc.Animation(framesEspadaAbajo, 0.03);
-        this.animaciones["ESPADA_ABAJO"]  = new cc.Sequence(new cc.Animate(animacionEspAbajo), this.obtainAnimation("SIMPLE_ABAJO"),cc.CallFunc.create(this.lock, this));
-        //Animacion Espada Lado
-        var framesEspadaDerecha = this.getAnimacion("Link_espadazo_derecha", 9);
-        var animacionEspDerecha = new cc.Animation(framesEspadaDerecha, 0.03);
-        this.animaciones["ESPADA_DERECHA"]  = new cc.Sequence(new cc.Animate(animacionEspDerecha), this.obtainAnimation("SIMPLE_LADO"),cc.CallFunc.create(this.lock, this));
-
-        this.animaciones["ESPADA_IZQUIERDA"]  = new cc.Sequence(new cc.Animate(animacionEspDerecha), this.obtainAnimation("SIMPLE_LADO"),cc.CallFunc.create(this.lock, this));
-
-        this.animaciones["ESPADA_CAMINAR_ARRIBA"]  = new cc.Spawn(new cc.Animate(animacionEspArriba),this.obtainAnimation("CAMINAR_ARRIBA"));
-        this.animaciones["ESPADA_CAMINAR_ABAJO"]  = new cc.Spawn(new cc.Animate(animacionEspAbajo),this.obtainAnimation("CAMINAR_ABAJO"));
-        this.animaciones["ESPADA_CAMINAR_DERECHA"]  = new cc.Spawn(new cc.Animate(animacionEspDerecha),this.obtainAnimation("CAMINAR_DERECHA"));
-        this.animaciones["ESPADA_CAMINAR_IZQUIERDA"]  = new cc.Spawn(new cc.Animate(animacionEspDerecha),this.obtainAnimation("CAMINAR_DERECHA"));
-    }
-    , getAnimacion: function (nombreAnimacion, numFrames) {
-        var framesAnimacion = [];
-        for (var i = 0; i < numFrames; i++) {
-            var str = nombreAnimacion + i + ".png";
-            var frame = cc.spriteFrameCache.getSpriteFrame(str);
-            framesAnimacion.push(frame);
-        }
-        return framesAnimacion;
 
     }, moverArriba: function () {
         this.orientacion="ARRIBA";
@@ -133,14 +79,22 @@ var Link = cc.Class.extend({
        if(this.boomerang!=null)
        {
             this.boomerang.update(dt);
-        }
-       if(this.usingSword)
+       }
+       //Solucion al problema del TODO?
+       if(this.sprite.getNumberOfRunningActions()==0)
+       {
+        this.atackIsDone=true;
+       }
+       if(this.usingSword && this.atackIsDone)
        {
             //Establecer la escala
+            this.atackIsDone=false;
+            //TODO en raros casos se queda pillado sin hacer el callback de la accion de atacar y no activar nunca el semaforo
+            this.sprite.stopAllActions();
             this.sprite.scaleX=(this.orientacion=="IZQUIERDA"? -1:1);
             this.sprite.runAction(this.obtainAnimation("ESPADA_"+this.orientacion));
        }
-      else if(this.isMoving)
+      if(this.isMoving && this.atackIsDone)
       {
         this.sprite.scaleX=(this.orientacion=="IZQUIERDA"? -1:1);
         this.sprite.runAction(this.obtainAnimation("CAMINAR_"+this.orientacion));
@@ -148,9 +102,5 @@ var Link = cc.Class.extend({
     },obtainAnimation: function(key)
     {
         return this.animaciones[key];
-    }
-    ,lock: function()
-    {
-        this.usingSword=false;
     }
 });

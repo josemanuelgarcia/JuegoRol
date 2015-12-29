@@ -22,6 +22,7 @@
         "src/Armas/Boomerang.js",
         "src/Recolectables/Corazon.js",
         "src/Recolectables/Rupia.js",
-        "src/Layers/HistoryLayer.js"
+        "src/Layers/HistoryLayer.js",
+        "src/Manager/AnimationManager.js"
     ]
 }
