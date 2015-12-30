@@ -18,7 +18,8 @@ var IULayer = cc.Layer.extend({
 
         //se llama par pintar las vidas iniciales
         this.darVidas();
-
+        //Al principio la weapon es el arco
+        weapon="ARCO";
 
 
 
