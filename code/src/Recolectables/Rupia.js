@@ -3,13 +3,31 @@ var Rupia = cc.Class.extend({
     sprite:null,
     shape:null,
     layer:null,
-ctor:function (space, posicion, layer) {
+    color:null,
+    rupias:0,
+ctor:function (space, posicion, layer,color) {
     this.space = space;
     this.layer = layer;
-
+    this.color = color;
 
     // Crear Sprite - Cuerpo y forma
-    this.sprite = new cc.PhysicsSprite(res.rupiaazul_colectable_png);
+    if(this.color=="v"){
+     this.sprite = new cc.PhysicsSprite(res.rupia_png);
+     this.rupias=1;
+     }
+    else if(this.color=="r"){
+     this.sprite = new cc.PhysicsSprite(res.rupia_roja_png);
+     this.rupias=5;
+     }
+    else if (this.color=="a"){
+     this.sprite = new cc.PhysicsSprite(res.rupiaazul_colectable_png);
+     this.rupias=10;
+     }
+    else if(this.color=="m"){
+     this.sprite = new cc.PhysicsSprite(res.rupia_amarilla_png);
+     this.rupias=20;
+     }
+
     // Cuerpo estática , no le afectan las fuerzas
     var body = new cp.StaticBody();
     body.setPos(posicion);
@@ -40,5 +58,7 @@ ctor:function (space, posicion, layer) {
 
      // quita el sprite
      this.layer.removeChild(this.sprite);
+ },agregarRupias: function(){
+    iuLayer.agregarRupia(this.rupias);
  }
 });
