@@ -73,27 +73,27 @@ var Octorok = cc.Class.extend({
 
         //Animacion disparar hacia abajo
         var framesDispararAbajo = this.getAnimacion("Octorok_disparo_abajo", 1);
-        var animacionDisparoAbajo = new cc.Animation(framesDispararAbajo,0.5);
-        this.animDispararAbajo = new cc.Sequence(new cc.Animate(animacionDisparoAbajo)
-            ,new cc.callFunc(this.crearDisparo,this), new cc.Animate(animacionAbajo));
+        var animacionDisparoAbajo = new cc.Animation(framesDispararAbajo,0.4);
+        this.animDispararAbajo = new cc.Sequence(new cc.Spawn(new cc.Animate(animacionDisparoAbajo)
+            ,new cc.callFunc(this.crearDisparo,this)), new cc.Animate(animacionAbajo));
 
         //Animacion disparar hacia arriba
         var framesDispararArriba = this.getAnimacion("Octorok_disparo_arriba", 1);
-        var animacionDispararArriba = new cc.Animation(framesDispararArriba, 0.5);
-        this.animDispararArriba = new cc.Sequence(new cc.Animate(animacionDispararArriba),
-           new cc.callFunc(this.crearDisparo,this),  new cc.Animate(animacionArriba));
+        var animacionDispararArriba = new cc.Animation(framesDispararArriba, 0.4);
+        this.animDispararArriba = new cc.Sequence(new cc.Spawn(new cc.Animate(animacionDispararArriba),
+           new cc.callFunc(this.crearDisparo,this)),  new cc.Animate(animacionArriba));
 
         //Animacion disparar hacia la drecha
         var framesDispararDerecha = this.getAnimacion("Octorok_disparo_derecha", 1);
-        var animacionDisparoDerecha = new cc.Animation(framesDispararDerecha, 0.5);
-        this.animDispararDerecha = new cc.Sequence(new cc.Animate(animacionDisparoDerecha),
-           new cc.callFunc(this.crearDisparo,this), new cc.Animate(animacionDerecha));
+        var animacionDisparoDerecha = new cc.Animation(framesDispararDerecha, 0.4);
+        this.animDispararDerecha = new cc.Sequence(new cc.Spawn(new cc.Animate(animacionDisparoDerecha),
+           new cc.callFunc(this.crearDisparo,this)), new cc.Animate(animacionDerecha));
 
         //Animacion disparar hacia la izquierda
         var framesDispararIzquierda = this.getAnimacion("Octorok_disparo_izquierda", 1);
-        var animacionDisparoIzquierda = new cc.Animation(framesDispararIzquierda, 0.5);
-        this.animDispararIzquierda = new cc.Sequence(new cc.Animate(animacionDisparoIzquierda),
-            new cc.callFunc(this.crearDisparo,this), new cc.Animate(animacionIzquierda));
+        var animacionDisparoIzquierda = new cc.Animation(framesDispararIzquierda, 0.4);
+        this.animDispararIzquierda = new cc.Sequence(new cc.Spawn(new cc.Animate(animacionDisparoIzquierda),
+            new cc.callFunc(this.crearDisparo,this)), new cc.Animate(animacionIzquierda));
 
 
         this.layer.mapa.addChild(this.sprite, 2);
@@ -114,6 +114,23 @@ var Octorok = cc.Class.extend({
         this.tiempoMovimiento = this.tiempoMovimiento + dt;
         if (this.tiempoMovimiento > this.tiempoEntreMovimientos) {
              this.sprite.stopAllActions();
+             var random = Math.floor(Math.random() * 4);
+             switch(random)
+             {
+                 case 0:
+                     this.moverDerecha();
+                     break;
+                 case 1:
+                    this.moverAbajo();
+                    break;
+                 case 2:
+                    this.moverIzquierda();
+                    break;
+                 case 3:
+                    this.moverArriba();
+                    break;
+             }
+             /*
             if (this.orientacion == "ARRIBA") {
                 this.moverDerecha();
             } else if (this.orientacion == "DERECHA") {
@@ -123,6 +140,7 @@ var Octorok = cc.Class.extend({
             } else {
                 this.moverArriba();
             }
+            */
             this.tiempoMovimiento = 0;
         }
 
@@ -156,6 +174,8 @@ var Octorok = cc.Class.extend({
         this.body.setVel(cp.v(-this.velMovimiento, 0));
 
     }, disparar: function () {
+        this.body.setVel(cp.v(0,0));
+
         if (this.orientacion == "ARRIBA") {
             this.sprite.runAction(this.animDispararArriba);
         }
@@ -176,13 +196,13 @@ var Octorok = cc.Class.extend({
                  disparo = new DisparoOctorok(this.space,
                                     cc.p(this.body.p.x, this.body.p.y+this.sprite.getContentSize().height/2), this.layer, this.orientacion);
             } else if (this.orientacion == "DERECHA") {
-                var disparo = new DisparoOctorok(this.space,
+                disparo = new DisparoOctorok(this.space,
                                    cc.p(this.body.p.x+this.sprite.getContentSize().width/2, this.body.p.y), this.layer, this.orientacion);
             } else if (this.orientacion == "IZQUIERDA") {
-                 var disparo = new DisparoOctorok(this.space,
+                 disparo = new DisparoOctorok(this.space,
                                     cc.p(this.body.p.x-this.sprite.getContentSize().width/2, this.body.p.y), this.layer, this.orientacion);
             } else if (this.orientacion == "ABAJO") {
-                 var disparo = new DisparoOctorok(this.space,
+                 disparo = new DisparoOctorok(this.space,
                                     cc.p(this.body.p.x, this.body.p.y-this.sprite.getContentSize().height/2), this.layer, this.orientacion);
             }
 
