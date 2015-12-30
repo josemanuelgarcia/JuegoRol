@@ -11,6 +11,7 @@ var tipoCorazon=6;
 var tipoRupia=7;
 var tipoBomba=8;
 var tipoEspada=9;
+var tipoCueva=10;
 var weapon="ARCO";
 
 var GameLayer = cc.Layer.extend({
@@ -26,6 +27,7 @@ var GameLayer = cc.Layer.extend({
     corazon:null,
     rupia:null,
     shapesToRemove: [],
+    cuevas:[],
     movementKeysPressed:[],
     ctor: function () {
 
@@ -42,6 +44,8 @@ var GameLayer = cc.Layer.extend({
         //La gravedad en este juego da igual.
         this.space.gravity = cp.v(0, 0);
         //Add the Debug Layer:
+        var depuracion = new cc.PhysicsDebugNode(this.space);
+        this.addChild(depuracion, 10);
 
         //Cargamos el Mapa
         this.cargarMapa();
@@ -99,9 +103,9 @@ var GameLayer = cc.Layer.extend({
                  null,this.collisionEspadaConEnemigo.bind(this), null, null);
         this.space.addCollisionHandler(
             tipoJugador, tipoOctorok, null, null, null, this.reducirVidas.bind(this));
-         this.space.addCollisionHandler(
+        this.space.addCollisionHandler(
                     tipoJugador, tipoBomba, null, null, null, this.reducirVidas.bind(this));
-
+        this.space.addCollisionHandler(tipoJugador,tipoCueva,null,this.transportarLink.bind(this),null,null);
 
         return true;
 
@@ -212,6 +216,22 @@ var GameLayer = cc.Layer.extend({
 
         }
 
+        var cuevas = this.mapa.getObjectGroup("Cuevas");
+        var cuevasArray = cuevas.getObjects();
+        cc.log(cuevasArray.length);
+        for(var i = 0; i<cuevasArray.length ; i++)
+        {
+            var x = cuevasArray[i]["x"];
+            var y = cuevasArray[i]["y"];
+            var salida = cuevasArray[i]["Salida"];
+            cc.log("X: "+ x + "Y: " + y +  "Salida: " + salida);
+            var cueva = new Cueva(this.space,new cc.p(x,y),salida);
+
+            this.cuevas.push(cueva);
+
+        }
+        cc.log(cuevas);
+
     }, actualizarCamara: function () {
         var winSize = cc.winSize;
 
@@ -301,6 +321,22 @@ var GameLayer = cc.Layer.extend({
       iuLayer.agregarRupia();
       var shapes = arbiter.getShapes();
       this.shapesToRemove.push(shapes[1]);
+
+    },transportarLink:function(arbiter,space)
+    {
+        var shapes = arbiter.getShapes();
+        var shape = shapes[1];
+        var cueva = null;
+        for(var i = 0; i<this.cuevas.length ; i++)
+        {
+
+            if(shape === this.cuevas[i].shape)
+                cueva = this.cuevas[i];
+        }
+
+        var pos = cueva.getPosSalida();
+        var newPos = cc.p(pos.x,this.mapaAlto - pos.y);
+        this.link.body.setPos(newPos);
 
     },isMovementKeyPressed:function(keyCode){
         for(var i=0;i<this.movementKeysPressed.length;i++)

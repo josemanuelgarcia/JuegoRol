@@ -76,7 +76,7 @@ var IULayer = cc.Layer.extend({
  var gameScene = instancia.getParent();
   var instanciaIU = event.getCurrentTarget();
         // La pulsación cae dentro del botón de menu
-        console.log(instanciaIU.entrar);
+
         if(instanciaIU.entrar){
         if (cc.rectContainsPoint(areaBoton, cc.p(event.getLocationX(), event.getLocationY()))) {
             cc.director.pause();
@@ -117,13 +117,6 @@ var IULayer = cc.Layer.extend({
         this.etiquetaMonedas.setString("" + this.rupias);
 
     }, darVidas: function () {
-
-
-
-
-
-
-      console.log(this.vidasIniciales);
       // Vidas iniciales
        for(i=0;i < this.vidasIniciales;i++){
 
@@ -133,9 +126,9 @@ var IULayer = cc.Layer.extend({
                    eval("variable" +100+i).setPosition(cc.p(this.posicionSpriteCorazones, cc.winSize.height - this.alturaSpriteCOrazones));
                    //y lo añadimos
                    this.addChild(eval("variable" +100+i),0,100+i);
-}
-//solo se ponen una vez
-this.vidasIniciales=0;
+        }
+            //solo se ponen una vez
+           this.vidasIniciales=0;
             //Si le han quitado vidas se las devolvemos
           if(this.vidasQuitadas>0)
           {
