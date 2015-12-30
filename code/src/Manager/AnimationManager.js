@@ -43,10 +43,18 @@ var AnimationManager=cc.Class.extend({
              this.objectToBeAnimated.animaciones["ESPADA_DERECHA"]  = new cc.Sequence(new cc.Animate(animacionEspDerecha),cc.CallFunc.create(this.lock, this));
 
              this.objectToBeAnimated.animaciones["ESPADA_IZQUIERDA"]  = new cc.Sequence(new cc.Animate(animacionEspDerecha),cc.CallFunc.create(this.lock, this));
-             this.objectToBeAnimated.animaciones["ESPADA_ARRIBA"].setTag(1);
-             this.objectToBeAnimated.animaciones["ESPADA_ARRIBA"].setTag(1);
-             this.objectToBeAnimated.animaciones["ESPADA_ARRIBA"].setTag(1);
-             this.objectToBeAnimated.animaciones["ESPADA_ARRIBA"].setTag(1);
+              var framesCaminarAbajo = this.getAnimacion("link_rodar_abajo", 8);
+                          var animacionAbajo = new cc.Animation(framesCaminarAbajo, 0.05);
+                          this.objectToBeAnimated.animaciones["RODAR_ABAJO"] = new cc.Sequence(new cc.Animate(animacionAbajo),cc.CallFunc.create(this.lock, this));
+                          //Animacion Caminar Arriba
+                          var framesCaminarArriba = this.getAnimacion("link_rodar_arriba", 8);
+                          var animacionArriba = new cc.Animation(framesCaminarArriba, 0.05);
+                          this.objectToBeAnimated.animaciones["RODAR_ARRIBA"] =new cc.Sequence(new cc.Animate(animacionArriba),cc.CallFunc.create(this.lock, this));
+                          //Animacion Caminar Derecha
+                          var framesCaminarDerecha = this.getAnimacion("link_rodar_derecha", 8);
+                          var animacionDerecha = new cc.Animation(framesCaminarDerecha, 0.05);
+                          this.objectToBeAnimated.animaciones["RODAR_DERECHA"] =new cc.Sequence(new cc.Animate(animacionDerecha),cc.CallFunc.create(this.lock, this));
+                          this.objectToBeAnimated.animaciones["RODAR_IZQUIERDA"] =new cc.Sequence(new cc.Animate(animacionDerecha),cc.CallFunc.create(this.lock, this));
          }
          , getAnimacion: function (nombreAnimacion, numFrames) {
              var framesAnimacion = [];
@@ -65,5 +73,29 @@ var AnimationManager=cc.Class.extend({
               {
                   this.objectToBeAnimated.atackIsDone=true;
                   this.objectToBeAnimated.usingSword=false;
+                  this.objectToBeAnimated.isCarrying=false;
+                  if(this.objectToBeAnimated.layer.isMovementKeyPressed())
+                  {
+                    if(this.objectToBeAnimated.orientacion=="ARRIBA")
+                    {
+                        this.objectToBeAnimated.moverArriba();
+                    }
+                    else if(this.objectToBeAnimated.orientacion=="ABAJO")
+                    {
+                       this.objectToBeAnimated.moverAbajo();
+                    }
+                    else if(this.objectToBeAnimated.orientacion=="DERECHA")
+                    {
+                       this.objectToBeAnimated.moverDerecha();
+                    }
+                    else if(this.objectToBeAnimated.orientacion=="IZQUIERDA")
+                    {
+                        this.objectToBeAnimated.moverIzquierda();
+                    }
+                  }
+                  else
+                  {
+                    this.objectToBeAnimated.parado();
+                  }
               }
 });

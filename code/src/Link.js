@@ -11,6 +11,7 @@ var Link = cc.Class.extend({
     shape: null,
     orientacion: null,
     atackIsDone:null,
+    isCarrying:null,
     usingSword:null,
     attackSensor:null,
     velMovimiento: 70,
@@ -32,6 +33,7 @@ var Link = cc.Class.extend({
         this.sprite.setBody(this.body);
         this.usingSword=false;
         this.atackIsDone=true;
+        this.isCarrying=false;
         // Se añade el cuerpo al espacio
         this.space.addBody(this.body);
 
@@ -56,29 +58,43 @@ var Link = cc.Class.extend({
         return true;
 
     }, moverArriba: function () {
+        if(!this.isCarrying){
         this.orientacion="ARRIBA";
         this.isMoving=true;
         this.animacionCaminar();
         this.body.setVel(cp.v(this.body.getVel().x, this.velMovimiento));
+        }
     }, moverAbajo: function () {
+        if(!this.isCarrying)
+        {
         this.orientacion="ABAJO";
         this.isMoving=true;
         this.animacionCaminar();
         this.body.setVel(cp.v(this.body.getVel().x, -this.velMovimiento));
+        }
     }, moverDerecha: function () {
+        if(!this.isCarrying)
+        {
         this.orientacion="DERECHA";
         this.isMoving=true;
         this.animacionCaminar();
         this.body.setVel(cp.v(this.velMovimiento, this.body.getVel().y));
+        }
     }, moverIzquierda: function () {
+        if(!this.isCarrying)
+        {
         this.orientacion="IZQUIERDA";
         this.isMoving=true;
         this.animacionCaminar();
         this.body.setVel(cp.v(-this.velMovimiento, this.body.getVel().y));
+        }
     }, parado: function ()
     {
+        if(!this.isCarrying)
+        {
            this.body.setVel(cp.v(0, 0));
            this.animacionPararse();
+           }
     }, utilizarEspada: function () {
         this.usingSword=true;
         this.animacionEspada();
@@ -90,8 +106,12 @@ var Link = cc.Class.extend({
     },utilizarBombas: function()
     {
         this.bombs.push(new Bomba(this.space,cc.p(this.body.p.x, this.body.p.y), this.layer));
+    },rodar:function()
+    {
+        this.isCarrying=true;
+        this.sprite.stopAllActions();
+        this.sprite.runAction(this.animationManager.obtainAnimation("RODAR_"+this.orientacion));
     },update:function(dt){
-        //Se hace el update del boomerang si este existe
        if(this.boomerang!=null)
        {
             this.boomerang.update(dt);

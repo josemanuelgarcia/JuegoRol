@@ -154,7 +154,7 @@ var GameLayer = cc.Layer.extend({
 
     }, procesarEventosKeyboard: function (keyCode, event) {
         var instancia = event.getCurrentTarget();
-        if (instancia.keyPulsada == keyCode && (keyCode != 77 && keyCode != 109)) {
+        if (instancia.keyPulsada == keyCode && (keyCode != 77 && keyCode != 109 && keyCode!=cc.KEY.n && keyCode!=cc.KEY.N)) {
             return;
         }
         instancia.keyPulsada = keyCode;
@@ -164,11 +164,11 @@ var GameLayer = cc.Layer.extend({
         instancia.movementLink(keyCode,instancia);
     }, dejarProcesarEventosKeyboard: function (keyCode, event) {
         var instancia = event.getCurrentTarget();
-        instancia.movementKeysPressed[keyCode]=false;
         //Si se suelta alguna de las teclas de movimiento se eliminan todas las acciones
         if (keyCode == cc.KEY.W || keyCode == cc.KEY.w || keyCode == cc.KEY.s || keyCode == cc.KEY.S
         || keyCode == cc.KEY.A || keyCode == cc.KEY.a || keyCode == cc.KEY.D || keyCode == cc.KEY.d) {
             instancia.keyPulsada = null;
+            instancia.movementKeysPressed[keyCode]=false;
             //Si ninguna tecla de movimiento esta pulsada se para
             if(!instancia.isMovementKeyPressed())
             {
@@ -267,7 +267,11 @@ var GameLayer = cc.Layer.extend({
             }
           }
     },movementLink: function(keyCode,instancia){
-        if (keyCode == cc.KEY.W || keyCode == cc.KEY.w)
+        if((keyCode==cc.KEY.n || keyCode==cc.KEY.n)&& this.isMovementKeyPressed())
+        {
+            instancia.link.rodar();
+        }
+        else if (keyCode == cc.KEY.W || keyCode == cc.KEY.w)
         {
             //W mover hacia arriba
             instancia.link.moverArriba();
