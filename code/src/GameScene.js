@@ -27,7 +27,7 @@ var GameLayer = cc.Layer.extend({
     octorock: null,
     depuracion: null,
     corazon:null,
-    rupia:null,
+    rupias:[],
     shapesToRemove: [],
     cuevas:[],
     jarrones:[],
@@ -64,8 +64,18 @@ var GameLayer = cc.Layer.extend({
         this.octorok = new Octorok(this.space, cc.p(600, 250), this);
         //creacion de corazon de prueba
         this.corazon = new Corazon(this.space,cc.p(550,200),this);
-        //Creacion de rupia de prueba
-        this.rupia = new Rupia(this.space,cc.p(700,200),this);
+
+        //Creacion de rupias de diferentes colores  de prueba--------------
+         var rupiaRoja = new Rupia(this.space,cc.p(600,200),this,"r");
+         this.rupias.push(rupiaRoja);
+         var rupiaAzul = new Rupia(this.space,cc.p(650,200),this,"a");
+           this.rupias.push(rupiaAzul);
+         var rupiaAmarilla = new Rupia(this.space,cc.p(520,200),this,"m");
+           this.rupias.push(rupiaAmarilla);
+         var rupiaVerde = new Rupia(this.space,cc.p(700,200),this,"v");
+           this.rupias.push(rupiaVerde);
+        //------------------------------------------------------------------
+
 
         //ARMA INICIAL
         //this.depuracion = new cc.PhysicsDebugNode(this.space);
@@ -136,10 +146,12 @@ var GameLayer = cc.Layer.extend({
             {
                this.corazon.eliminar();
             }
-            else if(this.rupia.shape==shape)
-            {
-               this.rupia.eliminar();
-            }
+            for (var i = 0; i < this.rupias.length; i++) {
+                            if (this.rupias[i].shape === shape) {
+                                this.rupias[i].eliminar();
+                                 this.rupias.splice(i, 1);
+                            }
+                        }
             for (var i = 0; i < this.disparosEnemigos.length; i++) {
                 if (this.disparosEnemigos[i].shape === shape) {
                     this.disparosEnemigos[i].eliminar();
@@ -335,8 +347,13 @@ var GameLayer = cc.Layer.extend({
         var shapes = arbiter.getShapes();
         this.shapesToRemove.push(shapes[1]);
     },collisionJugadorConRupia:function(arbiter,space){
-      iuLayer.agregarRupia();
+
       var shapes = arbiter.getShapes();
+       for (var i = 0; i < this.rupias.length; i++) {
+       if (this.rupias[i].shape === shapes[1]) {
+        this.rupias[i].agregarRupias();
+                                  }
+                              }
       this.shapesToRemove.push(shapes[1]);
 
     },transportarLink:function(arbiter,space)

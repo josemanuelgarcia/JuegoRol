@@ -17,6 +17,8 @@ var res = {
     espada_reducida_png: "res/Armas/espada_reducida.png",
     bomba_reducida_png: "res/Armas/bomba_reducida.png",
     rupia_png: "res/Colectables/rupia.png",
+    rupia_amarilla_png: "res/Colectables/rupia_amarilla.png",
+    rupia_roja_png: "res/Colectables/rupia_roja.png",
     rupiaazul_png: "res/IULayer/rupiaazul.png",
     rupiaazul_colectable_png: "res/Colectables/rupiaazul_colectable.png",
     corazon_png: "res/IULayer/corazon.png",

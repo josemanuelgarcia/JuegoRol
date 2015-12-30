@@ -1,5 +1,6 @@
 var IULayer = cc.Layer.extend({
     vidasIniciales:3,
+    ponerVidasIniciales:true,
     spriteBotonMenu: null,
     spriteBSumarVidas: null,
     spriteBQuitarVidas: null,
@@ -113,12 +114,13 @@ var IULayer = cc.Layer.extend({
 
         }
 
-    }, agregarRupia: function () {
-        this.rupias++;
+    }, agregarRupia: function (rupias) {
+        this.rupias= this.rupias+rupias;
         this.etiquetaMonedas.setString("" + this.rupias);
 
     }, darVidas: function () {
       // Vidas iniciales
+      if(this.ponerVidasIniciales){
        for(i=0;i < this.vidasIniciales;i++){
 
        console.log("he llegado");
@@ -128,8 +130,12 @@ var IULayer = cc.Layer.extend({
                    //y lo añadimos
                    this.addChild(eval("variable" +100+i),0,100+i);
         }
-            //solo se ponen una vez
-           this.vidasIniciales=0;
+        //solo se ponen una vez
+        this.ponerVidasIniciales=false;
+        }
+
+
+
             //Si le han quitado vidas se las devolvemos
           if(this.vidasQuitadas>0)
           {
@@ -175,6 +181,8 @@ this.corazones = this.corazones+1;
 
     }, quitarVidas: function () {
 
+        //se pueden quitar vida si hay vidas que quitar (logicamente)
+        if(this.vidasQuitadas<this.vidasIniciales){
         this.vidasQuitadas = this.vidasQuitadas+1;
         //Entraria siempre que haya algun corazon
         if(this.posicionSpriteCorazones>=30 || this.alturaSpriteCOrazones>30){
@@ -204,7 +212,7 @@ this.corazones = this.corazones+1;
 
         //Actualizamos el identificador de los sprite de los corazones blancos
         this.corazonesBlancos = this.corazonesBlancos+1;
-        }
+        }}
     }, pintarVidas() {
 
 
