@@ -70,7 +70,7 @@ var GameLayer = cc.Layer.extend({
          this.rupias.push(rupiaRoja);
          var rupiaAzul = new Rupia(this.space,cc.p(650,200),this,"a");
            this.rupias.push(rupiaAzul);
-         var rupiaAmarilla = new Rupia(this.space,cc.p(550,200),this,"m");
+         var rupiaAmarilla = new Rupia(this.space,cc.p(520,200),this,"m");
            this.rupias.push(rupiaAmarilla);
          var rupiaVerde = new Rupia(this.space,cc.p(700,200),this,"v");
            this.rupias.push(rupiaVerde);
