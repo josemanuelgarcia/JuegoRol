@@ -26,22 +26,20 @@ var Jarron = cc.Class.extend({
         this.space.addStaticShape(this.shape);
 
         var framesDestruir = this.manager.getAnimacion("Jarron_destruir",7);
-        this.animacionDestruir = new cc.Animation(framesDestruir,0.5);
+        this.animacionDestruir = new cc.Animation(framesDestruir,0.05);
         this.layer.mapa.addChild(this.sprite,2);
 
         return true;
-    },destruir(){
+    },destruir:function(){
 
-        var moverArriba = new cc.moveBy(1,new cc.p(0,10));
-        var moverAbajo = new cc.moveBy(1,new cc.p(this.position));
-        var sequence = new cc.Sequence(moverArriba,moverAbajo);
-        var spawn = new cc.Spawn(sequence,new cc.Animate(this.animacionDestruir));
-        var blink = new cc.Blink(3,20);
-        this.sprite.runAction(new cc.Sequence(spawn,blink));
+        this.sprite.runAction(cc.Sequence.create(cc.Animate.create(this.animacionDestruir),cc.CallFunc.create(this.eliminar,this)));
 
-        this.space.removeShape(this.shape);
-        this.layer.mapa.removeChild(this.sprite);
 
+
+    },eliminar:function()
+    {
+         this.space.removeShape(this.shape);
+         this.layer.mapa.removeChild(this.sprite);
     }
 
 });
