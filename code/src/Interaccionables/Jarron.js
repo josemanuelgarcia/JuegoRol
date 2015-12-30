@@ -16,20 +16,18 @@ var Jarron = cc.Class.extend({
         this.position = position;
 
         this.sprite = new cc.PhysicsSprite("#Jarron_normal.png");
-
         this.body = new cp.StaticBody();
-
         this.body.setPos(position);
-
-        this.shape = new cp.BoxShape(this.body,this.sprite.getContentSize().width/2,this.sprite.getContentSize().heigth/2);
-
+        this.sprite.setBody(this.body);
+        this.shape = new cp.BoxShape(this.body,
+                                 this.sprite.getContentSize().width - 2,
+                                 this.sprite.getContentSize().height - 2);
         this.shape.setCollisionType(tipoJarron);
         this.space.addStaticShape(this.shape);
 
-        var framesDestruir = this.manager.getAnimacion("Jarron",6);
+        var framesDestruir = this.manager.getAnimacion("Jarron_destruir",7);
         this.animacionDestruir = new cc.Animation(framesDestruir,0.5);
-
-        //this.layer.mapa.addChild(this.sprite,2);
+        this.layer.mapa.addChild(this.sprite,2);
 
         return true;
     },destruir(){
@@ -37,7 +35,7 @@ var Jarron = cc.Class.extend({
         var moverArriba = new cc.moveBy(1,new cc.p(0,10));
         var moverAbajo = new cc.moveBy(1,new cc.p(this.position));
         var sequence = new cc.Sequence(moverArriba,moverAbajo);
-        var spawn = new cc.Spawn(sequence,this.animacionDestruir);
+        var spawn = new cc.Spawn(sequence,new cc.Animate(this.animacionDestruir));
         var blink = new cc.Blink(3,20);
         this.sprite.runAction(new cc.Sequence(spawn,blink));
 

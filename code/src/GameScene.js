@@ -107,7 +107,7 @@ var GameLayer = cc.Layer.extend({
 
         this.space.addCollisionHandler(tipoJugador,tipoCueva,null,this.transportarLink.bind(this),null,null);
 
-        this.space.addCollisionHandler(tipoEspada,tipoJarron,this.destruirJarron.bind(this),null,null,null)
+        this.space.addCollisionHandler(tipoEspada,tipoJarron,null,this.destruirJarron.bind(this),null,null)
 
         return true;
 
@@ -145,6 +145,11 @@ var GameLayer = cc.Layer.extend({
                     this.disparosEnemigos[i].eliminar();
                 }
             }
+            for(var i = 0; i<this.jarrones.length; i++)
+                    {
+                        if(this.jarrones[i].shape === shape)
+                            this.jarrones[i].destruir();
+                    }
         }
         this.shapesToRemove = [];
 
@@ -357,13 +362,13 @@ var GameLayer = cc.Layer.extend({
     },destruirJarron:function(arbiter,space)
     {
         var shapes = arbiter.getShapes();
-        var shape = shapes[1];
-
-        for(var i = 0; i<this.jarrones.length; j++)
-        {
-            if(jarrones[i].shape === shape)
-                this.jarron[i].destruir();
-        }
+        if(this.link.usingSword)
+                {
+                    if(new MathUtil().isInViewCone(this.link.body.p,shapes[1].body.p,0.5,this))
+                    {
+                        this.shapesToRemove.push(shapes[1]);
+                    }
+                }
 
     }
     ,isMovementKeyPressed:function(keyCode){
