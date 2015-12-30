@@ -18,8 +18,8 @@ ctor:function (space, posicion, layer) {
     var radio = this.sprite.getContentSize().width / 2;
     // forma
     this.shape = new cp.BoxShape(body,
-                this.sprite.getContentSize().width,
-                this.sprite.getContentSize().height);
+                this.sprite.getContentSize().width-2,
+                this.sprite.getContentSize().height-2);
     this.shape.setCollisionType(tipoCorazon);
     // Nunca genera colisiones reales
     this.shape.setSensor(true);
