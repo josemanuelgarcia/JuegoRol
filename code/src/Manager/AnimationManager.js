@@ -7,14 +7,14 @@ var AnimationManager=cc.Class.extend({
          {
           //Animacion Simple Arriba
              var framesSimple = this.getAnimacion("link_parado_arriba", 3);
-             this.objectToBeAnimated.animaciones["SIMPLE_ARRIBA"] = cc.RepeatForever.create(cc.Animate.create(new cc.Animation(framesSimple, 0.05)));
+             this.objectToBeAnimated.animaciones["SIMPLE_ARRIBA"] = cc.RepeatForever.create(cc.Sequence.create(cc.Animate.create(new cc.Animation(framesSimple, 0.05)),cc.DelayTime.create(2)));
              //Animacion Simple Abajo
              var framesSimpleAbajo = this.getAnimacion("link_parado_abajo", 3);
-             this.objectToBeAnimated.animaciones["SIMPLE_ABAJO"] = cc.RepeatForever.create(cc.Animate.create(new cc.Animation(framesSimpleAbajo, 0.05)));
+             this.objectToBeAnimated.animaciones["SIMPLE_ABAJO"] = cc.RepeatForever.create(cc.Sequence.create(cc.Animate.create(new cc.Animation(framesSimpleAbajo, 0.05)),cc.DelayTime.create(2)));
              //Animacion Simple Lado
              var framesSimpleLado = this.getAnimacion("link_parado_derecha", 3);
-             this.objectToBeAnimated.animaciones["SIMPLE_DERECHA"] = cc.RepeatForever.create(cc.Animate.create(new cc.Animation(framesSimpleLado, 0.05)));
-             this.objectToBeAnimated.animaciones["SIMPLE_IZQUIERDA"] = cc.RepeatForever.create(cc.Animate.create(new cc.Animation(framesSimpleLado, 0.05)));
+             this.objectToBeAnimated.animaciones["SIMPLE_DERECHA"] = cc.RepeatForever.create(cc.Sequence.create(cc.Animate.create(new cc.Animation(framesSimpleLado, 0.05)),cc.DelayTime.create(2)));
+             this.objectToBeAnimated.animaciones["SIMPLE_IZQUIERDA"] = cc.RepeatForever.create(cc.Sequence.create(cc.Animate.create(new cc.Animation(framesSimpleLado, 0.05)),cc.DelayTime.create(2)));
              //Animacion Caminar Abajo
              var framesCaminarAbajo = this.getAnimacion("link_caminar_abajo", 10);
              var animacionAbajo = new cc.Animation(framesCaminarAbajo, 0.05);
