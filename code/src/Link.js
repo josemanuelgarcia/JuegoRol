@@ -15,6 +15,7 @@ var Link = cc.Class.extend({
     usingSword:null,
     attackSensor:null,
     velMovimiento: 70,
+    velCarrying:180,
     ctor: function (space, posicion, layer) {
         this.space = space;
         this.layer = layer;
@@ -110,6 +111,7 @@ var Link = cc.Class.extend({
     {
         this.isCarrying=true;
         this.sprite.stopAllActions();
+        this.getCarrying();
         this.sprite.runAction(this.animationManager.obtainAnimation("RODAR_"+this.orientacion));
     },update:function(dt){
        if(this.boomerang!=null)
@@ -140,5 +142,23 @@ var Link = cc.Class.extend({
         this.sprite.scaleX=(this.orientacion=="IZQUIERDA"? -1:1);
         this.sprite.stopAllActions();
         this.sprite.runAction(this.animationManager.obtainAnimation("SIMPLE_"+this.orientacion));
+    },getCarrying:function()
+    {
+        if(this.orientacion=="IZQUIERDA")
+        {
+            this.body.setVel(cp.v(-this.velCarrying, this.body.getVel().y));
+        }
+        else if(this.orientacion=="DERECHA")
+        {
+            this.body.setVel(cp.v(this.velCarrying, this.body.getVel().y));
+        }
+        else if(this.orientacion=="ARRIBA")
+        {
+            this.body.setVel(cp.v(this.body.getVel().x, this.velCarrying));
+        }
+        else if(this.orientacion=="ABAJO")
+        {
+            this.body.setVel(cp.v(this.body.getVel().x, -this.velCarrying));
+        }
     }
 });
