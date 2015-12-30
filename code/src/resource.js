@@ -34,7 +34,8 @@ var res = {
     bomb_plist:"res/Armas/bomb.plist",
     bomb_png:"res/Armas/bomb.png",
     link_png:"res/Animaciones/link.png",
-    link_plist:"res/Animaciones/link.plist"
+    link_plist:"res/Animaciones/link.plist",
+    Jarron_plist:"res/Interaccionables/Jarron.plist",
 
 };
 

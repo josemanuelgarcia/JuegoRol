@@ -26,6 +26,7 @@
         "src/Manager/AnimationManager.js",
         "src/Armas/Bomba.js",
         "src/Util/MathUtil.js",
-        "src/Cuevas/Cueva.js"
+        "src/Cuevas/Cueva.js",
+        "src/Interaccionables/Jarron.js"
     ]
 }
