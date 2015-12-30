@@ -26,9 +26,9 @@ var IULayer = cc.Layer.extend({
 
 
 
-        // boton para comprobar q se suman vidas (es provisional y lo podeis quitar si quereis)
-        this.spriteBSumarVidas = cc.Sprite.create(res.corazon_png);
-        this.spriteBSumarVidas.setPosition(cc.p(30, 150));
+        // boton para comprobar q se suman corazones (es provisional y lo podeis quitar si quereis)
+        this.spriteBSumarVidas = cc.Sprite.create(res.contenedorCorazon_png);
+        this.spriteBSumarVidas.setPosition(cc.p(50, 150));
         this.addChild(this.spriteBSumarVidas);
 
         // boton para comprobar q se quitan vidas (es provisional y lo podeis quitar si quereis)
@@ -95,11 +95,9 @@ var IULayer = cc.Layer.extend({
 
 
             // Metodo que suma una vida
-            instanciaIU.darVidas();
+            //instanciaIU.darVidas();
+            instanciaIU.nuevoCorazon();
 
-            instanciaIU.pintarVidas();
-
-            instanciaIU.agregarRupia();
 
 
         }
@@ -122,14 +120,13 @@ var IULayer = cc.Layer.extend({
       // Vidas iniciales
       if(this.ponerVidasIniciales){
        for(i=0;i < this.vidasIniciales;i++){
-
-       console.log("he llegado");
        this.posicionSpriteCorazones=this.posicionSpriteCorazones+30;
         eval("var variable" + 100+i + "= cc.Sprite.create(res.corazon_png)");
                    eval("variable" +100+i).setPosition(cc.p(this.posicionSpriteCorazones, cc.winSize.height - this.alturaSpriteCOrazones));
                    //y lo añadimos
                    this.addChild(eval("variable" +100+i),0,100+i);
         }
+
         //solo se ponen una vez
         this.ponerVidasIniciales=false;
         }
@@ -213,8 +210,16 @@ this.corazones = this.corazones+1;
         //Actualizamos el identificador de los sprite de los corazones blancos
         this.corazonesBlancos = this.corazonesBlancos+1;
         }}
-    }, pintarVidas() {
+    },nuevoCorazon() {
 
 
+console.log("numero de vidas quitadas"+this.vidasQuitadas);
+        for(i=0;i<=this.vidasQuitadas;i++)
+        {
+        this.vidasQuitadas=this.vidasQuitadas+1;
+        this.darVidas();
+        }
+        this.vidasQuitadas=0;
+        this.vidasIniciales=this.vidasIniciales+1;
     }
 });

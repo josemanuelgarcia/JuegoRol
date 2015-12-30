@@ -24,6 +24,7 @@ var res = {
     corazon_png: "res/IULayer/corazon.png",
     corazon_salvaje_png: "res/Colectables/corazon_salvaje.png",
     corazonnegro_png: "res/IULayer/corazonnegro.png",
+    contenedorCorazon_png: "res/IULayer/contenedorcorazon.png",
     corazonblanco_png : "res/IULayer/corazonblanco.png",
     Outside_A5_png: "res/Mapas/MapaA/Outside_A5.png",
     octorok_png: "res/Animaciones/octorok.png",
