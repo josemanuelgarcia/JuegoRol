@@ -10,10 +10,8 @@ var Link = cc.Class.extend({
     body: null,
     shape: null,
     orientacion: null,
-    usingSword:null,
-    isStopping:null,
     atackIsDone:null,
-    isMoving:null,
+    usingSword:null,
     attackSensor:null,
     velMovimiento: 70,
     ctor: function (space, posicion, layer) {
@@ -80,9 +78,10 @@ var Link = cc.Class.extend({
     }, parado: function ()
     {
            this.body.setVel(cp.v(0, 0));
-           this.isMoving=false;
+           this.animacionPararse();
     }, utilizarEspada: function () {
         this.usingSword=true;
+        this.animacionEspada();
     },utilizarBoomerang:function(){
         if(this.boomerang==null)
         {
@@ -102,28 +101,24 @@ var Link = cc.Class.extend({
        {
             this.bombs[i].update(dt);
        }
-       if(!this.usingSword && !this.isMoving)
-       {
-        //AnimacionParado
+    },animacionCaminar:function()
+    {
+                this.sprite.scaleX=(this.orientacion=="IZQUIERDA"? -1:1);
+                this.atackIsDone=true;
+                this.usingSword=false;
+                this.sprite.stopAllActions();
+                this.sprite.runAction(this.animationManager.obtainAnimation("CAMINAR_"+this.orientacion));
+    },animacionEspada:function()
+    {
+        if(this.atackIsDone)
+        {           this.atackIsDone=false;
+                    this.sprite.scaleX=(this.orientacion=="IZQUIERDA"? -1:1);
+                    this.sprite.runAction(this.animationManager.obtainAnimation("ESPADA_"+this.orientacion));
+        }
+    },animacionPararse:function()
+    {
         this.sprite.scaleX=(this.orientacion=="IZQUIERDA"? -1:1);
         this.sprite.stopAllActions();
         this.sprite.runAction(this.animationManager.obtainAnimation("SIMPLE_"+this.orientacion));
-       }
-       if(this.usingSword && this.atackIsDone)
-       {
-            //Establecer la escala
-            this.atackIsDone=false;
-            this.sprite.scaleX=(this.orientacion=="IZQUIERDA"? -1:1);
-            this.sprite.runAction(this.animationManager.obtainAnimation("ESPADA_"+this.orientacion));
-       }
-    },animacionCaminar:function()
-    {
-        if(this.isMoving && this.atackIsDone)
-              {
-
-                this.sprite.scaleX=(this.orientacion=="IZQUIERDA"? -1:1);
-                this.sprite.stopAllActions();
-                this.sprite.runAction(this.animationManager.obtainAnimation("CAMINAR_"+this.orientacion));
-              }
     }
 });

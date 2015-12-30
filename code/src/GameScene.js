@@ -158,7 +158,7 @@ var GameLayer = cc.Layer.extend({
             if(!instancia.isMovementKeyPressed())
             {
                 instancia.link.parado();
-                instancia.link.sprite.stopAllActions();
+                //instancia.link.sprite.stopAllActions();
             }
         }
     }, cargarMapa: function () {

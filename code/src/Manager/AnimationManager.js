@@ -7,14 +7,14 @@ var AnimationManager=cc.Class.extend({
          {
           //Animacion Simple Arriba
              var framesSimple = this.getAnimacion("link_parado_arriba", 3);
-             this.objectToBeAnimated.animaciones["SIMPLE_ARRIBA"] = cc.Animate.create(new cc.Animation(framesSimple, 0.05));
+             this.objectToBeAnimated.animaciones["SIMPLE_ARRIBA"] = cc.RepeatForever.create(cc.Animate.create(new cc.Animation(framesSimple, 0.05)));
              //Animacion Simple Abajo
              var framesSimpleAbajo = this.getAnimacion("link_parado_abajo", 3);
-             this.objectToBeAnimated.animaciones["SIMPLE_ABAJO"] = cc.Animate.create(new cc.Animation(framesSimpleAbajo, 0.05));
+             this.objectToBeAnimated.animaciones["SIMPLE_ABAJO"] = cc.RepeatForever.create(cc.Animate.create(new cc.Animation(framesSimpleAbajo, 0.05)));
              //Animacion Simple Lado
              var framesSimpleLado = this.getAnimacion("link_parado_derecha", 3);
-             this.objectToBeAnimated.animaciones["SIMPLE_DERECHA"] = cc.Animate.create(new cc.Animation(framesSimpleLado, 0.05));
-             this.objectToBeAnimated.animaciones["SIMPLE_IZQUIERDA"] = cc.Animate.create(new cc.Animation(framesSimpleLado, 0.05));
+             this.objectToBeAnimated.animaciones["SIMPLE_DERECHA"] = cc.RepeatForever.create(cc.Animate.create(new cc.Animation(framesSimpleLado, 0.05)));
+             this.objectToBeAnimated.animaciones["SIMPLE_IZQUIERDA"] = cc.RepeatForever.create(cc.Animate.create(new cc.Animation(framesSimpleLado, 0.05)));
              //Animacion Caminar Abajo
              var framesCaminarAbajo = this.getAnimacion("link_caminar_abajo", 10);
              var animacionAbajo = new cc.Animation(framesCaminarAbajo, 0.05);
@@ -31,18 +31,22 @@ var AnimationManager=cc.Class.extend({
              //Animacion Espada Arriba
              var framesEspadaArriba = this.getAnimacion("link_atacar_arriba", 8);
              var animacionEspArriba = new cc.Animation(framesEspadaArriba, 0.03);
-             this.objectToBeAnimated.animaciones["ESPADA_ARRIBA"]  = new cc.Sequence(new cc.Animate(animacionEspArriba), this.obtainAnimation("SIMPLE_ARRIBA"),cc.CallFunc.create(this.lock, this));
+             this.objectToBeAnimated.animaciones["ESPADA_ARRIBA"]  = new cc.Sequence(new cc.Animate(animacionEspArriba),cc.CallFunc.create(this.lock, this));
 
              //Animacion Espada Abajo
              var framesEspadaAbajo = this.getAnimacion("link_atacar_abajo", 8);
              var animacionEspAbajo = new cc.Animation(framesEspadaAbajo, 0.03);
-             this.objectToBeAnimated.animaciones["ESPADA_ABAJO"]  = new cc.Sequence(new cc.Animate(animacionEspAbajo), this.obtainAnimation("SIMPLE_ABAJO"),cc.CallFunc.create(this.lock, this));
+             this.objectToBeAnimated.animaciones["ESPADA_ABAJO"]  = new cc.Sequence(new cc.Animate(animacionEspAbajo),cc.CallFunc.create(this.lock, this));
              //Animacion Espada Lado
              var framesEspadaDerecha = this.getAnimacion("link_atacar_derecha", 8);
              var animacionEspDerecha = new cc.Animation(framesEspadaDerecha, 0.03);
-             this.objectToBeAnimated.animaciones["ESPADA_DERECHA"]  = new cc.Sequence(new cc.Animate(animacionEspDerecha), this.obtainAnimation("SIMPLE_LADO"),cc.CallFunc.create(this.lock, this));
+             this.objectToBeAnimated.animaciones["ESPADA_DERECHA"]  = new cc.Sequence(new cc.Animate(animacionEspDerecha),cc.CallFunc.create(this.lock, this));
 
-             this.objectToBeAnimated.animaciones["ESPADA_IZQUIERDA"]  = new cc.Sequence(new cc.Animate(animacionEspDerecha), this.obtainAnimation("SIMPLE_LADO"),cc.CallFunc.create(this.lock, this));
+             this.objectToBeAnimated.animaciones["ESPADA_IZQUIERDA"]  = new cc.Sequence(new cc.Animate(animacionEspDerecha),cc.CallFunc.create(this.lock, this));
+             this.objectToBeAnimated.animaciones["ESPADA_ARRIBA"].setTag(1);
+             this.objectToBeAnimated.animaciones["ESPADA_ARRIBA"].setTag(1);
+             this.objectToBeAnimated.animaciones["ESPADA_ARRIBA"].setTag(1);
+             this.objectToBeAnimated.animaciones["ESPADA_ARRIBA"].setTag(1);
          }
          , getAnimacion: function (nombreAnimacion, numFrames) {
              var framesAnimacion = [];
