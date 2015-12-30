@@ -45,14 +45,14 @@ var DisparoOctorok = cc.Class.extend({
         var radio = this.sprite.getContentSize().width / 2;
         // forma
         this.shape = new cp.CircleShape(this.body, radio, cp.vzero);
-        this.shape.setCollisionType(tipoDisparo);
+        this.shape.setCollisionType(tipoDisparoOctorok);
 
         this.space.addShape(this.shape);
 
         // ejecutar la animación
         this.sprite.runAction(actionAnimacionBucle);
 
-        layer.addChild(this.sprite, 10);
+        layer.mapa.addChild(this.sprite, 2);
         return true;
 
     }, getShape: function () {
@@ -63,7 +63,7 @@ var DisparoOctorok = cc.Class.extend({
         this.space.removeShape(this.shape);
 
         // quita el sprite
-        this.layer.removeChild(this.sprite);
+        this.layer.mapa.removeChild(this.sprite);
     }
 
 

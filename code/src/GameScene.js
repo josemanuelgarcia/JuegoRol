@@ -5,7 +5,7 @@ var idCapaHistoria=3;
 var tipoNoPasable = 1;
 var tipoJugador = 2;
 var tipoOctorok = 3;
-var tipoDisparo = 4;
+var tipoDisparoOctorok = 4;
 var tipoBoomerang=5;
 var tipoCorazon=6;
 var tipoRupia=7;
@@ -76,20 +76,27 @@ var GameLayer = cc.Layer.extend({
         //Colisiones entre elementos
         this.space.addCollisionHandler(tipoNoPasable, tipoOctorok,
             null, null, this.collisionObjetoConOctorok.bind(this), null);
-        this.space.addCollisionHandler(tipoNoPasable, tipoDisparo,
+
+        this.space.addCollisionHandler(tipoNoPasable, tipoDisparoOctorok,
             null, null, this.collisionObjetoConDisparo.bind(this), null);
-         this.space.addCollisionHandler(tipoBoomerang, tipoJugador,
-                    null,this.collisionBoomerangConJugador.bind(this), null, null);
-         this.space.addCollisionHandler(tipoBoomerang, tipoNoPasable,
-                             null,this.collisionBoomerangConNoPasable.bind(this), null, null);
-          this.space.addCollisionHandler(tipoBoomerang, tipoOctorok,
-                                      null,this.collisionBoomerangConOctorock.bind(this), null, null);
-         this.space.addCollisionHandler(tipoJugador, tipoCorazon,
-                                               null,this.collisionJugadorConCorazon.bind(this), null, null);
-           this.space.addCollisionHandler(tipoJugador, tipoRupia,
-                                                         null,this.collisionJugadorConRupia.bind(this), null, null);
-            this.space.addCollisionHandler(tipoEspada, tipoOctorok,
-                                                                     null,this.collisionEspadaConEnemigo.bind(this), null, null);
+
+        this.space.addCollisionHandler(tipoBoomerang, tipoJugador,
+                 null,this.collisionBoomerangConJugador.bind(this), null, null);
+
+        this.space.addCollisionHandler(tipoBoomerang, tipoNoPasable,
+                 null,this.collisionBoomerangConNoPasable.bind(this), null, null);
+
+         this.space.addCollisionHandler(tipoBoomerang, tipoOctorok,
+                 null,this.collisionBoomerangConOctorock.bind(this), null, null);
+
+        this.space.addCollisionHandler(tipoJugador, tipoCorazon,
+                 null,this.collisionJugadorConCorazon.bind(this), null, null);
+
+        this.space.addCollisionHandler(tipoJugador, tipoRupia,
+                 null,this.collisionJugadorConRupia.bind(this), null, null);
+
+        this.space.addCollisionHandler(tipoEspada, tipoOctorok,
+                 null,this.collisionEspadaConEnemigo.bind(this), null, null);
         this.space.addCollisionHandler(
             tipoJugador, tipoOctorok, null, null, null, this.reducirVidas.bind(this));
          this.space.addCollisionHandler(
@@ -104,30 +111,30 @@ var GameLayer = cc.Layer.extend({
         this.actualizarCamara();
         this.octorok.update(dt);
         this.link.update(dt);
-        //Eliminar los disparos que han impactado
+        //Eliminar elementos
         for (var i = 0; i < this.shapesToRemove.length; i++) {
             var shape = this.shapesToRemove[i];
             //Eliminar boomerang si dicho boomerang es distinto de null
             if(this.link.boomerang!=null){
                 if(this.link.boomerang.shape==shape)
-                    {
-                        this.link.boomerang.eliminar();
-                    }
+                 {
+                    this.link.boomerang.eliminar();
+                 }
             }
 
             //Eliminar octorock si impacta, mas adelante se recorreran todos los enemigos
             else if(this.octorok.shape==shape)
             {
-                console.log("OCTOROCK MATADO");
+
                 this.octorok.eliminar();
             }
             else if(this.corazon.shape==shape)
             {
-                            this.corazon.eliminar();
+               this.corazon.eliminar();
             }
             else if(this.rupia.shape==shape)
             {
-                             this.rupia.eliminar();
+               this.rupia.eliminar();
             }
             for (var i = 0; i < this.disparosEnemigos.length; i++) {
                 if (this.disparosEnemigos[i].shape === shape) {
@@ -270,6 +277,8 @@ var GameLayer = cc.Layer.extend({
 
     }, collisionObjetoConDisparo: function (arbiter, space) {
         var shapes = arbiter.getShapes();
+        var vel = shapes[1].getBody().getVel();
+
         this.shapesToRemove.push(shapes[1]);
 
     }, collisionBoomerangConJugador: function (arbiter, space) {
@@ -284,27 +293,25 @@ var GameLayer = cc.Layer.extend({
            var shapes = arbiter.getShapes();
            this.shapesToRemove.push(shapes[1]);
            //TODO quitar vida a octorok
-    },collisionJugadorConCorazon:function(arbiter,space)
-    {
-    iuLayer.darVidas();
-     var shapes = arbiter.getShapes();
-               this.shapesToRemove.push(shapes[1]);
-    },collisionJugadorConRupia:function(arbiter,space)
-    {
-     iuLayer.agregarRupia();
+    },collisionJugadorConCorazon:function(arbiter,space){
+        iuLayer.darVidas();
+        var shapes = arbiter.getShapes();
+        this.shapesToRemove.push(shapes[1]);
+    },collisionJugadorConRupia:function(arbiter,space){
+      iuLayer.agregarRupia();
       var shapes = arbiter.getShapes();
       this.shapesToRemove.push(shapes[1]);
-      },isMovementKeyPressed:function(keyCode){
-            for(var i=0;i<this.movementKeysPressed.length;i++)
+
+    },isMovementKeyPressed:function(keyCode){
+        for(var i=0;i<this.movementKeysPressed.length;i++)
+        {
+            if(this.movementKeysPressed[i])
             {
-                if(this.movementKeysPressed[i])
-                {
-                    return true;
-                }
+                return true;
             }
-            return false;
-      },collisionEspadaConEnemigo:function(arbiter,space)
-      {
+        }
+        return false;
+    },collisionEspadaConEnemigo:function(arbiter,space){
         var shapes = arbiter.getShapes();
         if(this.link.usingSword)
         {
