@@ -13,6 +13,7 @@ var tipoBomba=8;
 var tipoEspada=9;
 var tipoCueva=10;
 var weapon="ARCO";
+var posicion=null;
 
 var GameLayer = cc.Layer.extend({
     space: null,
@@ -33,7 +34,10 @@ var GameLayer = cc.Layer.extend({
 
         this._super();
         var size = cc.winSize;
-
+        if(posicion==null)
+        {
+            posicion=cc.p(400,400);
+        }
         //Cachear recursos del juego
         cc.spriteFrameCache.addSpriteFrames(res.link_plist);
          cc.spriteFrameCache.addSpriteFrames(res.boomerang_plist);
@@ -44,13 +48,13 @@ var GameLayer = cc.Layer.extend({
         //La gravedad en este juego da igual.
         this.space.gravity = cp.v(0, 0);
         //Add the Debug Layer:
-        var depuracion = new cc.PhysicsDebugNode(this.space);
-        this.addChild(depuracion, 10);
+       /* var depuracion = new cc.PhysicsDebugNode(this.space);
+        this.addChild(depuracion, 10);*/
 
         //Cargamos el Mapa
         this.cargarMapa();
         //Creación del personaje link
-        this.link = new Link(this.space, cc.p(400, 400), this);
+        this.link = new Link(this.space, posicion, this);
 
 
         //Creacion enemigo prueba
@@ -336,8 +340,13 @@ var GameLayer = cc.Layer.extend({
 
         var pos = cueva.getPosSalida();
         var newPos = cc.p(pos.x,this.mapaAlto - pos.y);
-        this.link.body.setPos(newPos);
-
+        var scene=this.getParent();
+        posicion=newPos;
+        //Para que no siga avanzando hacia arriba
+        this.link.parado();
+        cc.director.pause();
+        cc.director.runScene(cc.TransitionFade.create(3.0,new GameScene(newPos)));
+        cc.director.resume();
     },isMovementKeyPressed:function(keyCode){
         for(var i=0;i<this.movementKeysPressed.length;i++)
         {
