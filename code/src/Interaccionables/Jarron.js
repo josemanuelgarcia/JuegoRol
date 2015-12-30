@@ -12,19 +12,24 @@ var Jarron = cc.Class.extend({
         this.manager = new AnimationManager(this);
         this.space = space;
         this.layer = layer;
+
         this.position = position;
+
         this.sprite = new cc.PhysicsSprite("#Jarron_normal.png");
+
         this.body = new cp.StaticBody();
+
         this.body.setPos(position);
 
         this.shape = new cp.BoxShape(this.body,this.sprite.getContentSize().width/2,this.sprite.getContentSize().heigth/2);
+
         this.shape.setCollisionType(tipoJarron);
         this.space.addStaticShape(this.shape);
 
         var framesDestruir = this.manager.getAnimacion("Jarron",6);
         this.animacionDestruir = new cc.Animation(framesDestruir,0.5);
 
-        this.layer.mapa.addChild(this.sprite,2);
+        //this.layer.mapa.addChild(this.sprite,2);
 
         return true;
     },destruir(){

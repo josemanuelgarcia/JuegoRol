@@ -15,8 +15,6 @@ var Cueva = cc.Class.extend({
         this.shape.setSensor(true);
         this.shape.setCollisionType(tipoCueva);
         this.space.addStaticShape(this.shape);
-
-
         return true;
     },getPosSalida:function()
     {

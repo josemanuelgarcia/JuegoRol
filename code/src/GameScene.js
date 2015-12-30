@@ -44,7 +44,7 @@ var GameLayer = cc.Layer.extend({
         cc.spriteFrameCache.addSpriteFrames(res.link_plist);
          cc.spriteFrameCache.addSpriteFrames(res.boomerang_plist);
          cc.spriteFrameCache.addSpriteFrames(res.bomb_plist);
-         cc.spriteFrameCache.addSpriteFrames(res.Jarron_plist);
+         cc.spriteFrameCache.addSpriteFrames(res.jarron_plist);
 
         //Creación del espacio del juego
         this.space = new cp.Space();
@@ -127,11 +127,9 @@ var GameLayer = cc.Layer.extend({
                     this.link.boomerang.eliminar();
                  }
             }
-
             //Eliminar octorock si impacta, mas adelante se recorreran todos los enemigos
             else if(this.octorok.shape==shape)
             {
-
                 this.octorok.eliminar();
             }
             else if(this.corazon.shape==shape)
@@ -238,8 +236,8 @@ var GameLayer = cc.Layer.extend({
         {
             var x = jarronesArray[i]["x"];
             var y = jarronesArray[i]["y"];
-            //var jarron = new Jarron(this.space,new cc.p(x,y),this);
-           // this.jarrones.push(jarron);
+            var jarron = new Jarron(this.space,new cc.p(x,y),this);
+            this.jarrones.push(jarron);
         }
 
     }, actualizarCamara: function () {
