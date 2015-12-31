@@ -10,6 +10,7 @@ var tipoBomba=8;
 var tipoEspada=9;
 var tipoCueva=10;
 var tipoJarron=11;
+var tipoBloque=12;
 var CollisionManager = cc.Class.extend({
 
     space:null,
@@ -59,7 +60,7 @@ var CollisionManager = cc.Class.extend({
          this.layer.shapesToRemove.push(shapes[1]);
 
     }, collisionBoomerangConJugador: function (arbiter, space) {
-         if(this.link.boomerang.canBeDeleted) {
+         if(this.layer.link.boomerang.canBeDeleted) {
              var shapes = arbiter.getShapes();
              this.layer.shapesToRemove.push(shapes[0]);
          }

@@ -2,6 +2,7 @@ var IULayer = cc.Layer.extend({
     vidasIniciales:3,
     ponerVidasIniciales:true,
     spriteBotonMenu: null,
+    spriteBotonPause:null,
     spriteBSumarVidas: null,
     spriteBQuitarVidas: null,
     spriteArmaElegida: null,
@@ -13,6 +14,9 @@ var IULayer = cc.Layer.extend({
     alturaSpriteCOrazones: 30,
     vidasQuitadas:0,
     entrar:true,
+    pause:true,
+    numeroDeArmasDisponiblesLabel:null,
+    numeroArmas:0,
     ctor: function () {
         this._super();
         var size = cc.winSize;
@@ -21,7 +25,6 @@ var IULayer = cc.Layer.extend({
         this.darVidas();
         //Al principio la weapon es el arco
         weapon="ARCO";
-
 
 
 
@@ -51,14 +54,21 @@ var IULayer = cc.Layer.extend({
         this.spriteBotonMenu = cc.Sprite.create(res.boton_menu_png);
         this.spriteBotonMenu.setPosition(cc.p(90,40));
         this.spriteBotonMenu.setOpacity(190);
+         this.addChild(this.spriteBotonMenu);
+         // spriteBotonPause
+         this.spriteBotonPause = cc.Sprite.create(res.boton_menu_png);
+         this.spriteBotonPause.setPosition(cc.p(711,40));
+         this.spriteBotonPause.setOpacity(190);
 
-        this.addChild(this.spriteBotonMenu);
+        this.addChild(this.spriteBotonPause);
 
         //Sprite en el que se muestra el arma elegida
         this.spriteArmaElegida = cc.Sprite.create(res.arco_reducido_png);
         this.spriteArmaElegida.setPosition(cc.p(size.width - 40, size.height - 40));
 
         this.addChild(this.spriteArmaElegida);
+
+        this.crearLabelArmas();
 
 
         // Registrar Mouse Down
@@ -75,6 +85,7 @@ var IULayer = cc.Layer.extend({
         var areaBoton = instancia.spriteBotonMenu.getBoundingBox();
         var areaCorazon = instancia.spriteBSumarVidas.getBoundingBox();
         var areaQuitarCorazon = instancia.spriteBQuitarVidas.getBoundingBox();
+        var areaBotonPause = instancia.spriteBotonPause.getBoundingBox();
  var gameScene = instancia.getParent();
   var instanciaIU = event.getCurrentTarget();
         // La pulsación cae dentro del botón de menu
@@ -102,6 +113,20 @@ var IULayer = cc.Layer.extend({
 
         }
 
+        //pulsacion detro del boton de pausa
+         if(instanciaIU.entrar){
+        if (cc.rectContainsPoint(areaBotonPause,
+                    cc.p(event.getLocationX(), event.getLocationY()))) {
+
+        cc.director.pause();
+
+        instanciaIU.entrar=false;
+        instanciaIU.pause=false;
+                    // tenemos el objeto GameScene y le añadimos la nueva layer
+                    gameScene.addChild(new PauseLayer(gameScene), 0, 4);
+                }
+
+}
         //Pulsacion dentro de corazon lo cual quita una vida
         if (cc.rectContainsPoint(areaQuitarCorazon,
             cc.p(event.getLocationX(), event.getLocationY()))) {
@@ -210,7 +235,7 @@ this.corazones = this.corazones+1;
         //Actualizamos el identificador de los sprite de los corazones blancos
         this.corazonesBlancos = this.corazonesBlancos+1;
         }}
-    },nuevoCorazon() {
+    },nuevoCorazon : function() {
 
 
 console.log("numero de vidas quitadas"+this.vidasQuitadas);
@@ -221,5 +246,22 @@ console.log("numero de vidas quitadas"+this.vidasQuitadas);
         }
         this.vidasQuitadas=0;
         this.vidasIniciales=this.vidasIniciales+1;
+    },crearLabelArmas : function()
+    {
+    if(this.numeroDeArmasDisponiblesLabel==null){
+    this.numeroDeArmasDisponiblesLabel = new cc.LabelTTF("" + this.numeroArmas, "Helvetica", 20);
+                     this.numeroDeArmasDisponiblesLabel.setPosition(cc.p(cc.winSize.width - 30, cc.winSize.height - 50));
+                      this.numeroDeArmasDisponiblesLabel.fillStyle = new cc.Color(255, 255, 255, 255);
+                      this.numeroDeArmasDisponiblesLabel.setVisible(false);
+                     this.addChild(this.numeroDeArmasDisponiblesLabel);
+    }
+    else{
+    this.removeChild(this.numeroDeArmasDisponiblesLabel);
+     this.numeroDeArmasDisponiblesLabel = new cc.LabelTTF("" + this.numeroArmas, "Helvetica", 20);
+                         this.numeroDeArmasDisponiblesLabel.setPosition(cc.p(cc.winSize.width - 30, cc.winSize.height - 50));
+                          this.numeroDeArmasDisponiblesLabel.fillStyle = new cc.Color(255, 255, 255, 255);
+                          this.numeroDeArmasDisponiblesLabel.setVisible(false);
+                         this.addChild(this.numeroDeArmasDisponiblesLabel);
+    }
     }
 });

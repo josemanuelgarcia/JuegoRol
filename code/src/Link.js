@@ -9,11 +9,13 @@ var Link = cc.Class.extend({
     shape: null,
     orientacion: null,
     atackIsDone:null,
-    isCarrying:null,
+    isRodando:null,
     usingSword:null,
     attackSensor:null,
+    //Atributos de Link modificables
     velMovimiento: 70,
-    velCarrying:180,
+    velRodar:180,
+    numBombas:10,
     ctor: function (space, posicion, layer) {
         this.space = space;
         this.layer = layer;
@@ -32,7 +34,7 @@ var Link = cc.Class.extend({
         this.sprite.setBody(this.body);
         this.usingSword=false;
         this.atackIsDone=true;
-        this.isCarrying=false;
+        this.isRodando=false;
         // Se añade el cuerpo al espacio
         this.space.addBody(this.body);
 
@@ -55,43 +57,43 @@ var Link = cc.Class.extend({
         return true;
 
     }, moverArriba: function () {
-        if(!this.isCarrying){
-        this.orientacion="ARRIBA";
-        this.isMoving=true;
-        this.animacionCaminar();
-        this.body.setVel(cp.v(this.body.getVel().x, this.velMovimiento));
+        if(!this.isRodando){
+            this.orientacion="ARRIBA";
+            this.isMoving=true;
+            this.animacionCaminar();
+            this.body.setVel(cp.v(this.body.getVel().x, this.velMovimiento));
         }
     }, moverAbajo: function () {
-        if(!this.isCarrying)
+        if(!this.isRodando)
         {
-        this.orientacion="ABAJO";
-        this.isMoving=true;
-        this.animacionCaminar();
-        this.body.setVel(cp.v(this.body.getVel().x, -this.velMovimiento));
+            this.orientacion="ABAJO";
+            this.isMoving=true;
+            this.animacionCaminar();
+            this.body.setVel(cp.v(this.body.getVel().x, -this.velMovimiento));
         }
     }, moverDerecha: function () {
-        if(!this.isCarrying)
+        if(!this.isRodando)
         {
-        this.orientacion="DERECHA";
-        this.isMoving=true;
-        this.animacionCaminar();
-        this.body.setVel(cp.v(this.velMovimiento, this.body.getVel().y));
+            this.orientacion="DERECHA";
+            this.isMoving=true;
+            this.animacionCaminar();
+            this.body.setVel(cp.v(this.velMovimiento, this.body.getVel().y));
         }
     }, moverIzquierda: function () {
-        if(!this.isCarrying)
+        if(!this.isRodando)
         {
-        this.orientacion="IZQUIERDA";
-        this.isMoving=true;
-        this.animacionCaminar();
-        this.body.setVel(cp.v(-this.velMovimiento, this.body.getVel().y));
+            this.orientacion="IZQUIERDA";
+            this.isMoving=true;
+            this.animacionCaminar();
+            this.body.setVel(cp.v(-this.velMovimiento, this.body.getVel().y));
         }
-    }, parado: function ()
+    },parado: function ()
     {
-        if(!this.isCarrying)
+        if(!this.isRodando)
         {
            this.body.setVel(cp.v(0, 0));
            this.animacionPararse();
-           }
+        }
     }, utilizarEspada: function () {
         this.usingSword=true;
         this.animacionEspada();
@@ -102,12 +104,16 @@ var Link = cc.Class.extend({
         }
     },utilizarBombas: function()
     {
-        new Bomba(this.space,cc.p(this.body.p.x, this.body.p.y), this.layer);
+        if(this.numBombas>0)
+        {
+            new Bomba(this.space,cc.p(this.body.p.x, this.body.p.y), this.layer);
+            this.numBombas--;
+        }
     },rodar:function()
     {
-        this.isCarrying=true;
+        this.isRodando=true;
         this.sprite.stopAllActions();
-        this.getCarrying();
+        this.getSentidoRodar();
         this.sprite.runAction(animationManager.obtainAnimation("RODAR_"+this.orientacion));
     },update:function(dt){
        if(this.boomerang!=null)
@@ -117,40 +123,73 @@ var Link = cc.Class.extend({
 
     },animacionCaminar:function()
     {
-                this.sprite.scaleX=(this.orientacion=="IZQUIERDA"? -1:1);
-                this.atackIsDone=true;
-                this.usingSword=false;
-                this.sprite.stopAllActions();
-                this.sprite.runAction(animationManager.obtainAnimation("CAMINAR_"+this.orientacion));
+        this.sprite.scaleX=(this.orientacion=="IZQUIERDA"? -1:1);
+        this.atackIsDone=true;
+        this.usingSword=false;
+        this.sprite.stopAllActions();
+        this.sprite.runAction(animationManager.obtainAnimation("CAMINAR_"+this.orientacion));
     },animacionEspada:function()
     {
         if(this.atackIsDone)
-        {           this.atackIsDone=false;
-                    this.sprite.scaleX=(this.orientacion=="IZQUIERDA"? -1:1);
-                    this.sprite.runAction(animationManager.obtainAnimation("ESPADA_"+this.orientacion));
+        {
+            this.atackIsDone=false;
+            this.sprite.scaleX=(this.orientacion=="IZQUIERDA"? -1:1);
+            this.sprite.runAction(animationManager.obtainAnimation("ESPADA_"+this.orientacion));
         }
     },animacionPararse:function()
     {
         this.sprite.scaleX=(this.orientacion=="IZQUIERDA"? -1:1);
         this.sprite.stopAllActions();
         this.sprite.runAction(animationManager.obtainAnimation("SIMPLE_"+this.orientacion));
-    },getCarrying:function()
+    },getSentidoRodar:function()
     {
         if(this.orientacion=="IZQUIERDA")
         {
-            this.body.setVel(cp.v(-this.velCarrying, this.body.getVel().y));
+            this.body.setVel(cp.v(-this.velRodar, this.body.getVel().y));
         }
         else if(this.orientacion=="DERECHA")
         {
-            this.body.setVel(cp.v(this.velCarrying, this.body.getVel().y));
+            this.body.setVel(cp.v(this.velRodar, this.body.getVel().y));
         }
         else if(this.orientacion=="ARRIBA")
         {
-            this.body.setVel(cp.v(this.body.getVel().x, this.velCarrying));
+            this.body.setVel(cp.v(this.body.getVel().x, this.velRodar));
         }
         else if(this.orientacion=="ABAJO")
         {
-            this.body.setVel(cp.v(this.body.getVel().x, -this.velCarrying));
+            this.body.setVel(cp.v(this.body.getVel().x, -this.velRodar));
         }
+    },lock: function()
+    {
+       this.atackIsDone=true;
+       this.usingSword=false;
+       this.isRodando=false;
+
+
+       if(this.layer.isMovementKeyPressed())
+       {
+             if(this.orientacion=="ARRIBA")
+             {
+                 this.moverArriba();
+             }
+             else if(this.orientacion=="ABAJO")
+             {
+                this.moverAbajo();
+             }
+             else if(this.orientacion=="DERECHA")
+             {
+                this.moverDerecha();
+             }
+             else if(this.orientacion=="IZQUIERDA")
+             {
+                 this.moverIzquierda();
+             }
+
+       }
+       else
+       {
+           this.parado();
+       }
+
     }
 });

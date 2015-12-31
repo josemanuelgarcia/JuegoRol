@@ -17,6 +17,7 @@ var tipoBloque=12;
 var tipoSensorSoldado=13;
 var tipoSoldado=14;
 
+
 var weapon="ARCO";
 var posicion=null;
 var animationManager=null;
@@ -40,6 +41,8 @@ var GameLayer = cc.Layer.extend({
     bloques:[],
     movementKeysPressed:[],
     soldado:null,
+
+
     ctor: function () {
 
         this._super();
@@ -273,13 +276,13 @@ var GameLayer = cc.Layer.extend({
           {
             if(weapon=="BOOMERANG")
             {
-             instancia.link.utilizarBoomerang();
+                instancia.link.utilizarBoomerang();
             }
             if(weapon=="BOMBAS")
             {
-              instancia.link.utilizarBombas();
+                instancia.link.utilizarBombas();
             }
-          }
+         }
     },movementLink: function(keyCode,instancia){
         if((keyCode==cc.KEY.n || keyCode==cc.KEY.n)&& this.isMovementKeyPressed())
         {
@@ -290,7 +293,7 @@ var GameLayer = cc.Layer.extend({
             //W mover hacia arriba
             instancia.link.moverArriba();
             //Añadir tecla pulsada
-            instancia.movementKeysPressed[keyCode]=true;
+           instancia.movementKeysPressed[keyCode]=true;
         }
         else if (keyCode == cc.KEY.S || keyCode == cc.KEY.s)
         {
@@ -310,7 +313,7 @@ var GameLayer = cc.Layer.extend({
             instancia.link.moverIzquierda();
             instancia.movementKeysPressed[keyCode]=true;
         }
-    },isMovementKeyPressed:function(keyCode){
+    },isMovementKeyPressed:function(){
         for(var i=0;i<this.movementKeysPressed.length;i++)
         {
             if(this.movementKeysPressed[i])
