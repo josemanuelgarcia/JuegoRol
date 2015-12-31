@@ -1,7 +1,6 @@
 var Link = cc.Class.extend({
     //Variables de clase
     animaciones:[],
-    bombs:[],
     animationManager:null,
     boomerang:null,
     space: null,
@@ -104,7 +103,7 @@ var Link = cc.Class.extend({
         }
     },utilizarBombas: function()
     {
-        this.bombs.push(new Bomba(this.space,cc.p(this.body.p.x, this.body.p.y), this.layer));
+        new Bomba(this.space,cc.p(this.body.p.x, this.body.p.y), this.layer);
     },rodar:function()
     {
         this.isCarrying=true;
@@ -116,11 +115,7 @@ var Link = cc.Class.extend({
        {
             this.boomerang.update(dt);
        }
-       //Actualizar bombas
-       for(var i=0;i<this.bombs.length;i++)
-       {
-            this.bombs[i].update(dt);
-       }
+
     },animacionCaminar:function()
     {
                 this.sprite.scaleX=(this.orientacion=="IZQUIERDA"? -1:1);

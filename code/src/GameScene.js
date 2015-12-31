@@ -47,7 +47,7 @@ var GameLayer = cc.Layer.extend({
         //Cachear recursos del juego
         cc.spriteFrameCache.addSpriteFrames(res.link_plist);
          cc.spriteFrameCache.addSpriteFrames(res.boomerang_plist);
-         cc.spriteFrameCache.addSpriteFrames(res.bomb_plist);
+         cc.spriteFrameCache.addSpriteFrames(res.explosion_plist);
          cc.spriteFrameCache.addSpriteFrames(res.jarron_plist);
 
         //Creación del espacio del juego

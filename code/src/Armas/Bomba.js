@@ -2,6 +2,7 @@ var Bomba=cc.Class.extend({
 space:null,
 layer:null,
 shape:null,
+sensor:null,
 body:null,
 sprite:null,
 timeToExplote:null,
@@ -10,25 +11,14 @@ ctor: function (space, posicion, layer) {
     this.space = space;
     this.layer = layer;
     this.timeToExplote=Date.now();
-    var framesAnimacion = [];
-    for (var i = 1; i <= 2; i++) {
-         var str = "bomb" + i + ".png";
-         var frame = cc.spriteFrameCache.getSpriteFrame(str);
-         framesAnimacion.push(frame);
-            }
-    var animacion = new cc.Animation(framesAnimacion, 0.05);
-    var actionAnimacionBucle =new cc.RepeatForever(new cc.Animate(animacion));
     //Animacion de explosion
-    var framesAnimacion2 = [];
-        for (var i = 1; i <= 6; i++) {
-             var str = "explosion" + i + ".png";
-             var frame = cc.spriteFrameCache.getSpriteFrame(str);
-             framesAnimacion2.push(frame);
-                }
-    var animacion2 = new cc.Animation(framesAnimacion2, 0.05);
-    this.animacionExplosion =cc.Sequence.create(new cc.Animate(animacion2),cc.CallFunc.create(this.eliminar,this));
-    this.sprite = new cc.PhysicsSprite("#bomb1.png");
-    this.body = new cp.StaticBody(100, Infinity);
+    var framesExplosion = animationManager.getAnimacion("explosion",10);
+
+    var animExplosion = new cc.Animation(framesExplosion, 0.1);
+    this.animacionExplosion = new cc.Animate(animExplosion);
+    this.sprite = new cc.PhysicsSprite(res.bomb_png);
+
+    this.body = new cp.StaticBody();
     this.body.setPos(posicion);
     this.body.setAngle(0);
     this.sprite.setBody(this.body);
@@ -37,27 +27,27 @@ ctor: function (space, posicion, layer) {
     this.sprite.getContentSize().width - 2,
     this.sprite.getContentSize().height - 2);
     space.addStaticShape(this.shape);
-    this.sprite.runAction(actionAnimacionBucle);
-    layer.addChild(this.sprite, 10);
+
+    //sensor
+    this.sensor = new cp.CircleShape(this.body, this.sprite.getContentSize().width*1.5, cp.vzero);
+    this.sensor.setSensor(true);
+    this.space.addShape(this.sensor);
+    //Animacion BombaCreciendo
+    var espera = cc.DelayTime.create(1);
+    var aumenta = cc.ScaleBy.create(1,2,1);
+    var spawn = new cc.Spawn(this.animacionExplosion, new cc.callFunc(this.activarExplosion,this));
+    var sequence = new cc.Sequence(espera,aumenta,spawn,cc.CallFunc.create(this.eliminar,this));
+    this.sprite.runAction(sequence);
+    layer.mapa.addChild(this.sprite, 2);
     return true;
-},update: function(dt)
+},activarExplosion: function()
 {
-    if(Date.now()-this.timeToExplote>=2500)
-    {
-        this.shape.setCollisionType(tipoBomba);
-        this.sprite.runAction(this.animacionExplosion);
-    }
+    this.sensor.setCollisionType(tipoBomba);
+
 }, eliminar: function () {
          // quita la forma
-         for(var i=0;i<this.layer.link.bombs.length;i++)
-         {
-            if(this.layer.link.bombs[i]==this)
-            {
-                //Se elimina dicha bomba
-                this.layer.link.bombs.splice(i,1);
-            }
-         }
-         this.space.removeShape(this.shape);
-         this.layer.removeChild(this.sprite);
-     }
+     this.space.removeShape(this.shape);
+     this.space.removeShape(this.sensor);
+     this.layer.mapa.removeChild(this.sprite);
+ }
 });
