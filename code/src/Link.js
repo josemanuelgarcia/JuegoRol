@@ -12,8 +12,10 @@ var Link = cc.Class.extend({
     isRodando:null,
     usingSword:null,
     attackSensor:null,
+    //Atributos de Link modificables
     velMovimiento: 70,
     velRodar:180,
+    numBombas:10,
     ctor: function (space, posicion, layer) {
         this.space = space;
         this.layer = layer;
@@ -102,7 +104,11 @@ var Link = cc.Class.extend({
         }
     },utilizarBombas: function()
     {
-        new Bomba(this.space,cc.p(this.body.p.x, this.body.p.y), this.layer);
+        if(this.numBombas>0)
+        {
+            new Bomba(this.space,cc.p(this.body.p.x, this.body.p.y), this.layer);
+            this.numBombas--;
+        }
     },rodar:function()
     {
         this.isRodando=true;
