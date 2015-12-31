@@ -1,7 +1,6 @@
 var Link = cc.Class.extend({
     //Variables de clase
     animaciones:[],
-    animationManager:null,
     boomerang:null,
     space: null,
     layer: null,

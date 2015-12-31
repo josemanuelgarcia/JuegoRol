@@ -43,7 +43,7 @@ var CollisionManager = cc.Class.extend({
 
         this.space.addCollisionHandler(tipoJugador, tipoOctorok, null, null, null, this.reducirVidas.bind(this));
 
-        this.space.addCollisionHandler(tipoJugador,tipoBomba, null, this.reducirVidas.bind(this), null, null);
+        this.space.addCollisionHandler(tipoJugador,tipoBomba, this.reducirVidas.bind(this), null, null, null);
 
         this.space.addCollisionHandler(tipoJugador,tipoCueva,null,this.transportarLink.bind(this),null,null);
 
