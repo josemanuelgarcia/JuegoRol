@@ -13,6 +13,7 @@ var tipoBomba=8;
 var tipoEspada=9;
 var tipoCueva=10;
 var tipoJarron=11;
+var tipoBloque=13;
 var weapon="ARCO";
 var posicion=null;
 
@@ -32,6 +33,7 @@ var GameLayer = cc.Layer.extend({
     shapesToRemove: [],
     cuevas:[],
     jarrones:[],
+    bloques:[],
     movementKeysPressed:[],
     ctor: function () {
 
@@ -261,6 +263,17 @@ var GameLayer = cc.Layer.extend({
             var jarron = new Jarron(this.space,new cc.p(x,y),this);
             this.jarrones.push(jarron);
         }
+        //BLOQUES
+        var bloques = this.mapa.getObjectGroup("Bloques");
+        var bloquesArray = bloques.getObjects();
+        for(var i = 0; i< bloquesArray.length ; i++)
+        {
+            var x = bloquesArray[i]["x"];
+            var y = bloquesArray[i]["y"];
+            var bloque = new Bloque(this.space,new cc.p(x,y),this);
+            this.bloques.push(bloque);
+        }
+
 
     }, actualizarCamara: function () {
         var winSize = cc.winSize;
