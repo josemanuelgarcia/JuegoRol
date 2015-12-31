@@ -49,7 +49,6 @@ var CollisionManager = cc.Class.extend({
 
         this.space.addCollisionHandler(tipoEspada,tipoJarron,null,this.destruirJarron.bind(this),null,null);
 
-
     }, collisionObjetoConOctorok: function (arbiter, space) {
              //  this.octorok.haChocado();
 

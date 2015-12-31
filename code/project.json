@@ -28,6 +28,7 @@
         "src/Util/MathUtil.js",
         "src/Cuevas/Cueva.js",
         "src/Interaccionables/Jarron.js",
-        "src/Manager/CollisionManager.js"
+        "src/Manager/CollisionManager.js",
+        "src/Enemigos/Soldado.js"
     ]
 }

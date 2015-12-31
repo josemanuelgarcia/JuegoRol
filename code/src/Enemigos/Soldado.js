@@ -5,24 +5,22 @@ var Soldado = cc.Class.extend({
     body:null,
     shape:null,
     orientacion:"ABAJO",
-    velMoviiento:50,
+    velMovimiento:50,
     animMoverArriba:null,
     animMoverAbajo:null,
     animMoverDereha:null,
     animMoverIzquierda:null,
-    isMoving:false,
-
 
     ctor: function (space, position, layer) {
         this.space=space;
         this.layer=layer;
 
-        this.sprite = new cc.PhysicsSprite("#Soldado_abajo0.png");
+        this.sprite = new cc.PhysicsSprite(res.soldado_png);
 
         // Cuerpo dinamico, SI le afectan las fuerzas
         this.body = new cp.Body(100, Infinity);
 
-        this.body.setPos(posicion);
+        this.body.setPos(position);
         this.body.setAngle(0);
         this.body.e = 0;
 
@@ -37,7 +35,14 @@ var Soldado = cc.Class.extend({
         // forma dinamica
         this.shape.setCollisionType(tipoSoldado);
         this.space.addShape(this.shape);
-
+/*
+        //sensor
+        this.sensor = new cp.CircleShape(this.body, this.sprite.getContentSize().width*5, cp.vzero);
+        this.sensor.setSensor(true);
+        this.space.addShape(this.sensor);
+        this.sensor.setCollisionType(tipoSensorSoldado);
+*/
+/*
         //Animacion Mover Abajo
         var framesCaminarAbajo = this.getAnimacion("Octorok_abajo", 1);
         var animacionAbajo = new cc.Animation(framesCaminarAbajo, 0.2);
@@ -58,42 +63,25 @@ var Soldado = cc.Class.extend({
         var animacionIzquierda = new cc.Animation(framesCaminarIzquierda, 0.2);
         this.animMoverIzquierda = cc.RepeatForever.create(new cc.Animate(animacionIzquierda));
 
+*/
 
         this.layer.mapa.addChild(this.sprite, 2);
         return true;
 
-    }, update: function(dt, posJugador){
-        var distanciaX=this.body.p.x-posJugador.x;
-        var distanciaY=this.body.p.y-posJugador.y;
-        //TODO comprobar que el jugador este en un radio cercano al enemigo
-        var distancia=Math.sqrt((this.body.p.x-posJugador.x)^2+(this.body.p.y-posJugador.y)^2);
-        if(distancia<15) {
-            //TODO comprobar que el enemigo ve a link sin que haya tiles no pasables por el medio
+    }, update: function(dt){
+        var distanciaX=this.body.p.x-this.layer.link.body.p.x;
+        var distanciaY=this.body.p.y-this.layer.link.body.p.y;
+        //comprobar que el jugador este en un radio cercano al enemigo
+        var distancia=Math.sqrt(Math.pow(this.body.p.x-this.layer.link.body.p.x,2)+Math.pow(this.body.p.y-this.layer.link.body.p.y,2));
+        if(distancia<150) {
             //hacemos que primero el enemigo se muestre en el ejeX y despues en el ejeY
-            var puedeMoverse=false;
-
-            if(puedeMoverse) {
                  //TODO mover al enemigo en esa dirección
                  //TODO comprobar misma y y diferente X
+                this.moverHaciaJugador();
 
-                if(distanciaX<0) {
-                    this.moverIzquierda();
-                } else if(distanciaX>0) {
-                    this.moverDerecha()
-                } else {//estan en la misma coordenada x
-                    if(distanciaY>1) {
-                        this.moverAbajo();
-                    } else if(distanciaY<-1){
-                        this.moverArriba();
-                    } else {
-                        this.atacar();
-                    }
-                }
-
-            } else {
-                //TODO parar al enemigo
-                this.parar();
-            }
+        } else {
+           //parar al enemigo
+           this.parar();
         }
 
 
@@ -108,22 +96,22 @@ var Soldado = cc.Class.extend({
 
     }, moverArriba: function () {
         this.orientacion = "ARRIBA";
-        this.sprite.runAction(this.animMoverArriba);
+        //this.sprite.runAction(this.animMoverArriba);
         this.body.setVel(cp.v(0, this.velMovimiento));
 
     }, moverAbajo: function () {
         this.orientacion = "ABAJO";
-        this.sprite.runAction(this.animMoverAbajo);
+        //this.sprite.runAction(this.animMoverAbajo);
         this.body.setVel(cp.v(0, -this.velMovimiento));
 
     }, moverDerecha: function () {
         this.orientacion = "DERECHA";
-        this.sprite.runAction(this.animMoverDerecha);
+        //this.sprite.runAction(this.animMoverDerecha);
         this.body.setVel(cp.v(this.velMovimiento, 0));
 
     }, moverIzquierda: function () {
         this.orientacion = "IZQUIERDA";
-        this.sprite.runAction(this.animMoverIzquierda);
+        //this.sprite.runAction(this.animMoverIzquierda);
         this.body.setVel(cp.v(-this.velMovimiento, 0));
 
     }, eliminar: function() {
@@ -132,7 +120,31 @@ var Soldado = cc.Class.extend({
 
     }, parar: function () {
         this.body.setVel(cp.v(0, 0));
-        this.isMoving=null;
+        this.sprite.stopAllActions();
+
+    }, moverHaciaJugador: function() {
+         var distanciaX=this.body.p.x-this.layer.link.body.p.x;
+         var distanciaY=this.body.p.y-this.layer.link.body.p.y;
+
+        //var action = cc.MoveTo.create(50, cc.p(this.layer.link.body.p.x,this.layer.link.body.p.y));
+        //his.sprite.runAction(action);
+        //TODO no se mueve
+
+         if(distanciaX<10) {
+                this.moverDerecha();
+         } else if(distanciaX>10) {
+                this.moverIzquierda()
+         }
+
+          if(distanciaY>10) {
+              this.moverAbajo();
+          } else if(distanciaY<-10){
+               this.moverArriba();
+          }
+
+    }, atacar:function (){
+        this.parar();
+        //TODO mirar al jugador y atacarlo
     }
 
 

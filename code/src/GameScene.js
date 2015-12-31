@@ -13,7 +13,10 @@ var tipoBomba=8;
 var tipoEspada=9;
 var tipoCueva=10;
 var tipoJarron=11;
-var tipoBloque=13;
+var tipoBloque=12;
+var tipoSensorSoldado=13;
+var tipoSoldado=14;
+
 var weapon="ARCO";
 var posicion=null;
 var animationManager=null;
@@ -36,6 +39,7 @@ var GameLayer = cc.Layer.extend({
     jarrones:[],
     bloques:[],
     movementKeysPressed:[],
+    soldado:null,
     ctor: function () {
 
         this._super();
@@ -45,8 +49,9 @@ var GameLayer = cc.Layer.extend({
         {
             posicion=cc.p(400,400);
         }
+
         //Cachear recursos del juego
-        cc.spriteFrameCache.addSpriteFrames(res.link_plist);
+         cc.spriteFrameCache.addSpriteFrames(res.link_plist);
          cc.spriteFrameCache.addSpriteFrames(res.boomerang_plist);
          cc.spriteFrameCache.addSpriteFrames(res.explosion_plist);
          cc.spriteFrameCache.addSpriteFrames(res.jarron_plist);
@@ -67,6 +72,10 @@ var GameLayer = cc.Layer.extend({
 
         //Creacion enemigo prueba
         this.octorok = new Octorok(this.space, cc.p(600, 250), this);
+
+        //Creacion de soldado de prueba
+        this.soldado = new Soldado(this.space, cc.p(600, 200), this);
+
         //creacion de corazon de prueba
         this.corazones.push(new Corazon(this.space,cc.p(550,200),this));
 
@@ -99,9 +108,6 @@ var GameLayer = cc.Layer.extend({
         }, this);
         this.scheduleUpdate();
 
-        //Colisiones entre elementos
-
-
         return true;
 
     }, update: function (dt) {
@@ -109,25 +115,25 @@ var GameLayer = cc.Layer.extend({
         this.space.step(dt);
         this.actualizarCamara();
         this.octorok.update(dt);
+
+        this.soldado.update(dt);
+
         this.link.update(dt);
         //Eliminar elementos
         for (var i = 0; i < this.shapesToRemove.length; i++) {
             var shape = this.shapesToRemove[i];
             //Eliminar boomerang si dicho boomerang es distinto de null
             if(this.link.boomerang!=null){
-                if(this.link.boomerang.shape==shape)
-                 {
+                if(this.link.boomerang.shape==shape) {
                     this.link.boomerang.eliminar();
                  }
             }
             //Eliminar octorock si impacta, mas adelante se recorreran todos los enemigos
-            else if(this.octorok.shape==shape)
-            {
+            else if(this.octorok.shape==shape) {
                 this.octorok.eliminar();
             }
             for(var i = 0; i< this.corazones.length; i++){
-                if(this.corazones[i].shape===shape)
-                {
+                if(this.corazones[i].shape===shape) {
                    this.corazones[i].eliminar();
                    this.corazones.splice(i,1);
                 }
@@ -143,8 +149,7 @@ var GameLayer = cc.Layer.extend({
                     this.disparosEnemigos[i].eliminar();
                 }
             }
-            for(var i = 0; i<this.jarrones.length; i++)
-            {
+            for(var i = 0; i<this.jarrones.length; i++) {
                 if(this.jarrones[i].shape === shape)
                     this.jarrones[i].destruir();
             }
