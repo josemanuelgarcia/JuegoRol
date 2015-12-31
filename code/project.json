@@ -15,6 +15,7 @@
         "src/app.js",
         "src/Link.js",
         "src/Layers/IULayer.js",
+        "src/Layers/PauseLayer.js",
         "src/Enemigos/Octorok.js",
         "src/Enemigos/DisparoOctorok.js",
         "src/Layers/MenuObjetosLayer.js",

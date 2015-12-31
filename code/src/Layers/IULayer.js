@@ -2,6 +2,7 @@ var IULayer = cc.Layer.extend({
     vidasIniciales:3,
     ponerVidasIniciales:true,
     spriteBotonMenu: null,
+    spriteBotonPause:null,
     spriteBSumarVidas: null,
     spriteBQuitarVidas: null,
     spriteArmaElegida: null,
@@ -13,6 +14,7 @@ var IULayer = cc.Layer.extend({
     alturaSpriteCOrazones: 30,
     vidasQuitadas:0,
     entrar:true,
+    pause:true,
     ctor: function () {
         this._super();
         var size = cc.winSize;
@@ -51,8 +53,13 @@ var IULayer = cc.Layer.extend({
         this.spriteBotonMenu = cc.Sprite.create(res.boton_menu_png);
         this.spriteBotonMenu.setPosition(cc.p(90,40));
         this.spriteBotonMenu.setOpacity(190);
+         this.addChild(this.spriteBotonMenu);
+         // spriteBotonPause
+         this.spriteBotonPause = cc.Sprite.create(res.boton_menu_png);
+         this.spriteBotonPause.setPosition(cc.p(711,40));
+         this.spriteBotonPause.setOpacity(190);
 
-        this.addChild(this.spriteBotonMenu);
+        this.addChild(this.spriteBotonPause);
 
         //Sprite en el que se muestra el arma elegida
         this.spriteArmaElegida = cc.Sprite.create(res.arco_reducido_png);
@@ -75,6 +82,7 @@ var IULayer = cc.Layer.extend({
         var areaBoton = instancia.spriteBotonMenu.getBoundingBox();
         var areaCorazon = instancia.spriteBSumarVidas.getBoundingBox();
         var areaQuitarCorazon = instancia.spriteBQuitarVidas.getBoundingBox();
+        var areaBotonPause = instancia.spriteBotonPause.getBoundingBox();
  var gameScene = instancia.getParent();
   var instanciaIU = event.getCurrentTarget();
         // La pulsación cae dentro del botón de menu
@@ -102,6 +110,20 @@ var IULayer = cc.Layer.extend({
 
         }
 
+        //pulsacion detro del boton de pausa
+         if(instanciaIU.entrar){
+        if (cc.rectContainsPoint(areaBotonPause,
+                    cc.p(event.getLocationX(), event.getLocationY()))) {
+
+        cc.director.pause();
+
+        instanciaIU.entrar=false;
+        instanciaIU.pause=false;
+                    // tenemos el objeto GameScene y le añadimos la nueva layer
+                    gameScene.addChild(new PauseLayer(gameScene), 0, 4);
+                }
+
+}
         //Pulsacion dentro de corazon lo cual quita una vida
         if (cc.rectContainsPoint(areaQuitarCorazon,
             cc.p(event.getLocationX(), event.getLocationY()))) {
