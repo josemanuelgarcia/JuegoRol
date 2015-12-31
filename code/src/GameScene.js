@@ -42,6 +42,9 @@ var GameLayer = cc.Layer.extend({
     movementKeysPressed:[],
     soldado:null,
 
+    //Teclado
+    numTeclasPulsadas:0,
+    teclasPulsadas:[],
 
     ctor: function () {
 
@@ -161,6 +164,16 @@ var GameLayer = cc.Layer.extend({
 
     }, procesarEventosKeyboard: function (keyCode, event) {
         var instancia = event.getCurrentTarget();
+
+        if(instancia.keyPulsada != keyCode)
+        {
+            instancia.keyPulsada = keyCode;
+            //instancia.numTeclasPulsadas++;
+            instancia.teclasPulsadas.push(keyCode);
+            //cc.log("Pulsada "+ instancia.numTeclasPulsadas);
+            cc.log("Pulsada "+instancia.teclasPulsadas);
+        }
+        /*
         if (instancia.keyPulsada == keyCode && (keyCode != 77 && keyCode != 109 && keyCode!=cc.KEY.n && keyCode!=cc.KEY.N)) {
             return;
         }
@@ -169,8 +182,23 @@ var GameLayer = cc.Layer.extend({
         instancia.useWeapon(keyCode,instancia);
         //Metodo que maneja los eventos de teclado de movimiento
         instancia.movementLink(keyCode,instancia);
+        */
     }, dejarProcesarEventosKeyboard: function (keyCode, event) {
         var instancia = event.getCurrentTarget();
+        instancia.numTeclasPulsadas--;
+
+        instancia.eliminarTeclaPulsada();
+        cc.log(instancia.teclasPulsadas.length)
+        if(instancia.teclasPulsadas.length==0)
+            instancia.keyPulsada=null;
+        else
+            instancia.keyPulsada == instancia.teclasPulsadas[instancia.teclasPulsadas.length -1];
+
+
+         //cc.log("Soltada "+instancia.numTeclasPulsadas);
+        // cc.log("Soltada "+ instancia.teclasPulsadas);
+         //cc.log("Ultima Pulsada "+ instancia.keyPulsada);
+        /*
         //Si se suelta alguna de las teclas de movimiento se eliminan todas las acciones
         if (keyCode == cc.KEY.W || keyCode == cc.KEY.w || keyCode == cc.KEY.s || keyCode == cc.KEY.S
         || keyCode == cc.KEY.A || keyCode == cc.KEY.a || keyCode == cc.KEY.D || keyCode == cc.KEY.d) {
@@ -182,8 +210,16 @@ var GameLayer = cc.Layer.extend({
                 instancia.link.parado();
                 //instancia.link.sprite.stopAllActions();
             }
+
         }
-    }, cargarMapa: function () {
+        */
+    },eliminarTeclaPulsada(keyCode)
+    {
+       var index = this.teclasPulsadas.indexOf(keyCode);
+       this.teclasPulsadas.splice(index,1);
+
+    }
+    , cargarMapa: function () {
 
         this.mapa = new cc.TMXTiledMap(res.mapa_inicial_tmx);
         // Añadirlo a la Layer
@@ -283,36 +319,6 @@ var GameLayer = cc.Layer.extend({
                 instancia.link.utilizarBombas();
             }
          }
-    },movementLink: function(keyCode,instancia){
-        if((keyCode==cc.KEY.n || keyCode==cc.KEY.n)&& this.isMovementKeyPressed())
-        {
-            instancia.link.rodar();
-        }
-        else if (keyCode == cc.KEY.W || keyCode == cc.KEY.w)
-        {
-            //W mover hacia arriba
-            instancia.link.moverArriba();
-            //Añadir tecla pulsada
-           instancia.movementKeysPressed[keyCode]=true;
-        }
-        else if (keyCode == cc.KEY.S || keyCode == cc.KEY.s)
-        {
-          //S mover hacia abajo
-          instancia.link.moverAbajo();
-          instancia.movementKeysPressed[keyCode]=true;
-        }
-                //Mover derecha
-        else if (keyCode == cc.KEY.D || keyCode == cc.KEY.d)
-        {
-            instancia.link.moverDerecha();
-            instancia.movementKeysPressed[keyCode]=true;
-        }
-                //Mover izquierda
-        else if (keyCode == cc.KEY.A || keyCode == cc.KEY.a)
-        {
-            instancia.link.moverIzquierda();
-            instancia.movementKeysPressed[keyCode]=true;
-        }
     },isMovementKeyPressed:function(){
         for(var i=0;i<this.movementKeysPressed.length;i++)
         {
