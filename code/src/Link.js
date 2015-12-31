@@ -107,7 +107,7 @@ var Link = cc.Class.extend({
     {
         this.isRodando=true;
         this.sprite.stopAllActions();
-        this.getCarrying();
+        this.getSentidoRodar();
         this.sprite.runAction(animationManager.obtainAnimation("RODAR_"+this.orientacion));
     },update:function(dt){
        if(this.boomerang!=null)
@@ -135,7 +135,7 @@ var Link = cc.Class.extend({
         this.sprite.scaleX=(this.orientacion=="IZQUIERDA"? -1:1);
         this.sprite.stopAllActions();
         this.sprite.runAction(animationManager.obtainAnimation("SIMPLE_"+this.orientacion));
-    },getCarrying:function()
+    },getSentidoRodar:function()
     {
         if(this.orientacion=="IZQUIERDA")
         {
