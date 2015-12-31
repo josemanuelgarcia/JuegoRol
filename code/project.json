@@ -28,6 +28,6 @@
         "src/Util/MathUtil.js",
         "src/Cuevas/Cueva.js",
         "src/Interaccionables/Jarron.js",
-        "src/Interaccionables/Bloque.js"
+        "src/Manager/CollisionManager.js"
     ]
 }

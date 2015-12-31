@@ -51,8 +51,8 @@ var Link = cc.Class.extend({
         this.attackSensor.sensor=true;
         this.space.addShape(this.attackSensor);
         //Añadir las animaciones de link
-        this.animationManager=new AnimationManager(this);
-        this.animationManager.addAnimationsLink();
+
+        animationManager.addAnimationsLink(this);
         this.layer.mapa.addChild(this.sprite, 2);
         return true;
 
@@ -110,7 +110,7 @@ var Link = cc.Class.extend({
         this.isCarrying=true;
         this.sprite.stopAllActions();
         this.getCarrying();
-        this.sprite.runAction(this.animationManager.obtainAnimation("RODAR_"+this.orientacion));
+        this.sprite.runAction(animationManager.obtainAnimation("RODAR_"+this.orientacion));
     },update:function(dt){
        if(this.boomerang!=null)
        {
@@ -127,19 +127,19 @@ var Link = cc.Class.extend({
                 this.atackIsDone=true;
                 this.usingSword=false;
                 this.sprite.stopAllActions();
-                this.sprite.runAction(this.animationManager.obtainAnimation("CAMINAR_"+this.orientacion));
+                this.sprite.runAction(animationManager.obtainAnimation("CAMINAR_"+this.orientacion));
     },animacionEspada:function()
     {
         if(this.atackIsDone)
         {           this.atackIsDone=false;
                     this.sprite.scaleX=(this.orientacion=="IZQUIERDA"? -1:1);
-                    this.sprite.runAction(this.animationManager.obtainAnimation("ESPADA_"+this.orientacion));
+                    this.sprite.runAction(animationManager.obtainAnimation("ESPADA_"+this.orientacion));
         }
     },animacionPararse:function()
     {
         this.sprite.scaleX=(this.orientacion=="IZQUIERDA"? -1:1);
         this.sprite.stopAllActions();
-        this.sprite.runAction(this.animationManager.obtainAnimation("SIMPLE_"+this.orientacion));
+        this.sprite.runAction(animationManager.obtainAnimation("SIMPLE_"+this.orientacion));
     },getCarrying:function()
     {
         if(this.orientacion=="IZQUIERDA")
