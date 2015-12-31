@@ -294,7 +294,7 @@ var GameLayer = cc.Layer.extend({
             instancia.link.moverIzquierda();
             instancia.movementKeysPressed[keyCode]=true;
         }
-    },isMovementKeyPressed:function(keyCode){
+    },isMovementKeyPressed:function(){
         for(var i=0;i<this.movementKeysPressed.length;i++)
         {
             if(this.movementKeysPressed[i])
