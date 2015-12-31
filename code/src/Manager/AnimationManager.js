@@ -1,10 +1,10 @@
 var AnimationManager=cc.Class.extend({
     objectToBeAnimated:null,
     animaciones:[],
-    ctor: function(object){
-        this.objectToBeAnimated=object;
-    },addAnimationsLink:function()
+    ctor: function(){
+    },addAnimationsLink:function(object)
          {
+         this.objectToBeAnimated = object;
           //Animacion Simple Arriba
              var framesSimple = this.getAnimacion("link_parado_arriba", 3);
              this.objectToBeAnimated.animaciones["SIMPLE_ARRIBA"] = cc.RepeatForever.create(cc.Sequence.create(cc.Animate.create(new cc.Animation(framesSimple, 0.05)),cc.DelayTime.create(2)));
@@ -44,17 +44,17 @@ var AnimationManager=cc.Class.extend({
 
              this.objectToBeAnimated.animaciones["ESPADA_IZQUIERDA"]  = new cc.Sequence(new cc.Animate(animacionEspDerecha),cc.CallFunc.create(this.lock, this));
               var framesCaminarAbajo = this.getAnimacion("link_rodar_abajo", 8);
-                          var animacionAbajo = new cc.Animation(framesCaminarAbajo, 0.05);
-                          this.objectToBeAnimated.animaciones["RODAR_ABAJO"] = new cc.Sequence(new cc.Animate(animacionAbajo),cc.CallFunc.create(this.lock, this));
-                          //Animacion Caminar Arriba
-                          var framesCaminarArriba = this.getAnimacion("link_rodar_arriba", 8);
-                          var animacionArriba = new cc.Animation(framesCaminarArriba, 0.05);
-                          this.objectToBeAnimated.animaciones["RODAR_ARRIBA"] =new cc.Sequence(new cc.Animate(animacionArriba),cc.CallFunc.create(this.lock, this));
-                          //Animacion Caminar Derecha
-                          var framesCaminarDerecha = this.getAnimacion("link_rodar_derecha", 8);
-                          var animacionDerecha = new cc.Animation(framesCaminarDerecha, 0.05);
-                          this.objectToBeAnimated.animaciones["RODAR_DERECHA"] =new cc.Sequence(new cc.Animate(animacionDerecha),cc.CallFunc.create(this.lock, this));
-                          this.objectToBeAnimated.animaciones["RODAR_IZQUIERDA"] =new cc.Sequence(new cc.Animate(animacionDerecha),cc.CallFunc.create(this.lock, this));
+              var animacionAbajo = new cc.Animation(framesCaminarAbajo, 0.05);
+              this.objectToBeAnimated.animaciones["RODAR_ABAJO"] = new cc.Sequence(new cc.Animate(animacionAbajo),cc.CallFunc.create(this.lock, this));
+              //Animacion Caminar Arriba
+              var framesCaminarArriba = this.getAnimacion("link_rodar_arriba", 8);
+              var animacionArriba = new cc.Animation(framesCaminarArriba, 0.05);
+              this.objectToBeAnimated.animaciones["RODAR_ARRIBA"] =new cc.Sequence(new cc.Animate(animacionArriba),cc.CallFunc.create(this.lock, this));
+              //Animacion Caminar Derecha
+              var framesCaminarDerecha = this.getAnimacion("link_rodar_derecha", 8);
+              var animacionDerecha = new cc.Animation(framesCaminarDerecha, 0.05);
+              this.objectToBeAnimated.animaciones["RODAR_DERECHA"] =new cc.Sequence(new cc.Animate(animacionDerecha),cc.CallFunc.create(this.lock, this));
+              this.objectToBeAnimated.animaciones["RODAR_IZQUIERDA"] =new cc.Sequence(new cc.Animate(animacionDerecha),cc.CallFunc.create(this.lock, this));
          }
          , getAnimacion: function (nombreAnimacion, numFrames) {
              var framesAnimacion = [];

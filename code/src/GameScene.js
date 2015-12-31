@@ -15,8 +15,10 @@ var tipoCueva=10;
 var tipoJarron=11;
 var weapon="ARCO";
 var posicion=null;
+var animationManager=null;
 
 var GameLayer = cc.Layer.extend({
+
     space: null,
     link: null,
     mapa: null,
@@ -38,6 +40,7 @@ var GameLayer = cc.Layer.extend({
         this._super();
         var size = cc.winSize;
         this.mathUtil = new MathUtil();
+        animationManager = new AnimationManager();
         if(posicion==null)
         {
             posicion=cc.p(400,400);
