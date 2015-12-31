@@ -16,7 +16,7 @@ var tipoJarron=11;
 var tipoBloque=13;
 var weapon="ARCO";
 var posicion=null;
-
+var animationManager=null;
 var GameLayer = cc.Layer.extend({
     space: null,
     link: null,
@@ -57,7 +57,7 @@ var GameLayer = cc.Layer.extend({
         //Add the Debug Layer:
        //var depuracion = new cc.PhysicsDebugNode(this.space);
        //this.addChild(depuracion, 10);
-
+        animationManager=new AnimationManager();
         //Cargamos el Mapa
         this.cargarMapa();
         //Creación del personaje link
@@ -263,16 +263,7 @@ var GameLayer = cc.Layer.extend({
             var jarron = new Jarron(this.space,new cc.p(x,y),this);
             this.jarrones.push(jarron);
         }
-        //BLOQUES
-        var bloques = this.mapa.getObjectGroup("Bloques");
-        var bloquesArray = bloques.getObjects();
-        for(var i = 0; i< bloquesArray.length ; i++)
-        {
-            var x = bloquesArray[i]["x"];
-            var y = bloquesArray[i]["y"];
-            var bloque = new Bloque(this.space,new cc.p(x,y),this);
-            this.bloques.push(bloque);
-        }
+
 
 
     }, actualizarCamara: function () {
