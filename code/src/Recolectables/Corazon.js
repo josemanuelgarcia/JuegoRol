@@ -26,10 +26,7 @@ ctor:function (space, posicion, layer) {
     // forma estática
     this.space.addStaticShape(this.shape);
     // añadir sprite a la capa
-
-
-
-    layer.addChild(this.sprite,10);
+    this.layer.mapa.addChild(this.sprite,2);
 
 }, getShape: function (){
       return this.shape;
@@ -39,6 +36,6 @@ ctor:function (space, posicion, layer) {
      this.space.removeShape(this.shape);
 
      // quita el sprite
-     this.layer.removeChild(this.sprite);
+     this.layer.mapa.removeChild(this.sprite);
  }
 });

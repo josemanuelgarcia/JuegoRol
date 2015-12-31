@@ -20,13 +20,14 @@ var GameLayer = cc.Layer.extend({
     space: null,
     link: null,
     mapa: null,
+    mathUtil:null,
     mapaAncho: null,
     mapaAlto: null,
     keyPulsada: null,
     disparosEnemigos: [],
     octorock: null,
     depuracion: null,
-    corazon:null,
+    corazones:[],
     rupias:[],
     shapesToRemove: [],
     cuevas:[],
@@ -36,6 +37,7 @@ var GameLayer = cc.Layer.extend({
 
         this._super();
         var size = cc.winSize;
+        this.mathUtil = new MathUtil();
         if(posicion==null)
         {
             posicion=cc.p(400,400);
@@ -51,8 +53,8 @@ var GameLayer = cc.Layer.extend({
         //La gravedad en este juego da igual.
         this.space.gravity = cp.v(0, 0);
         //Add the Debug Layer:
-       var depuracion = new cc.PhysicsDebugNode(this.space);
-        this.addChild(depuracion, 10);
+       //var depuracion = new cc.PhysicsDebugNode(this.space);
+       //this.addChild(depuracion, 10);
 
         //Cargamos el Mapa
         this.cargarMapa();
@@ -63,7 +65,7 @@ var GameLayer = cc.Layer.extend({
         //Creacion enemigo prueba
         this.octorok = new Octorok(this.space, cc.p(600, 250), this);
         //creacion de corazon de prueba
-        this.corazon = new Corazon(this.space,cc.p(550,200),this);
+        this.corazones.push(new Corazon(this.space,cc.p(550,200),this));
 
         //Creacion de rupias de diferentes colores  de prueba--------------
          var rupiaRoja = new Rupia(this.space,cc.p(600,200),this,"r");
@@ -142,26 +144,29 @@ var GameLayer = cc.Layer.extend({
             {
                 this.octorok.eliminar();
             }
-            else if(this.corazon.shape==shape)
-            {
-               this.corazon.eliminar();
+            for(var i = 0; i< this.corazones.length; i++){
+                if(this.corazones[i].shape===shape)
+                {
+                   this.corazones[i].eliminar();
+                   this.corazones.splice(i,1);
+                }
             }
             for (var i = 0; i < this.rupias.length; i++) {
-                            if (this.rupias[i].shape === shape) {
-                                this.rupias[i].eliminar();
-                                 this.rupias.splice(i, 1);
-                            }
-                        }
+             if (this.rupias[i].shape === shape) {
+                  this.rupias[i].eliminar();
+                  this.rupias.splice(i, 1);
+                }
+             }
             for (var i = 0; i < this.disparosEnemigos.length; i++) {
                 if (this.disparosEnemigos[i].shape === shape) {
                     this.disparosEnemigos[i].eliminar();
                 }
             }
             for(var i = 0; i<this.jarrones.length; i++)
-                    {
-                        if(this.jarrones[i].shape === shape)
-                            this.jarrones[i].destruir();
-                    }
+            {
+                if(this.jarrones[i].shape === shape)
+                    this.jarrones[i].destruir();
+            }
         }
         this.shapesToRemove = [];
 
@@ -308,14 +313,14 @@ var GameLayer = cc.Layer.extend({
                 //Mover derecha
         else if (keyCode == cc.KEY.D || keyCode == cc.KEY.d)
         {
-          instancia.link.moverDerecha();
-           instancia.movementKeysPressed[keyCode]=true;
+            instancia.link.moverDerecha();
+            instancia.movementKeysPressed[keyCode]=true;
         }
                 //Mover izquierda
         else if (keyCode == cc.KEY.A || keyCode == cc.KEY.a)
         {
-         instancia.link.moverIzquierda();
-          instancia.movementKeysPressed[keyCode]=true;
+            instancia.link.moverIzquierda();
+            instancia.movementKeysPressed[keyCode]=true;
         }
     }, reducirVidas: function (arbiter, space) {
         iuLayer.quitarVidas();
@@ -350,10 +355,10 @@ var GameLayer = cc.Layer.extend({
 
       var shapes = arbiter.getShapes();
        for (var i = 0; i < this.rupias.length; i++) {
-       if (this.rupias[i].shape === shapes[1]) {
-        this.rupias[i].agregarRupias();
-                                  }
-                              }
+           if (this.rupias[i].shape === shapes[1]) {
+            this.rupias[i].agregarRupias();
+          }
+        }
       this.shapesToRemove.push(shapes[1]);
 
     },transportarLink:function(arbiter,space)
@@ -380,12 +385,12 @@ var GameLayer = cc.Layer.extend({
     {
         var shapes = arbiter.getShapes();
         if(this.link.usingSword)
-                {
-                    if(new MathUtil().isInViewCone(this.link.body.p,shapes[1].body.p,0.5,this))
-                    {
-                        this.shapesToRemove.push(shapes[1]);
-                    }
-                }
+        {
+            if(this.mathUtil.isInViewCone(this.link.body.p,shapes[1].body.p,0.5,this))
+            {
+                this.shapesToRemove.push(shapes[1]);
+            }
+        }
 
     }
     ,isMovementKeyPressed:function(keyCode){
@@ -401,7 +406,7 @@ var GameLayer = cc.Layer.extend({
         var shapes = arbiter.getShapes();
         if(this.link.usingSword)
         {
-            if(new MathUtil().isInViewCone(this.link.body.p,shapes[1].body.p,0.5,this))
+            if(this.mathUtil.isInViewCone(this.link.body.p,shapes[1].body.p,0.5,this))
             {
                 this.shapesToRemove.push(shapes[1]);
             }

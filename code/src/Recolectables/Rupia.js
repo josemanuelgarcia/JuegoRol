@@ -12,20 +12,20 @@ ctor:function (space, posicion, layer,color) {
 
     // Crear Sprite - Cuerpo y forma
     if(this.color=="v"){
-     this.sprite = new cc.PhysicsSprite(res.rupia_png);
-     this.rupias=1;
+         this.sprite = new cc.PhysicsSprite(res.rupia_png);
+         this.rupias=1;
      }
     else if(this.color=="r"){
-     this.sprite = new cc.PhysicsSprite(res.rupia_roja_png);
-     this.rupias=5;
+         this.sprite = new cc.PhysicsSprite(res.rupia_roja_png);
+         this.rupias=5;
      }
     else if (this.color=="a"){
-     this.sprite = new cc.PhysicsSprite(res.rupiaazul_colectable_png);
-     this.rupias=10;
+         this.sprite = new cc.PhysicsSprite(res.rupiaazul_colectable_png);
+         this.rupias=10;
      }
     else if(this.color=="m"){
-     this.sprite = new cc.PhysicsSprite(res.rupia_amarilla_png);
-     this.rupias=20;
+         this.sprite = new cc.PhysicsSprite(res.rupia_amarilla_png);
+         this.rupias=20;
      }
 
     // Cuerpo estática , no le afectan las fuerzas
@@ -47,7 +47,7 @@ ctor:function (space, posicion, layer,color) {
 
 
 
-    layer.addChild(this.sprite,10);
+    layer.mapa.addChild(this.sprite,1);
 
 }, getShape: function (){
       return this.shape;
@@ -57,7 +57,7 @@ ctor:function (space, posicion, layer,color) {
      this.space.removeShape(this.shape);
 
      // quita el sprite
-     this.layer.removeChild(this.sprite);
+     this.layer.mapa.removeChild(this.sprite);
  },agregarRupias: function(){
     iuLayer.agregarRupia(this.rupias);
  }

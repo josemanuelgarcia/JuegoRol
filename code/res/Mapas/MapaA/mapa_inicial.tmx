@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.0" orientation="orthogonal" renderorder="right-down" width="50" height="50" tilewidth="32" tileheight="32" nextobjectid="213">
+<map version="1.0" orientation="orthogonal" renderorder="right-down" width="50" height="50" tilewidth="32" tileheight="32" nextobjectid="221">
  <tileset firstgid="1" name="Outside_A5" tilewidth="32" tileheight="32" tilecount="128">
   <image source="Outside_A5.png" width="256" height="512"/>
  </tileset>
@@ -258,9 +258,17 @@
   </object>
  </objectgroup>
  <objectgroup name="Jarrones">
-  <object id="209" x="378" y="1170" width="14" height="16"/>
-  <object id="210" x="378" y="1198" width="14" height="16"/>
-  <object id="211" x="407" y="1170" width="14" height="16"/>
-  <object id="212" x="407" y="1198" width="14" height="16"/>
+  <object id="209" x="336" y="1121" width="14" height="16"/>
+  <object id="210" x="336" y="1138" width="14" height="16"/>
+  <object id="211" x="352" y="1121.33" width="14" height="16"/>
+  <object id="212" x="351.667" y="1138" width="14" height="16"/>
+  <object id="213" x="367.333" y="1121.33" width="14" height="16"/>
+  <object id="214" x="367.333" y="1138.33" width="14" height="16"/>
+  <object id="215" x="336" y="1103" width="14" height="16"/>
+  <object id="216" x="352" y="1103" width="14" height="16"/>
+  <object id="217" x="367.333" y="1103" width="14" height="16"/>
+  <object id="218" x="335.667" y="1155.33" width="14" height="16"/>
+  <object id="219" x="335.333" y="1173.33" width="14" height="16"/>
+  <object id="220" x="335" y="1191.33" width="14" height="16"/>
  </objectgroup>
 </map>

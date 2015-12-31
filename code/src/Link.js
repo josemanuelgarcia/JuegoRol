@@ -39,9 +39,7 @@ var Link = cc.Class.extend({
         this.space.addBody(this.body);
 
         // forma
-        this.shape = new cp.BoxShape(this.body,
-            this.sprite.getContentSize().width - 2,
-            this.sprite.getContentSize().height - 2);
+        this.shape = new cp.BoxShape(this.body,16, 21);
         // forma dinamica
         this.shape.setFriction(1);
         this.shape.setCollisionType(tipoJugador);

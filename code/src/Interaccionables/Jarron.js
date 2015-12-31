@@ -31,15 +31,40 @@ var Jarron = cc.Class.extend({
 
         return true;
     },destruir:function(){
+        var animacion = cc.Animate.create(this.animacionDestruir);
+        var crearColectable = cc.CallFunc.create(this.crearColectableAleatorio,this);
+        var eliminar = cc.CallFunc.create(this.eliminar,this);
 
-        this.sprite.runAction(cc.Sequence.create(cc.Animate.create(this.animacionDestruir),cc.CallFunc.create(this.eliminar,this)));
-
-
+        this.sprite.runAction(cc.Sequence.create(animacion,crearColectable,eliminar));
 
     },eliminar:function()
     {
          this.space.removeShape(this.shape);
          this.layer.mapa.removeChild(this.sprite);
+    },crearColectableAleatorio()
+    {
+        //No siempre dará algo, asi que el random es mayor
+        var random = Math.floor(Math.random() * 4);
+        switch(random)
+        {
+
+            case 0:
+                this.layer.corazones.push(new Corazon(this.space,this.position,this.layer));
+                break;
+            case 1:
+                var random2 = Math.floor(Math.random()*2);
+                switch(random2)
+                {
+                    case 0:
+                        this.layer.rupias.push(new Rupia(this.space,this.position,this.layer,"v"));
+                        break;
+                    case 1:
+                        this.layer.rupias.push(new Rupia(this.space,this.position,this.layer,"a"));
+                        break;
+                }
+            default:
+                break;
+        }
     }
 
 });
