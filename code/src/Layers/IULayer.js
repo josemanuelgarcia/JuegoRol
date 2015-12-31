@@ -15,6 +15,8 @@ var IULayer = cc.Layer.extend({
     vidasQuitadas:0,
     entrar:true,
     pause:true,
+    numeroDeArmasDisponiblesLabel:null,
+    numeroArmas:0,
     ctor: function () {
         this._super();
         var size = cc.winSize;
@@ -23,7 +25,6 @@ var IULayer = cc.Layer.extend({
         this.darVidas();
         //Al principio la weapon es el arco
         weapon="ARCO";
-
 
 
 
@@ -66,6 +67,8 @@ var IULayer = cc.Layer.extend({
         this.spriteArmaElegida.setPosition(cc.p(size.width - 40, size.height - 40));
 
         this.addChild(this.spriteArmaElegida);
+
+        this.crearLabelArmas();
 
 
         // Registrar Mouse Down
@@ -232,7 +235,7 @@ this.corazones = this.corazones+1;
         //Actualizamos el identificador de los sprite de los corazones blancos
         this.corazonesBlancos = this.corazonesBlancos+1;
         }}
-    },nuevoCorazon() {
+    },nuevoCorazon : function() {
 
 
 console.log("numero de vidas quitadas"+this.vidasQuitadas);
@@ -243,5 +246,22 @@ console.log("numero de vidas quitadas"+this.vidasQuitadas);
         }
         this.vidasQuitadas=0;
         this.vidasIniciales=this.vidasIniciales+1;
+    },crearLabelArmas : function()
+    {
+    if(this.numeroDeArmasDisponiblesLabel==null){
+    this.numeroDeArmasDisponiblesLabel = new cc.LabelTTF("" + this.numeroArmas, "Helvetica", 20);
+                     this.numeroDeArmasDisponiblesLabel.setPosition(cc.p(cc.winSize.width - 30, cc.winSize.height - 50));
+                      this.numeroDeArmasDisponiblesLabel.fillStyle = new cc.Color(255, 255, 255, 255);
+                      this.numeroDeArmasDisponiblesLabel.setVisible(false);
+                     this.addChild(this.numeroDeArmasDisponiblesLabel);
+    }
+    else{
+    this.removeChild(this.numeroDeArmasDisponiblesLabel);
+     this.numeroDeArmasDisponiblesLabel = new cc.LabelTTF("" + this.numeroArmas, "Helvetica", 20);
+                         this.numeroDeArmasDisponiblesLabel.setPosition(cc.p(cc.winSize.width - 30, cc.winSize.height - 50));
+                          this.numeroDeArmasDisponiblesLabel.fillStyle = new cc.Color(255, 255, 255, 255);
+                          this.numeroDeArmasDisponiblesLabel.setVisible(false);
+                         this.addChild(this.numeroDeArmasDisponiblesLabel);
+    }
     }
 });

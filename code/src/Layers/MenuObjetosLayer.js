@@ -1,19 +1,21 @@
 
 var MenuObjetosLayer = cc.LayerColor.extend({
     scene: null,
-
+    etiquetaBombas:null,
+    GameLayer:null,
+    size:null,
     ctor: function (scene) {
         this._super();
-        var size = cc.winSize;
+        this.size = cc.winSize;
         this.scene = scene;
-
+        this.GameLayer =  this.scene.getChildByTag(idCapaJuego);
 
         // Fondo
         var spriteFondoTitulo = new cc.Sprite(res.fondomenu4_png);
         // Asigno posición central
-        spriteFondoTitulo.setPosition(cc.p(size.width / 2, size.height / 2));
+        spriteFondoTitulo.setPosition(cc.p(this.size.width / 2, this.size.height / 2));
         // Lo escalo porque es más pequeño que la pantalla
-        spriteFondoTitulo.setScale(size.height / spriteFondoTitulo.height);
+        spriteFondoTitulo.setScale(this.size.height / spriteFondoTitulo.height);
         // Añado Sprite a la escena
         this.addChild(spriteFondoTitulo);
 
@@ -47,19 +49,28 @@ var MenuObjetosLayer = cc.LayerColor.extend({
 
         // creo el menú pasándole el boton del arco
         var menuArco = new cc.Menu(menuArcoSprite);
-        menuArco.setPosition(cc.p((size.width / 2) - 60, (size.height * 0.25) + 210));
+        menuArco.setPosition(cc.p((this.size.width / 2) - 60, (this.size.height * 0.25) + 210));
 
         // creo el menú pasándole el boton de la espada
         var menuEspada = new cc.Menu(menuEspadaSprite);
-        menuEspada.setPosition(cc.p((size.width / 2) + 180, (size.height * 0.25) + 210));
+        menuEspada.setPosition(cc.p((this.size.width / 2) + 180, (this.size.height * 0.25) + 210));
 
         // creo el menú pasándole el boton del boomerán
         var menuBoomeran = new cc.Menu(menuBoomeranSprite);
-        menuBoomeran.setPosition(cc.p((size.width / 2) - 180, (size.height * 0.25)+210));
+        menuBoomeran.setPosition(cc.p((this.size.width / 2) - 180, (this.size.height * 0.25)+210));
+
+
+
+
+         //numero de bombas que le quedan
+        this.etiquetaBombas = new cc.LabelTTF("" + this.GameLayer.link.numBombas, "Helvetica", 20);
+        this.etiquetaBombas.setPosition(cc.p((this.size.width / 2) + 75, (this.size.height * 0.25) + 200));
+        this.etiquetaBombas.fillStyle = new cc.Color(255, 255, 255, 255);
 
         // creo el menú pasándole el boton de las bombas
         var menuBombas = new cc.Menu(menuBombaSprite);
-        menuBombas.setPosition(cc.p((size.width / 2) + 60, (size.height * 0.25) + 210));
+        menuBombas.setPosition(cc.p((this.size.width / 2) + 60, (this.size.height * 0.25) + 210));
+
 
 
 
@@ -70,7 +81,7 @@ var MenuObjetosLayer = cc.LayerColor.extend({
         this.addChild(menuEspada);
         this.addChild(menuBoomeran);
         this.addChild(menuBombas);
-
+         this.addChild(this.etiquetaBombas);
 
         return true;
     }, pulsarBotonArco: function () {
@@ -79,6 +90,12 @@ var MenuObjetosLayer = cc.LayerColor.extend({
         weapon="ARCO";
         //Sprite en el que se muestra el arma elegida
         IULayer.spriteArmaElegida.setTexture(res.arco_reducido_png);
+
+        //sera el numero de flechas de link
+                        IULayer.numeroArmas =0;
+                        IULayer.crearLabelArmas();
+                                IULayer.numeroDeArmasDisponiblesLabel.setVisible(true);
+
         this.scene.getChildByTag(2).entrar=true;
         this.scene.removeChild(this);
 
@@ -90,6 +107,11 @@ var MenuObjetosLayer = cc.LayerColor.extend({
         //Sprite en el que se muestra el arma elegida
         weapon="ESPADA";
         IULayer.spriteArmaElegida.setTexture(res.espada_reducida_png);
+
+                        IULayer.numeroArmas =0;
+IULayer.crearLabelArmas();
+        IULayer.numeroDeArmasDisponiblesLabel.setVisible(false);
+
          this.scene.getChildByTag(2).entrar=true;
         this.scene.removeChild(this);
     }, pulsarBotonBoomeran: function () {
@@ -98,6 +120,9 @@ var MenuObjetosLayer = cc.LayerColor.extend({
         //Sprite en el que se muestra el arma elegida
        weapon="BOOMERANG";
         IULayer.spriteArmaElegida.setTexture(res.boomeran_reducido_png);
+                IULayer.numeroArmas =0;
+                IULayer.crearLabelArmas();
+                        IULayer.numeroDeArmasDisponiblesLabel.setVisible(false);
          this.scene.getChildByTag(2).entrar=true;
         this.scene.removeChild(this);
 
@@ -108,7 +133,12 @@ var MenuObjetosLayer = cc.LayerColor.extend({
         //Sprite en el que se muestra el arma elegida
         weapon="BOMBAS";
         IULayer.spriteArmaElegida.setTexture(res.bomba_reducida_png);
-         this.scene.getChildByTag(2).entrar=true;
+        IULayer.numeroArmas = this.GameLayer.link.numBombas;
+        IULayer.crearLabelArmas();
+        IULayer.numeroDeArmasDisponiblesLabel.setVisible(true);
+
+
+        IULayer.entrar=true;
         this.scene.removeChild(this);
 
 
