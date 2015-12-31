@@ -119,7 +119,7 @@ var CollisionManager = cc.Class.extend({
           var shapes = arbiter.getShapes();
           if(this.layer.link.usingSword)
           {
-              if(this.layer.mathUtil.isInViewCone(this.link.body.p,shapes[1].body.p,0.5,this.layer))
+              if(this.layer.mathUtil.isInViewCone(this.layer.link.body.p,shapes[1].body.p,0.5,this.layer))
               {
                   this.layer.shapesToRemove.push(shapes[1]);
               }
