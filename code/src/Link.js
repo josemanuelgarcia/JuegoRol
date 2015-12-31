@@ -58,34 +58,34 @@ var Link = cc.Class.extend({
 
     }, moverArriba: function () {
         if(!this.isRodando){
-        this.orientacion="ARRIBA";
-        this.isMoving=true;
-        this.animacionCaminar();
-        this.body.setVel(cp.v(this.body.getVel().x, this.velMovimiento));
+            this.orientacion="ARRIBA";
+            this.isMoving=true;
+            this.animacionCaminar();
+            this.body.setVel(cp.v(this.body.getVel().x, this.velMovimiento));
         }
     }, moverAbajo: function () {
         if(!this.isRodando)
         {
-        this.orientacion="ABAJO";
-        this.isMoving=true;
-        this.animacionCaminar();
-        this.body.setVel(cp.v(this.body.getVel().x, -this.velMovimiento));
+            this.orientacion="ABAJO";
+            this.isMoving=true;
+            this.animacionCaminar();
+            this.body.setVel(cp.v(this.body.getVel().x, -this.velMovimiento));
         }
     }, moverDerecha: function () {
         if(!this.isRodando)
         {
-        this.orientacion="DERECHA";
-        this.isMoving=true;
-        this.animacionCaminar();
-        this.body.setVel(cp.v(this.velMovimiento, this.body.getVel().y));
+            this.orientacion="DERECHA";
+            this.isMoving=true;
+            this.animacionCaminar();
+            this.body.setVel(cp.v(this.velMovimiento, this.body.getVel().y));
         }
     }, moverIzquierda: function () {
         if(!this.isRodando)
         {
-        this.orientacion="IZQUIERDA";
-        this.isMoving=true;
-        this.animacionCaminar();
-        this.body.setVel(cp.v(-this.velMovimiento, this.body.getVel().y));
+            this.orientacion="IZQUIERDA";
+            this.isMoving=true;
+            this.animacionCaminar();
+            this.body.setVel(cp.v(-this.velMovimiento, this.body.getVel().y));
         }
     },parado: function ()
     {
@@ -123,11 +123,11 @@ var Link = cc.Class.extend({
 
     },animacionCaminar:function()
     {
-                this.sprite.scaleX=(this.orientacion=="IZQUIERDA"? -1:1);
-                this.atackIsDone=true;
-                this.usingSword=false;
-                this.sprite.stopAllActions();
-                this.sprite.runAction(animationManager.obtainAnimation("CAMINAR_"+this.orientacion));
+        this.sprite.scaleX=(this.orientacion=="IZQUIERDA"? -1:1);
+        this.atackIsDone=true;
+        this.usingSword=false;
+        this.sprite.stopAllActions();
+        this.sprite.runAction(animationManager.obtainAnimation("CAMINAR_"+this.orientacion));
     },animacionEspada:function()
     {
         if(this.atackIsDone)
