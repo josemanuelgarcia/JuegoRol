@@ -2,18 +2,7 @@ var idCapaJuego = 1;
 var idCapaControles = 2;
 var idCapaHistoria=3;
 //Tipos para las colisiones
-var tipoNoPasable = 1;
-var tipoJugador = 2;
-var tipoOctorok = 3;
-var tipoDisparoOctorok = 4;
-var tipoBoomerang=5;
-var tipoCorazon=6;
-var tipoRupia=7;
-var tipoBomba=8;
-var tipoEspada=9;
-var tipoCueva=10;
-var tipoJarron=11;
-var tipoBloque=13;
+
 var weapon="ARCO";
 var posicion=null;
 var animationManager=null;
