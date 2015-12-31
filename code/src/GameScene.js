@@ -17,6 +17,7 @@ var tipoBloque=13;
 var weapon="ARCO";
 var posicion=null;
 var animationManager=null;
+var collisionManager =null;
 var GameLayer = cc.Layer.extend({
     space: null,
     link: null,
@@ -99,29 +100,7 @@ var GameLayer = cc.Layer.extend({
         this.scheduleUpdate();
 
         //Colisiones entre elementos
-        this.space.addCollisionHandler(tipoNoPasable, tipoOctorok,null, null, this.collisionObjetoConOctorok.bind(this), null);
 
-        this.space.addCollisionHandler(tipoNoPasable, tipoDisparoOctorok,null, null, this.collisionObjetoConDisparo.bind(this), null);
-
-        this.space.addCollisionHandler(tipoBoomerang, tipoJugador, null,this.collisionBoomerangConJugador.bind(this), null, null);
-
-        this.space.addCollisionHandler(tipoBoomerang, tipoNoPasable, null,this.collisionBoomerangConNoPasable.bind(this), null, null);
-
-         this.space.addCollisionHandler(tipoBoomerang, tipoOctorok,null,this.collisionBoomerangConOctorock.bind(this), null, null);
-
-        this.space.addCollisionHandler(tipoJugador, tipoCorazon,null,this.collisionJugadorConCorazon.bind(this), null, null);
-
-        this.space.addCollisionHandler(tipoJugador, tipoRupia,null,this.collisionJugadorConRupia.bind(this), null, null);
-
-        this.space.addCollisionHandler(tipoEspada, tipoOctorok, null,this.collisionEspadaConEnemigo.bind(this), null, null);
-
-        this.space.addCollisionHandler(tipoJugador, tipoOctorok, null, null, null, this.reducirVidas.bind(this));
-
-        this.space.addCollisionHandler(tipoJugador,tipoBomba, null, null, null, this.reducirVidas.bind(this));
-
-        this.space.addCollisionHandler(tipoJugador,tipoCueva,null,this.transportarLink.bind(this),null,null);
-
-        this.space.addCollisionHandler(tipoEspada,tipoJarron,null,this.destruirJarron.bind(this),null,null)
 
         return true;
 
@@ -326,78 +305,7 @@ var GameLayer = cc.Layer.extend({
             instancia.link.moverIzquierda();
             instancia.movementKeysPressed[keyCode]=true;
         }
-    }, reducirVidas: function (arbiter, space) {
-        iuLayer.quitarVidas();
-        //TODO las vidas hay que quitarselas a link no a la interfaz xD
-
-    }, collisionObjetoConOctorok: function (arbiter, space) {
-        //  this.octorok.haChocado();
-
-    }, collisionObjetoConDisparo: function (arbiter, space) {
-        var shapes = arbiter.getShapes();
-        var vel = shapes[1].getBody().getVel();
-
-        this.shapesToRemove.push(shapes[1]);
-
-    }, collisionBoomerangConJugador: function (arbiter, space) {
-        if(this.link.boomerang.canBeDeleted) {
-            var shapes = arbiter.getShapes();
-            this.shapesToRemove.push(shapes[0]);
-         }
-    },collisionBoomerangConNoPasable: function (arbiter, space) {
-        this.link.boomerang.choco=true;
-
-    },collisionBoomerangConOctorock: function (arbiter, space) {
-           var shapes = arbiter.getShapes();
-           this.shapesToRemove.push(shapes[1]);
-           //TODO quitar vida a octorok
-    },collisionJugadorConCorazon:function(arbiter,space){
-        iuLayer.darVidas();
-        var shapes = arbiter.getShapes();
-        this.shapesToRemove.push(shapes[1]);
-    },collisionJugadorConRupia:function(arbiter,space){
-
-      var shapes = arbiter.getShapes();
-       for (var i = 0; i < this.rupias.length; i++) {
-           if (this.rupias[i].shape === shapes[1]) {
-            this.rupias[i].agregarRupias();
-          }
-        }
-      this.shapesToRemove.push(shapes[1]);
-
-    },transportarLink:function(arbiter,space)
-    {
-        var shapes = arbiter.getShapes();
-        var shape = shapes[1];
-        var cueva = null;
-        for(var i = 0; i<this.cuevas.length ; i++)
-        {
-            if(shape === this.cuevas[i].shape)
-                cueva = this.cuevas[i];
-        }
-
-        var pos = cueva.getPosSalida();
-        var newPos = cc.p(pos.x,this.mapaAlto - pos.y);
-        var scene=this.getParent();
-        posicion=newPos;
-        //Para que no siga avanzando hacia arriba
-        this.link.parado();
-        cc.director.pause();
-        cc.director.runScene(cc.TransitionFade.create(3.0,new GameScene(newPos)));
-        cc.director.resume();
-    },destruirJarron:function(arbiter,space)
-    {
-        var shapes = arbiter.getShapes();
-        if(this.link.usingSword)
-        {
-            if(this.mathUtil.isInViewCone(this.link.body.p,shapes[1].body.p,0.5,this))
-            {
-                this.shapesToRemove.push(shapes[1]);
-            }
-        }
-
-    }
-    ,isMovementKeyPressed:function(keyCode){
+    },isMovementKeyPressed:function(keyCode){
         for(var i=0;i<this.movementKeysPressed.length;i++)
         {
             if(this.movementKeysPressed[i])
@@ -406,22 +314,14 @@ var GameLayer = cc.Layer.extend({
             }
         }
         return false;
-    },collisionEspadaConEnemigo:function(arbiter,space){
-        var shapes = arbiter.getShapes();
-        if(this.link.usingSword)
-        {
-            if(this.mathUtil.isInViewCone(this.link.body.p,shapes[1].body.p,0.5,this))
-            {
-                this.shapesToRemove.push(shapes[1]);
-            }
-        }
-      }
+    }
 });
 
 var GameScene = cc.Scene.extend({
     onEnter: function () {
         this._super();
         var layer = new GameLayer();
+        collisionManager = new CollisionManager(layer.space,layer);
         this.addChild(layer, 0, idCapaJuego);
         iuLayer = new IULayer();
         this.addChild(iuLayer, 0, idCapaControles);
