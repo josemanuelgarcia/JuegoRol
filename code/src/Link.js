@@ -174,7 +174,7 @@ var Link = cc.Class.extend({
     }
     ,animacionCaminar:function()
     {
-        //this.sprite.stopAllActions();
+        this.sprite.stopAllActions();
         this.canMove = false;
         this.sprite.scaleX=(this.orientacion=="IZQUIERDA"? -1:1);
         this.sprite.runAction(animationManager.obtainAnimation("CAMINAR_"+this.orientacion));

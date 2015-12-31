@@ -107,7 +107,7 @@ var CollisionManager = cc.Class.extend({
     },destruirJarron:function(arbiter,space)
     {
          var shapes = arbiter.getShapes();
-         if(this.layer.link.usingSword)
+         if(this.layer.link.sword)
          {
              if(this.layer.mathUtil.isInViewCone(this.layer.link.body.p,shapes[1].body.p,0.5,this.layer))
              {
@@ -117,7 +117,7 @@ var CollisionManager = cc.Class.extend({
 
     },collisionEspadaConEnemigo:function(arbiter,space){
           var shapes = arbiter.getShapes();
-          if(this.layer.link.usingSword)
+          if(this.layer.link.sword)
           {
               if(this.layer.mathUtil.isInViewCone(this.layer.link.body.p,shapes[1].body.p,0.5,this.layer))
               {
