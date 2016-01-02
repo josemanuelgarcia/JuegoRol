@@ -16,6 +16,7 @@ var Link = cc.Class.extend({
     weapon:false,
     rolling:false,
     stopped:false,
+    flagCaminar:false,
     //Atributos de Link modificables
     velMovimiento: 70,
     velRodar:180,
@@ -130,7 +131,8 @@ var Link = cc.Class.extend({
     },procesarEventos:function()
     {
         var keyCode = null;
-        //cc.log(this.layer.teclasPulsadas);
+        if(this.layer.teclasPulsadas.length>0)
+            cc.log(this.layer.teclasPulsadas);
         //Si no se ha pulsado ninguna tecla se deja parado
         if(this.layer.teclasPulsadas.length==0)
             this.parado();
@@ -186,25 +188,25 @@ var Link = cc.Class.extend({
 
     },animacionRodar:function(){
 
-        this.sprite.runAction(animationManager.obtainAnimation("RODAR_"+this.orientacion));
+        this.sprite.runAction(this.obtainAnimation("RODAR_"+this.orientacion));
     }
     ,animacionCaminar:function()
     {
         this.sprite.stopAllActions();
         this.canMove = false;
         this.sprite.scaleX=(this.orientacion=="IZQUIERDA"? -1:1);
-        this.sprite.runAction(animationManager.obtainAnimation("CAMINAR_"+this.orientacion));
+
+        this.sprite.runAction(this.obtainAnimation("CAMINAR_"+this.orientacion));
 
     },animacionEspada:function()
     {
-
         this.sprite.scaleX=(this.orientacion=="IZQUIERDA"? -1:1);
-        this.sprite.runAction(animationManager.obtainAnimation("ESPADA_"+this.orientacion));
+        this.sprite.runAction(this.obtainAnimation("ESPADA_"+this.orientacion));
 
     },animacionPararse:function()
     {
         this.sprite.scaleX=(this.orientacion=="IZQUIERDA"? -1:1);
-        this.sprite.runAction(animationManager.obtainAnimation("SIMPLE_"+this.orientacion));
+        this.sprite.runAction(this.obtainAnimation("SIMPLE_"+this.orientacion));
 
     },getSentidoRodar:function()
     {
@@ -244,6 +246,8 @@ var Link = cc.Class.extend({
     },setCanMove:function()
     {
         this.canMove = true;
+    }, obtainAnimation: function (key) {
+             return this.animaciones[key];
     }
 
 

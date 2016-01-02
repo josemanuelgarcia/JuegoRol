@@ -113,8 +113,6 @@ var AnimationManager = cc.Class.extend({
         }
         return framesAnimacion;
 
-    }, obtainAnimation: function (key) {
-        return this.objectToBeAnimated.animaciones[key];
     }
 
 

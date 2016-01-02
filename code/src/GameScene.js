@@ -163,7 +163,7 @@ var GameLayer = cc.Layer.extend({
             instancia.keyPulsada=null;
         else if(instancia.teclasPulsadas.length>1)
             instancia.keyPulsada == instancia.teclasPulsadas[instancia.teclasPulsadas.length -2];
-        cc.log(instancia.keyPulsada);
+        //cc.log(instancia.keyPulsada);
         instancia.eliminarTeclaPulsada(keyCode);
 
     },eliminarTeclaPulsada(keyCode)
