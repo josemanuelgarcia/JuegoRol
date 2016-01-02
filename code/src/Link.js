@@ -102,9 +102,11 @@ var Link = cc.Class.extend({
         this.canMove=true;
         this.body.setPos(pos);
     }, utilizarEspada: function () {
-        this.body.setVel(cp.v(0, 0));
-        this.canMove=false;
-        this.sword=true;
+        if(!this.rolling){
+            this.body.setVel(cp.v(0, 0));
+            this.canMove=false;
+            this.sword=true;
+        }
     },utilizarBoomerang:function(){
         if(this.boomerang==null)
         {
@@ -138,8 +140,8 @@ var Link = cc.Class.extend({
     },procesarEventos:function()
     {
         var keyCode = null;
-        if(this.layer.teclasPulsadas.length>0)
-            cc.log(this.layer.teclasPulsadas);
+        //if(this.layer.teclasPulsadas.length>0)
+          //  cc.log(this.layer.teclasPulsadas);
         //Si no se ha pulsado ninguna tecla se deja parado
         if(this.layer.teclasPulsadas.length==0)
             this.parado();
