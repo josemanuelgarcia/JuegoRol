@@ -87,13 +87,20 @@ var Link = cc.Class.extend({
         }
     },parado: function ()
     {
-        if(!this.rolling)
-        {
+        if(!this.rolling){
            this.body.setVel(cp.v(0, 0));
            this.walking=false;
            this.canMove=true;
            this.stopped=true;
         }
+    },entrarTransicion:function(){
+       this.body.setVel(cp.v(0, 0));
+       this.canMove=false;
+       this.stopped=true;
+
+    },salirTransicion:function(pos){
+        this.canMove=true;
+        this.body.setPos(pos);
     }, utilizarEspada: function () {
         this.body.setVel(cp.v(0, 0));
         this.canMove=false;
@@ -192,7 +199,7 @@ var Link = cc.Class.extend({
     }
     ,animacionCaminar:function()
     {
-        this.sprite.stopAllActions();
+        this.acabarAcciones();
         this.canMove = false;
         this.sprite.scaleX=(this.orientacion=="IZQUIERDA"? -1:1);
 
@@ -235,6 +242,12 @@ var Link = cc.Class.extend({
          {
              this.utilizarBombas();
          }
+    },acabarAcciones:function()
+    {
+        this.sprite.stopAllActions();
+        this.sword = false;
+        this.rolling = false;
+        this.weapon = false;
     }
     ,swordFinished:function()
     {
@@ -247,7 +260,7 @@ var Link = cc.Class.extend({
     {
         this.canMove = true;
     }, obtainAnimation: function (key) {
-             return this.animaciones[key];
+        return this.animaciones[key];
     }
 
 

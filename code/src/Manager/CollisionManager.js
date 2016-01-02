@@ -107,14 +107,17 @@ var CollisionManager = cc.Class.extend({
          }
 
          var pos = cueva.getPosSalida();
-         var newPos = cc.p(pos.x,this.mapaAlto - pos.y);
+         var newPos = cc.p(pos.x,this.layer.mapaAlto - pos.y);
          var scene=this.layer.getParent();
-         posicion=newPos;
          //Para que no siga avanzando hacia arriba
-         this.layer.link.parado();
+         this.layer.link.entrarTransicion();
+
+        /*
          cc.director.pause();
          cc.director.runScene(cc.TransitionFade.create(3.0,new GameScene(newPos)));
          cc.director.resume();
+         */
+         this.layer.link.salirTransicion(newPos);
 
     }, destruirJarron:function(arbiter,space) {
          var shapes = arbiter.getShapes();
