@@ -11,6 +11,8 @@ var tipoEspada=9;
 var tipoCueva=10;
 var tipoJarron=11;
 var tipoBloque=12;
+var tipoSensorSoldado=13;
+var tipoSoldado=14;
 var CollisionManager = cc.Class.extend({
 
     space:null,
@@ -89,7 +91,7 @@ var CollisionManager = cc.Class.extend({
          var shapes = arbiter.getShapes();
          var shape = shapes[1];
          var cueva = null;
-         for(var i = 0; i<this.cuevas.length ; i++)
+         for(var i = 0; i<this.layer.cuevas.length ; i++)
          {
              if(shape === this.layer.cuevas[i].shape)
                  cueva = this.layer.cuevas[i];

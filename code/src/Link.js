@@ -15,6 +15,7 @@ var Link = cc.Class.extend({
     sword:false,
     weapon:false,
     rolling:false,
+    stopped:false,
     //Atributos de Link modificables
     velMovimiento: 70,
     velRodar:180,
@@ -57,31 +58,31 @@ var Link = cc.Class.extend({
         return true;
 
     }, moverArriba: function () {
-        if(!this.rolling){
+        if(this.canMove){
             this.orientacion="ARRIBA";
             this.walking=true;
-            this.body.setVel(cp.v(this.body.getVel().x, this.velMovimiento));
+            this.body.setVel(cp.v(0, this.velMovimiento));
         }
     }, moverAbajo: function () {
-        if(!this.rolling)
+        if(this.canMove)
         {
             this.orientacion="ABAJO";
             this.walking=true;
-            this.body.setVel(cp.v(this.body.getVel().x, -this.velMovimiento));
+            this.body.setVel(cp.v(0, -this.velMovimiento));
         }
     }, moverDerecha: function () {
-        if(!this.rolling)
+        if(this.canMove)
         {
             this.orientacion="DERECHA";
             this.walking=true;
-            this.body.setVel(cp.v(this.velMovimiento, this.body.getVel().y));
+            this.body.setVel(cp.v(this.velMovimiento, 0));
         }
     }, moverIzquierda: function () {
-        if(!this.rolling)
+        if(this.canMove)
         {
             this.orientacion="IZQUIERDA";
             this.walking=true;
-            this.body.setVel(cp.v(-this.velMovimiento, this.body.getVel().y));
+            this.body.setVel(cp.v(-this.velMovimiento,0));
         }
     },parado: function ()
     {
@@ -90,9 +91,11 @@ var Link = cc.Class.extend({
            this.body.setVel(cp.v(0, 0));
            this.walking=false;
            this.canMove=true;
+           this.stopped=true;
         }
     }, utilizarEspada: function () {
-        this.walking=false;
+        this.body.setVel(cp.v(0, 0));
+        this.canMove=false;
         this.sword=true;
     },utilizarBoomerang:function(){
         if(this.boomerang==null)
@@ -108,8 +111,10 @@ var Link = cc.Class.extend({
         }
     },rodar:function()
     {
-        if(!this.walking){
+        if(this.walking){
             this.rolling=true;
+            this.canMove=false;
+            this.walking=false;
             this.getSentidoRodar();
         }
 
@@ -125,9 +130,13 @@ var Link = cc.Class.extend({
     },procesarEventos:function()
     {
         var keyCode = null;
-        if(this.layer.teclasPulsadas==0)
+        //cc.log(this.layer.teclasPulsadas);
+        //Si no se ha pulsado ninguna tecla se deja parado
+        if(this.layer.teclasPulsadas.length==0)
             this.parado();
         else
+        {
+            this.stopped = false;
             for(var i = 0; i<this.layer.teclasPulsadas.length;i++)
             {
                 keyCode = this.layer.teclasPulsadas[i];
@@ -146,31 +155,38 @@ var Link = cc.Class.extend({
                          this.moverIzquierda();
                          break;
                     case( cc.KEY.M ||  cc.KEY.m):
+                        this.layer.eliminarTeclaPulsada(keyCode);
                         this.utilizarEspada();
                         break;
                     case( cc.KEY.K || cc.KEY.k):
-                        this.weapon = true;
+                        this.layer.eliminarTeclaPulsada(keyCode);
+                        this.useWeapon();
                         break;
                     case(cc.KEY.N ||  cc.KEY.n):
+                        this.layer.eliminarTeclaPulsada(keyCode);
                         this.rodar();
                         break;
+
                 }
-
-
             }
 
-    },realizarAnimaciones()
-    {
+        }
 
-        if(this.sword)
-            this.animacionEspada();
-        else if(this.walking && this.canMove)
+    },realizarAnimaciones:function()
+    {
+        //cc.log("Sword: "+this.sword +"\n" + "Walking: "+this.walking + "\n" + "Rolling: " + this.rolling);
+        if(this.walking && this.canMove)
             this.animacionCaminar();
+        else if(this.sword)
+            this.animacionEspada();
         else if(this.rolling)
-            this.sprite.runAction(animationManager.obtainAnimation("RODAR_"+this.orientacion));
-        else if(!this.walking)
+            this.animacionRodar();
+        else if(this.stopped)
             this.animacionPararse();
 
+    },animacionRodar:function(){
+
+        this.sprite.runAction(animationManager.obtainAnimation("RODAR_"+this.orientacion));
     }
     ,animacionCaminar:function()
     {
@@ -181,39 +197,50 @@ var Link = cc.Class.extend({
 
     },animacionEspada:function()
     {
+
         this.sprite.scaleX=(this.orientacion=="IZQUIERDA"? -1:1);
         this.sprite.runAction(animationManager.obtainAnimation("ESPADA_"+this.orientacion));
 
     },animacionPararse:function()
     {
         this.sprite.scaleX=(this.orientacion=="IZQUIERDA"? -1:1);
-        this.sprite.stopAllActions();
         this.sprite.runAction(animationManager.obtainAnimation("SIMPLE_"+this.orientacion));
 
     },getSentidoRodar:function()
     {
-        if(this.orientacion=="IZQUIERDA")
+        switch(this.orientacion)
         {
-            this.body.setVel(cp.v(-this.velRodar, this.body.getVel().y));
+            case "IZQUIERDA":
+                this.body.setVel(cp.v(-this.velRodar, 0));
+                break;
+            case "DERECHA":
+                this.body.setVel(cp.v(this.velRodar, 0));
+                break;
+            case "ARRIBA":
+                 this.body.setVel(cp.v(0, this.velRodar));
+                 break;
+            case "ABAJO":
+                this.body.setVel(cp.v(0, -this.velRodar));
+                break;
         }
-        else if(this.orientacion=="DERECHA")
-        {
-            this.body.setVel(cp.v(this.velRodar, this.body.getVel().y));
-        }
-        else if(this.orientacion=="ARRIBA")
-        {
-            this.body.setVel(cp.v(this.body.getVel().x, this.velRodar));
-        }
-        else if(this.orientacion=="ABAJO")
-        {
-            this.body.setVel(cp.v(this.body.getVel().x, -this.velRodar));
-        }
-    },swordFinished:function()
+    },useWeapon: function(){
+
+         if(weapon=="BOOMERANG")
+         {
+             this.utilizarBoomerang();
+         }
+         else if(weapon=="BOMBAS")
+         {
+             this.utilizarBombas();
+         }
+    }
+    ,swordFinished:function()
     {
         this.sword = false;
     },rollingFinished:function()
     {
         this.rolling=false;
+        this.canMove=true;
     },setCanMove:function()
     {
         this.canMove = true;

@@ -1,25 +1,8 @@
 var idCapaJuego = 1;
 var idCapaControles = 2;
 var idCapaHistoria=3;
-//Tipos para las colisiones
-var tipoNoPasable = 1;
-var tipoJugador = 2;
-var tipoOctorok = 3;
-var tipoDisparoOctorok = 4;
-var tipoBoomerang=5;
-var tipoCorazon=6;
-var tipoRupia=7;
-var tipoBomba=8;
-var tipoEspada=9;
-var tipoCueva=10;
-var tipoJarron=11;
-var tipoBloque=12;
-var tipoSensorSoldado=13;
-var tipoSoldado=14;
-
 
 var weapon="ARCO";
-var posicion=null;
 var animationManager=null;
 var collisionManager =null;
 var GameLayer = cc.Layer.extend({
@@ -43,7 +26,6 @@ var GameLayer = cc.Layer.extend({
     soldado:null,
 
     //Teclado
-    numTeclasPulsadas:0,
     teclasPulsadas:[],
 
     ctor: function () {
@@ -51,10 +33,6 @@ var GameLayer = cc.Layer.extend({
         this._super();
         var size = cc.winSize;
         this.mathUtil = new MathUtil();
-        if(posicion==null)
-        {
-            posicion=cc.p(400,400);
-        }
 
         //Cachear recursos del juego
          cc.spriteFrameCache.addSpriteFrames(res.link_plist);
@@ -73,6 +51,7 @@ var GameLayer = cc.Layer.extend({
         //Cargamos el Mapa
         this.cargarMapa();
         //Creación del personaje link
+        var posicion=cc.p(400,400);
         this.link = new Link(this.space, posicion, this);
 
 
@@ -164,59 +143,30 @@ var GameLayer = cc.Layer.extend({
 
     }, procesarEventosKeyboard: function (keyCode, event) {
         var instancia = event.getCurrentTarget();
-
-        if(instancia.keyPulsada != keyCode)
+        //Al cambiar de ventana en el navegador entra un 18 no se por que
+        if(instancia.keyPulsada != keyCode && keyCode!=18)
         {
             instancia.keyPulsada = keyCode;
-            //instancia.numTeclasPulsadas++;
             instancia.teclasPulsadas.push(keyCode);
-            //cc.log("Pulsada "+ instancia.numTeclasPulsadas);
-            cc.log("Pulsada "+instancia.teclasPulsadas);
+
         }
-        /*
-        if (instancia.keyPulsada == keyCode && (keyCode != 77 && keyCode != 109 && keyCode!=cc.KEY.n && keyCode!=cc.KEY.N)) {
-            return;
-        }
-        instancia.keyPulsada = keyCode;
-        //Utilizar armas
-        instancia.useWeapon(keyCode,instancia);
-        //Metodo que maneja los eventos de teclado de movimiento
-        instancia.movementLink(keyCode,instancia);
-        */
+
     }, dejarProcesarEventosKeyboard: function (keyCode, event) {
         var instancia = event.getCurrentTarget();
-        instancia.numTeclasPulsadas--;
-
-        instancia.eliminarTeclaPulsada();
-        cc.log(instancia.teclasPulsadas.length)
-        if(instancia.teclasPulsadas.length==0)
+        //Controlamos la ultima teclaPulsada cuando se pulsan más de una
+        if(instancia.teclasPulsadas.length<=1)
             instancia.keyPulsada=null;
-        else
-            instancia.keyPulsada == instancia.teclasPulsadas[instancia.teclasPulsadas.length -1];
+        else if(instancia.teclasPulsadas.length>1)
+            instancia.keyPulsada == instancia.teclasPulsadas[instancia.teclasPulsadas.length -2];
+        cc.log(instancia.keyPulsada);
+        instancia.eliminarTeclaPulsada(keyCode);
 
-
-         //cc.log("Soltada "+instancia.numTeclasPulsadas);
-        // cc.log("Soltada "+ instancia.teclasPulsadas);
-         //cc.log("Ultima Pulsada "+ instancia.keyPulsada);
-        /*
-        //Si se suelta alguna de las teclas de movimiento se eliminan todas las acciones
-        if (keyCode == cc.KEY.W || keyCode == cc.KEY.w || keyCode == cc.KEY.s || keyCode == cc.KEY.S
-        || keyCode == cc.KEY.A || keyCode == cc.KEY.a || keyCode == cc.KEY.D || keyCode == cc.KEY.d) {
-            instancia.keyPulsada = null;
-            instancia.movementKeysPressed[keyCode]=false;
-            //Si ninguna tecla de movimiento esta pulsada se para
-            if(!instancia.isMovementKeyPressed())
-            {
-                instancia.link.parado();
-                //instancia.link.sprite.stopAllActions();
-            }
-
-        }
-        */
     },eliminarTeclaPulsada(keyCode)
     {
+
        var index = this.teclasPulsadas.indexOf(keyCode);
-       this.teclasPulsadas.splice(index,1);
+       if(index>-1)
+            this.teclasPulsadas.splice(index,1);
 
     }
     , cargarMapa: function () {
@@ -303,22 +253,6 @@ var GameLayer = cc.Layer.extend({
         var viewPoint = cc.pSub(centerOfView, actualPosition);
         this.setPosition(viewPoint);
 
-    },useWeapon: function(keyCode,instancia){
-        if (keyCode == cc.KEY.M || keyCode == cc.KEY.m) {
-             instancia.link.utilizarEspada();
-         }
-                //Utilizar tecla k arma seleccionada
-        else if( keyCode==cc.KEY.K || keyCode==cc.KEY.k)
-          {
-            if(weapon=="BOOMERANG")
-            {
-                instancia.link.utilizarBoomerang();
-            }
-            if(weapon=="BOMBAS")
-            {
-                instancia.link.utilizarBombas();
-            }
-         }
     },isMovementKeyPressed:function(){
         for(var i=0;i<this.movementKeysPressed.length;i++)
         {

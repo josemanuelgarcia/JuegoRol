@@ -814,7 +814,7 @@
                 <key>textureRotated</key>
                 <false/>
             </dict>
-            <key>link_parado_abajo0.png</key>
+            <key>link_parado_abajo2.png</key>
             <dict>
                 <key>aliases</key>
                 <array/>
@@ -844,7 +844,7 @@
                 <key>textureRotated</key>
                 <false/>
             </dict>
-            <key>link_parado_abajo2.png</key>
+            <key>link_parado_abajo0.png</key>
             <dict>
                 <key>aliases</key>
                 <array/>
@@ -904,7 +904,7 @@
                 <key>textureRotated</key>
                 <false/>
             </dict>
-            <key>link_parado_derecha0.png</key>
+            <key>link_parado_derecha2.png</key>
             <dict>
                 <key>aliases</key>
                 <array/>
@@ -934,7 +934,7 @@
                 <key>textureRotated</key>
                 <true/>
             </dict>
-            <key>link_parado_derecha2.png</key>
+            <key>link_parado_derecha0.png</key>
             <dict>
                 <key>aliases</key>
                 <array/>
