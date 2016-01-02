@@ -105,6 +105,12 @@ var IULayer = cc.Layer.extend({
             cc.p(event.getLocationX(), event.getLocationY()))) {
 
 
+//Es una muñeca número de conservación de datos.
+dollNum = 1;
+
+
+
+
             // Metodo que suma una vida
             //instanciaIU.darVidas();
             instanciaIU.nuevoCorazon();
@@ -246,7 +252,7 @@ console.log("numero de vidas quitadas"+this.vidasQuitadas);
         }
         this.vidasQuitadas=0;
         this.vidasIniciales=this.vidasIniciales+1;
-    },crearLabelArmas : function()
+    }, crearLabelArmas : function()
     {
     if(this.numeroDeArmasDisponiblesLabel==null){
     this.numeroDeArmasDisponiblesLabel = new cc.LabelTTF("" + this.numeroArmas, "Helvetica", 20);

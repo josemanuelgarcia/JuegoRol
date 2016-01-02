@@ -1,7 +1,7 @@
 var idCapaJuego = 1;
 var idCapaControles = 2;
 var idCapaHistoria=3;
-
+var cargarPartida = false;
 var weapon="ARCO";
 var animationManager=null;
 var collisionManager =null;
@@ -54,8 +54,20 @@ var GameLayer = cc.Layer.extend({
          //Creacion enemigo prueba
          this.octorok = new Octorok(this.space, cc.p(600, 250), this);
 
-        //Creación del personaje link
+
+        //obtenemos la posicion guardada
+        var posicionX = parseInt(loadDollNum("xLink",1));
+        var posicionY = parseInt(loadDollNum("yLink",1));
+
+       //Si exista una posicion guiardada y se ha dado a cargar partida entramos
+        if(cargarPartida && posicionX != null && posicionY != null){
+        var posicion=cc.p(posicionX,posicionY);
+        }
+        //en caso contrario cargamos posicion por defecto
+        else
+        {
         var posicion=cc.p(400,400);
+        }
         this.link = new Link(this.space, posicion, this);
 
 
