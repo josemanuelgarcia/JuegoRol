@@ -3,7 +3,7 @@ var DisparoOctorok = cc.Class.extend({
     sprite: null,
     shape: null,
     layer: null,
-    velDisparo: 50,
+    velDisparo: 70,
     ctor: function (space, posicion, layer, sentido) {
         this.space = space;
         this.layer = layer;

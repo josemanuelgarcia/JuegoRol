@@ -50,13 +50,14 @@ var GameLayer = cc.Layer.extend({
         animationManager=new AnimationManager();
         //Cargamos el Mapa
         this.cargarMapa();
+
+         //Creacion enemigo prueba
+         this.octorok = new Octorok(this.space, cc.p(600, 250), this);
+
         //Creación del personaje link
         var posicion=cc.p(400,400);
         this.link = new Link(this.space, posicion, this);
 
-
-        //Creacion enemigo prueba
-        this.octorok = new Octorok(this.space, cc.p(600, 250), this);
 
         //Creacion de soldado de prueba
         this.soldado = new Soldado(this.space, cc.p(600, 200), this);
@@ -137,6 +138,10 @@ var GameLayer = cc.Layer.extend({
             for(var i = 0; i<this.jarrones.length; i++) {
                 if(this.jarrones[i].shape === shape)
                     this.jarrones[i].destruir();
+            }
+
+            if(this.soldado.shape == shape){
+                this.soldado.eliminar();
             }
         }
         this.shapesToRemove = [];

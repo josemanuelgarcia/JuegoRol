@@ -35,13 +35,7 @@ var Soldado = cc.Class.extend({
         // forma dinamica
         this.shape.setCollisionType(tipoSoldado);
         this.space.addShape(this.shape);
-/*
-        //sensor
-        this.sensor = new cp.CircleShape(this.body, this.sprite.getContentSize().width*5, cp.vzero);
-        this.sensor.setSensor(true);
-        this.space.addShape(this.sensor);
-        this.sensor.setCollisionType(tipoSensorSoldado);
-*/
+
 /*
         //Animacion Mover Abajo
         var framesCaminarAbajo = this.getAnimacion("Octorok_abajo", 1);
@@ -75,15 +69,12 @@ var Soldado = cc.Class.extend({
         var distancia=Math.sqrt(Math.pow(this.body.p.x-this.layer.link.body.p.x,2)+Math.pow(this.body.p.y-this.layer.link.body.p.y,2));
         if(distancia<150) {
             //hacemos que primero el enemigo se muestre en el ejeX y despues en el ejeY
-                 //TODO mover al enemigo en esa dirección
-                 //TODO comprobar misma y y diferente X
-                this.moverHaciaJugador();
+            this.moverHaciaJugador();
 
         } else {
            //parar al enemigo
            this.parar();
         }
-
 
     }, getAnimacion: function (nombreAnimacion, numFrames) {
          var framesAnimacion = [];
@@ -115,8 +106,8 @@ var Soldado = cc.Class.extend({
         this.body.setVel(cp.v(-this.velMovimiento, 0));
 
     }, eliminar: function() {
-        this.shape.removeShape(this.shape);
-        this.layer.removeChild(this.sprite);
+        this.space.removeShape(this.shape);
+        this.layer.mapa.removeChild(this.sprite);
 
     }, parar: function () {
         this.body.setVel(cp.v(0, 0));
@@ -125,10 +116,6 @@ var Soldado = cc.Class.extend({
     }, moverHaciaJugador: function() {
          var distanciaX=this.body.p.x-this.layer.link.body.p.x;
          var distanciaY=this.body.p.y-this.layer.link.body.p.y;
-
-        //var action = cc.MoveTo.create(50, cc.p(this.layer.link.body.p.x,this.layer.link.body.p.y));
-        //his.sprite.runAction(action);
-        //TODO no se mueve
 
          if(distanciaX<10) {
                 this.moverDerecha();
@@ -142,9 +129,6 @@ var Soldado = cc.Class.extend({
                this.moverArriba();
           }
 
-    }, atacar:function (){
-        this.parar();
-        //TODO mirar al jugador y atacarlo
     }
 
 
