@@ -45,6 +45,8 @@ var CollisionManager = cc.Class.extend({
 
         this.space.addCollisionHandler(tipoJarron, tipoDisparoOctorok,null, null, this.collisionObjetoConDisparo.bind(this), null);
 
+        this.space.addCollisionHandler(tipoSoldado, tipoDisparoOctorok,null, null, this.collisionObjetoConDisparo.bind(this), null);
+
         this.space.addCollisionHandler(tipoJugador, tipoDisparoOctorok,null, null, this.collisionJugadorConDisparo.bind(this), null);
 
         this.space.addCollisionHandler(tipoBoomerang, tipoOctorok,null,this.collisionBoomerangConOctorock.bind(this), null, null);

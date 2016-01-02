@@ -84,25 +84,25 @@ var AnimationManager = cc.Class.extend({
         var framesDispararAbajo = this.getAnimacion("Octorok_disparo_abajo", 1);
         var animacionDisparoAbajo = new cc.Animation(framesDispararAbajo,0.4);
         this.objectToBeAnimated.animaciones["DISPARAR_ABAJO"]  = new cc.Sequence(new cc.Spawn(new cc.Animate(animacionDisparoAbajo)
-            ,new cc.callFunc(this.crearDisparo,this)), new cc.Animate(animacionAbajo));
+            ,new cc.callFunc(octorok.crearDisparo,octorok)), new cc.Animate(animacionAbajo));
 
         //Animacion disparar hacia arriba
         var framesDispararArriba = this.getAnimacion("Octorok_disparo_arriba", 1);
         var animacionDispararArriba = new cc.Animation(framesDispararArriba, 0.4);
         this.objectToBeAnimated.animaciones["DISPARAR_ARRIBA"] = new cc.Sequence(new cc.Spawn(new cc.Animate(animacionDispararArriba),
-           new cc.callFunc(this.crearDisparo,this)),  new cc.Animate(animacionArriba));
+           new cc.callFunc(octorok.crearDisparo,octorok)),  new cc.Animate(animacionArriba));
 
         //Animacion disparar hacia la drecha
         var framesDispararDerecha = this.getAnimacion("Octorok_disparo_derecha", 1);
         var animacionDisparoDerecha = new cc.Animation(framesDispararDerecha, 0.4);
         this.objectToBeAnimated.animaciones["DISPARAR_DERECHA"] = new cc.Sequence(new cc.Spawn(new cc.Animate(animacionDisparoDerecha),
-           new cc.callFunc(this.crearDisparo,this)), new cc.Animate(animacionDerecha));
+           new cc.callFunc(octorok.crearDisparo,octorok)), new cc.Animate(animacionDerecha));
 
         //Animacion disparar hacia la izquierda
         var framesDispararIzquierda = this.getAnimacion("Octorok_disparo_izquierda", 1);
         var animacionDisparoIzquierda = new cc.Animation(framesDispararIzquierda, 0.4);
         this.objectToBeAnimated.animaciones["DISPARAR_IZQUIERDA"] = new cc.Sequence(new cc.Spawn(new cc.Animate(animacionDisparoIzquierda),
-            new cc.callFunc(this.crearDisparo,this)), new cc.Animate(animacionIzquierda));
+            new cc.callFunc(octorok.crearDisparo,octorok)), new cc.Animate(animacionIzquierda));
 
     }, getAnimacion: function (nombreAnimacion, numFrames) {
         var framesAnimacion = [];

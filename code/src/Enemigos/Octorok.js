@@ -1,13 +1,5 @@
 var Octorok = cc.Class.extend({
     //Variables de clase
-    animMoverArriba: null,
-    animMoverAbajo: null,
-    animMoverDerecha: null,
-    animMoverIzquierda: null,
-    animDispararArriba: null,
-    animDispararAbajo: null,
-    animDispararDerecha: null,
-    animDispararIzquierda: null,
     tiempoEntreDisparos: null,
     tiempoUltimoDisparo: 0,
     space: null,
@@ -103,27 +95,27 @@ var Octorok = cc.Class.extend({
 
     }, moverArriba: function () {
         this.orientacion = "ARRIBA";
-        this.sprite.runAction(this.animaciones["MOVER_"+this.orientacion]);
+        this.sprite.runAction(this.obtainAnimation("MOVER_"+this.orientacion));
         this.body.setVel(cp.v(0, this.velMovimiento));
 
     }, moverAbajo: function () {
         this.orientacion = "ABAJO";
-        this.sprite.runAction(this.animaciones["MOVER_"+this.orientacion]);
+        this.sprite.runAction(this.obtainAnimation("MOVER_"+this.orientacion));
         this.body.setVel(cp.v(0, -this.velMovimiento));
 
     }, moverDerecha: function () {
         this.orientacion = "DERECHA";
-        this.sprite.runAction(this.animaciones["MOVER_"+this.orientacion]);
+        this.sprite.runAction(this.obtainAnimation("MOVER_"+this.orientacion));
         this.body.setVel(cp.v(this.velMovimiento, 0));
 
     }, moverIzquierda: function () {
         this.orientacion = "IZQUIERDA";
-        this.sprite.runAction(this.animaciones["MOVER_"+this.orientacion]);
+        this.sprite.runAction(this.obtainAnimation("MOVER_"+this.orientacion));
         this.body.setVel(cp.v(-this.velMovimiento, 0));
 
     }, disparar: function () {
         this.body.setVel(cp.v(0,0));
-        this.sprite.runAction(this.animaciones["DISPARAR_"+this.orientacion]);
+        this.sprite.runAction(this.obtainAnimation("DISPARAR_"+this.orientacion));
 /*
         if (this.orientacion == "ARRIBA") {
             this.sprite.runAction(animationManager.obtainAnimation("DISPARAR"+this.orientacion));
@@ -140,6 +132,7 @@ var Octorok = cc.Class.extend({
 
     }, crearDisparo:function(){
        //Crear el disparo
+       console.log("disparo");
         var disparo;
             if (this.orientacion == "ARRIBA") {
                  disparo = new DisparoOctorok(this.space,
@@ -172,10 +165,14 @@ var Octorok = cc.Class.extend({
         }
 
         this.tiempoEntreMovimientos = 0;
+
     }, eliminar:function () {
         // quita la forma
         this.space.removeShape(this.shape);
         // quita el sprite
         this.layer.mapa.removeChild(this.sprite);
-     }
+
+    }, obtainAnimation: function (key) {
+              return this.animaciones[key];
+    }
 });
