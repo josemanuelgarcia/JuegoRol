@@ -106,6 +106,7 @@ var Link = cc.Class.extend({
             this.body.setVel(cp.v(0, 0));
             this.canMove=false;
             this.sword=true;
+            this.walking=false;
         }
     },utilizarBoomerang:function(){
         if(this.boomerang==null)
@@ -140,8 +141,8 @@ var Link = cc.Class.extend({
     },procesarEventos:function()
     {
         var keyCode = null;
-        //if(this.layer.teclasPulsadas.length>0)
-          //  cc.log(this.layer.teclasPulsadas);
+        if(this.layer.teclasPulsadas.length>0)cc.log(this.layer.teclasPulsadas);
+
         //Si no se ha pulsado ninguna tecla se deja parado
         if(this.layer.teclasPulsadas.length==0)
             this.parado();
@@ -254,6 +255,7 @@ var Link = cc.Class.extend({
     ,swordFinished:function()
     {
         this.sword = false;
+
     },rollingFinished:function()
     {
         this.rolling=false;

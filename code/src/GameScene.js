@@ -22,9 +22,7 @@ var GameLayer = cc.Layer.extend({
     cuevas:[],
     jarrones:[],
     bloques:[],
-    movementKeysPressed:[],
     soldado:null,
-
     //Teclado
     teclasPulsadas:[],
 
@@ -170,13 +168,16 @@ var GameLayer = cc.Layer.extend({
 
     }, dejarProcesarEventosKeyboard: function (keyCode, event) {
         var instancia = event.getCurrentTarget();
+        instancia.eliminarTeclaPulsada(keyCode);
         //Controlamos la ultima teclaPulsada cuando se pulsan más de una
         if(instancia.teclasPulsadas.length<=1)
             instancia.keyPulsada=null;
-        else if(instancia.teclasPulsadas.length>1)
-            instancia.keyPulsada == instancia.teclasPulsadas[instancia.teclasPulsadas.length -2];
-        //cc.log(instancia.keyPulsada);
-        instancia.eliminarTeclaPulsada(keyCode);
+        else if(instancia.teclasPulsadas.length>1){
+            cc.log(instancia.teclasPulsadas);
+            instancia.keyPulsada = instancia.teclasPulsadas[instancia.teclasPulsadas.length-1];
+            cc.log(instancia.keyPulsada);
+        }
+
 
     },eliminarTeclaPulsada(keyCode)
     {
@@ -270,15 +271,6 @@ var GameLayer = cc.Layer.extend({
         var viewPoint = cc.pSub(centerOfView, actualPosition);
         this.setPosition(viewPoint);
 
-    },isMovementKeyPressed:function(){
-        for(var i=0;i<this.movementKeysPressed.length;i++)
-        {
-            if(this.movementKeysPressed[i])
-            {
-                return true;
-            }
-        }
-        return false;
     }
 });
 
