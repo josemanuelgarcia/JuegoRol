@@ -17,17 +17,37 @@ var IULayer = cc.Layer.extend({
     pause:true,
     numeroDeArmasDisponiblesLabel:null,
     numeroArmas:0,
+    corazonesSumados:0,
     ctor: function () {
         this._super();
         var size = cc.winSize;
 
         //se llama par pintar las vidas iniciales
-        this.darVidas();
+
         //Al principio la weapon es el arco
         weapon="ARCO";
 
 
+        //-------------------Cargar Partida-------------------------------------
+        var vidasGuardadas = parseInt(loadDollNum("corazonesDados",1));
+        var vidasPerdidas = parseInt(loadDollNum("vidasQuitadas",1));
+        console.log(""+vidasPerdidas+"  "+vidasGuardadas);
+          if(cargarPartida && (vidasGuardadas != 0 || vidasPerdidas != 0)){
 
+                this.vidasIniciales=this.vidasIniciales+vidasGuardadas;
+                this.corazones = this.corazones+vidasGuardadas;
+                this.corazonesSumados = vidasGuardadas;
+                this.darVidas();
+                for(i=0;i<vidasPerdidas;i++)
+                {this.quitarVidas();}
+                }
+
+                else
+                {
+                 this.darVidas();
+
+                }
+        //----------------------------------------------------------------------
 
         // boton para comprobar q se suman corazones (es provisional y lo podeis quitar si quereis)
         this.spriteBSumarVidas = cc.Sprite.create(res.contenedorCorazon_png);
@@ -156,6 +176,7 @@ dollNum = 1;
                    eval("variable" +100+i).setPosition(cc.p(this.posicionSpriteCorazones, cc.winSize.height - this.alturaSpriteCOrazones));
                    //y lo añadimos
                    this.addChild(eval("variable" +100+i),0,100+i);
+                   console.log("doy vida");
         }
 
         //solo se ponen una vez
@@ -240,10 +261,11 @@ this.corazones = this.corazones+1;
 
         //Actualizamos el identificador de los sprite de los corazones blancos
         this.corazonesBlancos = this.corazonesBlancos+1;
+        console.log("numero de vidas quitadas"+this.vidasQuitadas);
         }}
     },nuevoCorazon : function() {
 
-
+        this.corazonesSumados=this.corazonesSumados+1;
 console.log("numero de vidas quitadas"+this.vidasQuitadas);
         for(i=0;i<=this.vidasQuitadas;i++)
         {

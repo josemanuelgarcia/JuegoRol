@@ -56,14 +56,17 @@ var GameLayer = cc.Layer.extend({
         //obtenemos la posicion guardada
         var posicionX = parseInt(loadDollNum("xLink",1));
         var posicionY = parseInt(loadDollNum("yLink",1));
-
+console.log("he salido de save");
        //Si exista una posicion guiardada y se ha dado a cargar partida entramos
-        if(cargarPartida && posicionX != null && posicionY != null){
+        if(cargarPartida && posicionX != 0 && posicionY != 0){
+        console.log("he entrado por el if ");
         posicion=cc.p(posicionX,posicionY);
+
         }
         //en caso contrario cargamos posicion por defecto
         else
         {
+        console.log("he entrado por el else ");
         posicion=cc.p(400,400);
         }
         this.link = new Link(this.space, posicion, this);

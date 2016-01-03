@@ -4,6 +4,7 @@ var res = {
     CloseSelected_png: "res/CloseSelected.png",
     boton_jugar_png: "res/boton_jugar.png",
     boton_guardar_png: "res/boton_guardar.png",
+    boton_borrar_png: "res/boton_borrar.png",
     boton_cargar_png: "res/boton_cargar.png",
     boton_saltar_png: "res/IULayer/boton_saltar.png",
     boton_menu_png: "res/IULayer/boton_menu.png",
