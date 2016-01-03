@@ -59,12 +59,12 @@ var GameLayer = cc.Layer.extend({
 
        //Si exista una posicion guiardada y se ha dado a cargar partida entramos
         if(cargarPartida && posicionX != null && posicionY != null){
-        var posicion=cc.p(posicionX,posicionY);
+        posicion=cc.p(posicionX,posicionY);
         }
         //en caso contrario cargamos posicion por defecto
         else
         {
-        var posicion=cc.p(400,400);
+        posicion=cc.p(400,400);
         }
         this.link = new Link(this.space, posicion, this);
 
