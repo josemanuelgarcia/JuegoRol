@@ -51,12 +51,16 @@ var CollisionManager = cc.Class.extend({
 
         this.space.addCollisionHandler(tipoBoomerang, tipoOctorok,null,this.collisionBoomerangConOctorock.bind(this), null, null);
 
+        this.space.addCollisionHandler(tipoBomba, tipoOctorok,null,this.collisionBoomerangConOctorock.bind(this), null, null);
+
         this.space.addCollisionHandler(tipoEspada, tipoOctorok, null,this.collisionEspadaConEnemigo.bind(this), null, null);
 
         this.space.addCollisionHandler(tipoJugador, tipoOctorok, null, null, null, this.reducirVidas.bind(this));
 
         //Colisiones Soldado
         this.space.addCollisionHandler(tipoBoomerang, tipoSoldado,null,this.collisionBoomerangConOctorock.bind(this), null, null);
+
+        this.space.addCollisionHandler(tipoBomba, tipoSoldado,null,this.collisionBoomerangConOctorock.bind(this), null, null);
 
         this.space.addCollisionHandler(tipoEspada, tipoSoldado, null,this.collisionEspadaConEnemigo.bind(this), null, null);
 
@@ -83,7 +87,6 @@ var CollisionManager = cc.Class.extend({
     }, collisionBoomerangConOctorock: function (arbiter, space) {
             var shapes = arbiter.getShapes();
             this.layer.shapesToRemove.push(shapes[1]);
-            //TODO quitar vida a octorok
 
     }, collisionJugadorConCorazon:function(arbiter,space){
          iuLayer.darVidas();

@@ -132,8 +132,7 @@ var Octorok = cc.Class.extend({
 
     }, crearDisparo:function(){
        //Crear el disparo
-       console.log("disparo");
-        var disparo;
+            var disparo;
             if (this.orientacion == "ARRIBA") {
                  disparo = new DisparoOctorok(this.space,
                                     cc.p(this.body.p.x, this.body.p.y+this.sprite.getContentSize().height/2), this.layer, this.orientacion);

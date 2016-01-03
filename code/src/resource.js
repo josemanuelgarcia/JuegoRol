@@ -42,7 +42,8 @@ var res = {
     link_plist:"res/Animaciones/link.plist",
     jarron_plist:"res/Interaccionables/Jarron.plist",
     jarron_png:"res/Interaccionables/Jarron.png",
-    soldado_png: "res/Animaciones/GreenSoldier.png"
+    soldadoVerde_png: "res/Animaciones/Soldado_Verde.png",
+    soldadoVerde_plist: "res/Animaciones/Soldado_Verde.plist"
 
 };
 

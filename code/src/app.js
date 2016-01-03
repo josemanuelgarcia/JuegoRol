@@ -5,6 +5,8 @@ var MenuLayer = cc.Layer.extend({
 
         //Cacheo de recursos graficos
         cc.spriteFrameCache.addSpriteFrames(res.octorok_plist);
+        cc.spriteFrameCache.addSpriteFrames(res.soldadoVerde_plist);
+
 
         // Fondo
         var spriteFondoTitulo= new cc.Sprite(res.fondomenu_png);
