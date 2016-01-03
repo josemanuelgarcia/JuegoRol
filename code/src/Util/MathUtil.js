@@ -14,17 +14,15 @@ isInViewCone:function(viewer, obj, coneSize,layer) {
         //check if 'e' is withing a conic area in the direction we face
         switch(layer.link.orientacion) {
             case "ARRIBA":
-                console.log(coneVec.y);
-                                console.log(coneVec.x);
-                return (coneVec.y < coneSize && coneVec.x > -coneSize && coneVec.x < coneSize);
+                return obj.y>viewer.y;
             case "ABAJO":
 
-                return (coneVec.y > 0 && coneVec.x > -coneSize && coneVec.x < coneSize);
+                return obj.y<viewer.y;
             case "IZQUIERDA":
-                return (coneVec.x < coneSize && coneVec.y > -coneSize && coneVec.y < coneSize);
+                return obj.x<viewer.x;
             case "DERECHA":
 
-                return (coneVec.x > 0 && coneVec.y > -coneSize && coneVec.y < coneSize);
+                return obj.x>viewer.x;
         }
     },
     normalize: function()
