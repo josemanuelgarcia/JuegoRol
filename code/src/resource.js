@@ -44,7 +44,9 @@ var res = {
     jarron_plist:"res/Interaccionables/Jarron.plist",
     jarron_png:"res/Interaccionables/Jarron.png",
     soldadoVerde_png: "res/Animaciones/Soldado_Verde.png",
-    soldadoVerde_plist: "res/Animaciones/Soldado_Verde.plist"
+    soldadoVerde_plist: "res/Animaciones/Soldado_Verde.plist",
+    dungeon1_tmx: "res/Mapas/Dungeon1/Dungeon1.tmx",
+    first_dungeon_png:"res/Mapas/Dungeon1/First_Dungeon.png"
 
 };
 
