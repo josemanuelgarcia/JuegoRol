@@ -1,26 +1,109 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.0" orientation="orthogonal" renderorder="right-down" width="100" height="100" tilewidth="16" tileheight="16" nextobjectid="1">
- <tileset firstgid="1" name="First_Dungeon" tilewidth="16" tileheight="16" tilecount="480">
+<map version="1.0" orientation="orthogonal" renderorder="right-down" width="100" height="100" tilewidth="16" tileheight="16" nextobjectid="47">
+ <tileset firstgid="1" name="First_Dungeon" tilewidth="16" tileheight="16" tilecount="612">
   <image source="First_Dungeon.png" width="480" height="256"/>
  </tileset>
  <layer name="Background" width="100" height="100">
   <data encoding="base64" compression="zlib">
-   eJzt1kEKwjAQBdD0BOpB1INUj6YeRD2Heiuni0IWDYV2xM178CE0WSX0M6UAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAADwT5uulG1ktzLk2MddHiLHlSFHH3d5ipxXhjxDZy1J/ZbkGTprSbzHb/Td8niPfPW91vPWuG7NYPV38tQz1tS6NYPV38lT/x9T69YMpq9+Y6qjxk56xf478pk5R55WXw25xP41cps5R55WXw25x/4j8pw5B7DUF69DLDI=
+   eJzt2Y9N8zAQh2E8ARRYAwKs0RZYDBgEmAPYCkeNpdPhcxLXQNp7H+mkfOSP9OVnX6z65AQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAADAoTgNv1NnsVbhv/93h+cq7F86A/Kotw67yo3tlTon33cpA695tOwvufGey2dVmBfe82jRa1KtRcn3LbPohpLXkcdO6Ruq+0/pOlm5uSD/th2qP96oc53znqX7y1mh/5S+vfrdyXnQqXus/tUNOXnOQ49rnYEe+9b47zJZbEWtw3ieuVw95rEZ3pmVQTpv5ZDe/bX6d7qvCz/7mjWXdAbyGg+s8V5baT6kXGUmY31KZpdKflc8SH1Eju19Ss+xlEfKyPqGyOvk8+QawAv93vYpnYM8njKvdHnqVYnuK7WV++bMubd0jyet5sc+zxm7Dzg25+F36iLWJXNmtpvQvsij3n1oX+SxLOSxLOSxLOSxLMeeR6vfEv/KsefR6rdES2l/cUrpvY9jz6PVbyUWa39xSnnMo1c7dmWWltz+4pS6dpxH7fidkkft98lzHrVjeG4ec75H1nrBSx65PfJ0bI3x3PjV5DOs/do56zcPecg1Vu7YWoPJv1vS+5d9rmY9l3jIw9pfTcfWGmxOv8r1uJr1m4c8cj0q9YmPeP4z1tfIdaVnt1y/ecjD6ld9PcXzz7FeRq4rPbvl+s1DHla/6us1nn+L9T5yXenZLddvHvI4JP0e4W2sO/JYhH6P8CHW44Hl8Q1AwbUr
   </data>
  </layer>
  <layer name="Background Top" width="100" height="100">
   <data encoding="base64" compression="zlib">
-   eJzt1rEJwDAMBEDtv6ftNZKQiLhwLxV38OBS8CA5AgAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAADiZd8aXWTwLbw+nNzX00UvuqxX2VQdPD2MLtfYOVtkUJPejl/zn5h0BAOB3ASsJFYU=
+   eJzt1kEOgjAQBVCMehD1/scqDbfQRSc26hAWCia8lzRtwiyghfkMAwAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAwLvjYes7oHdxHpsYH6O0MSY1tV2f2szvlGTdq8ma71v7PEo3eDq1fIh+VYe8X/V7mNUsVV7mzHln+XVtzxvZMPfOTq2uztQstfT7uO3sPEK/L1kvkh/rkef/JTIhcuST6FfxzwsAsBd3CIMyxg==
   </data>
  </layer>
  <layer name="Foreground" width="100" height="100">
   <data encoding="base64" compression="zlib">
-   eJzt2TluFEEYxfHqBEjANjY3ABLwSgJHAK8QwBHYl4DtAiwxiy8AOLWAE7CkCDgBS+ARQsAJWN5oplSfih5Xt6cCKP1/0tNUl6tf4Bp3yTPOAQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAP+e3ZVz48pEw7Rdb4M0+/uda5AZZbbh2jhIs/ux0iBLynLDtXGQZvfjka4fK2PdeWVcmVD2mNdtWrdd2VGFubr1T5Q1F/6ecnXH/aWx+/FC1y+VaWVGmVXmlEPmda/W7VP2V2Gubv0r5bULf0+5uuP+0tj9mNT1lDKi8agyVvXGbeLvO6qeYy7sR67uuL80dj/mdb2gTGo8pUxXvXGb+PtOq+eMC/uRqzvuL43dj7O6PqfMa7ygLFa9cZv4+26p57YL+5GrO+4vjd2PO7q+2/L+DaXTf/1i5ncqu1zYj5zdtr80dj9GdD0a/fywcmST+ztmTcfMx/uRs9v2l6buPLdOKqc2ub9j1tj38AHloPv7PM/RbftLU3eet2GfKRtmfl156sJ+PNf4WaZu21+auvO8je771v/e7DPljfLWhf14r/G7TN22vzSp83yrz/ivyjcX9uOHxt8zddv+0qTO8zbPePtMaXKeb7Xb9pcmdZ6ndJ8p/hlv38P+vPX9Obttf2mGPc8H8Z9n+P6c3ba/NMOe54P4zzN8f85u21+aYf8/H8R/nuH7c3bb/tLY7/s+6PqjsqgsKcvKinJcOaFcVa4p15Ubys3+fN36T8pn05/qbjof95fGft/3U9e/lPPKBeWickm5rFxR7in3lQfKQ2W1P1+3/ne3vAr9qe6m83H//+oPD4PKBQ==
+   eJztmUluFDEUhl0bYAOZb0DYQGaQ4AiQESLBEZiHSEyLbIEAWTGtkZjZRIETMCyJ4AYQthFwAoa/6X60Zdxld7edqq76P+lTVRz3a6teul/spxQhhBBCCCGEEEIIIYQQQgghhBBCCCGEEEIIIYQQQgghhBBCCCGEEEIIIYQQQgghhBBCCCGEEEIIIYQQQkj7PIKPYQ/shX2wHw7UrrbxgQbjsceewKdxHkNueAPfwhE4CsfgOJyoXW3jEw3GY4+9g+/jPIbcMASHYVeiVDfsSar3zSivi81uuCf+22TKJJyCQ3iew3Akqd43o7wuNgfhofhvkykn4Sk4iec5BaeT6n0zyuticxyeiP82mXIDLmW9CE+uwetZLyIyXbA760V4sh3uyHoRkZF63gmUoZ7fhLeyXoQnZajnz+DzrBfhCet5vmA9zxes5/miDPVc9uedQBnquezPOwHW83xRhnr+GX6B03AGzsI5eBgegRfhhlIP1+AKvFobt82PPbYOv8Z6EBnSmyjVB/vhT/z8C56GZ+BZeA6ehxfgHfgNefgIV+GD2rhtfuyx35XFb8K55Waj52Pcw1E45jnXlLjR8zHn4Qyc9ZxrStzo+XD1zyvXLZi3FW5L0vvd0t+Wz5Mr9rxlfN4y34xfNPR8uPrnletOzBuEu5L0frf0t+Xz5Iq9YBlfsMw34xcNPR8h++eyX5N8+MTej98fUPWrLbYZv2jo+QjZP5f9muTDJ/ZR/P6Yql9tsc34RUPPR8j+uezXJB+hYpvxi4aej5D7czl/lXzYYn+Ai444i7V5JnvhvrZXmT/0fNjO2+W7PA3bHDMfoc/yi3rebqvnOvJdnoZtjpyHm/W8WRr9PRT1vF3PR8j++QpcVfV8vMb9qxbiNPp7uA2X21hfXtHzEbJ/vmYZ+xQodoUX8GXAeHnBVc9brR8b6u/Z47/Pxw/cfw+y4ipl+P/KVnNbrR+s563hquetIvVW4tti8//d/7Htz0Mg5xkSP3RvvgznJSH753KeIfF9YpvnVz7xi0as/bnUW4nvE9s8v/KJXzT0fp9P//wSvAyvwLT++bqq9rclviu277gZv2jo/T6f/vldeA/eh2n9c+lvS3xXbN9xM36n8gexz/iL
   </data>
  </layer>
  <layer name="Top" width="100" height="100">
   <data encoding="base64" compression="zlib">
-   eJztwTEBAAAAwqD1T+1lC6AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAIAbnEAAAQ==
+   eJztzsEJACAMALF2JPcfQrqRQoeoYAL3vwgAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAF6xbyu7mp4BAAD41AEALgIF
   </data>
  </layer>
+ <objectgroup name="Zones">
+  <object id="2" name="Zona 1" x="128.667" y="1296.67" width="367.333" height="306.667"/>
+  <object id="3" name="Zona 2" x="496.667" y="1296" width="383.333" height="305.333"/>
+ </objectgroup>
+ <objectgroup name="Jarrones">
+  <object id="4" x="224.667" y="1552.67" width="15" height="15"/>
+  <object id="5" x="208" y="1552.67" width="15" height="15"/>
+  <object id="6" x="191.333" y="1553.33" width="15" height="15"/>
+  <object id="7" x="175.333" y="1553.33" width="15" height="15"/>
+  <object id="8" x="432.5" y="1552.5" width="15" height="15"/>
+  <object id="9" x="416.833" y="1552.17" width="15" height="15"/>
+  <object id="10" x="400.5" y="1552.5" width="15" height="15"/>
+  <object id="11" x="384.167" y="1552.5" width="15" height="15"/>
+  <object id="13" x="543.5" y="1344" width="15" height="15"/>
+  <object id="14" x="543.5" y="1360" width="15" height="15"/>
+  <object id="15" x="560" y="1344" width="15" height="15"/>
+  <object id="16" x="816" y="1344" width="15" height="15"/>
+  <object id="17" x="800" y="1344" width="15" height="15"/>
+  <object id="18" x="816.5" y="1360.5" width="15" height="15"/>
+  <object id="19" x="816.5" y="1536.5" width="15" height="15"/>
+  <object id="20" x="816.5" y="1553" width="15" height="15"/>
+  <object id="21" x="800" y="1553" width="15" height="15"/>
+  <object id="22" x="543.5" y="1553.5" width="15" height="15"/>
+  <object id="23" x="543" y="1538" width="15" height="15"/>
+  <object id="24" x="559.5" y="1553.5" width="15" height="15"/>
+ </objectgroup>
+ <objectgroup name="Cofres">
+  <object id="25" name="Cofre" x="672" y="1440" width="15" height="15">
+   <properties>
+    <property name="Cofre" value="1"/>
+   </properties>
+  </object>
+ </objectgroup>
+ <objectgroup name="Interruptores">
+  <object id="26" name="Interruptor" x="752" y="1392.5" width="15" height="15">
+   <properties>
+    <property name="Interruptor" value="2"/>
+   </properties>
+  </object>
+  <object id="27" name="Interruptor" x="752" y="1505" width="15" height="15">
+   <properties>
+    <property name="Interruptor" value="4"/>
+   </properties>
+  </object>
+  <object id="28" name="Interruptor" x="592.5" y="1505" width="15" height="15">
+   <properties>
+    <property name="Interruptor" value="3"/>
+   </properties>
+  </object>
+  <object id="29" name="Interruptor" x="592.5" y="1393" width="15" height="15">
+   <properties>
+    <property name="Interruptor" value="1"/>
+   </properties>
+  </object>
+ </objectgroup>
+ <objectgroup name="Animados">
+  <object id="42" name="Antorcha" x="608" y="1392" width="15.5" height="15.5"/>
+  <object id="44" name="Antorcha" x="736.25" y="1392.75" width="15.5" height="15.5"/>
+  <object id="45" name="Antorcha" x="736.25" y="1504.25" width="15.5" height="15.5"/>
+  <object id="46" name="Antorcha" x="608.25" y="1504.25" width="15.5" height="15.5"/>
+ </objectgroup>
+ <objectgroup name="Enemigos"/>
+ <objectgroup name="Colisiones">
+  <object id="30" x="224.5" y="1408" width="30.5" height="31"/>
+  <object id="31" x="224.5" y="1472.5" width="31" height="30"/>
+  <object id="32" x="369" y="1408.5" width="30" height="30.5"/>
+  <object id="33" x="368" y="1472.5" width="31.5" height="31.5"/>
+  <object id="34" x="174.5" y="1343">
+   <polyline points="0,0 -0.5,226.5 128.5,225.5 128.5,253"/>
+  </object>
+  <object id="35" x="321" y="1595.5">
+   <polyline points="0,0 -0.5,-27.5 128,-27 127.5,-122.5 222,-122 222,-26 511.5,-26.5 511.5,-252 223.5,-252.5 222.5,-141 127.5,-140.5 127.5,-252 0,-252"/>
+  </object>
+  <object id="36" x="174.5" y="1341.5">
+   <polyline points="0,0 129.5,1"/>
+  </object>
+  <object id="37" x="656.5" y="1344" width="30.5" height="30"/>
+  <object id="38" x="688" y="1343.5" width="32.5" height="31"/>
+  <object id="39" x="735.5" y="1424" width="32.5" height="31.5"/>
+  <object id="40" x="656.5" y="1536" width="30.5" height="30.5"/>
+  <object id="41" x="688.5" y="1536" width="31" height="31"/>
+ </objectgroup>
+ <objectgroup name="Puertas"/>
 </map>
