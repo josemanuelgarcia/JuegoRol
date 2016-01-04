@@ -1,0 +1,119 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<map version="1.0" orientation="orthogonal" renderorder="right-down" width="100" height="100" tilewidth="16" tileheight="16" nextobjectid="1">
+ <tileset firstgid="1" name="Forest_Dungeon" tilewidth="16" tileheight="16" tilecount="480">
+  <image source="../../../../../../Desktop/Videojuegos/Link/MinishCap/Mapa/Forest_Dungeon.png" width="480" height="256"/>
+  <tile id="123">
+   <animation>
+    <frame tileid="123" duration="100"/>
+    <frame tileid="153" duration="100"/>
+    <frame tileid="183" duration="100"/>
+    <frame tileid="213" duration="100"/>
+   </animation>
+  </tile>
+  <tile id="124">
+   <animation>
+    <frame tileid="124" duration="100"/>
+    <frame tileid="154" duration="100"/>
+    <frame tileid="184" duration="100"/>
+    <frame tileid="214" duration="100"/>
+   </animation>
+  </tile>
+  <tile id="125">
+   <animation>
+    <frame tileid="125" duration="100"/>
+    <frame tileid="155" duration="100"/>
+    <frame tileid="185" duration="100"/>
+    <frame tileid="215" duration="100"/>
+   </animation>
+  </tile>
+ </tileset>
+ <tileset firstgid="481" name="First_Dungeon" tilewidth="16" tileheight="16" tilecount="480">
+  <image source="../../../../../../Desktop/Videojuegos/Link/MinishCap/Mapa/First_Dungeon.png" width="480" height="256"/>
+  <tile id="0">
+   <animation>
+    <frame tileid="0" duration="100"/>
+    <frame tileid="1" duration="100"/>
+    <frame tileid="2" duration="100"/>
+   </animation>
+  </tile>
+  <tile id="30">
+   <animation>
+    <frame tileid="30" duration="100"/>
+    <frame tileid="31" duration="100"/>
+    <frame tileid="32" duration="100"/>
+   </animation>
+  </tile>
+  <tile id="60">
+   <animation>
+    <frame tileid="60" duration="100"/>
+    <frame tileid="61" duration="100"/>
+    <frame tileid="62" duration="100"/>
+   </animation>
+  </tile>
+  <tile id="90">
+   <animation>
+    <frame tileid="90" duration="100"/>
+    <frame tileid="91" duration="100"/>
+    <frame tileid="92" duration="100"/>
+   </animation>
+  </tile>
+  <tile id="120">
+   <animation>
+    <frame tileid="120" duration="100"/>
+    <frame tileid="121" duration="100"/>
+    <frame tileid="122" duration="100"/>
+   </animation>
+  </tile>
+  <tile id="123">
+   <animation>
+    <frame tileid="123" duration="100"/>
+    <frame tileid="153" duration="100"/>
+    <frame tileid="183" duration="100"/>
+    <frame tileid="213" duration="100"/>
+   </animation>
+  </tile>
+  <tile id="124">
+   <animation>
+    <frame tileid="124" duration="100"/>
+    <frame tileid="154" duration="100"/>
+    <frame tileid="184" duration="100"/>
+    <frame tileid="214" duration="100"/>
+   </animation>
+  </tile>
+  <tile id="125">
+   <animation>
+    <frame tileid="125" duration="100"/>
+    <frame tileid="155" duration="100"/>
+    <frame tileid="185" duration="100"/>
+    <frame tileid="215" duration="100"/>
+   </animation>
+  </tile>
+  <tile id="180">
+   <animation>
+    <frame tileid="180" duration="100"/>
+    <frame tileid="181" duration="100"/>
+    <frame tileid="182" duration="100"/>
+   </animation>
+  </tile>
+ </tileset>
+ <layer name="Background" width="100" height="100">
+  <data encoding="base64" compression="zlib">
+   eJzt1rENwjAQBVAr1MAgwGjAIMAcwHTABlyKSC7iFMkhmvekL1mRK5/ydaUAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAADwT6+ulHfkszDkWK9K2US2C0OOXbzlPnJYGPL0nTUn9SzJ03fWnJjHb+xW82Me+ep3rfet4dzawerv5Kl3rLFzawerv5On/j/Gzq0dTF/9xlhHDZ10jzwiz276HnlafdXnGG99ipy76XvkafVVn0vM4Rq5ddP3AOb6AuBZT7Q=
+  </data>
+ </layer>
+ <layer name="Background Top" width="100" height="100">
+  <data encoding="base64" compression="zlib">
+   eJzt1kEKwCAMBMDg/7+l+VYpVBDqPTnMgJD74iYRAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAwM0aEfN770ytOe4zNeTRy+6r1Fct5LE//I96ZwYpj3L2Ry/7zl36CgDg5wEMEhK1
+  </data>
+ </layer>
+ <layer name="Foreground" width="100" height="100">
+  <data encoding="base64" compression="zlib">
+   eJzt2TluFEEAheFxD5AANoYEjgDY2BDAEdiXgO0CLDHbBVhSBJyAJUXACVgCWyMEnIAlAhKwwSbntWZK/dTqcU3bFUDp/6SnKbern9Rd4y573OkAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA/57fRaezpCyPmLbzPYjz+7u1G88WZXKEeU1BnK/HbDeePcrMCPOagjhfj5vKLeXXmI4rS8qy8sdev+r735TvRXWsaf5tff9OUf08pequ9+fG1+Oh8kiZKO+jMlk+w5Rt9rpO93a9sqFbHWua/1h5UlQ/T6m66/258fXYrIwrC8pi+V4ejNsknLdT2WXrkaq73p8bX4/dylS5Lrp/48pEtz9uk3DeQfUcsvVI1V3vz42vx2HlSLkuut4pZbrbH7dJOO+Cei7aeqTqrvfnxtfjknK55TXOaf580X/t2bk/tOf+HKvWI2W39+fG12NB17dYu8btOr5jhftY3q8wZ36F9UjZ7f25adrP3X59fSByz8Icfw9v1HhTw36eotv7c9O0n7fhz5Q5O/euxvdsPR5ofD9Rt/fnpmk/b6NXVPfNnylPNX5m6/FC4+eJur0/N7H9fLXP+Lcav7P1+KDx+0Td3p+b2H7e5hnvz5RR9vPVdnt/bmL7eUzPnvH+Hg77behP2e39uVnrfj5M+Dwj9Kfs9v7crHU/HyZ8nhH6U3Z7f27W+vf5MOHzjNCfstv7c+P/73up63ulTJe/FykzyqyyV9mnnFbOKGeVc8r5wfGm+a+VN0XVH+se9Xi9Pzf+/76Pur5PylHlmHJcOaGcVE4pV5SryjXlunJjcLxp/mflS1H1x7pHPV7v/1/9BRu7M18=
+  </data>
+ </layer>
+ <layer name="Top" width="100" height="100">
+  <data encoding="base64" compression="zlib">
+   eJztwTEBAAAAwqD1T+1lC6AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAIAbnEAAAQ==
+  </data>
+ </layer>
+</map>
