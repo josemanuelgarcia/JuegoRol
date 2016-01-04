@@ -34,8 +34,6 @@ var CollisionManager = cc.Class.extend({
 
         this.space.addCollisionHandler(tipoJugador,tipoBomba, this.reducirVidas.bind(this), null, null, null);
 
-        this.space.addCollisionHandler(tipoJugador,tipoCueva,null,this.transportarLink.bind(this),null,null);
-
         this.space.addCollisionHandler(tipoEspada,tipoJarron,null,this.destruirJarron.bind(this),null,null);
 
         //Colisiones con Octorok
@@ -113,16 +111,7 @@ var CollisionManager = cc.Class.extend({
 
          var pos = cueva.getPosSalida();
          var newPos = cc.p(pos.x,this.layer.mapaAlto - pos.y);
-         var scene=this.layer.getParent();
-         //Para que no siga avanzando hacia arriba
-         this.layer.link.entrarTransicion();
-
-        /*
-         cc.director.pause();
-         cc.director.runScene(cc.TransitionFade.create(3.0,new GameScene(newPos)));
-         cc.director.resume();
-         */
-         this.layer.link.salirTransicion(newPos);
+         this.layer.transicion();
 
     }, destruirJarron:function(arbiter,space) {
          var shapes = arbiter.getShapes();

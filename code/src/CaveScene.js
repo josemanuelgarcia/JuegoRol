@@ -1,12 +1,5 @@
-var idCapaJuego = 1;
-var idCapaControles = 2;
-var idCapaHistoria=3;
-var cargarPartida = false;
-var weapon="ARCO";
-var animationManager=null;
-var collisionManager =null;
-var posicion=cc.p(400,400);
-var GameLayer = cc.Layer.extend({
+var idCapaCueva = 1;
+var CaveLayer = cc.Layer.extend({
     space: null,
     link: null,
     mapa: null,
@@ -38,6 +31,7 @@ var GameLayer = cc.Layer.extend({
          cc.spriteFrameCache.addSpriteFrames(res.boomerang_plist);
          cc.spriteFrameCache.addSpriteFrames(res.explosion_plist);
          cc.spriteFrameCache.addSpriteFrames(res.jarron_plist);
+
         //Creación del espacio del juego
         this.space = new cp.Space();
         //La gravedad en este juego da igual.
@@ -63,7 +57,12 @@ console.log("he salido de save");
         posicion=cc.p(posicionX,posicionY);
 
         }
-
+        //en caso contrario cargamos posicion por defecto
+        else
+        {
+        console.log("he entrado por el else ");
+        posicion=cc.p(400,400);
+        }
         this.link = new Link(this.space, posicion, this);
 
 
@@ -82,7 +81,6 @@ console.log("he salido de save");
            this.rupias.push(rupiaAmarilla);
          var rupiaVerde = new Rupia(this.space,cc.p(700,200),this,"v");
            this.rupias.push(rupiaVerde);
-           this.space.addCollisionHandler(tipoJugador,tipoCueva,this.transicion.bind(this),null,null,null);
         //------------------------------------------------------------------
 
 
@@ -270,31 +268,15 @@ console.log("he salido de save");
         var viewPoint = cc.pSub(centerOfView, actualPosition);
         this.setPosition(viewPoint);
 
-    },transicion:function(arbiter,space)
-    {
-        var shapes = arbiter.getShapes();
-                 var shape = shapes[1];
-                 var cueva = null;
-                 for(var i = 0; i<this.cuevas.length ; i++) {
-                     if(shape === this.cuevas[i].shape)
-                         cueva = this.cuevas[i];
-                 }
-
-                 var pos = cueva.getPosSalida();
-                 posicion = cc.p(pos.x,this.mapaAlto - pos.y);
-         var nextScene=new CaveScene();
-         cc.director.runScene(new cc.TransitionShrinkGrow(3.0,nextScene));
     }
 });
-var GameScene = cc.Scene.extend({
+
+var CaveScene = cc.Scene.extend({
     onEnter: function () {
         this._super();
-        var layer = new GameLayer();
-        collisionManager = new CollisionManager(layer.space,layer);
-        this.addChild(layer, 0, idCapaJuego);
+        var layer = new CaveLayer();
+        this.addChild(layer, 0, idCapaCueva);
         iuLayer = new IULayer();
         this.addChild(iuLayer, 0, idCapaControles);
-    },
-    onExit:function(){
     }
 });
