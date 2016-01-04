@@ -16,8 +16,10 @@ var Jarron = cc.Class.extend({
         this.position = position;
 
         this.sprite = new cc.PhysicsSprite("#Jarron_normal.png");
+        var tamaño = this.sprite.getContentSize();
+        cc.log(tamaño);
         this.body = new cp.StaticBody();
-        this.body.setPos(position);
+        this.body.setPos(cc.p(position.x + tamaño.width/2,position.y + tamaño.height/2));
         this.sprite.setBody(this.body);
         this.shape = new cp.BoxShape(this.body,
                                  this.sprite.getContentSize().width - 2,
