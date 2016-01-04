@@ -6,10 +6,8 @@ var Jarron = cc.Class.extend({
     animacionDestruir:null,
     position:null,
     layer:null,
-    manager:null,
     ctor:function(space,position,layer){
 
-        this.manager = new AnimationManager(this);
         this.space = space;
         this.layer = layer;
 
@@ -19,7 +17,7 @@ var Jarron = cc.Class.extend({
         var tamaño = this.sprite.getContentSize();
         cc.log(tamaño);
         this.body = new cp.StaticBody();
-        this.body.setPos(cc.p(position.x + tamaño.width/2,position.y + tamaño.height/2));
+        this.body.setPos(cc.p(position.x + tamaño.width/2,position.y - tamaño.height/2));
         this.sprite.setBody(this.body);
         this.shape = new cp.BoxShape(this.body,
                                  this.sprite.getContentSize().width - 2,
@@ -27,7 +25,7 @@ var Jarron = cc.Class.extend({
         this.shape.setCollisionType(tipoJarron);
         this.space.addStaticShape(this.shape);
 
-        var framesDestruir = this.manager.getAnimacion("Jarron_destruir",7);
+        var framesDestruir = animationManager.getAnimacion("Jarron_destruir",7);
         this.animacionDestruir = new cc.Animation(framesDestruir,0.05);
         this.layer.mapa.addChild(this.sprite,2);
 
