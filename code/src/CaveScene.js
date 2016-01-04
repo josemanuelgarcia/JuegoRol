@@ -219,10 +219,10 @@ console.log("he salido de save");
            {
                var x = zonasArray[i]["x"];
                     var y = zonasArray[i]["y"];
-                    var zona = new Zona(new cc.p(x,y));
+                    var zona = new Zona(new cc.p(x,this.mapaAlto-y));
                     this.zonas.push(zona);
            }
-            cc.log(this.zonas);
+            cc.log(this.zonas[0].posCentral.x+"POOOOOOOOS");
 
     }, actualizarCamara: function () {
         var winSize = cc.winSize;

@@ -6,6 +6,7 @@ var weapon="ARCO";
 var animationManager=null;
 var collisionManager =null;
 var posicion=cc.p(400,400);
+
 var GameLayer = cc.Layer.extend({
     space: null,
     link: null,
@@ -172,9 +173,7 @@ var GameLayer = cc.Layer.extend({
         if(instancia.teclasPulsadas.length<=1)
             instancia.keyPulsada=null;
         else if(instancia.teclasPulsadas.length>1){
-            cc.log(instancia.teclasPulsadas);
             instancia.keyPulsada = instancia.teclasPulsadas[instancia.teclasPulsadas.length-1];
-            cc.log(instancia.keyPulsada);
         }
 
 
