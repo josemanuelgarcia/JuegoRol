@@ -56,10 +56,10 @@ var GameLayer = cc.Layer.extend({
         //obtenemos la posicion guardada
         var posicionX = parseInt(loadDollNum("xLink",1));
         var posicionY = parseInt(loadDollNum("yLink",1));
-console.log("he salido de save");
+
        //Si exista una posicion guiardada y se ha dado a cargar partida entramos
         if(cargarPartida && posicionX != 0 && posicionY != 0){
-        console.log("he entrado por el if ");
+
         posicion=cc.p(posicionX,posicionY);
 
         }
@@ -158,7 +158,7 @@ console.log("he salido de save");
     }, procesarEventosKeyboard: function (keyCode, event) {
         var instancia = event.getCurrentTarget();
         //Al cambiar de ventana en el navegador entra un 18 no se por que
-        if(instancia.keyPulsada != keyCode && keyCode!=18)
+        if(instancia.keyPulsada != keyCode && keyCode!=18 && instancia.teclasPulsadas.length<3)
         {
             instancia.keyPulsada = keyCode;
             instancia.teclasPulsadas.push(keyCode);
