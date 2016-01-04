@@ -34,11 +34,8 @@ var GameLayer = cc.Layer.extend({
         var size = cc.winSize;
         this.mathUtil = new MathUtil();
 
-        //Cachear recursos del juego
-         cc.spriteFrameCache.addSpriteFrames(res.link_plist);
-         cc.spriteFrameCache.addSpriteFrames(res.boomerang_plist);
-         cc.spriteFrameCache.addSpriteFrames(res.explosion_plist);
-         cc.spriteFrameCache.addSpriteFrames(res.jarron_plist);
+
+
         //Creación del espacio del juego
         this.space = new cp.Space();
         //La gravedad en este juego da igual.
@@ -51,7 +48,7 @@ var GameLayer = cc.Layer.extend({
         this.cargarMapa();
 
          //Creacion enemigo prueba
-         this.octorok = new Octorok(this.space, cc.p(600, 250), this);
+        this.octorok = new Octorok(this.space, cc.p(600, 250), this);
 
 
         //obtenemos la posicion guardada
@@ -61,12 +58,14 @@ var GameLayer = cc.Layer.extend({
        //Si exista una posicion guiardada y se ha dado a cargar partida entramos
         if(cargarPartida && posicionX != 0 && posicionY != 0){
 
-        posicion=cc.p(posicionX,posicionY);
+            posicion=cc.p(posicionX,posicionY);
 
         }
 
         this.link = new Link(this.space, posicion, this);
-
+        var antorcha = new ObjetoAnimado(this.space,cc.p(300,300),this,"antorchaC_",4);
+        var antorcha = new ObjetoAnimado(this.space,cc.p(315,300),this,"antorchaB_",4);
+        var antorcha = new ObjetoAnimado(this.space,cc.p(330,300),this,"antorchaA_",4);
 
         //Creacion de soldado de prueba
         this.soldado = new Soldado(this.space, cc.p(600, 200), this);

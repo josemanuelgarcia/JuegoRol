@@ -46,7 +46,9 @@ var res = {
     soldadoVerde_png: "res/Animaciones/Soldado_Verde.png",
     soldadoVerde_plist: "res/Animaciones/Soldado_Verde.plist",
     dungeon1_tmx: "res/Mapas/Dungeon1/Dungeon1.tmx",
-    first_dungeon_png:"res/Mapas/Dungeon1/First_Dungeon.png"
+    first_dungeon_png:"res/Mapas/Dungeon1/First_Dungeon.png",
+    objetosAnimados_plist:"res/Animaciones/ObjetosAnimados.plist",
+    objetosAnimados_plist_png:"res/Animaciones/ObjetosAnimados.png"
 
 };
 

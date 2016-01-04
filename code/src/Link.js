@@ -141,7 +141,8 @@ var Link = cc.Class.extend({
     },procesarEventos:function()
     {
         var keyCode = null;
-        //if(this.layer.teclasPulsadas.length>0)cc.log(this.layer.teclasPulsadas);
+        if(this.layer.teclasPulsadas.length>0)
+            cc.log(this.layer.teclasPulsadas);
 
         //Si no se ha pulsado ninguna tecla se deja parado
         if(this.layer.teclasPulsadas.length==0)

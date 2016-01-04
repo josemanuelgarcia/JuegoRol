@@ -10,12 +10,10 @@ var Jarron = cc.Class.extend({
 
         this.space = space;
         this.layer = layer;
-
         this.position = position;
 
         this.sprite = new cc.PhysicsSprite("#Jarron_normal.png");
         var tamaño = this.sprite.getContentSize();
-        cc.log(tamaño);
         this.body = new cp.StaticBody();
         this.body.setPos(cc.p(position.x + tamaño.width/2,position.y - tamaño.height/2));
         this.sprite.setBody(this.body);
