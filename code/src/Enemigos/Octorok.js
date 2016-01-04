@@ -1,7 +1,6 @@
 var Octorok = cc.Class.extend({
     //Variables de clase
-    tiempoEntreDisparos: null,
-    tiempoUltimoDisparo: 0,
+
     space: null,
     layer: null,
     sprite: null,
@@ -18,9 +17,6 @@ var Octorok = cc.Class.extend({
         this.space = space;
         this.layer = layer;
 
-        //Primera prueba: que dispare cada cierto tiempo
-        this.tiempoEntreDisparos = 5  + Math.floor(Math.random() * 2);
-        this.tiempoEntreMovimientos = 4 + Math.floor(Math.random() * 2);
 
         this.sprite = new cc.PhysicsSprite("#Octorok_abajo0.png");
 
@@ -51,20 +47,14 @@ var Octorok = cc.Class.extend({
 
 
     }, update: function (dt) {
-        // aumentar el tiempo que ha pasado desde el ultimo disparo
-        this.tiempoUltimoDisparo = this.tiempoUltimoDisparo + dt;
 
-        // Dispara si el tiempo ha pasado
-        if (this.tiempoUltimoDisparo > this.tiempoEntreDisparos && this.shape !=null) {
-            this.tiempoUltimoDisparo = 0;
-            this.disparar();
-        }
 
         //aumentamos el tiempo del movimiento
         this.tiempoMovimiento = this.tiempoMovimiento + dt;
         if (this.tiempoMovimiento > this.tiempoEntreMovimientos) {
              this.sprite.stopAllActions();
-             var random = Math.floor(Math.random() * 4);
+             var random = Math.floor(Math.random() * 7);
+             cc.log(random);
              switch(random) {
                  case 0:
                      this.moverDerecha();
@@ -78,18 +68,12 @@ var Octorok = cc.Class.extend({
                  case 3:
                     this.moverArriba();
                     break;
+                 case 4||5||6:
+                    this.disparar();
+                    break;
              }
-             /*
-            if (this.orientacion == "ARRIBA") {
-                this.moverDerecha();
-            } else if (this.orientacion == "DERECHA") {
-                this.moverAbajo();
-            } else if (this.orientacion == "ABAJO") {
-                this.moverIzquierda();
-            } else {
-                this.moverArriba();
-            }
-            */
+
+
             this.tiempoMovimiento = 0;
         }
 
