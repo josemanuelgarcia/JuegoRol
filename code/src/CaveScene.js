@@ -14,6 +14,7 @@ var CaveLayer = cc.Layer.extend({
     rupias:[],
     shapesToRemove: [],
     cuevas:[],
+    zonas:[],
     jarrones:[],
     bloques:[],
     soldado:null,
@@ -37,14 +38,14 @@ var CaveLayer = cc.Layer.extend({
         //La gravedad en este juego da igual.
         this.space.gravity = cp.v(0, 0);
         //Add the Debug Layer:
-       //var depuracion = new cc.PhysicsDebugNode(this.space);
-       //this.addChild(depuracion, 10);
+       var depuracion = new cc.PhysicsDebugNode(this.space);
+       this.addChild(depuracion, 10);
         animationManager=new AnimationManager();
         //Cargamos el Mapa
         this.cargarMapa();
-
+        this.setScale(1.6);
+        this.setPosition(310,this.mapaAlto-1455);
          //Creacion enemigo prueba
-         this.octorok = new Octorok(this.space, cc.p(600, 250), this);
 
 
         //obtenemos la posicion guardada
@@ -63,24 +64,7 @@ console.log("he salido de save");
         console.log("he entrado por el else ");
         posicion=cc.p(400,400);
         }
-        this.link = new Link(this.space, posicion, this);
-
-
-        //Creacion de soldado de prueba
-        this.soldado = new Soldado(this.space, cc.p(600, 200), this);
-
-        //creacion de corazon de prueba
-        this.corazones.push(new Corazon(this.space,cc.p(550,200),this));
-
-        //Creacion de rupias de diferentes colores  de prueba--------------
-         var rupiaRoja = new Rupia(this.space,cc.p(600,200),this,"r");
-         this.rupias.push(rupiaRoja);
-         var rupiaAzul = new Rupia(this.space,cc.p(650,200),this,"a");
-           this.rupias.push(rupiaAzul);
-         var rupiaAmarilla = new Rupia(this.space,cc.p(520,200),this,"m");
-           this.rupias.push(rupiaAmarilla);
-         var rupiaVerde = new Rupia(this.space,cc.p(700,200),this,"v");
-           this.rupias.push(rupiaVerde);
+        this.link = new Link(this.space, cc.p(304,this.mapaAlto-1552), this);
         //------------------------------------------------------------------
 
 
@@ -106,11 +90,7 @@ console.log("he salido de save");
     }, update: function (dt) {
         //Camara mapa inicial del personaje
         this.space.step(dt);
-        this.actualizarCamara();
-        this.octorok.update(dt);
-
-        this.soldado.update(dt);
-
+        //this.actualizarCamara();
         this.link.update(dt);
         //Eliminar elementos
         for (var i = 0; i < this.shapesToRemove.length; i++) {
@@ -122,26 +102,6 @@ console.log("he salido de save");
                  }
             }
             //Eliminar octorock si impacta, mas adelante se recorreran todos los enemigos
-            else if(this.octorok.shape==shape) {
-                this.octorok.eliminar();
-            }
-            for(var i = 0; i< this.corazones.length; i++){
-                if(this.corazones[i].shape===shape) {
-                   this.corazones[i].eliminar();
-                   this.corazones.splice(i,1);
-                }
-            }
-            for (var i = 0; i < this.rupias.length; i++) {
-             if (this.rupias[i].shape === shape) {
-                  this.rupias[i].eliminar();
-                  this.rupias.splice(i, 1);
-                }
-             }
-            for (var i = 0; i < this.disparosEnemigos.length; i++) {
-                if (this.disparosEnemigos[i].shape === shape) {
-                    this.disparosEnemigos[i].eliminar();
-                }
-            }
             for(var i = 0; i<this.jarrones.length; i++) {
                 if(this.jarrones[i].shape === shape)
                     this.jarrones[i].destruir();
@@ -186,7 +146,8 @@ console.log("he salido de save");
     }
     , cargarMapa: function () {
 
-        this.mapa = new cc.TMXTiledMap(res.mapa_inicial_tmx);
+        this.mapa= new cc.TMXTiledMap("res/Mapas/Dungeon1/Dungeon1.tmx");
+        console.log(this.mapa);
         // Añadirlo a la Layer
         this.addChild(this.mapa);
 
@@ -229,7 +190,7 @@ console.log("he salido de save");
         }
 
         //CUEVAS
-        var cuevas = this.mapa.getObjectGroup("Cuevas");
+       /* var cuevas = this.mapa.getObjectGroup("Cuevas");
         var cuevasArray = cuevas.getObjects();
         for(var i = 0; i<cuevasArray.length ; i++)
         {
@@ -238,7 +199,7 @@ console.log("he salido de save");
             var salida = cuevasArray[i]["Salida"];
             var cueva = new Cueva(this.space,new cc.p(x,y),salida);
             this.cuevas.push(cueva);
-        }
+        }*/
 
         //JARRONES
         var jarrones = this.mapa.getObjectGroup("Jarrones");
@@ -251,8 +212,17 @@ console.log("he salido de save");
             var jarron = new Jarron(this.space,new cc.p(x,y),this);
             this.jarrones.push(jarron);
         }
-
-
+         //JARRONES
+          var zonas = this.mapa.getObjectGroup("Zones");
+          var zonasArray = zonas.getObjects();
+          for(var i = 0; i< zonasArray.length ; i++)
+           {
+               var x = zonasArray[i]["x"];
+                    var y = zonasArray[i]["y"];
+                    var zona = new Zona(new cc.p(x,y));
+                    this.zonas.push(zona);
+           }
+            cc.log(this.zonas);
 
     }, actualizarCamara: function () {
         var winSize = cc.winSize;

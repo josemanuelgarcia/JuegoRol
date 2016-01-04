@@ -283,7 +283,7 @@ console.log("he salido de save");
                  var pos = cueva.getPosSalida();
                  posicion = cc.p(pos.x,this.mapaAlto - pos.y);
          var nextScene=new CaveScene();
-         cc.director.runScene(new cc.TransitionShrinkGrow(3.0,nextScene));
+         cc.director.runScene(new cc.TransitionFade(3.0,nextScene));
     }
 });
 var GameScene = cc.Scene.extend({

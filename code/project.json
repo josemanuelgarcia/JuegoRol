@@ -32,6 +32,7 @@
         "src/Manager/CollisionManager.js",
         "src/Guardado/Save.js",
         "src/Enemigos/Soldado.js",
-        "src/CaveScene.js"
+        "src/CaveScene.js",
+        "src/Cuevas/Zona.js"
     ]
 }
