@@ -122,7 +122,7 @@ var Soldado = cc.Class.extend({
          } else if(distanciaX>10) {
              this.moverIzquierda()
          }
-         else if(distanciaY>10) {
+         if(distanciaY>10) {
                 this.moverAbajo();
          } else if(distanciaY<-10){
                this.moverArriba();
