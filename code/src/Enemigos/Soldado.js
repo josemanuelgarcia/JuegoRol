@@ -11,11 +11,13 @@ var Soldado = cc.Class.extend({
     animMoverDereha:null,
     animMoverIzquierda:null,
     animaciones:[],
+    tiempoEntreMovimientos: null,
+    tiempoMovimiento:0,
 
     ctor: function (space, position, layer) {
         this.space=space;
         this.layer=layer;
-
+        this.tiempoEntreMovimientos = 1 + Math.floor(Math.random() * 2);
         this.sprite = new cc.PhysicsSprite("#Soldado_verde_parado_abajo0.png");
 
         // Cuerpo dinamico, SI le afectan las fuerzas
@@ -48,16 +50,41 @@ var Soldado = cc.Class.extend({
         var distanciaY=this.body.p.y-this.layer.link.body.p.y;
         //comprobar que el jugador este en un radio cercano al enemigo
         var distancia=Math.sqrt(Math.pow(this.body.p.x-this.layer.link.body.p.x,2)+Math.pow(this.body.p.y-this.layer.link.body.p.y,2));
+        this.tiempoMovimiento = this.tiempoMovimiento + dt;
+
         if(distancia<150) {
             //hacemos que primero el enemigo se muestre en el ejeX y despues en el ejeY
             this.moverHaciaJugador();
-
-        } else {
-           //parar al enemigo
-           this.parar();
+        } else if(this.tiempoMovimiento > this.tiempoEntreMovimientos){
+             this.vigilar();
+             this.tiempoMovimiento = 0;
         }
 
-    }, moverArriba: function () {
+    },vigilar:function(){
+         var random = Math.floor(Math.random() * 5);
+         cc.log(random);
+
+         switch(random) {
+             case 0:
+                 this.moverDerecha();
+                 break;
+             case 1:
+                this.moverAbajo();
+                break;
+             case 2:
+                this.moverIzquierda();
+                break;
+             case 3:
+                this.moverArriba();
+                break;
+             case 4:
+                this.parar();
+                break;
+         }
+
+    }
+    , moverArriba: function () {
+
         this.orientacion = "ARRIBA";
         this.animacionMoverse();
         this.body.setVel(cp.v(0, this.velMovimiento));
@@ -91,15 +118,15 @@ var Soldado = cc.Class.extend({
          var distanciaY=this.body.p.y-this.layer.link.body.p.y;
 
          if(distanciaX<10) {
-                this.moverDerecha();
+             this.moverDerecha();
          } else if(distanciaX>10) {
-                this.moverIzquierda()
+             this.moverIzquierda()
          }
-          if(distanciaY>10) {
-              this.moverAbajo();
-          } else if(distanciaY<-10){
+         else if(distanciaY>10) {
+                this.moverAbajo();
+         } else if(distanciaY<-10){
                this.moverArriba();
-          }
+         }
 
     }, obtainAnimation: function (key) {
            return this.animaciones[key];
@@ -108,6 +135,7 @@ var Soldado = cc.Class.extend({
         this.sprite.runAction(this.obtainAnimation("SIMPLE_"+this.orientacion));
 
     }, animacionMoverse: function() {
+        this.sprite.stopAllActions();
         this.sprite.runAction(this.obtainAnimation("MOVER_"+this.orientacion));
 
     }

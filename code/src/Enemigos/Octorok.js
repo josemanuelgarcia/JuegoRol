@@ -16,7 +16,7 @@ var Octorok = cc.Class.extend({
     ctor: function (space, posicion, layer) {
         this.space = space;
         this.layer = layer;
-
+        this.tiempoEntreMovimientos = 1;
 
         this.sprite = new cc.PhysicsSprite("#Octorok_abajo0.png");
 
@@ -43,18 +43,17 @@ var Octorok = cc.Class.extend({
         animationManager.addAnimationsOctorok(this);
 
         this.layer.mapa.addChild(this.sprite, 2);
+
         return true;
 
 
     }, update: function (dt) {
-
-
         //aumentamos el tiempo del movimiento
         this.tiempoMovimiento = this.tiempoMovimiento + dt;
         if (this.tiempoMovimiento > this.tiempoEntreMovimientos) {
              this.sprite.stopAllActions();
              var random = Math.floor(Math.random() * 7);
-             cc.log(random);
+
              switch(random) {
                  case 0:
                      this.moverDerecha();

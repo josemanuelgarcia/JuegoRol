@@ -62,7 +62,7 @@ var CollisionManager = cc.Class.extend({
 
         this.space.addCollisionHandler(tipoEspada, tipoSoldado, null,this.collisionEspadaConEnemigo.bind(this), null, null);
 
-        this.space.addCollisionHandler(tipoJugador, tipoSoldado, null, null, null, this.reducirVidas.bind(this));
+        this.space.addCollisionHandler(tipoJugador, tipoSoldado, this.reducirVidas.bind(this), null, null, null);
 
 
 
