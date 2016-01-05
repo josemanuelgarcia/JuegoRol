@@ -61,9 +61,7 @@ var Soldado = cc.Class.extend({
         }
 
     },vigilar:function(){
-         var random = Math.floor(Math.random() * 5);
-         cc.log(random);
-
+         var random = Math.floor(Math.random() * 7);
          switch(random) {
              case 0:
                  this.moverDerecha();
@@ -77,7 +75,7 @@ var Soldado = cc.Class.extend({
              case 3:
                 this.moverArriba();
                 break;
-             case 4:
+             case 4||5||6:
                 this.parar();
                 break;
          }

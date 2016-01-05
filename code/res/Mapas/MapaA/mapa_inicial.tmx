@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.0" orientation="orthogonal" renderorder="right-down" width="50" height="50" tilewidth="32" tileheight="32" nextobjectid="222">
+<map version="1.0" orientation="orthogonal" renderorder="right-down" width="50" height="50" tilewidth="32" tileheight="32" nextobjectid="242">
  <tileset firstgid="1" name="Outside_A5" tilewidth="32" tileheight="32" tilecount="128">
   <image source="Outside_A5.png" width="256" height="512"/>
  </tileset>
@@ -273,5 +273,67 @@
  </objectgroup>
  <objectgroup name="Bloques">
   <object id="221" x="449" y="1183" width="18" height="19"/>
+ </objectgroup>
+ <objectgroup name="ObjetosAnimados">
+  <object id="227" x="269.667" y="621" width="16" height="16">
+   <properties>
+    <property name="tipo" value="antorchaA_"/>
+   </properties>
+  </object>
+  <object id="228" x="320.333" y="621.333" width="16" height="16">
+   <properties>
+    <property name="tipo" value="antorchaA_"/>
+   </properties>
+  </object>
+  <object id="232" x="432" y="1060.33" width="16" height="16">
+   <properties>
+    <property name="tipo" value="antorchaB_"/>
+   </properties>
+  </object>
+  <object id="233" x="431.333" y="1036.33" width="16" height="16">
+   <properties>
+    <property name="tipo" value="antorchaC_"/>
+   </properties>
+  </object>
+  <object id="234" x="431.667" y="1012.33" width="16" height="16">
+   <properties>
+    <property name="tipo" value="antorchaC_"/>
+   </properties>
+  </object>
+  <object id="235" x="432" y="989.667" width="16" height="16">
+   <properties>
+    <property name="tipo" value="antorchaC_"/>
+   </properties>
+  </object>
+  <object id="236" x="431.667" y="968" width="16" height="16">
+   <properties>
+    <property name="tipo" value="antorchaB_"/>
+   </properties>
+  </object>
+  <object id="237" x="576.333" y="966" width="16" height="16">
+   <properties>
+    <property name="tipo" value="antorchaB_"/>
+   </properties>
+  </object>
+  <object id="238" x="576" y="989.333" width="16" height="16">
+   <properties>
+    <property name="tipo" value="antorchaC_"/>
+   </properties>
+  </object>
+  <object id="239" x="576" y="1014.33" width="16" height="16">
+   <properties>
+    <property name="tipo" value="antorchaC_"/>
+   </properties>
+  </object>
+  <object id="240" x="576.333" y="1037.33" width="16" height="16">
+   <properties>
+    <property name="tipo" value="antorchaC_"/>
+   </properties>
+  </object>
+  <object id="241" x="576.333" y="1060" width="16" height="16">
+   <properties>
+    <property name="tipo" value="antorchaB_"/>
+   </properties>
+  </object>
  </objectgroup>
 </map>

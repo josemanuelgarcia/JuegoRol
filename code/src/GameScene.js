@@ -63,9 +63,6 @@ var GameLayer = cc.Layer.extend({
         }
 
         this.link = new Link(this.space, posicion, this);
-        var antorcha = new ObjetoAnimado(this.space,cc.p(300,300),this,"antorchaC_",4);
-        var antorcha = new ObjetoAnimado(this.space,cc.p(315,300),this,"antorchaB_",4);
-        var antorcha = new ObjetoAnimado(this.space,cc.p(330,300),this,"antorchaA_",4);
 
         //Creacion de soldado de prueba
         this.soldado = new Soldado(this.space, cc.p(600, 200), this);
@@ -243,13 +240,25 @@ var GameLayer = cc.Layer.extend({
         //JARRONES
         var jarrones = this.mapa.getObjectGroup("Jarrones");
         var jarronesArray = jarrones.getObjects();
-        cc.log("Jarrones: "+ jarronesArray.length);
         for(var i = 0; i< jarronesArray.length ; i++)
         {
             var x = jarronesArray[i]["x"];
             var y = jarronesArray[i]["y"];
             var jarron = new Jarron(this.space,new cc.p(x,y),this);
             this.jarrones.push(jarron);
+        }
+
+        //ObjetosAnimados
+        var objetosAnimados = this.mapa.getObjectGroup("ObjetosAnimados");
+        var objetosAnimadosArray = objetosAnimados.getObjects();
+        cc.log("ObjetosAnimados -> "+objetosAnimadosArray.length);
+        for(var i = 0; i<objetosAnimadosArray.length;i++)
+        {
+            var x = objetosAnimadosArray[i]["x"];
+            var y = objetosAnimadosArray[i]["y"];
+            var tipo = objetosAnimadosArray[i]["tipo"];
+            var objetoAnimado = new ObjetoAnimado(this.space,cc.p(x,y),this,tipo,4);
+
         }
 
 

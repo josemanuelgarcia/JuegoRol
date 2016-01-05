@@ -12,7 +12,7 @@ ctor:function(space,position,layer,nombreAnimacion,numFrames){
     var tamaño = this.sprite.getContentSize();
 
     var body = new cp.StaticBody();
-    body.setPos(cc.p(position.x + tamaño.width/2,position.y - tamaño.height/2));
+    body.setPos(cc.p(position.x + tamaño.width/2,position.y + tamaño.height/2));
 
     this.sprite.setBody(body);
 
