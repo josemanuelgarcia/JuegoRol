@@ -146,9 +146,9 @@ var GameLayer = cc.Layer.extend({
                     this.jarrones[i].destruir();
             }
 
-           /* if(this.soldado.shape == shape){
+            if(this.soldado.shape == shape){
                 this.soldado.eliminar();
-            }*/
+            }
         }
         this.shapesToRemove = [];
 
