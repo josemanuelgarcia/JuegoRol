@@ -34,7 +34,7 @@ var CollisionManager = cc.Class.extend({
 
         this.space.addCollisionHandler(tipoJugador,tipoBomba, this.reducirVidas.bind(this), null, null, null);
 
-        this.space.addCollisionHandler(tipoEspada,tipoJarron,null,this.destruirJarron.bind(this),null,null);
+        this.space.addCollisionHandler(tipoEspada,tipoJarron,this.destruirJarron.bind(this),null,null,null);
 
         //Colisiones con Octorok
         this.space.addCollisionHandler(tipoNoPasable, tipoOctorok,null, null, this.collisionObjetoConOctorok.bind(this), null);
@@ -60,7 +60,7 @@ var CollisionManager = cc.Class.extend({
 
         this.space.addCollisionHandler(tipoBomba, tipoSoldado,null,this.destruirSegundo.bind(this), null, null);
 
-        this.space.addCollisionHandler(tipoEspada, tipoSoldado, null,this.collisionEspadaConEnemigo.bind(this), null, null);
+        this.space.addCollisionHandler(tipoEspada, tipoSoldado, this.collisionEspadaConEnemigo.bind(this),null, null, null);
 
         this.space.addCollisionHandler(tipoJugador, tipoSoldado, this.reducirVidas.bind(this), null, null, null);
 
@@ -123,8 +123,11 @@ var CollisionManager = cc.Class.extend({
 
     }, collisionEspadaConEnemigo:function(arbiter,space){
           var shapes = arbiter.getShapes();
+
           if(this.layer.link.sword) {
               if(this.layer.mathUtil.isInViewCone(this.layer.link.body.p,shapes[1].body.p,0.5,this.layer)) {
+                  var normal =  arbiter.getContactPointSet()[0].normal;
+                  //shapes[1].getBody().applyImpulse(cc.v(normal.x*10,normal.y*10),cp.v(0,0));
                   this.layer.shapesToRemove.push(shapes[1]);
               }
           }
