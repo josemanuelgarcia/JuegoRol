@@ -148,7 +148,50 @@ var AnimationManager = cc.Class.extend({
         this.objectToBeAnimated.animaciones["MOVER_IZQUIERDA"] = cc.RepeatForever.create(
             cc.Animate.create(new cc.Animation(framesMoverIzq, 0.2)));
 
-    }, getAnimacion: function (nombreAnimacion, numFrames) {
+    }, addAnimationsSoldadoRojo: function(soldado){
+              this.objectToBeAnimated=soldado;
+
+              //Animacion parado Arriba
+              var framesSimple = this.getAnimacion("Soldado_rojo_parado_arriba", 2);
+              this.objectToBeAnimated.animaciones["SIMPLE_ARRIBA"] = cc.RepeatForever.create(
+                  cc.Sequence.create(cc.Animate.create(new cc.Animation(framesSimple, 0.4)), cc.DelayTime.create(2)));
+
+              //Animacion parado Abajo
+              var framesSimpleAbajo = this.getAnimacion("Soldado_rojo_parado_abajo", 2);
+              this.objectToBeAnimated.animaciones["SIMPLE_ABAJO"] = cc.RepeatForever.create(
+                    cc.Sequence.create(cc.Animate.create(new cc.Animation(framesSimpleAbajo, 0.4)), cc.DelayTime.create(2)));
+
+              //Animacion parado Derecha
+              var framesSimpleDerecha = this.getAnimacion("Soldado_rojo_parado_derecha", 2);
+              this.objectToBeAnimated.animaciones["SIMPLE_DERECHA"] = cc.RepeatForever.create(
+                  cc.Sequence.create(cc.Animate.create(new cc.Animation(framesSimpleDerecha, 0.4)), cc.DelayTime.create(2)));
+
+              //Animacion parado Izquierda
+              var framesSimpleIzq = this.getAnimacion("Soldado_rojo_parado_izq", 2);
+              this.objectToBeAnimated.animaciones["SIMPLE_IZQUIERDA"] = cc.RepeatForever.create(
+                  cc.Sequence.create(cc.Animate.create(new cc.Animation(framesSimpleIzq, 0.4)), cc.DelayTime.create(2)));
+
+              //Animacion mover arriba
+              var framesMoverArriba = this.getAnimacion("Soldado_rojo_mover_arriba", 2);
+              this.objectToBeAnimated.animaciones["MOVER_ARRIBA"] = cc.RepeatForever.create(
+                  cc.Animate.create(new cc.Animation(framesMoverArriba, 0.2)));
+
+              //Animacion mover abajo
+              var framesMoverAbajo = this.getAnimacion("Soldado_rojo_mover", 2);
+              this.objectToBeAnimated.animaciones["MOVER_ABAJO"] = cc.RepeatForever.create(
+              cc.Animate.create(new cc.Animation(framesMoverAbajo, 0.2)));
+
+              //Animacion mover derecha
+              var framesMoverDerecha = this.getAnimacion("Soldado_rojo_mover_derecha", 2);
+              this.objectToBeAnimated.animaciones["MOVER_DERECHA"] = cc.RepeatForever.create(
+                  cc.Animate.create(new cc.Animation(framesMoverDerecha, 0.2)));
+
+              //Animacion mover izquierda
+              var framesMoverIzq = this.getAnimacion("Soldado_rojo_mover_izq", 2);
+              this.objectToBeAnimated.animaciones["MOVER_IZQUIERDA"] = cc.RepeatForever.create(
+                  cc.Animate.create(new cc.Animation(framesMoverIzq, 0.2)));
+
+     }, getAnimacion: function (nombreAnimacion, numFrames) {
         var framesAnimacion = [];
         for (var i = 0; i < numFrames; i++) {
             var str = nombreAnimacion + i + ".png";

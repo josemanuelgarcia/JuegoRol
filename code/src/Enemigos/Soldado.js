@@ -14,11 +14,22 @@ var Soldado = cc.Class.extend({
     tiempoEntreMovimientos: null,
     tiempoMovimiento:0,
 
-    ctor: function (space, position, layer) {
+    ctor: function (space, position, layer, color) {
         this.space=space;
         this.layer=layer;
         this.tiempoEntreMovimientos = 1 + Math.floor(Math.random() * 2);
-        this.sprite = new cc.PhysicsSprite("#Soldado_verde_parado_abajo0.png");
+
+        console.log(color);
+
+        if(color ===  "r") {
+            this.sprite = new cc.PhysicsSprite("#Soldado_rojo_parado_abajo0.png");
+            animationManager.addAnimationsSoldadoRojo(this);
+
+        } else {
+            this.sprite = new cc.PhysicsSprite("#Soldado_verde_parado_abajo0.png");
+            animationManager.addAnimationsSoldadoVerde(this);
+        }
+
 
         // Cuerpo dinamico, SI le afectan las fuerzas
         this.body = new cp.Body(100, Infinity);
@@ -38,9 +49,6 @@ var Soldado = cc.Class.extend({
         // forma dinamica
         this.shape.setCollisionType(tipoSoldado);
         this.space.addShape(this.shape);
-
-        //Añadir las animaciones de octorok
-        animationManager.addAnimationsSoldadoVerde(this);
 
         this.layer.mapa.addChild(this.sprite, 2);
         return true;
@@ -114,17 +122,31 @@ var Soldado = cc.Class.extend({
     }, moverHaciaJugador: function() {
          var distanciaX=this.body.p.x-this.layer.link.body.p.x;
          var distanciaY=this.body.p.y-this.layer.link.body.p.y;
+      //TODO probar
+         if(distanciaX<distanciaY) {
+                   if(distanciaX<10) {
+                      this.moverDerecha();
+                  } else if(distanciaX>10) {
+                      this.moverIzquierda()
+                  }
+         } else {
+                  if(distanciaY>10) {
+                        this.moverAbajo();
+                  } else if(distanciaY<-10){
+                        this.moverArriba();
+                  }
+         }
 
-         if(distanciaX<10) {
+        /*if(distanciaX<10) {
              this.moverDerecha();
          } else if(distanciaX>10) {
              this.moverIzquierda()
          }
          if(distanciaY>10) {
-                this.moverAbajo();
+               this.moverAbajo();
          } else if(distanciaY<-10){
                this.moverArriba();
-         }
+         }*/
 
     }, obtainAnimation: function (key) {
            return this.animaciones[key];

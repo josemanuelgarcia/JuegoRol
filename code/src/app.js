@@ -6,6 +6,7 @@ var MenuLayer = cc.Layer.extend({
         //Cacheo de recursos graficos
         cc.spriteFrameCache.addSpriteFrames(res.octorok_plist);
         cc.spriteFrameCache.addSpriteFrames(res.soldadoVerde_plist);
+        cc.spriteFrameCache.addSpriteFrames(res.soldadoRojo_plist);
         cc.spriteFrameCache.addSpriteFrames(res.link_plist);
          cc.spriteFrameCache.addSpriteFrames(res.boomerang_plist);
          cc.spriteFrameCache.addSpriteFrames(res.explosion_plist);
