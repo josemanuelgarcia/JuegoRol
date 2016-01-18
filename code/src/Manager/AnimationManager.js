@@ -177,7 +177,7 @@ var AnimationManager = cc.Class.extend({
                   cc.Animate.create(new cc.Animation(framesMoverArriba, 0.2)));
 
               //Animacion mover abajo
-              var framesMoverAbajo = this.getAnimacion("Soldado_rojo_mover", 2);
+              var framesMoverAbajo = this.getAnimacion("Soldado_rojo_mover_abajo", 2);
               this.objectToBeAnimated.animaciones["MOVER_ABAJO"] = cc.RepeatForever.create(
               cc.Animate.create(new cc.Animation(framesMoverAbajo, 0.2)));
 
@@ -186,10 +186,8 @@ var AnimationManager = cc.Class.extend({
               this.objectToBeAnimated.animaciones["MOVER_DERECHA"] = cc.RepeatForever.create(
                   cc.Animate.create(new cc.Animation(framesMoverDerecha, 0.2)));
 
-              //Animacion mover izquierda
-              var framesMoverIzq = this.getAnimacion("Soldado_rojo_mover_izq", 2);
               this.objectToBeAnimated.animaciones["MOVER_IZQUIERDA"] = cc.RepeatForever.create(
-                  cc.Animate.create(new cc.Animation(framesMoverIzq, 0.2)));
+                                cc.Animate.create(new cc.Animation(framesMoverDerecha, 0.2)));
 
      }, getAnimacion: function (nombreAnimacion, numFrames) {
         var framesAnimacion = [];

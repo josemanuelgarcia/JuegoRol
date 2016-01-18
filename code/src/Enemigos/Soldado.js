@@ -13,6 +13,7 @@ var Soldado = cc.Class.extend({
     animaciones:[],
     tiempoEntreMovimientos: null,
     tiempoMovimiento:0,
+    isMoving :false,
 
     ctor: function (space, position, layer, color) {
         this.space=space;
@@ -90,25 +91,40 @@ var Soldado = cc.Class.extend({
 
     }
     , moverArriba: function () {
-
-        this.orientacion = "ARRIBA";
-        this.animacionMoverse();
-        this.body.setVel(cp.v(0, this.velMovimiento));
+        if(this.orientacion != "ARRIBA" || !this.isMoving){
+            this.orientacion = "ARRIBA";
+            this.sprite.scaleX=1;
+            this.animacionMoverse();
+            this.body.setVel(cp.v(0, this.velMovimiento));
+            this.isMoving=true;
+        }
 
     }, moverAbajo: function () {
-        this.orientacion = "ABAJO";
-        this.animacionMoverse();
-        this.body.setVel(cp.v(0, -this.velMovimiento));
+        if(this.orientacion != "ABAJO" || !this.isMoving){
+            this.orientacion = "ABAJO";
+            this.sprite.scaleX=1;
+            this.animacionMoverse();
+            this.body.setVel(cp.v(0, -this.velMovimiento));
+            this.isMoving=true;
+        }
 
     }, moverDerecha: function () {
-        this.orientacion = "DERECHA";
-        this.animacionMoverse();
-        this.body.setVel(cp.v(this.velMovimiento, 0));
+        if(this.orientacion != "DERECHA" || !this.isMoving){
+            this.orientacion = "DERECHA";
+            this.sprite.scaleX=1;
+            this.animacionMoverse();
+            this.body.setVel(cp.v(this.velMovimiento, 0));
+            this.isMoving=true;
+        }
 
     }, moverIzquierda: function () {
-        this.orientacion = "IZQUIERDA";
-        this.animacionMoverse();
-        this.body.setVel(cp.v(-this.velMovimiento, 0));
+        if(this.orientacion != "IZQUIERDA" || !this.isMoving){
+            this.orientacion = "IZQUIERDA";
+            this.sprite.scaleX=-1;
+            this.animacionMoverse();
+            this.body.setVel(cp.v(-this.velMovimiento, 0));
+            this.isMoving=true;
+        }
 
     }, eliminar: function() {
         this.space.removeShape(this.shape);
@@ -116,37 +132,43 @@ var Soldado = cc.Class.extend({
 
     }, parar: function () {
         this.body.setVel(cp.v(0, 0));
+        this.sprite.scaleX=(this.orientacion=="IZQUIERDA"? -1:1);
         this.sprite.stopAllActions();
         this.animacionPararse();
+        this.isMoving=false;
 
     }, moverHaciaJugador: function() {
          var distanciaX=this.body.p.x-this.layer.link.body.p.x;
          var distanciaY=this.body.p.y-this.layer.link.body.p.y;
-      //TODO probar
-         if(distanciaX<distanciaY) {
-                   if(distanciaX<10) {
-                      this.moverDerecha();
-                  } else if(distanciaX>10) {
-                      this.moverIzquierda()
-                  }
-         } else {
-                  if(distanciaY>10) {
-                        this.moverAbajo();
-                  } else if(distanciaY<-10){
-                        this.moverArriba();
-                  }
-         }
 
-        /*if(distanciaX<10) {
-             this.moverDerecha();
-         } else if(distanciaX>10) {
-             this.moverIzquierda()
-         }
-         if(distanciaY>10) {
-               this.moverAbajo();
-         } else if(distanciaY<-10){
-               this.moverArriba();
-         }*/
+
+
+        if(distanciaX>=0 && distanciaY>=0){//Primer cuadrante
+               if(distanciaX<distanciaY){
+                    this.moverAbajo()
+               } else {
+                    this.moverIzquierda()
+               }
+
+        }else if(distanciaX<=0 && distanciaY>=0){//Segundo cuadrante
+                if(Math.abs(distanciaX)<distanciaY){
+                    this.moverAbajo()
+               } else {
+                    this.moverDerecha()
+               }
+        }else if( distanciaX<=0 && distanciaY<=0){//Tercer cuadrante
+               if(distanciaX>distanciaY){
+                    this.moverArriba()
+               } else {
+                    this.moverDerecha()
+               }
+        }else {//Cuarto cuadrante
+                if(distanciaX<distanciaY){
+                    this.moverArriba()
+               } else {
+                    this.moverIzquierda()
+               }
+        }
 
     }, obtainAnimation: function (key) {
            return this.animaciones[key];
