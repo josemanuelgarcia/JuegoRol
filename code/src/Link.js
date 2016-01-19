@@ -20,7 +20,7 @@ var Link = cc.Class.extend({
     //Atributos de Link modificables
     velMovimiento: 70,
     velRodar:180,
-    numBombas:10,
+    numBombas:0,
     ctor: function (space, posicion, layer) {
         this.space = space;
         this.layer = layer;
@@ -28,6 +28,19 @@ var Link = cc.Class.extend({
         this.orientacion="ABAJO";
         //Sprite inicial de link
         this.sprite = new cc.PhysicsSprite("#link_caminar_abajo0.png");
+
+        //numero de bombas cuando se guarda
+         var numBombasGuardadas=parseInt(loadDollNum("numBombas",1));
+          console.log("numero de bombas guardadas"+numBombasGuardadas);
+        if(cargarPartida && numBombasGuardadas!=0)
+        {
+       this.numBombas=numBombasGuardadas;
+
+        }
+        else
+        {
+        this.numBombas=10;
+        }
 
         // Cuerpo dinamico, SI le afectan las fuerzas
         this.body = new cp.Body(100, Infinity);

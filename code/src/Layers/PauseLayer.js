@@ -89,6 +89,7 @@ var PauseLayer = cc.LayerColor.extend({
     saveDollNum("yLink",y);
     saveDollNum("vidasQuitadas",vidasQuitadas);
     saveDollNum("corazonesDados",corazonesDados);
+    saveDollNum("numBombas",gameScene.link.numBombas);
      this.scene.getChildByTag(2).entrar=true;
             this.scene.getChildByTag(2).pause=true;
             cc.director.resume();
