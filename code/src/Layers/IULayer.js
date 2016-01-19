@@ -71,12 +71,12 @@ var IULayer = cc.Layer.extend({
         this.addChild(this.etiquetaMonedas);
 
         // spriteBotonMenu
-        this.spriteBotonMenu = cc.Sprite.create(res.boton_menu_png);
+        this.spriteBotonMenu = cc.Sprite.create(res.boton_menu2_png);
         this.spriteBotonMenu.setPosition(cc.p(90,40));
         this.spriteBotonMenu.setOpacity(190);
          this.addChild(this.spriteBotonMenu);
          // spriteBotonPause
-         this.spriteBotonPause = cc.Sprite.create(res.boton_menu_png);
+         this.spriteBotonPause = cc.Sprite.create(res.boton_pausa_png);
          this.spriteBotonPause.setPosition(cc.p(711,40));
          this.spriteBotonPause.setOpacity(190);
 
