@@ -19,6 +19,7 @@ var GameLayer = cc.Layer.extend({
     octorock: null,
     depuracion: null,
     corazones:[],
+    bombaRecolectable:[],
     rupias:[],
     shapesToRemove: [],
     cuevas:[],
@@ -64,11 +65,17 @@ var GameLayer = cc.Layer.extend({
 
         this.link = new Link(this.space, posicion, this);
 
+        //creacion bomba de prueba
+        this.bombaRecolectable.push(new BombaRecolectable(this.space,cc.p(550,300),this));
+
+
         //Creacion de soldado de prueba
         this.soldado = new Soldado(this.space, cc.p(600, 200), this,"r");
 
         //creacion de corazon de prueba
         this.corazones.push(new Corazon(this.space,cc.p(550,200),this));
+
+
 
         //Creacion de rupias de diferentes colores  de prueba--------------
          var rupiaRoja = new Rupia(this.space,cc.p(600,200),this,"r");
@@ -149,6 +156,12 @@ var GameLayer = cc.Layer.extend({
             if(this.soldado.shape == shape){
                 this.soldado.eliminar();
             }
+             for (var i = 0; i < this.bombaRecolectable.length; i++) {
+                         if (this.bombaRecolectable[i].shape === shape) {
+                              this.bombaRecolectable[i].eliminar();
+                              this.bombaRecolectable.splice(i, 1);
+                            }
+                         }
         }
         this.shapesToRemove = [];
 

@@ -23,6 +23,7 @@
         "src/Armas/Boomerang.js",
         "src/Recolectables/Corazon.js",
         "src/Recolectables/Rupia.js",
+        "src/Recolectables/BombaRecolectable.js",
         "src/Layers/HistoryLayer.js",
         "src/Manager/AnimationManager.js",
         "src/Armas/Bomba.js",

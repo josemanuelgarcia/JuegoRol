@@ -12,6 +12,7 @@ var tipoCueva=10;
 var tipoJarron=11;
 var tipoBloque=12;
 var tipoSoldado=13;
+var tipoBombaRecolectable=14;
 var CollisionManager = cc.Class.extend({
 
     space:null,
@@ -29,6 +30,8 @@ var CollisionManager = cc.Class.extend({
         this.space.addCollisionHandler(tipoBoomerang, tipoNoPasable, null,this.collisionBoomerangConNoPasable.bind(this), null, null);
 
         this.space.addCollisionHandler(tipoJugador, tipoCorazon,null,this.collisionJugadorConCorazon.bind(this), null, null);
+
+        this.space.addCollisionHandler(tipoJugador, tipoBombaRecolectable,null,this.collisionJugadorConBombaRecolectable.bind(this), null, null);
 
         this.space.addCollisionHandler(tipoJugador, tipoRupia,null,this.collisionJugadorConRupia.bind(this), null, null);
 
@@ -91,7 +94,17 @@ var CollisionManager = cc.Class.extend({
          var shapes = arbiter.getShapes();
          this.layer.shapesToRemove.push(shapes[1]);
 
-    },collisionJugadorConRupia:function(arbiter,space){
+    }, collisionJugadorConBombaRecolectable:function(arbiter,space){
+
+              var shapes = arbiter.getShapes();
+              for (var i = 0; i < this.layer.bombaRecolectable.length; i++) {
+                          if (this.layer.bombaRecolectable[i].shape === shapes[1]) {
+                           this.layer.bombaRecolectable[i].agregarBombas();
+                         }
+                       }
+                this.layer.shapesToRemove.push(shapes[1]);
+
+         },collisionJugadorConRupia:function(arbiter,space){
          var shapes = arbiter.getShapes();
          for (var i = 0; i < this.layer.rupias.length; i++) {
             if (this.layer.rupias[i].shape === shapes[1]) {
