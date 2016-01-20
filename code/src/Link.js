@@ -21,6 +21,7 @@ var Link = cc.Class.extend({
     velMovimiento: 70,
     velRodar:180,
     numBombas:0,
+    numFlechas:0,
     ctor: function (space, posicion, layer) {
         this.space = space;
         this.layer = layer;
@@ -29,17 +30,22 @@ var Link = cc.Class.extend({
         //Sprite inicial de link
         this.sprite = new cc.PhysicsSprite("#link_caminar_abajo0.png");
 
-        //numero de bombas cuando se guarda
+
+
+        //numero de bombas y de flechas cuando se guarda
          var numBombasGuardadas=parseInt(loadDollNum("numBombas",1));
+         var numFlechasGuardadas=parseInt(loadDollNum("numFlechas",1));
           console.log("numero de bombas guardadas"+numBombasGuardadas);
-        if(cargarPartida && numBombasGuardadas!=0)
+        if(cargarPartida && numBombasGuardadas!=0 && numFlechasGuardadas!=0)
         {
        this.numBombas=numBombasGuardadas;
+       this.numFlechas=numFlechasGuardadas;
 
         }
         else
         {
         this.numBombas=10;
+        this.numFlechas=10;
         }
 
         // Cuerpo dinamico, SI le afectan las fuerzas

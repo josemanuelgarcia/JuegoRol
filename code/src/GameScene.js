@@ -20,6 +20,7 @@ var GameLayer = cc.Layer.extend({
     depuracion: null,
     corazones:[],
     bombaRecolectable:[],
+    flechasRecolectables:[],
     rupias:[],
     shapesToRemove: [],
     cuevas:[],
@@ -68,6 +69,8 @@ var GameLayer = cc.Layer.extend({
         //creacion bomba de prueba
         this.bombaRecolectable.push(new BombaRecolectable(this.space,cc.p(550,300),this));
 
+        //creacion de flecha de prueba
+        this.flechasRecolectables.push(new FlechaRecolectable(this.space,cc.p(500,400),this));
 
         //Creacion de soldado de prueba
         this.soldado = new Soldado(this.space, cc.p(600, 200), this,"r");
@@ -162,6 +165,12 @@ var GameLayer = cc.Layer.extend({
                               this.bombaRecolectable.splice(i, 1);
                             }
                          }
+              for (var i = 0; i < this.flechasRecolectables.length; i++) {
+                          if (this.flechasRecolectables[i].shape === shape) {
+                           this.flechasRecolectables[i].eliminar();
+                            this.flechasRecolectables.splice(i, 1);
+                                         }
+                                      }
         }
         this.shapesToRemove = [];
 

@@ -2,6 +2,7 @@
 var MenuObjetosLayer = cc.LayerColor.extend({
     scene: null,
     etiquetaBombas:null,
+    etiquetaFlechas:null,
     GameLayer:null,
     size:null,
     ctor: function (scene) {
@@ -47,6 +48,12 @@ var MenuObjetosLayer = cc.LayerColor.extend({
             this.pulsarBotonBombas, this);
    //     menuBombaSprite.setOpacity(160);
 
+
+     //numero de flechas que le quedan
+           this.etiquetaFlechas = new cc.LabelTTF("" + this.GameLayer.link.numFlechas, "Helvetica", 20);
+           this.etiquetaFlechas.setPosition(cc.p((this.size.width / 2) - 45, (this.size.height * 0.25) + 200));
+           this.etiquetaFlechas.fillStyle = new cc.Color(255, 255, 255, 255);
+
         // creo el menú pasándole el boton del arco
         var menuArco = new cc.Menu(menuArcoSprite);
         menuArco.setPosition(cc.p((this.size.width / 2) - 60, (this.size.height * 0.25) + 210));
@@ -82,7 +89,7 @@ var MenuObjetosLayer = cc.LayerColor.extend({
         this.addChild(menuBoomeran);
         this.addChild(menuBombas);
          this.addChild(this.etiquetaBombas);
-
+        this.addChild(this.etiquetaFlechas);
         return true;
     }, pulsarBotonArco: function () {
         cc.director.resume();
@@ -92,7 +99,7 @@ var MenuObjetosLayer = cc.LayerColor.extend({
         IULayer.spriteArmaElegida.setTexture(res.arco_reducido_png);
 
         //sera el numero de flechas de link
-                        IULayer.numeroArmas =0;
+                        IULayer.numeroArmas = this.GameLayer.link.numFlechas;
                         IULayer.crearLabelArmas();
                                 IULayer.numeroDeArmasDisponiblesLabel.setVisible(true);
 

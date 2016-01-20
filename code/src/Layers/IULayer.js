@@ -25,7 +25,7 @@ var IULayer = cc.Layer.extend({
         //se llama par pintar las vidas iniciales
 
         //Al principio la weapon es el arco
-        weapon="ARCO";
+        weapon="BOOMERANG";
 
 
         //-------------------Cargar Partida-------------------------------------
@@ -83,7 +83,7 @@ var IULayer = cc.Layer.extend({
         this.addChild(this.spriteBotonPause);
 
         //Sprite en el que se muestra el arma elegida
-        this.spriteArmaElegida = cc.Sprite.create(res.arco_reducido_png);
+        this.spriteArmaElegida = cc.Sprite.create(res.boomeran_reducido_png);
         this.spriteArmaElegida.setPosition(cc.p(size.width - 40, size.height - 40));
 
         this.addChild(this.spriteArmaElegida);
