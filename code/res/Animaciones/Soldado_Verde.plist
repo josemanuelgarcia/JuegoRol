@@ -4,7 +4,7 @@
     <dict>
         <key>frames</key>
         <dict>
-            <key>Soldado_verde_mover0.png</key>
+            <key>Soldado_verde_mover_abajo0.png</key>
             <dict>
                 <key>aliases</key>
                 <array/>
@@ -19,7 +19,7 @@
                 <key>textureRotated</key>
                 <false/>
             </dict>
-            <key>Soldado_verde_mover1.png</key>
+            <key>Soldado_verde_mover_abajo1.png</key>
             <dict>
                 <key>aliases</key>
                 <array/>

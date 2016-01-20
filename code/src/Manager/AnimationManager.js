@@ -134,7 +134,7 @@ var AnimationManager = cc.Class.extend({
             cc.Animate.create(new cc.Animation(framesMoverArriba, 0.2)));
 
         //Animacion mover abajo
-        var framesMoverAbajo = this.getAnimacion("Soldado_verde_mover", 2);
+        var framesMoverAbajo = this.getAnimacion("Soldado_verde_mover_abajo", 2);
         this.objectToBeAnimated.animaciones["MOVER_ABAJO"] = cc.RepeatForever.create(
         cc.Animate.create(new cc.Animation(framesMoverAbajo, 0.2)));
 
@@ -152,12 +152,12 @@ var AnimationManager = cc.Class.extend({
               this.objectToBeAnimated=soldado;
 
               //Animacion parado Arriba
-              var framesSimple = this.getAnimacion("Soldado_rojo_parado_arriba", 2);
+              var framesSimple = this.getAnimacion("Soldado_rojo_parado_arriba", 3);
               this.objectToBeAnimated.animaciones["SIMPLE_ARRIBA"] = cc.RepeatForever.create(
                   cc.Sequence.create(cc.Animate.create(new cc.Animation(framesSimple, 0.4)), cc.DelayTime.create(2)));
 
               //Animacion parado Abajo
-              var framesSimpleAbajo = this.getAnimacion("Soldado_rojo_parado_abajo", 2);
+              var framesSimpleAbajo = this.getAnimacion("Soldado_rojo_parado_abajo", 1);
               this.objectToBeAnimated.animaciones["SIMPLE_ABAJO"] = cc.RepeatForever.create(
                     cc.Sequence.create(cc.Animate.create(new cc.Animation(framesSimpleAbajo, 0.4)), cc.DelayTime.create(2)));
 
@@ -182,7 +182,7 @@ var AnimationManager = cc.Class.extend({
               cc.Animate.create(new cc.Animation(framesMoverAbajo, 0.2)));
 
               //Animacion mover derecha
-              var framesMoverDerecha = this.getAnimacion("Soldado_rojo_mover_derecha", 2);
+              var framesMoverDerecha = this.getAnimacion("Soldado_rojo_mover_derecha", 3);
               this.objectToBeAnimated.animaciones["MOVER_DERECHA"] = cc.RepeatForever.create(
                   cc.Animate.create(new cc.Animation(framesMoverDerecha, 0.2)));
 
