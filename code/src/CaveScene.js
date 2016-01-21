@@ -44,8 +44,6 @@ var CaveLayer = cc.Layer.extend({
         //Cargamos el Mapa
         this.cargarMapa();
         collisionManager = new CollisionManager(this.space,this);
-         //Creacion enemigo prueba
-         this.octorok = new Octorok(this.space, cc.p(600, 250), this);
 
 
         //obtenemos la posicion guardada

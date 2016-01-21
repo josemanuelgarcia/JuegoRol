@@ -16,7 +16,7 @@ var Octorok = cc.Class.extend({
     ctor: function (space, posicion, layer) {
         this.space = space;
         this.layer = layer;
-        this.tiempoEntreMovimientos = 1;
+        this.tiempoEntreMovimientos = 5;
 
         this.sprite = new cc.PhysicsSprite("#Octorok_abajo0.png");
 
