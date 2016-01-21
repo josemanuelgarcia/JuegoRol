@@ -39,8 +39,8 @@ var CaveLayer = cc.Layer.extend({
         //La gravedad en este juego da igual.
         this.space.gravity = cp.v(0, 0);
         //Add the Debug Layer:
-       //var depuracion = new cc.PhysicsDebugNode(this.space);
-       //this.addChild(depuracion, 10);
+       var depuracion = new cc.PhysicsDebugNode(this.space);
+       this.addChild(depuracion, 10);
         animationManager=new AnimationManager();
         //Cargamos el Mapa
         this.cargarMapa();
@@ -95,14 +95,6 @@ console.log("he salido de save");
         this.actualizarCamara();
         this.link.update(dt);
          this.abrirCofre();
-         //Actualizar enemigos de la mazmorra
-         for(var i=0;i<this.zonas.length;i++)
-         {
-            for(var j=0;j<this.zonas[i].enemigos.length;j++)
-            {
-                this.zonas[i].enemigos[j].update(dt);
-            }
-         }
         //Eliminar elementos
         for (var i = 0; i < this.shapesToRemove.length; i++) {
             var shape = this.shapesToRemove[i];
@@ -113,16 +105,10 @@ console.log("he salido de save");
                  }
             }
             //Eliminar octorock si impacta, mas adelante se recorreran todos los enemigos
-            for(var i=0;i<this.zonas.length;i++)
-                     {
-                        for(var j=0;j<this.zonas[i].enemigos.length;j++)
+                        for(var j=0;j<this.zonaActual.enemigos.length;j++)
                         {
-                            if(this.zonas[i].enemigos[j].shape==shape)
-                            {
-                                this.zonas[i].enemigos[j].eliminar();
-                            }
+                            this.zonaActual.eliminarEnemigo(i);
                         }
-                     }
             for(var i = 0; i< this.corazones.length; i++){
                 if(this.corazones[i].shape===shape) {
                    this.corazones[i].eliminar();
@@ -138,19 +124,28 @@ console.log("he salido de save");
             for (var i = 0; i < this.disparosEnemigos.length; i++) {
                 if (this.disparosEnemigos[i].shape === shape) {
                     this.disparosEnemigos[i].eliminar();
+                    this.disparosEnemigos.splice(i,1);
                 }
             }
             for(var i = 0; i<this.jarrones.length; i++) {
                 if(this.jarrones[i].shape === shape)
                     this.jarrones[i].destruir();
+                    this.jarrones.splice(i,1);
             }
 
            /* if(this.soldado.shape == shape){
                 this.soldado.eliminar();
             }*/
+            shapesToRemove=[];
         }
-        this.shapesToRemove = [];
-
+        //Actualizar enemigos de la mazmorra
+                 /*for(var i=0;i<this.zonas.length;i++)
+                 {
+                    for(var j=0;j<this.zonas[i].enemigos.length;j++)
+                    {
+                        this.zonas[i].enemigos[j].update(dt);
+                    }
+                 }*/
     }, procesarEventosKeyboard: function (keyCode, event) {
         var instancia = event.getCurrentTarget();
         //Al cambiar de ventana en el navegador entra un 18 no se por que
@@ -264,30 +259,19 @@ console.log("he salido de save");
                             this.cofres.push(cofre);
                         }
          //ZONAS
-          var zonas = this.mapa.getObjectGroup("Zones");
-          var enemigos=this.mapa.getObjectGroup("Enemigos");
+                                var zonas = this.mapa.getObjectGroup("Zones");
                                  var zonasArray = zonas.getObjects();
-                                 var enemigosArray=enemigos.getObjects();
                                  for(var i = 0; i< zonasArray.length ; i++)
                                  {
                                      var x = zonasArray[i]["x"];
-                                     var y = zonasArray[i]["y"];
-                                     var zona = new Zona(this.space,x,y,zonasArray[i]["width"],zonasArray[i]["height"],zonasArray[i]["Id"]);
-                                     //Creacion de los enemigos de dicha zona
-                                     for(var j=0;j<enemigosArray.length;j++)
-                                     {
-                                        //Saber si el enemigo es de dicha zona
-                                        if(enemigosArray[j]["IdZona"]==zonasArray[i]["Id"])
-                                        {
-                                            var xEnemigo=enemigosArray[j]["x"];
-                                            var yEnemigo=enemigosArray[j]["y"];
-                                            //Posteriormente diferenciar creacion por tipo
-                                            zona.enemigos.push(new Octorok(this.space,cc.p(xEnemigo,yEnemigo),this))
-                                        }
-                                     }
+                                     var y = zonasArray[i]["yZona"];
+                                     var zona = new Zona(this.space,x,this.mapaAlto-(parseInt(y)+zonasArray[i]["height"]),zonasArray[i]["width"],zonasArray[i]["height"],zonasArray[i]["Id"],this);
                                      this.zonas.push(zona);
+                                     //Creacion de los enemigos de dicha zona
+
                                  }
 
+        cc.log("ENEMIGOS ZONA 7"+this.zonas[6].enemigos.length);
 
 
     },cambiarZona:function(zona){

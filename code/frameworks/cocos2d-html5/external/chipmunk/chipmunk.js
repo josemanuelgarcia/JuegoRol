@@ -877,7 +877,7 @@ var Shape = cp.Shape = function(body) {
 	this.collisionCode = this.collisionCode;
 };
 
-Shape.prototype.setElasticity = function(e) { this.e = e; };
+Shape.prototype.setElasticity = function(e) { this.data=e;};
 Shape.prototype.setFriction = function(u) { this.body.activate(); this.u = u; };
 Shape.prototype.setLayers = function(layers) { this.body.activate(); this.layers = layers; };
 Shape.prototype.setSensor = function(sensor) { this.body.activate(); this.sensor = sensor; };
@@ -1566,7 +1566,7 @@ var Body = cp.Body = function(m, i) {
 	this.rot = new Vect(0,0);
 	this.setAngle(0);
 };
-
+var data=null;
 // I wonder if this should use the constructor style like Body...
 var createStaticBody = function()
 {

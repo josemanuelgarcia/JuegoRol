@@ -185,7 +185,7 @@ var CollisionManager = cc.Class.extend({
     },actualizarCamaraZona: function(arbiter, space){
         var shapes = arbiter.getShapes();
         var shape = shapes[1];
-        
+        this.layer.cambiarZona(shape.data);
         //this.layer.cambiarZona(shape.getBody().getUserData());
 
 

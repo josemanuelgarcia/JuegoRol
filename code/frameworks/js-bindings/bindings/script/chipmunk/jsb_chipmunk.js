@@ -50,6 +50,7 @@ cp.Vect.prototype.mult = function(s){
     this.y *= s;
     return this;
 }
+
 cp.Vect.prototype.rotate = function(v){
     this.x = this.x * v.x - this.y * v.y;
     this.y = this.x * v.y + this.y * v.x;

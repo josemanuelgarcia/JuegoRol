@@ -27,41 +27,49 @@
   <object id="309" name="Zona 1" x="416.667" y="1296.67" width="367.333" height="306.667">
    <properties>
     <property name="Id" value="1"/>
+    <property name="yZona" value="1296,67"/>
    </properties>
   </object>
   <object id="310" name="Zona 2" x="784.667" y="1296" width="383.333" height="305.333">
    <properties>
     <property name="Id" value="2"/>
+    <property name="yZona" value="1296,00"/>
    </properties>
   </object>
   <object id="311" name="Zona 3" x="417" y="985.333" width="367.333" height="306.667">
    <properties>
     <property name="Id" value="3"/>
+    <property name="yZona" value="985,33"/>
    </properties>
   </object>
   <object id="312" name="Zona 4" x="787" y="986" width="388" height="306.667">
    <properties>
     <property name="Id" value="4"/>
+    <property name="yZona" value="986,00"/>
    </properties>
   </object>
   <object id="372" name="Zona 5" x="1179" y="966" width="406" height="328">
    <properties>
     <property name="Id" value="5"/>
+    <property name="yZona" value="966,00"/>
    </properties>
   </object>
   <object id="388" name="Zona 6" x="495" y="638" width="562" height="326">
    <properties>
     <property name="Id" value="6"/>
+    <property name="yZona" value="638,00"/>
    </properties>
   </object>
   <object id="401" name="Zona 7" x="26.6667" y="970.667" width="383.666" height="338.667">
    <properties>
     <property name="Id" value="7"/>
+    <property name="yZona" value="970,67"/>
    </properties>
   </object>
   <object id="434" name="Zona 8" x="1168" y="624.667" width="429.333" height="338">
    <properties>
     <property name="Id" value="8"/>
+    <property name="yZona" value="624,6"/>
    </properties>
   </object>
  </objectgroup>
