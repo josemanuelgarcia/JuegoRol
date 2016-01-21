@@ -26,6 +26,8 @@
         "src/Recolectables/BombaRecolectable.js",
         "src/Recolectables/FlechaRecolectable.js",
         "src/Recolectables/ContenedorCorazon.js",
+        "src/Recolectables/LlaveNormal.js",
+        "src/Recolectables/LlaveJefe.js",
         "src/Layers/HistoryLayer.js",
         "src/Manager/AnimationManager.js",
         "src/Armas/Bomba.js",

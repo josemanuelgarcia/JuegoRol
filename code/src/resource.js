@@ -33,6 +33,8 @@ var res = {
     llave_normal_png: "res/Colectables/llave_normal.png",
     llave_jefe_png: "res/Colectables/llave_jefe.png",
     corazonnegro_png: "res/IULayer/corazonnegro.png",
+    llave_normal_iu_png: "res/IULayer/llave_normal_iu.png",
+    llave_jefe_iu_png: "res/IULayer/llave_jefe_iu.png",
     contenedorCorazon_png: "res/IULayer/contenedorcorazon.png",
     corazonblanco_png : "res/IULayer/corazonblanco.png",
     Outside_A5_png: "res/Mapas/MapaA/Outside_A5.png",

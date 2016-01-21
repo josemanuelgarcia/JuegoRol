@@ -15,10 +15,10 @@ var tipoSoldado=13;
 var tipoBombaRecolectable=14;
 var tipoFlechaRecolectable=15;
 var tipoInterruptor=16;
-
 var tipoContenedorCorazon=18;
-
 var tipoZona = 17;
+var tipoLlaveNormal=19;
+var tipoLlaveJefe=20;
 
 var CollisionManager = cc.Class.extend({
 
@@ -39,6 +39,10 @@ var CollisionManager = cc.Class.extend({
         this.space.addCollisionHandler(tipoJugador, tipoCorazon,null,this.collisionJugadorConCorazon.bind(this), null, null);
 
          this.space.addCollisionHandler(tipoJugador, tipoContenedorCorazon,null,this.collisionJugadorConContenedorCorazon.bind(this), null, null);
+
+          this.space.addCollisionHandler(tipoJugador, tipoLlaveNormal,null,this.collisionJugadorConLlaveNormal.bind(this), null, null);
+
+           this.space.addCollisionHandler(tipoJugador, tipoLlaveJefe,null,this.collisionJugadorConLlaveJefe.bind(this), null, null);
 
         this.space.addCollisionHandler(tipoJugador, tipoBombaRecolectable,null,this.collisionJugadorConBombaRecolectable.bind(this), null, null);
 
@@ -130,7 +134,27 @@ var CollisionManager = cc.Class.extend({
                                  }
                           this.layer.shapesToRemove.push(shapes[1]);
 
-                   },collisionJugadorConRupia:function(arbiter,space){
+         }, collisionJugadorConLlaveNormal:function(arbiter,space){
+
+          var shapes = arbiter.getShapes();
+          for (var i = 0; i < this.layer.llavesNormales.length; i++) {
+           if (this.layer.llavesNormales[i].shape === shapes[1]) {
+           this.layer.llavesNormales[i].agregarLlaves();
+            }
+             }
+            this.layer.shapesToRemove.push(shapes[1]);
+
+          }, collisionJugadorConLlaveJefe:function(arbiter,space){
+
+                     var shapes = arbiter.getShapes();
+                     for (var i = 0; i < this.layer.llavesJefe.length; i++) {
+                      if (this.layer.llavesJefe[i].shape === shapes[1]) {
+                      this.layer.llavesJefe[i].agregarLlaves();
+                       }
+                        }
+                       this.layer.shapesToRemove.push(shapes[1]);
+
+                     },collisionJugadorConRupia:function(arbiter,space){
          var shapes = arbiter.getShapes();
          for (var i = 0; i < this.layer.rupias.length; i++) {
             if (this.layer.rupias[i].shape === shapes[1]) {

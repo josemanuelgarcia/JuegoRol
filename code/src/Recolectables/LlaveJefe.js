@@ -1,9 +1,10 @@
-var FlechaRecolectable = cc.Class.extend({
+var LlaveJefe = cc.Class.extend({
     space:null,
     sprite:null,
     shape:null,
     layer:null,
     color:null,
+    bombas:0,
 ctor:function (space, posicion, layer) {
     this.space = space;
     this.layer = layer;
@@ -11,8 +12,8 @@ ctor:function (space, posicion, layer) {
 
     // Crear Sprite - Cuerpo y forma
 
-         this.sprite = new cc.PhysicsSprite(res.flecha_png);
-         this.flechas=5;
+         this.sprite = new cc.PhysicsSprite(res.llave_jefe_png);
+         this.llaves=1;
 
 
 
@@ -26,7 +27,7 @@ ctor:function (space, posicion, layer) {
     this.shape = new cp.BoxShape(body,
                 this.sprite.getContentSize().width,
                 this.sprite.getContentSize().height);
-    this.shape.setCollisionType(tipoFlechaRecolectable);
+    this.shape.setCollisionType(tipoLlaveJefe);
     // Nunca genera colisiones reales
     this.shape.setSensor(true);
     // forma estática
@@ -46,17 +47,12 @@ ctor:function (space, posicion, layer) {
 
      // quita el sprite
      this.layer.mapa.removeChild(this.sprite);
- },agregarFlechas: function(){
-        this.layer.link.numFlechas=this.layer.link.numFlechas+this.flechas;
-        if(weapon=="ARCO")
-        {
-        //Sprite en el que se muestra el arma elegida
-        iuLayer.spriteArmaElegida.setTexture(res.arco_reducido_png);
+ },agregarLlaves: function(){
 
-        //sera el numero de flechas de link
-        iuLayer.numeroArmas = this.layer.link.numFlechas;
-        iuLayer.crearLabelArmas();
-        iuLayer.numeroDeArmasDisponiblesLabel.setVisible(true);
-        }
+        //sera el numero de llaves de link
+       iuLayer.llavesJefe=iuLayer.llavesJefe+this.llaves;
+        iuLayer.crearLabelLlaves();
+        
+        
  }
 });

@@ -6,9 +6,14 @@ var IULayer = cc.Layer.extend({
     spriteBSumarVidas: null,
     spriteBQuitarVidas: null,
     spriteArmaElegida: null,
+    apriteActivarLlaves:null,
     spriteRupias: null,
     spriteLlaves:null,
     spriteLlavesJefe:null,
+    etiquetaLlaves:null,
+    etiquetaLlavesjefe:null,
+    llavesNormales: 0,
+    llavesJefe:0,
     rupias: 0,
     corazones: 103,
     corazonesBlancos:999,
@@ -19,6 +24,7 @@ var IULayer = cc.Layer.extend({
     pause:true,
     numeroDeArmasDisponiblesLabel:null,
     numeroArmas:0,
+    activado:true,
     corazonesSumados:0,
     ctor: function () {
         this._super();
@@ -51,6 +57,12 @@ var IULayer = cc.Layer.extend({
                 }
         //----------------------------------------------------------------------
 
+        //boton para comprobar que la activacion de las llaves funciona
+        this.apriteActivarLlaves = cc.Sprite.create(res.llave_jefe_iu_png);
+                this.apriteActivarLlaves.setPosition(cc.p(50, 300));
+                this.addChild(this.apriteActivarLlaves);
+
+
         // boton para comprobar q se suman corazones (es provisional y lo podeis quitar si quereis)
         this.spriteBSumarVidas = cc.Sprite.create(res.contenedorCorazon_png);
         this.spriteBSumarVidas.setPosition(cc.p(50, 150));
@@ -62,14 +74,28 @@ var IULayer = cc.Layer.extend({
         this.addChild(this.spriteBQuitarVidas);
 
         //Llaves normales para mazmorras
-        this.spriteLlaves = cc.Sprite.create(res.llave_normal_png);
-        this.spriteLlaves.setPosition(cc.p(300, 430));
+        this.spriteLlaves = cc.Sprite.create(res.llave_normal_iu_png);
+        this.spriteLlaves.setPosition(cc.p(500, 420));
+         this.spriteLlaves.setVisible(false);
         this.addChild(this.spriteLlaves);
 
+        this.etiquetaLlaves = new cc.LabelTTF("0", "Helvetica", 20);
+        this.etiquetaLlaves.setPosition(cc.p(525, 420));
+        this.etiquetaLlaves.fillStyle = new cc.Color(255, 255, 255, 255);
+         this.etiquetaLlaves.setVisible(false);
+        this.addChild(this.etiquetaLlaves);
+
         //Llaves para jefes finales
-        this.spriteLlavesJefe = cc.Sprite.create(res.llave_jefe_png);
-        this.spriteLlavesJefe.setPosition(cc.p(200, 430));
+        this.spriteLlavesJefe = cc.Sprite.create(res.llave_jefe_iu_png);
+        this.spriteLlavesJefe.setPosition(cc.p(400, 420));
+         this.spriteLlavesJefe.setVisible(false);
         this.addChild(this.spriteLlavesJefe);
+
+        this.etiquetaLlavesjefe = new cc.LabelTTF("0", "Helvetica", 20);
+        this.etiquetaLlavesjefe.setPosition(cc.p(425, 420));
+        this.etiquetaLlavesjefe.fillStyle = new cc.Color(255, 255, 255, 255);
+         this.etiquetaLlavesjefe.setVisible(false);
+        this.addChild(this.etiquetaLlavesjefe);
 
 
         // Contador Rupias
@@ -116,6 +142,7 @@ var IULayer = cc.Layer.extend({
         var instancia = event.getCurrentTarget();
         var areaBoton = instancia.spriteBotonMenu.getBoundingBox();
         var areaCorazon = instancia.spriteBSumarVidas.getBoundingBox();
+        var areaLlaves = instancia.apriteActivarLlaves.getBoundingBox();
         var areaQuitarCorazon = instancia.spriteBQuitarVidas.getBoundingBox();
         var areaBotonPause = instancia.spriteBotonPause.getBoundingBox();
  var gameScene = instancia.getParent();
@@ -140,16 +167,17 @@ var IULayer = cc.Layer.extend({
 //Es una muñeca número de conservación de datos.
 dollNum = 1;
 
-
-
-
             // Metodo que suma una vida
             //instanciaIU.darVidas();
             instanciaIU.nuevoCorazon();
 
-
-
         }
+         //Pulsacion dentro de llaves lo cual hace visible el contador de llaves de mazmorra
+                if (cc.rectContainsPoint(areaLlaves,
+                    cc.p(event.getLocationX(), event.getLocationY()))) {
+                        console.log("llaves activadas");
+                    instanciaIU.activarLlaves();
+                }
 
         //pulsacion detro del boton de pausa
          if(instanciaIU.entrar){
@@ -179,7 +207,23 @@ dollNum = 1;
         this.rupias= this.rupias+rupias;
         this.etiquetaMonedas.setString("" + this.rupias);
 
-    }, darVidas: function () {
+    }, activarLlaves: function () {
+
+                    this.spriteLlaves.setVisible(this.activado);
+
+                    this.etiquetaLlaves.setVisible(this.activado);
+
+                    this.spriteLlavesJefe.setVisible(this.activado);
+
+                    this.etiquetaLlavesjefe.setVisible(this.activado);
+
+                    if(this.activado==true)
+                    {this.activado=false}
+                    else
+                    {
+                    this.activado=true;
+                    }
+  }, darVidas: function () {
       // Vidas iniciales
       if(this.ponerVidasIniciales){
        for(i=0;i < this.vidasIniciales;i++){
@@ -303,5 +347,24 @@ console.log("numero de vidas quitadas"+this.vidasQuitadas);
                           this.numeroDeArmasDisponiblesLabel.setVisible(false);
                          this.addChild(this.numeroDeArmasDisponiblesLabel);
     }
-    }
+    }, crearLabelLlaves : function()
+         {
+
+         this.removeChild(this.etiquetaLlaves);
+         this.removeChild(this.etiquetaLlavesjefe);
+
+          this.etiquetaLlaves = new cc.LabelTTF(""+this.llavesNormales, "Helvetica", 20);
+                 this.etiquetaLlaves.setPosition(cc.p(525, 420));
+                 this.etiquetaLlaves.fillStyle = new cc.Color(255, 255, 255, 255);
+                  this.etiquetaLlaves.setVisible(true);
+                 this.addChild(this.etiquetaLlaves);
+
+
+              this.etiquetaLlavesjefe = new cc.LabelTTF(""+this.llavesJefe, "Helvetica", 20);
+                     this.etiquetaLlavesjefe.setPosition(cc.p(425, 420));
+                     this.etiquetaLlavesjefe.fillStyle = new cc.Color(255, 255, 255, 255);
+                      this.etiquetaLlavesjefe.setVisible(true);
+                     this.addChild(this.etiquetaLlavesjefe);
+
+         }
 });

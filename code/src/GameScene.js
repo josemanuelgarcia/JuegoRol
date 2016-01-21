@@ -22,6 +22,8 @@ var GameLayer = cc.Layer.extend({
     bombaRecolectable:[],
     flechasRecolectables:[],
     contenedoresCorazon:[],
+    llavesNormales:[],
+    llavesJefe:[],
     rupias:[],
     shapesToRemove: [],
     cuevas:[],
@@ -81,6 +83,12 @@ var GameLayer = cc.Layer.extend({
 
          //creacion contenedor de corazon de prueba
          this.contenedoresCorazon.push(new ContenedorCorazon(this.space,cc.p(450,400),this));
+
+         //creacion de llave normal de prueba
+          this.llavesNormales.push(new LlaveNormal(this.space,cc.p(400,350),this));
+
+         //creacion de llave de jefe de prueba
+            this.llavesJefe.push(new LlaveJefe(this.space,cc.p(450,350),this));
 
         //Creacion de rupias de diferentes colores  de prueba--------------
          var rupiaRoja = new Rupia(this.space,cc.p(600,200),this,"r");
@@ -179,6 +187,18 @@ var GameLayer = cc.Layer.extend({
                                this.contenedoresCorazon.splice(i, 1);
                                                        }
                                                     }
+              for (var i = 0; i < this.llavesNormales.length; i++) {
+                                if (this.llavesNormales[i].shape === shape) {
+                                this.llavesNormales[i].eliminar();
+                                this.llavesNormales.splice(i, 1);
+                                                                     }
+                                                                  }
+              for (var i = 0; i < this.llavesJefe.length; i++) {
+                                if (this.llavesJefe[i].shape === shape) {
+                                this.llavesJefe[i].eliminar();
+                                this.llavesJefe.splice(i, 1);
+                                                                                   }
+                                                                                }
         }
         this.shapesToRemove = [];
 
