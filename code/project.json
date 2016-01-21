@@ -25,6 +25,7 @@
         "src/Recolectables/Rupia.js",
         "src/Recolectables/BombaRecolectable.js",
         "src/Recolectables/FlechaRecolectable.js",
+        "src/Recolectables/ContenedorCorazon.js",
         "src/Layers/HistoryLayer.js",
         "src/Manager/AnimationManager.js",
         "src/Armas/Bomba.js",

@@ -62,11 +62,11 @@ var IULayer = cc.Layer.extend({
 
         // Contador Rupias
         this.spriteRupias = cc.Sprite.create(res.rupiaazul_png);
-        this.spriteRupias.setPosition(cc.p(size.width - 55, 28));
+        this.spriteRupias.setPosition(cc.p(size.width/2, 28));
         this.addChild(this.spriteRupias);
 
         this.etiquetaMonedas = new cc.LabelTTF("0", "Helvetica", 20);
-        this.etiquetaMonedas.setPosition(cc.p((size.width) - 30, 25));
+        this.etiquetaMonedas.setPosition(cc.p((size.width/2) + 25, 25));
         this.etiquetaMonedas.fillStyle = new cc.Color(255, 255, 255, 255);
         this.addChild(this.etiquetaMonedas);
 

@@ -15,6 +15,7 @@ var tipoSoldado=13;
 var tipoBombaRecolectable=14;
 var tipoFlechaRecolectable=15;
 var tipoInterruptor=16;
+var tipoContenedorCorazon=17;
 var CollisionManager = cc.Class.extend({
 
     space:null,
@@ -32,6 +33,8 @@ var CollisionManager = cc.Class.extend({
         this.space.addCollisionHandler(tipoBoomerang, tipoNoPasable, null,this.collisionBoomerangConNoPasable.bind(this), null, null);
 
         this.space.addCollisionHandler(tipoJugador, tipoCorazon,null,this.collisionJugadorConCorazon.bind(this), null, null);
+
+         this.space.addCollisionHandler(tipoJugador, tipoContenedorCorazon,null,this.collisionJugadorConContenedorCorazon.bind(this), null, null);
 
         this.space.addCollisionHandler(tipoJugador, tipoBombaRecolectable,null,this.collisionJugadorConBombaRecolectable.bind(this), null, null);
 
@@ -98,7 +101,12 @@ var CollisionManager = cc.Class.extend({
          var shapes = arbiter.getShapes();
          this.layer.shapesToRemove.push(shapes[1]);
 
-    }, collisionJugadorConBombaRecolectable:function(arbiter,space){
+    }, collisionJugadorConContenedorCorazon:function(arbiter,space){
+              iuLayer.nuevoCorazon();
+              var shapes = arbiter.getShapes();
+              this.layer.shapesToRemove.push(shapes[1]);
+
+         }, collisionJugadorConBombaRecolectable:function(arbiter,space){
 
               var shapes = arbiter.getShapes();
               for (var i = 0; i < this.layer.bombaRecolectable.length; i++) {
