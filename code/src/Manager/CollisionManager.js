@@ -14,6 +14,7 @@ var tipoBloque=12;
 var tipoSoldado=13;
 var tipoBombaRecolectable=14;
 var tipoFlechaRecolectable=15;
+var tipoInterruptor=16;
 var CollisionManager = cc.Class.extend({
 
     space:null,
@@ -60,7 +61,7 @@ var CollisionManager = cc.Class.extend({
         this.space.addCollisionHandler(tipoEspada, tipoOctorok, null,this.collisionEspadaConEnemigo.bind(this), null, null);
 
         this.space.addCollisionHandler(tipoJugador, tipoOctorok, null, null, null, this.reducirVidas.bind(this));
-
+        this.space.addCollisionHandler(tipoJugador, tipoInterruptor, null, null, null, this.pulsarInterruptor.bind(this));
         //Colisiones Soldado
         this.space.addCollisionHandler(tipoBoomerang, tipoSoldado,null,this.destruirSegundo.bind(this), null, null);
 
@@ -168,6 +169,18 @@ var CollisionManager = cc.Class.extend({
          this.layer.shapesToRemove.push(shapes[1]);
          iuLayer.quitarVidas();
 
-    }
+    }, pulsarInterruptor: function(arbiter, space) {
+              var shapes = arbiter.getShapes();
+              for (var key in this.layer.interruptores)
+              {
+                for (var object in this.layer.interruptores[key]){
+                    if(this.layer.interruptores[key][object].shape===shapes[1])
+                         {
+                             this.layer.interruptores[key][object].activarInterruptor();
+                         }
+                }
+              }
+
+         }
 
 });

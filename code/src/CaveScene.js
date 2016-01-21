@@ -16,6 +16,8 @@ var CaveLayer = cc.Layer.extend({
     cuevas:[],
     jarrones:[],
     bloques:[],
+    interruptores:[],
+    cofres:[],
     soldado:null,
     //Teclado
     teclasPulsadas:[],
@@ -42,7 +44,7 @@ var CaveLayer = cc.Layer.extend({
         animationManager=new AnimationManager();
         //Cargamos el Mapa
         this.cargarMapa();
-
+        collisionManager = new CollisionManager(this.space,this);
          //Creacion enemigo prueba
          this.octorok = new Octorok(this.space, cc.p(600, 250), this);
 
@@ -61,7 +63,7 @@ console.log("he salido de save");
         else
         {
         console.log("he entrado por el else ");
-        posicion=cc.p(400,400);
+        posicion=cc.p(600,400);
         }
         this.link = new Link(this.space, posicion, this);
 
@@ -112,6 +114,7 @@ console.log("he salido de save");
         this.soldado.update(dt);
 
         this.link.update(dt);
+         this.abrirCofre();
         //Eliminar elementos
         for (var i = 0; i < this.shapesToRemove.length; i++) {
             var shape = this.shapesToRemove[i];
@@ -186,7 +189,7 @@ console.log("he salido de save");
     }
     , cargarMapa: function () {
 
-        this.mapa = new cc.TMXTiledMap(res.mapa_inicial_tmx);
+        this.mapa = new cc.TMXTiledMap(res.dungeon1_tmx);
         // Añadirlo a la Layer
         this.addChild(this.mapa);
 
@@ -228,29 +231,43 @@ console.log("he salido de save");
 
         }
 
-        //CUEVAS
-        var cuevas = this.mapa.getObjectGroup("Cuevas");
-        var cuevasArray = cuevas.getObjects();
-        for(var i = 0; i<cuevasArray.length ; i++)
-        {
-            var x = cuevasArray[i]["x"];
-            var y = cuevasArray[i]["y"];
-            var salida = cuevasArray[i]["Salida"];
-            var cueva = new Cueva(this.space,new cc.p(x,y),salida);
-            this.cuevas.push(cueva);
-        }
 
         //JARRONES
         var jarrones = this.mapa.getObjectGroup("Jarrones");
-        var jarronesArray = jarrones.getObjects();
-        cc.log("Jarrones: "+ jarronesArray.length);
-        for(var i = 0; i< jarronesArray.length ; i++)
-        {
-            var x = jarronesArray[i]["x"];
-            var y = jarronesArray[i]["y"];
-            var jarron = new Jarron(this.space,new cc.p(x,y),this);
-            this.jarrones.push(jarron);
-        }
+                 var jarronesArray = jarrones.getObjects();
+                 cc.log("Jarrones: "+ jarronesArray.length);
+                 for(var i = 0; i< jarronesArray.length ; i++)
+                 {
+                     var x = jarronesArray[i]["x"];
+                     var y = jarronesArray[i]["y"];
+                     var jarron = new Jarron(this.space,new cc.p(x,y),this);
+                     this.jarrones.push(jarron);
+                 }
+         //INTERRUPTORES
+        var interruptore = this.mapa.getObjectGroup("Interruptores");
+        cc.log(interruptore.length);
+                var interruptoresArray = interruptore.getObjects();
+                for(var i = 0; i< interruptoresArray.length ; i++)
+                {
+                    var x = interruptoresArray[i]["x"];
+                    var y = interruptoresArray[i]["y"];
+                    var interruptor = new Interruptor(this.space,new cc.p(x,y),this);
+                    //HASHMAP IMPROVISADO
+                    if(this.interruptores[interruptoresArray[i]["cofre"]]==undefined)
+                    {
+                       this.interruptores[interruptoresArray[i]["cofre"]]=new Array();
+                    }
+                    this.interruptores[interruptoresArray[i]["cofre"]].push(interruptor);
+                }
+         var cofres = this.mapa.getObjectGroup("Cofres");
+                        var cofresArray = cofres.getObjects();
+                        for(var i = 0; i< cofresArray.length ; i++)
+                        {
+                            var x = cofresArray[i]["x"];
+                            var y = cofresArray[i]["y"];
+                            var cofre = new Cofre(this.space,new cc.p(x,y),this,cofresArray[i]["Cofre"],cofresArray[i]["botin"]);
+                            this.cofres.push(cofre);
+                        }
 
 
 
@@ -268,6 +285,30 @@ console.log("he salido de save");
         var viewPoint = cc.pSub(centerOfView, actualPosition);
         this.setPosition(viewPoint);
 
+    },abrirCofre:function()
+    {
+        for (var key in this.interruptores)
+        {
+            var cofreAbierto=true;
+          for (var object in this.interruptores[key])
+          {
+                if(!this.interruptores[key][object].pulsado)
+                 {
+                    cofreAbierto=false;
+                 }
+          }
+          if(cofreAbierto)
+          {
+          for(var i=0;i<this.cofres.length;i++)
+          {
+            //MIRAS A VER EL COFRE ABIERTO
+            if(this.cofres[i].idCofre==key)
+            {
+                this.cofres[i].cofreAparece();
+            }
+          }
+          }
+        }
     }
 });
 
