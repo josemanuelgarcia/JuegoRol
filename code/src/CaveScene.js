@@ -42,6 +42,7 @@ var CaveLayer = cc.Layer.extend({
        //var depuracion = new cc.PhysicsDebugNode(this.space);
        //this.addChild(depuracion, 10);
         animationManager=new AnimationManager();
+        this.setScale(1.4);
         //Cargamos el Mapa
         this.cargarMapa();
         collisionManager = new CollisionManager(this.space,this);
@@ -284,9 +285,8 @@ console.log("he salido de save");
 
         var x = Math.max(this.link.body.p.x, winSize.width/2);
         var y = Math.max(this.link.body.p.y, winSize.height/2);
-
-        x = Math.min(x, (this.mapa.width * this.mapa.getTileSize().width) - winSize.width / 2);
-        y = Math.min(y, (this.mapa.height *this.mapa.getTileSize().height) - winSize.height/2);
+        x = Math.min(x, (this.mapa.width * this.mapa.getTileSize().width)+200 - winSize.width / 2);
+        y = Math.min(y, (this.mapa.height *this.mapa.getTileSize().height)+200 - winSize.height/2);
         var actualPosition = cc.p(x, y);
 
         var centerOfView = cc.p(winSize.width/2, winSize.height/2);
