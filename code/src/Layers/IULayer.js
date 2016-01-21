@@ -7,6 +7,8 @@ var IULayer = cc.Layer.extend({
     spriteBQuitarVidas: null,
     spriteArmaElegida: null,
     spriteRupias: null,
+    spriteLlaves:null,
+    spriteLlavesJefe:null,
     rupias: 0,
     corazones: 103,
     corazonesBlancos:999,
@@ -58,6 +60,16 @@ var IULayer = cc.Layer.extend({
         this.spriteBQuitarVidas = cc.Sprite.create(res.corazonnegro_png);
         this.spriteBQuitarVidas.setPosition(cc.p(30, 250));
         this.addChild(this.spriteBQuitarVidas);
+
+        //Llaves normales para mazmorras
+        this.spriteLlaves = cc.Sprite.create(res.llave_normal_png);
+        this.spriteLlaves.setPosition(cc.p(300, 430));
+        this.addChild(this.spriteLlaves);
+
+        //Llaves para jefes finales
+        this.spriteLlavesJefe = cc.Sprite.create(res.llave_jefe_png);
+        this.spriteLlavesJefe.setPosition(cc.p(200, 430));
+        this.addChild(this.spriteLlavesJefe);
 
 
         // Contador Rupias

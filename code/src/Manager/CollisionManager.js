@@ -15,11 +15,11 @@ var tipoSoldado=13;
 var tipoBombaRecolectable=14;
 var tipoFlechaRecolectable=15;
 var tipoInterruptor=16;
-<<<<<<< HEAD
-var tipoContenedorCorazon=17;
-=======
+
+var tipoContenedorCorazon=18;
+
 var tipoZona = 17;
->>>>>>> origin/master
+
 var CollisionManager = cc.Class.extend({
 
     space:null,

@@ -30,6 +30,8 @@ var res = {
     corazon_salvaje_png: "res/Colectables/corazon_salvaje.png",
     bomba_rec_png: "res/Colectables/bomba_rec.png",
     flecha_png: "res/Colectables/flecha.png",
+    llave_normal_png: "res/Colectables/llave_normal.png",
+    llave_jefe_png: "res/Colectables/llave_jefe.png",
     corazonnegro_png: "res/IULayer/corazonnegro.png",
     contenedorCorazon_png: "res/IULayer/contenedorcorazon.png",
     corazonblanco_png : "res/IULayer/corazonblanco.png",
