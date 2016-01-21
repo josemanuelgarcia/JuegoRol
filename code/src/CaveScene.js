@@ -18,6 +18,7 @@ var CaveLayer = cc.Layer.extend({
     interruptores:[],
     cofres:[],
     zonas:[],
+    zonaActual: null,
     //Teclado
     teclasPulsadas:[],
 
@@ -271,7 +272,7 @@ console.log("he salido de save");
                                  {
                                      var x = zonasArray[i]["x"];
                                      var y = zonasArray[i]["y"];
-                                     var zona = new Zona(x,y,zonasArray[i]["width"],zonasArray[i]["height"],zonasArray[i]["Id"]);
+                                     var zona = new Zona(this.space,x,y,zonasArray[i]["width"],zonasArray[i]["height"],zonasArray[i]["Id"]);
                                      //Creacion de los enemigos de dicha zona
                                      for(var j=0;j<enemigosArray.length;j++)
                                      {
@@ -289,14 +290,17 @@ console.log("he salido de save");
 
 
 
+    },cambiarZona:function(zona){
+        this.zonaActual = zona;
+
     }, actualizarCamara: function () {
         var winSize = cc.winSize;
 
         var x = Math.max(this.link.body.p.x, winSize.width/2);
         var y = Math.max(this.link.body.p.y, winSize.height/2);
 
-        x = Math.min(x, (this.mapa.getMapSize().width * this.mapa.getTileSize().width) - winSize.width / 2);
-        y = Math.min(y, (this.mapa.getMapSize().height *this.mapa.getTileSize().height) - winSize.height/2);
+        x = Math.min(x, (this.mapa.width * this.mapa.getTileSize().width) - winSize.width / 2);
+        y = Math.min(y, (this.mapa.height *this.mapa.getTileSize().height) - winSize.height/2);
         var actualPosition = cc.p(x, y);
 
         var centerOfView = cc.p(winSize.width/2, winSize.height/2);
