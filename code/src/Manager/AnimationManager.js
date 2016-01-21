@@ -58,8 +58,8 @@ var AnimationManager = cc.Class.extend({
         this.objectToBeAnimated.animaciones["RODAR_DERECHA"] = new cc.Sequence(new cc.Animate(animacionDerecha), cc.CallFunc.create(link.rollingFinished, link));
         this.objectToBeAnimated.animaciones["RODAR_IZQUIERDA"] = new cc.Sequence(new cc.Animate(animacionDerecha), cc.CallFunc.create(link.rollingFinished, link));
 
-    }, addAnimationsOctorok: function(octorok){
-        this.objectToBeAnimated=octorok;
+    }, addAnimationsOctorok: function (octorok) {
+        this.objectToBeAnimated = octorok;
 
         //Animacion Mover Abajo
         var framesCaminarAbajo = this.getAnimacion("Octorok_abajo", 2);
@@ -69,44 +69,44 @@ var AnimationManager = cc.Class.extend({
         //Animacion Mover Arriba
         var framesCaminarArriba = this.getAnimacion("Octorok_arriba", 2);
         var animacionArriba = new cc.Animation(framesCaminarArriba, 0.5);
-        this.objectToBeAnimated.animaciones["MOVER_ARRIBA"]  = cc.RepeatForever.create(new cc.Animate(animacionArriba));
+        this.objectToBeAnimated.animaciones["MOVER_ARRIBA"] = cc.RepeatForever.create(new cc.Animate(animacionArriba));
 
         //Animacion Mover Derecha
         var framesCaminarDerecha = this.getAnimacion("Octorok_derecha", 2);
         var animacionDerecha = new cc.Animation(framesCaminarDerecha, 0.5);
-        this.objectToBeAnimated.animaciones["MOVER_DERECHA"]  = cc.RepeatForever.create(new cc.Animate(animacionDerecha));
+        this.objectToBeAnimated.animaciones["MOVER_DERECHA"] = cc.RepeatForever.create(new cc.Animate(animacionDerecha));
 
         //Animacion mover izquierda
         var framesCaminarIzquierda = this.getAnimacion("Octorok_izquierda", 2);
         var animacionIzquierda = new cc.Animation(framesCaminarIzquierda, 0.5);
-        this.objectToBeAnimated.animaciones["MOVER_IZQUIERDA"]  = cc.RepeatForever.create(new cc.Animate(animacionIzquierda));
+        this.objectToBeAnimated.animaciones["MOVER_IZQUIERDA"] = cc.RepeatForever.create(new cc.Animate(animacionIzquierda));
 
         //Animacion disparar hacia abajo
         var framesDispararAbajo = this.getAnimacion("Octorok_disparo_abajo", 2);
-        var animacionDisparoAbajo = new cc.Animation(framesDispararAbajo,0.4);
-        this.objectToBeAnimated.animaciones["DISPARAR_ABAJO"]  = new cc.Sequence(new cc.Spawn(new cc.Animate(animacionDisparoAbajo)
-            ,new cc.callFunc(octorok.crearDisparo,octorok)), new cc.Animate(animacionAbajo));
+        var animacionDisparoAbajo = new cc.Animation(framesDispararAbajo, 0.4);
+        this.objectToBeAnimated.animaciones["DISPARAR_ABAJO"] = new cc.Sequence(new cc.Spawn(new cc.Animate(animacionDisparoAbajo)
+            , new cc.callFunc(octorok.crearDisparo, octorok)), new cc.Animate(animacionAbajo));
 
         //Animacion disparar hacia arriba
         var framesDispararArriba = this.getAnimacion("Octorok_disparo_arriba", 2);
         var animacionDispararArriba = new cc.Animation(framesDispararArriba, 0.4);
         this.objectToBeAnimated.animaciones["DISPARAR_ARRIBA"] = new cc.Sequence(new cc.Spawn(new cc.Animate(animacionDispararArriba),
-           new cc.callFunc(octorok.crearDisparo,octorok)),  new cc.Animate(animacionArriba));
+            new cc.callFunc(octorok.crearDisparo, octorok)), new cc.Animate(animacionArriba));
 
         //Animacion disparar hacia la drecha
         var framesDispararDerecha = this.getAnimacion("Octorok_disparo_derecha", 2);
         var animacionDisparoDerecha = new cc.Animation(framesDispararDerecha, 0.4);
         this.objectToBeAnimated.animaciones["DISPARAR_DERECHA"] = new cc.Sequence(new cc.Spawn(new cc.Animate(animacionDisparoDerecha),
-           new cc.callFunc(octorok.crearDisparo,octorok)), new cc.Animate(animacionDerecha));
+            new cc.callFunc(octorok.crearDisparo, octorok)), new cc.Animate(animacionDerecha));
 
         //Animacion disparar hacia la izquierda
         var framesDispararIzquierda = this.getAnimacion("Octorok_disparo_izquierda", 2);
         var animacionDisparoIzquierda = new cc.Animation(framesDispararIzquierda, 0.4);
         this.objectToBeAnimated.animaciones["DISPARAR_IZQUIERDA"] = new cc.Sequence(new cc.Spawn(new cc.Animate(animacionDisparoIzquierda),
-            new cc.callFunc(octorok.crearDisparo,octorok)), new cc.Animate(animacionIzquierda));
+            new cc.callFunc(octorok.crearDisparo, octorok)), new cc.Animate(animacionIzquierda));
 
-    },addAnimationsSoldadoVerde: function(soldado){
-        this.objectToBeAnimated=soldado;
+    }, addAnimationsSoldadoVerde: function (soldado) {
+        this.objectToBeAnimated = soldado;
 
         //Animacion parado Arriba
         var framesSimple = this.getAnimacion("Soldado_verde_parado_arriba", 2);
@@ -116,7 +116,7 @@ var AnimationManager = cc.Class.extend({
         //Animacion parado Abajo
         var framesSimpleAbajo = this.getAnimacion("Soldado_verde_parado_abajo", 2);
         this.objectToBeAnimated.animaciones["SIMPLE_ABAJO"] = cc.RepeatForever.create(
-              cc.Sequence.create(cc.Animate.create(new cc.Animation(framesSimpleAbajo, 0.4)), cc.DelayTime.create(2)));
+            cc.Sequence.create(cc.Animate.create(new cc.Animation(framesSimpleAbajo, 0.4)), cc.DelayTime.create(2)));
 
         //Animacion parado Derecha
         var framesSimpleDerecha = this.getAnimacion("Soldado_verde_parado_derecha", 2);
@@ -136,7 +136,7 @@ var AnimationManager = cc.Class.extend({
         //Animacion mover abajo
         var framesMoverAbajo = this.getAnimacion("Soldado_verde_mover_abajo", 2);
         this.objectToBeAnimated.animaciones["MOVER_ABAJO"] = cc.RepeatForever.create(
-        cc.Animate.create(new cc.Animation(framesMoverAbajo, 0.2)));
+            cc.Animate.create(new cc.Animation(framesMoverAbajo, 0.2)));
 
         //Animacion mover derecha
         var framesMoverDerecha = this.getAnimacion("Soldado_verde_mover_derecha", 2);
@@ -148,48 +148,48 @@ var AnimationManager = cc.Class.extend({
         this.objectToBeAnimated.animaciones["MOVER_IZQUIERDA"] = cc.RepeatForever.create(
             cc.Animate.create(new cc.Animation(framesMoverIzq, 0.2)));
 
-    }, addAnimationsSoldadoRojo: function(soldado){
-              this.objectToBeAnimated=soldado;
+    }, addAnimationsSoldadoRojo: function (soldado) {
+        this.objectToBeAnimated = soldado;
 
-              //Animacion parado Arriba
-              var framesSimple = this.getAnimacion("Soldado_rojo_parado_arriba", 3);
-              this.objectToBeAnimated.animaciones["SIMPLE_ARRIBA"] = cc.RepeatForever.create(
-                  cc.Sequence.create(cc.Animate.create(new cc.Animation(framesSimple, 0.4)), cc.DelayTime.create(2)));
+        //Animacion parado Arriba
+        var framesSimple = this.getAnimacion("Soldado_rojo_parado_arriba", 3);
+        this.objectToBeAnimated.animaciones["SIMPLE_ARRIBA"] = cc.RepeatForever.create(
+            cc.Sequence.create(cc.Animate.create(new cc.Animation(framesSimple, 0.4)), cc.DelayTime.create(2)));
 
-              //Animacion parado Abajo
-              var framesSimpleAbajo = this.getAnimacion("Soldado_rojo_parado_abajo", 1);
-              this.objectToBeAnimated.animaciones["SIMPLE_ABAJO"] = cc.RepeatForever.create(
-                    cc.Sequence.create(cc.Animate.create(new cc.Animation(framesSimpleAbajo, 0.4)), cc.DelayTime.create(2)));
+        //Animacion parado Abajo
+        var framesSimpleAbajo = this.getAnimacion("Soldado_rojo_parado_abajo", 1);
+        this.objectToBeAnimated.animaciones["SIMPLE_ABAJO"] = cc.RepeatForever.create(
+            cc.Sequence.create(cc.Animate.create(new cc.Animation(framesSimpleAbajo, 0.4)), cc.DelayTime.create(2)));
 
-              //Animacion parado Derecha
-              var framesSimpleDerecha = this.getAnimacion("Soldado_rojo_parado_derecha", 2);
-              this.objectToBeAnimated.animaciones["SIMPLE_DERECHA"] = cc.RepeatForever.create(
-                  cc.Sequence.create(cc.Animate.create(new cc.Animation(framesSimpleDerecha, 0.4)), cc.DelayTime.create(2)));
+        //Animacion parado Derecha
+        var framesSimpleDerecha = this.getAnimacion("Soldado_rojo_parado_derecha", 2);
+        this.objectToBeAnimated.animaciones["SIMPLE_DERECHA"] = cc.RepeatForever.create(
+            cc.Sequence.create(cc.Animate.create(new cc.Animation(framesSimpleDerecha, 0.4)), cc.DelayTime.create(2)));
 
-              //Animacion parado Izquierda
-              var framesSimpleIzq = this.getAnimacion("Soldado_rojo_parado_izq", 2);
-              this.objectToBeAnimated.animaciones["SIMPLE_IZQUIERDA"] = cc.RepeatForever.create(
-                  cc.Sequence.create(cc.Animate.create(new cc.Animation(framesSimpleIzq, 0.4)), cc.DelayTime.create(2)));
+        //Animacion parado Izquierda
+        var framesSimpleIzq = this.getAnimacion("Soldado_rojo_parado_izq", 2);
+        this.objectToBeAnimated.animaciones["SIMPLE_IZQUIERDA"] = cc.RepeatForever.create(
+            cc.Sequence.create(cc.Animate.create(new cc.Animation(framesSimpleIzq, 0.4)), cc.DelayTime.create(2)));
 
-              //Animacion mover arriba
-              var framesMoverArriba = this.getAnimacion("Soldado_rojo_mover_arriba", 2);
-              this.objectToBeAnimated.animaciones["MOVER_ARRIBA"] = cc.RepeatForever.create(
-                  cc.Animate.create(new cc.Animation(framesMoverArriba, 0.2)));
+        //Animacion mover arriba
+        var framesMoverArriba = this.getAnimacion("Soldado_rojo_mover_arriba", 2);
+        this.objectToBeAnimated.animaciones["MOVER_ARRIBA"] = cc.RepeatForever.create(
+            cc.Animate.create(new cc.Animation(framesMoverArriba, 0.2)));
 
-              //Animacion mover abajo
-              var framesMoverAbajo = this.getAnimacion("Soldado_rojo_mover_abajo", 2);
-              this.objectToBeAnimated.animaciones["MOVER_ABAJO"] = cc.RepeatForever.create(
-              cc.Animate.create(new cc.Animation(framesMoverAbajo, 0.2)));
+        //Animacion mover abajo
+        var framesMoverAbajo = this.getAnimacion("Soldado_rojo_mover_abajo", 2);
+        this.objectToBeAnimated.animaciones["MOVER_ABAJO"] = cc.RepeatForever.create(
+            cc.Animate.create(new cc.Animation(framesMoverAbajo, 0.2)));
 
-              //Animacion mover derecha
-              var framesMoverDerecha = this.getAnimacion("Soldado_rojo_mover_derecha", 3);
-              this.objectToBeAnimated.animaciones["MOVER_DERECHA"] = cc.RepeatForever.create(
-                  cc.Animate.create(new cc.Animation(framesMoverDerecha, 0.2)));
+        //Animacion mover derecha
+        var framesMoverDerecha = this.getAnimacion("Soldado_rojo_mover_derecha", 3);
+        this.objectToBeAnimated.animaciones["MOVER_DERECHA"] = cc.RepeatForever.create(
+            cc.Animate.create(new cc.Animation(framesMoverDerecha, 0.2)));
 
-              this.objectToBeAnimated.animaciones["MOVER_IZQUIERDA"] = cc.RepeatForever.create(
-                                cc.Animate.create(new cc.Animation(framesMoverDerecha, 0.2)));
+        this.objectToBeAnimated.animaciones["MOVER_IZQUIERDA"] = cc.RepeatForever.create(
+            cc.Animate.create(new cc.Animation(framesMoverDerecha, 0.2)));
 
-     }, getAnimacion: function (nombreAnimacion, numFrames) {
+    }, getAnimacion: function (nombreAnimacion, numFrames) {
         var framesAnimacion = [];
         for (var i = 0; i < numFrames; i++) {
             var str = nombreAnimacion + i + ".png";

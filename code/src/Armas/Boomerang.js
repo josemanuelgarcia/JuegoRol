@@ -3,16 +3,16 @@ var Boomerang = cc.Class.extend({
     sprite: null,
     shape: null,
     layer: null,
-    choco:null,
-    sentido:null,
-    canBeDeleted:null,
+    choco: null,
+    sentido: null,
+    canBeDeleted: null,
     velDisparo: 100,
-    timeToChange:null,
+    timeToChange: null,
     ctor: function (space, posicion, layer, sentido) {
         this.space = space;
         this.layer = layer;
-        this.sentido=sentido;
-        this.choco=false;
+        this.sentido = sentido;
+        this.choco = false;
         // Crear animación
         var framesAnimacion = [];
         for (var i = 0; i <= 5; i++) {
@@ -29,8 +29,8 @@ var Boomerang = cc.Class.extend({
 
         this.body = new cp.Body(100, Infinity);
         this.body.setPos(posicion);
-        this.timeToChange=Date.now();
-        this.canBeDeleted=false;
+        this.timeToChange = Date.now();
+        this.canBeDeleted = false;
         //Poner la direccion del disparo en función de la de Octorok
 
         if (sentido == "ARRIBA") {
@@ -51,9 +51,9 @@ var Boomerang = cc.Class.extend({
 
         var radio = this.sprite.getContentSize().width / 2;
         // forma
-         this.shape = new cp.BoxShape(this.body,
-                    this.sprite.getContentSize().width - 2,
-                    this.sprite.getContentSize().height - 2);
+        this.shape = new cp.BoxShape(this.body,
+            this.sprite.getContentSize().width - 2,
+            this.sprite.getContentSize().height - 2);
         this.shape.setCollisionType(tipoBoomerang);
 
         this.space.addShape(this.shape);
@@ -71,15 +71,14 @@ var Boomerang = cc.Class.extend({
         // quita la forma
         this.space.removeShape(this.shape);
         //Link solo puede lanzar un boomerang a la vez
-        this.layer.link.boomerang=null;
+        this.layer.link.boomerang = null;
         // quita el sprite
         this.layer.removeChild(this.sprite);
-    },update:function(dt){
-    //Si pasa el tiempo o si choca da la vuelta
-        if(Date.now()-this.timeToChange>=1500 || this.choco)
-        {
-            this.canBeDeleted=true;
-            this.sprite.runAction(cc.MoveTo.create(1.5, cc.p(this.layer.link.body.p.x,this.layer.link.body.p.y)) );
+    }, update: function (dt) {
+        //Si pasa el tiempo o si choca da la vuelta
+        if (Date.now() - this.timeToChange >= 1500 || this.choco) {
+            this.canBeDeleted = true;
+            this.sprite.runAction(cc.MoveTo.create(1.5, cc.p(this.layer.link.body.p.x, this.layer.link.body.p.y)));
         }
     }
 

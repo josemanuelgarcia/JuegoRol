@@ -1,51 +1,49 @@
 var Link = cc.Class.extend({
     //Variables de clase
-    animaciones:[],
-    boomerang:null,
+    animaciones: [],
+    boomerang: null,
     space: null,
     layer: null,
     sprite: null,
     body: null,
     shape: null,
     orientacion: null,
-    attackSensor:null,
+    attackSensor: null,
     //Atributos de Animacion
-    canMove:true,
-    walking:false,
-    sword:false,
-    weapon:false,
-    rolling:false,
-    stopped:false,
-    flagCaminar:false,
+    canMove: true,
+    walking: false,
+    sword: false,
+    weapon: false,
+    rolling: false,
+    stopped: false,
+    flagCaminar: false,
     //Atributos de Link modificables
     velMovimiento: 70,
-    velRodar:180,
-    numBombas:0,
-    numFlechas:0,
+    velRodar: 180,
+    numBombas: 0,
+    numFlechas: 0,
     ctor: function (space, posicion, layer) {
         this.space = space;
         this.layer = layer;
         //Orientacion inicial
-        this.orientacion="ABAJO";
+        this.orientacion = "ABAJO";
         //Sprite inicial de link
         this.sprite = new cc.PhysicsSprite("#link_caminar_abajo0.png");
 
 
 
         //numero de bombas y de flechas cuando se guarda
-         var numBombasGuardadas=parseInt(loadDollNum("numBombas",1));
-         var numFlechasGuardadas=parseInt(loadDollNum("numFlechas",1));
-          console.log("numero de bombas guardadas"+numBombasGuardadas);
-        if(cargarPartida && numBombasGuardadas!=0 && numFlechasGuardadas!=0)
-        {
-       this.numBombas=numBombasGuardadas;
-       this.numFlechas=numFlechasGuardadas;
+        var numBombasGuardadas = parseInt(loadDollNum("numBombas", 1));
+        var numFlechasGuardadas = parseInt(loadDollNum("numFlechas", 1));
+        console.log("numero de bombas guardadas" + numBombasGuardadas);
+        if (cargarPartida && numBombasGuardadas != 0 && numFlechasGuardadas != 0) {
+            this.numBombas = numBombasGuardadas;
+            this.numFlechas = numFlechasGuardadas;
 
         }
-        else
-        {
-        this.numBombas=10;
-        this.numFlechas=10;
+        else {
+            this.numBombas = 10;
+            this.numFlechas = 10;
         }
 
         // Cuerpo dinamico, SI le afectan las fuerzas
@@ -60,7 +58,7 @@ var Link = cc.Class.extend({
         this.space.addBody(this.body);
 
         // forma
-        this.shape = new cp.BoxShape(this.body,16, 21);
+        this.shape = new cp.BoxShape(this.body, 16, 21);
         // forma dinamica
         this.shape.setFriction(1);
         this.shape.setCollisionType(tipoJugador);
@@ -69,7 +67,7 @@ var Link = cc.Class.extend({
         this.attackSensor = new cp.CircleShape(this.body, 18, cp.vzero);
         this.attackSensor.setFriction(1);
         this.attackSensor.setCollisionType(tipoEspada);
-        this.attackSensor.sensor=true;
+        this.attackSensor.sensor = true;
         this.space.addShape(this.attackSensor);
         //Añadir las animaciones de link
 
@@ -78,123 +76,110 @@ var Link = cc.Class.extend({
         return true;
 
     }, moverArriba: function () {
-        if(this.canMove){
-            this.orientacion="ARRIBA";
-            this.walking=true;
+        if (this.canMove) {
+            this.orientacion = "ARRIBA";
+            this.walking = true;
             this.body.setVel(cp.v(0, this.velMovimiento));
         }
     }, moverAbajo: function () {
-        if(this.canMove)
-        {
-            this.orientacion="ABAJO";
-            this.walking=true;
+        if (this.canMove) {
+            this.orientacion = "ABAJO";
+            this.walking = true;
             this.body.setVel(cp.v(0, -this.velMovimiento));
         }
     }, moverDerecha: function () {
-        if(this.canMove)
-        {
-            this.orientacion="DERECHA";
-            this.walking=true;
+        if (this.canMove) {
+            this.orientacion = "DERECHA";
+            this.walking = true;
             this.body.setVel(cp.v(this.velMovimiento, 0));
         }
     }, moverIzquierda: function () {
-        if(this.canMove)
-        {
-            this.orientacion="IZQUIERDA";
-            this.walking=true;
-            this.body.setVel(cp.v(-this.velMovimiento,0));
+        if (this.canMove) {
+            this.orientacion = "IZQUIERDA";
+            this.walking = true;
+            this.body.setVel(cp.v(-this.velMovimiento, 0));
         }
-    },parado: function ()
-    {
-        if(!this.rolling){
-           this.body.setVel(cp.v(0, 0));
-           this.walking=false;
-           this.canMove=true;
-           this.stopped=true;
+    }, parado: function () {
+        if (!this.rolling) {
+            this.body.setVel(cp.v(0, 0));
+            this.walking = false;
+            this.canMove = true;
+            this.stopped = true;
         }
-    },entrarTransicion:function(){
-       this.body.setVel(cp.v(0, 0));
-       this.canMove=false;
-       this.stopped=true;
+    }, entrarTransicion: function () {
+        this.body.setVel(cp.v(0, 0));
+        this.canMove = false;
+        this.stopped = true;
 
-    },salirTransicion:function(pos){
-        this.canMove=true;
+    }, salirTransicion: function (pos) {
+        this.canMove = true;
         this.body.setPos(pos);
     }, utilizarEspada: function () {
-        if(!this.rolling){
+        if (!this.rolling) {
             this.body.setVel(cp.v(0, 0));
-            this.canMove=false;
-            this.sword=true;
-            this.walking=false;
+            this.canMove = false;
+            this.sword = true;
+            this.walking = false;
         }
-    },utilizarBoomerang:function(){
-        if(this.boomerang==null)
-        {
-            this.boomerang=new Boomerang(this.space,cc.p(this.body.p.x, this.body.p.y), this.layer, this.orientacion);
+    }, utilizarBoomerang: function () {
+        if (this.boomerang == null) {
+            this.boomerang = new Boomerang(this.space, cc.p(this.body.p.x, this.body.p.y), this.layer, this.orientacion);
         }
-    },utilizarBombas: function()
-    {
-        if(this.numBombas>0)
-        {
-            new Bomba(this.space,cc.p(this.body.p.x, this.body.p.y), this.layer);
+    }, utilizarBombas: function () {
+        if (this.numBombas > 0) {
+            new Bomba(this.space, cc.p(this.body.p.x, this.body.p.y), this.layer);
             this.numBombas--;
         }
-    },rodar:function()
-    {
-        if(this.walking){
-            this.rolling=true;
-            this.canMove=false;
-            this.walking=false;
+    }, rodar: function () {
+        if (this.walking) {
+            this.rolling = true;
+            this.canMove = false;
+            this.walking = false;
             this.getSentidoRodar();
         }
 
-    },update:function(dt){
+    }, update: function (dt) {
         this.procesarEventos();
         this.realizarAnimaciones();
 
-        if(this.boomerang!=null)
-        {
+        if (this.boomerang != null) {
             this.boomerang.update(dt);
         }
 
-    },procesarEventos:function()
-    {
+    }, procesarEventos: function () {
         var keyCode = null;
-        if(this.layer.teclasPulsadas.length>0)
-            cc.log(this.layer.teclasPulsadas);
+        if (this.layer.teclasPulsadas.length > 0) { }
+        // cc.log(this.layer.teclasPulsadas);
 
         //Si no se ha pulsado ninguna tecla se deja parado
-        if(this.layer.teclasPulsadas.length==0)
+        if (this.layer.teclasPulsadas.length == 0)
             this.parado();
-        else
-        {
+        else {
             this.stopped = false;
-            for(var i = 0; i<this.layer.teclasPulsadas.length;i++)
-            {
+            for (var i = 0; i < this.layer.teclasPulsadas.length; i++) {
                 keyCode = this.layer.teclasPulsadas[i];
-                switch(keyCode)
-                {
+                switch (keyCode) {
                     case (cc.KEY.W || cc.KEY.w):
-                          this.moverArriba();
-                          break;
-                    case(cc.KEY.S ||cc.KEY.s):
+                        this.moverArriba();
+                        break;
+                    case (cc.KEY.S || cc.KEY.s):
                         this.moverAbajo();
                         break;
                     case (cc.KEY.D || cc.KEY.d):
                         this.moverDerecha();
                         break;
-                    case(cc.KEY.A || cc.KEY.a):
-                         this.moverIzquierda();
-                         break;
-                    case( cc.KEY.M ||  cc.KEY.m):
+                    case (cc.KEY.A || cc.KEY.a):
+                        this.moverIzquierda();
+                        break;
+                    case (cc.KEY.M || cc.KEY.m):
                         this.layer.eliminarTeclaPulsada(keyCode);
                         this.utilizarEspada();
                         break;
-                    case( cc.KEY.K || cc.KEY.k):
+                    case (cc.KEY.K || cc.KEY.k):
                         this.layer.eliminarTeclaPulsada(keyCode);
                         this.useWeapon();
                         break;
-                    case(cc.KEY.N ||  cc.KEY.n):
+                    case (cc.KEY.N || cc.KEY.n):
                         this.layer.eliminarTeclaPulsada(keyCode);
                         this.rodar();
                         break;
@@ -204,44 +189,38 @@ var Link = cc.Class.extend({
 
         }
 
-    },realizarAnimaciones:function()
-    {
+    }, realizarAnimaciones: function () {
         //cc.log("Sword: "+this.sword +"\n" + "Walking: "+this.walking + "\n" + "Rolling: " + this.rolling);
-        if(this.walking && this.canMove)
+        if (this.walking && this.canMove)
             this.animacionCaminar();
-        else if(this.sword)
+        else if (this.sword)
             this.animacionEspada();
-        else if(this.rolling)
+        else if (this.rolling)
             this.animacionRodar();
-        else if(this.stopped)
+        else if (this.stopped)
             this.animacionPararse();
 
-    },animacionRodar:function(){
+    }, animacionRodar: function () {
 
-        this.sprite.runAction(this.obtainAnimation("RODAR_"+this.orientacion));
+        this.sprite.runAction(this.obtainAnimation("RODAR_" + this.orientacion));
     }
-    ,animacionCaminar:function()
-    {
+    , animacionCaminar: function () {
         this.acabarAcciones();
         this.canMove = false;
-        this.sprite.scaleX=(this.orientacion=="IZQUIERDA"? -1:1);
+        this.sprite.scaleX = (this.orientacion == "IZQUIERDA" ? -1 : 1);
 
-        this.sprite.runAction(this.obtainAnimation("CAMINAR_"+this.orientacion));
+        this.sprite.runAction(this.obtainAnimation("CAMINAR_" + this.orientacion));
 
-    },animacionEspada:function()
-    {
-        this.sprite.scaleX=(this.orientacion=="IZQUIERDA"? -1:1);
-        this.sprite.runAction(this.obtainAnimation("ESPADA_"+this.orientacion));
+    }, animacionEspada: function () {
+        this.sprite.scaleX = (this.orientacion == "IZQUIERDA" ? -1 : 1);
+        this.sprite.runAction(this.obtainAnimation("ESPADA_" + this.orientacion));
 
-    },animacionPararse:function()
-    {
-        this.sprite.scaleX=(this.orientacion=="IZQUIERDA"? -1:1);
-        this.sprite.runAction(this.obtainAnimation("SIMPLE_"+this.orientacion));
+    }, animacionPararse: function () {
+        this.sprite.scaleX = (this.orientacion == "IZQUIERDA" ? -1 : 1);
+        this.sprite.runAction(this.obtainAnimation("SIMPLE_" + this.orientacion));
 
-    },getSentidoRodar:function()
-    {
-        switch(this.orientacion)
-        {
+    }, getSentidoRodar: function () {
+        switch (this.orientacion) {
             case "IZQUIERDA":
                 this.body.setVel(cp.v(-this.velRodar, 0));
                 break;
@@ -249,39 +228,33 @@ var Link = cc.Class.extend({
                 this.body.setVel(cp.v(this.velRodar, 0));
                 break;
             case "ARRIBA":
-                 this.body.setVel(cp.v(0, this.velRodar));
-                 break;
+                this.body.setVel(cp.v(0, this.velRodar));
+                break;
             case "ABAJO":
                 this.body.setVel(cp.v(0, -this.velRodar));
                 break;
         }
-    },useWeapon: function(){
+    }, useWeapon: function () {
 
-         if(weapon=="BOOMERANG")
-         {
-             this.utilizarBoomerang();
-         }
-         else if(weapon=="BOMBAS")
-         {
-             this.utilizarBombas();
-         }
-    },acabarAcciones:function()
-    {
+        if (weapon == "BOOMERANG") {
+            this.utilizarBoomerang();
+        }
+        else if (weapon == "BOMBAS") {
+            this.utilizarBombas();
+        }
+    }, acabarAcciones: function () {
         this.sprite.stopAllActions();
         this.sword = false;
         this.rolling = false;
         this.weapon = false;
     }
-    ,swordFinished:function()
-    {
+    , swordFinished: function () {
         this.sword = false;
 
-    },rollingFinished:function()
-    {
-        this.rolling=false;
-        this.canMove=true;
-    },setCanMove:function()
-    {
+    }, rollingFinished: function () {
+        this.rolling = false;
+        this.canMove = true;
+    }, setCanMove: function () {
         this.canMove = true;
     }, obtainAnimation: function (key) {
         return this.animaciones[key];

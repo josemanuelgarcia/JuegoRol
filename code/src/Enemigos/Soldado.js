@@ -1,28 +1,28 @@
 var Soldado = cc.Class.extend({
-    space:null,
-    layer:null,
-    sprite:null,
-    body:null,
-    shape:null,
-    orientacion:"ABAJO",
-    velMovimiento:50,
-    animMoverArriba:null,
-    animMoverAbajo:null,
-    animMoverDereha:null,
-    animMoverIzquierda:null,
-    animaciones:[],
+    space: null,
+    layer: null,
+    sprite: null,
+    body: null,
+    shape: null,
+    orientacion: "ABAJO",
+    velMovimiento: 50,
+    animMoverArriba: null,
+    animMoverAbajo: null,
+    animMoverDereha: null,
+    animMoverIzquierda: null,
+    animaciones: [],
     tiempoEntreMovimientos: null,
-    tiempoMovimiento:0,
-    isMoving :false,
+    tiempoMovimiento: 0,
+    isMoving: false,
 
     ctor: function (space, position, layer, color) {
-        this.space=space;
-        this.layer=layer;
+        this.space = space;
+        this.layer = layer;
         this.tiempoEntreMovimientos = 1 + Math.floor(Math.random() * 2);
 
         console.log(color);
 
-        if(color ===  "r") {
+        if (color === "r") {
             this.sprite = new cc.PhysicsSprite("#Soldado_rojo_parado_abajo0.png");
             animationManager.addAnimationsSoldadoRojo(this);
 
@@ -54,131 +54,131 @@ var Soldado = cc.Class.extend({
         this.layer.mapa.addChild(this.sprite, 2);
         return true;
 
-    }, update: function(dt){
-        var distanciaX=this.body.p.x-this.layer.link.body.p.x;
-        var distanciaY=this.body.p.y-this.layer.link.body.p.y;
+    }, update: function (dt) {
+        var distanciaX = this.body.p.x - this.layer.link.body.p.x;
+        var distanciaY = this.body.p.y - this.layer.link.body.p.y;
         //comprobar que el jugador este en un radio cercano al enemigo
-        var distancia=Math.sqrt(Math.pow(this.body.p.x-this.layer.link.body.p.x,2)+Math.pow(this.body.p.y-this.layer.link.body.p.y,2));
+        var distancia = Math.sqrt(Math.pow(this.body.p.x - this.layer.link.body.p.x, 2) + Math.pow(this.body.p.y - this.layer.link.body.p.y, 2));
         this.tiempoMovimiento = this.tiempoMovimiento + dt;
 
-        if(distancia<150) {
+        if (distancia < 150) {
             //hacemos que primero el enemigo se muestre en el ejeX y despues en el ejeY
             this.moverHaciaJugador();
-        } else if(this.tiempoMovimiento > this.tiempoEntreMovimientos){
-             this.vigilar();
-             this.tiempoMovimiento = 0;
+        } else if (this.tiempoMovimiento > this.tiempoEntreMovimientos) {
+            this.vigilar();
+            this.tiempoMovimiento = 0;
         }
 
-    },vigilar:function(){
-         var random = Math.floor(Math.random() * 7);
-         switch(random) {
-             case 0:
-                 this.moverDerecha();
-                 break;
-             case 1:
+    }, vigilar: function () {
+        var random = Math.floor(Math.random() * 7);
+        switch (random) {
+            case 0:
+                this.moverDerecha();
+                break;
+            case 1:
                 this.moverAbajo();
                 break;
-             case 2:
+            case 2:
                 this.moverIzquierda();
                 break;
-             case 3:
+            case 3:
                 this.moverArriba();
                 break;
-             case 4||5||6:
+            case 4 || 5 || 6:
                 this.parar();
                 break;
-         }
+        }
 
     }
     , moverArriba: function () {
-        if(this.orientacion != "ARRIBA" || !this.isMoving){
+        if (this.orientacion != "ARRIBA" || !this.isMoving) {
             this.orientacion = "ARRIBA";
-            this.sprite.scaleX=1;
+            this.sprite.scaleX = 1;
             this.animacionMoverse();
             this.body.setVel(cp.v(0, this.velMovimiento));
-            this.isMoving=true;
+            this.isMoving = true;
         }
 
     }, moverAbajo: function () {
-        if(this.orientacion != "ABAJO" || !this.isMoving){
+        if (this.orientacion != "ABAJO" || !this.isMoving) {
             this.orientacion = "ABAJO";
-            this.sprite.scaleX=1;
+            this.sprite.scaleX = 1;
             this.animacionMoverse();
             this.body.setVel(cp.v(0, -this.velMovimiento));
-            this.isMoving=true;
+            this.isMoving = true;
         }
 
     }, moverDerecha: function () {
-        if(this.orientacion != "DERECHA" || !this.isMoving){
+        if (this.orientacion != "DERECHA" || !this.isMoving) {
             this.orientacion = "DERECHA";
-            this.sprite.scaleX=1;
+            this.sprite.scaleX = 1;
             this.animacionMoverse();
             this.body.setVel(cp.v(this.velMovimiento, 0));
-            this.isMoving=true;
+            this.isMoving = true;
         }
 
     }, moverIzquierda: function () {
-        if(this.orientacion != "IZQUIERDA" || !this.isMoving){
+        if (this.orientacion != "IZQUIERDA" || !this.isMoving) {
             this.orientacion = "IZQUIERDA";
-            this.sprite.scaleX=-1;
+            this.sprite.scaleX = -1;
             this.animacionMoverse();
             this.body.setVel(cp.v(-this.velMovimiento, 0));
-            this.isMoving=true;
+            this.isMoving = true;
         }
 
-    }, eliminar: function() {
+    }, eliminar: function () {
         this.space.removeShape(this.shape);
         this.layer.mapa.removeChild(this.sprite);
 
     }, parar: function () {
         this.body.setVel(cp.v(0, 0));
-        this.sprite.scaleX=(this.orientacion=="IZQUIERDA"? -1:1);
+        this.sprite.scaleX = (this.orientacion == "IZQUIERDA" ? -1 : 1);
         this.sprite.stopAllActions();
         this.animacionPararse();
-        this.isMoving=false;
+        this.isMoving = false;
 
-    }, moverHaciaJugador: function() {
-         var distanciaX=this.body.p.x-this.layer.link.body.p.x;
-         var distanciaY=this.body.p.y-this.layer.link.body.p.y;
+    }, moverHaciaJugador: function () {
+        var distanciaX = this.body.p.x - this.layer.link.body.p.x;
+        var distanciaY = this.body.p.y - this.layer.link.body.p.y;
 
 
 
-        if(distanciaX>=0 && distanciaY>=0){//Primer cuadrante
-               if(distanciaX<distanciaY){
-                    this.moverAbajo()
-               } else {
-                    this.moverIzquierda()
-               }
+        if (distanciaX >= 0 && distanciaY >= 0) {//Primer cuadrante
+            if (distanciaX < distanciaY) {
+                this.moverAbajo()
+            } else {
+                this.moverIzquierda()
+            }
 
-        }else if(distanciaX<=0 && distanciaY>=0){//Segundo cuadrante
-                if(Math.abs(distanciaX)<distanciaY){
-                    this.moverAbajo()
-               } else {
-                    this.moverDerecha()
-               }
-        }else if( distanciaX<=0 && distanciaY<=0){//Tercer cuadrante
-               if(distanciaX>distanciaY){
-                    this.moverArriba()
-               } else {
-                    this.moverDerecha()
-               }
-        }else {//Cuarto cuadrante
-                if(distanciaX<distanciaY){
-                    this.moverArriba()
-               } else {
-                    this.moverIzquierda()
-               }
+        } else if (distanciaX <= 0 && distanciaY >= 0) {//Segundo cuadrante
+            if (Math.abs(distanciaX) < distanciaY) {
+                this.moverAbajo()
+            } else {
+                this.moverDerecha()
+            }
+        } else if (distanciaX <= 0 && distanciaY <= 0) {//Tercer cuadrante
+            if (distanciaX > distanciaY) {
+                this.moverArriba()
+            } else {
+                this.moverDerecha()
+            }
+        } else {//Cuarto cuadrante
+            if (distanciaX < distanciaY) {
+                this.moverArriba()
+            } else {
+                this.moverIzquierda()
+            }
         }
 
     }, obtainAnimation: function (key) {
-           return this.animaciones[key];
+        return this.animaciones[key];
 
-    }, animacionPararse: function(){
-        this.sprite.runAction(this.obtainAnimation("SIMPLE_"+this.orientacion));
+    }, animacionPararse: function () {
+        this.sprite.runAction(this.obtainAnimation("SIMPLE_" + this.orientacion));
 
-    }, animacionMoverse: function() {
+    }, animacionMoverse: function () {
         this.sprite.stopAllActions();
-        this.sprite.runAction(this.obtainAnimation("MOVER_"+this.orientacion));
+        this.sprite.runAction(this.obtainAnimation("MOVER_" + this.orientacion));
 
     }
 
