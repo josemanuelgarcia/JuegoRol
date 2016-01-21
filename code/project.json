@@ -37,6 +37,7 @@
         "src/CaveScene.js",
         "src/ObjetoAnimado.js",
         "src/Cuevas/Interruptor.js",
-        "src/Cuevas/Cofre.js"
+        "src/Cuevas/Cofre.js",
+        "src/Cuevas/Zona.js"
     ]
 }

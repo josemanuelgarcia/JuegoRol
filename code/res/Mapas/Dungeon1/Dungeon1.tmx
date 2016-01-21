@@ -23,15 +23,47 @@
    eJztm11u00AQgJ0X4LnpNUBND9JW4gK5AlfgX4JD8ApvhQv4BhUHKVyBWakDG8cbr39mZ12+Txo5ShvPZD+v1/ZumgYAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAACw528yPi4dYYl8hthLnG5tax9TggbblnLh6iCX2dcrHEvvPjZ2TD23LuXG90H5O+Viq1twaPNC2vHHK32XIR4la8fEPfOAjVYMH+EjX4AE+0jV4gI90DR7gI12DB/hI1+ABPtI1eICPdA0e4CNdgwf4SNfgAT7SNXiAj3QNHuAjXYMH+v0u8XFUgwf0j3QNHoz5js82TftU4onE0P/eN82XO4lbiTH16FxpX38t5SOer9VjwyJKrAGYmydu87n1vJZ4I/FW4p3E+0TN3dAaYh+XBlFiDUCJPHPirLPd9UR8vlIfNwZhvQ7gulCeq4x2D+0q/aGVftFK/2iln7TSX1r926nP9fmwYs75V8aNRsaPMI4MIuPGXsaPvYwj+2nZjim1NmotPryJzzHWefAxTDzeW+fBxzAXDuerc3wkOXWvaJEnoNe6VuAjP09Ar3VfynXJqwWvTZS1+/C6vnour18Y5Fqzj1LjR9/zkm9N035thp8TjWXNPjzOV5rvs7j4hI+/yP3lgY97g7ZR+nx8kNcfDXKt1Yfc6x/4uCvsY+nx/JfUH44x9fFjqR0XQvrDwXh+W9iHBeEYUx8/bVKY8pieX32X4ykcY+rj9/IpzHlMPpS1jh8Bj+cl+EhD/6iL//15+9Q1CVYEF6Wft1uvNRhb15zzg352aLvt1Jnaxr8Pn9oGqff7ImC91mAM8WenEM9Vn9ruOnXmbKe2Qer97eZ4XUPAeq3BGCzmwOdQYiyHfEqM5ZAP/aMu8FEX+KgLfNQFPuoCH/nofGoIq7lUfOQT5rr0vtZqLhUf+cTzqVZzqfioC3zUBT7qAh91gY+6wEdd4KMuSs9//AEOxPYY
   </data>
  </layer>
- <objectgroup name="Zones" visible="0">
-  <object id="309" name="Zona 1" x="416.667" y="1296.67" width="367.333" height="306.667"/>
-  <object id="310" name="Zona 2" x="784.667" y="1296" width="383.333" height="305.333"/>
-  <object id="311" name="Zona 3" x="417" y="985.333" width="367.333" height="306.667"/>
-  <object id="312" name="Zona 4" x="787" y="986" width="388" height="306.667"/>
-  <object id="372" name="Zona 5" x="1179" y="966" width="406" height="328"/>
-  <object id="388" name="Zona 6" x="495" y="638" width="562" height="326"/>
-  <object id="401" name="Zona 7" x="26.6667" y="970.667" width="383.666" height="338.667"/>
-  <object id="434" name="Zona 8" x="1168" y="624.667" width="429.333" height="338"/>
+ <objectgroup name="Zones">
+  <object id="309" name="Zona 1" x="416.667" y="1296.67" width="367.333" height="306.667">
+   <properties>
+    <property name="Id" value="1"/>
+   </properties>
+  </object>
+  <object id="310" name="Zona 2" x="784.667" y="1296" width="383.333" height="305.333">
+   <properties>
+    <property name="Id" value="2"/>
+   </properties>
+  </object>
+  <object id="311" name="Zona 3" x="417" y="985.333" width="367.333" height="306.667">
+   <properties>
+    <property name="Id" value="3"/>
+   </properties>
+  </object>
+  <object id="312" name="Zona 4" x="787" y="986" width="388" height="306.667">
+   <properties>
+    <property name="Id" value="4"/>
+   </properties>
+  </object>
+  <object id="372" name="Zona 5" x="1179" y="966" width="406" height="328">
+   <properties>
+    <property name="Id" value="5"/>
+   </properties>
+  </object>
+  <object id="388" name="Zona 6" x="495" y="638" width="562" height="326">
+   <properties>
+    <property name="Id" value="6"/>
+   </properties>
+  </object>
+  <object id="401" name="Zona 7" x="26.6667" y="970.667" width="383.666" height="338.667">
+   <properties>
+    <property name="Id" value="7"/>
+   </properties>
+  </object>
+  <object id="434" name="Zona 8" x="1168" y="624.667" width="429.333" height="338">
+   <properties>
+    <property name="Id" value="8"/>
+   </properties>
+  </object>
  </objectgroup>
  <objectgroup name="Jarrones">
   <object id="313" x="512.667" y="1552.67" width="15" height="15"/>
@@ -135,7 +167,7 @@
   <object id="379" name="Interruptor" x="800.5" y="703.833" width="15" height="15">
    <properties>
     <property name="Interruptor" value="5"/>
-    <property name="cofre" value="4"/>
+    <property name="cofre" value="5"/>
    </properties>
   </object>
   <object id="387" name="Interruptor" x="880.5" y="1504.5" width="15" height="15">
@@ -149,31 +181,37 @@
  <objectgroup name="Enemigos">
   <object id="414" x="136.667" y="1096.67">
    <properties>
+    <property name="IdZona" value="7"/>
     <property name="tipo" value="soldado_verde"/>
    </properties>
   </object>
   <object id="415" x="135.333" y="1144.67">
    <properties>
+    <property name="IdZona" value="7"/>
     <property name="tipo" value="soldado_rojo"/>
    </properties>
   </object>
   <object id="416" x="136" y="1190">
    <properties>
+    <property name="IdZona" value="7"/>
     <property name="tipo" value="soldado_verde"/>
    </properties>
   </object>
   <object id="417" x="216" y="1094.67">
    <properties>
+    <property name="IdZona" value="7"/>
     <property name="tipo" value="soldado_rojo"/>
    </properties>
   </object>
   <object id="418" x="215.333" y="1143.33">
    <properties>
+    <property name="IdZona" value="7"/>
     <property name="tipo" value="soldado_verde"/>
    </properties>
   </object>
   <object id="419" x="215.333" y="1192">
    <properties>
+    <property name="IdZona" value="7"/>
     <property name="tipo" value="soldado_rojo"/>
    </properties>
   </object>

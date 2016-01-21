@@ -8,7 +8,6 @@ var CaveLayer = cc.Layer.extend({
     mapaAlto: null,
     keyPulsada: null,
     disparosEnemigos: [],
-    octorock: null,
     depuracion: null,
     corazones:[],
     rupias:[],
@@ -18,7 +17,7 @@ var CaveLayer = cc.Layer.extend({
     bloques:[],
     interruptores:[],
     cofres:[],
-    soldado:null,
+    zonas:[],
     //Teclado
     teclasPulsadas:[],
 
@@ -68,21 +67,7 @@ console.log("he salido de save");
         this.link = new Link(this.space, posicion, this);
 
 
-        //Creacion de soldado de prueba
-        this.soldado = new Soldado(this.space, cc.p(600, 200), this);
 
-        //creacion de corazon de prueba
-        this.corazones.push(new Corazon(this.space,cc.p(550,200),this));
-
-        //Creacion de rupias de diferentes colores  de prueba--------------
-         var rupiaRoja = new Rupia(this.space,cc.p(600,200),this,"r");
-         this.rupias.push(rupiaRoja);
-         var rupiaAzul = new Rupia(this.space,cc.p(650,200),this,"a");
-           this.rupias.push(rupiaAzul);
-         var rupiaAmarilla = new Rupia(this.space,cc.p(520,200),this,"m");
-           this.rupias.push(rupiaAmarilla);
-         var rupiaVerde = new Rupia(this.space,cc.p(700,200),this,"v");
-           this.rupias.push(rupiaVerde);
         //------------------------------------------------------------------
 
 
@@ -109,12 +94,16 @@ console.log("he salido de save");
         //Camara mapa inicial del personaje
         this.space.step(dt);
         this.actualizarCamara();
-        this.octorok.update(dt);
-
-        this.soldado.update(dt);
-
         this.link.update(dt);
          this.abrirCofre();
+         //Actualizar enemigos de la mazmorra
+         for(var i=0;i<this.zonas.length;i++)
+         {
+            for(var j=0;j<this.zonas[i].enemigos.length;j++)
+            {
+                this.zonas[i].enemigos[j].update(dt);
+            }
+         }
         //Eliminar elementos
         for (var i = 0; i < this.shapesToRemove.length; i++) {
             var shape = this.shapesToRemove[i];
@@ -125,9 +114,16 @@ console.log("he salido de save");
                  }
             }
             //Eliminar octorock si impacta, mas adelante se recorreran todos los enemigos
-            else if(this.octorok.shape==shape) {
-                this.octorok.eliminar();
-            }
+            for(var i=0;i<this.zonas.length;i++)
+                     {
+                        for(var j=0;j<this.zonas[i].enemigos.length;j++)
+                        {
+                            if(this.zonas[i].enemigos[j].shape==shape)
+                            {
+                                this.zonas[i].enemigos[j].eliminar();
+                            }
+                        }
+                     }
             for(var i = 0; i< this.corazones.length; i++){
                 if(this.corazones[i].shape===shape) {
                    this.corazones[i].eliminar();
@@ -265,9 +261,33 @@ console.log("he salido de save");
                         {
                             var x = cofresArray[i]["x"];
                             var y = cofresArray[i]["y"];
-                            var cofre = new Cofre(this.space,new cc.p(x,y),this,cofresArray[i]["Cofre"],cofresArray[i]["botin"]);
+                            var cofre = new Cofre(this.space,new cc.p(x,y),this,cofresArray[i]["Cofre"],cofresArray[i]["botin"],cofresArray[i]["visible"]);
                             this.cofres.push(cofre);
                         }
+         //ZONAS
+          var zonas = this.mapa.getObjectGroup("Zones");
+          var enemigos=this.mapa.getObjectGroup("Enemigos");
+                                 var zonasArray = zonas.getObjects();
+                                 var enemigosArray=enemigos.getObjects();
+                                 for(var i = 0; i< zonasArray.length ; i++)
+                                 {
+                                     var x = zonasArray[i]["x"];
+                                     var y = zonasArray[i]["y"];
+                                     var zona = new Zona(x,y,zonasArray[i]["width"],zonasArray[i]["height"],zonasArray[i]["Id"]);
+                                     //Creacion de los enemigos de dicha zona
+                                     for(var j=0;j<enemigosArray.length;j++)
+                                     {
+                                        //Saber si el enemigo es de dicha zona
+                                        if(enemigosArray[j]["IdZona"]==zonasArray[i]["Id"])
+                                        {
+                                            var xEnemigo=enemigosArray[j]["x"];
+                                            var yEnemigo=enemigosArray[j]["y"];
+                                            //Posteriormente diferenciar creacion por tipo
+                                            zona.enemigos.push(new Octorok(this.space,cc.p(xEnemigo,yEnemigo),this))
+                                        }
+                                     }
+                                     this.zonas.push(zona);
+                                 }
 
 
 
