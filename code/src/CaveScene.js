@@ -1,4 +1,4 @@
-Fvar idCapaCueva = 1;
+var idCapaCueva = 1;
 var CaveLayer = cc.Layer.extend({
     space: null,
     link: null,

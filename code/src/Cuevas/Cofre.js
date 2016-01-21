@@ -41,14 +41,14 @@ var Cofre = cc.Class.extend({
         this.space.addShape(this.shape);
 
         var framesDestruir = animationManager.getAnimacion("Jarron_destruir", 7);
-        this.animacionDestruir = new cc.Animation(framesDestruir, 0.05);
+        this.animacionAbrir = new cc.Animation(framesDestruir, 0.05);
 
         this.layer.mapa.addChild(this.sprite, 2);
         this.visible = true;
 
     }, abrir: function () {
         if (!this.abierto) {
-            var animacion = cc.Animate.create(this.animacionDestruir);
+            var animacion = cc.Animate.create(this.animacionAbrir);
             var crearColectable = cc.CallFunc.create(this.crearColectable, this);
             this.abierto = true;
             this.sprite.runAction(cc.Sequence.create(animacion, crearColectable));
@@ -57,7 +57,7 @@ var Cofre = cc.Class.extend({
 
     }, crearColectable: function () {
 
-        switch (botin) {
+        switch (this.botin) {
             case "rupio_azul":
                 this.layer.rupias.push(new Rupia(this.space, this.position, this.layer, "a"));
                 break;

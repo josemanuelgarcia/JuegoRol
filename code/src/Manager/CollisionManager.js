@@ -227,9 +227,9 @@ var CollisionManager = cc.Class.extend({
         var shapes = arbiter.getShapes();
         if (this.layer.link.sword) {
             if (this.layer.mathUtil.isInViewCone(this.layer.link.body.p, shapes[1].body.p, 0.5, this.layer)) {
-                for (var cofre in this.layer.cofres) {
-                    if (cofre.shape === shapes[1]) {
-                        cofre.abrir();
+                for (var i=0;i<this.layer.cofres.length;i++) {
+                    if (this.layer.cofres[i].shape === shapes[1]) {
+                        this.layer.cofres[i].abrir();
                         //todo creo que falla aqui
                     }
                 }
