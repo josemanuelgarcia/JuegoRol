@@ -39,8 +39,8 @@ var CaveLayer = cc.Layer.extend({
         //La gravedad en este juego da igual.
         this.space.gravity = cp.v(0, 0);
         //Add the Debug Layer:
-       var depuracion = new cc.PhysicsDebugNode(this.space);
-       this.addChild(depuracion, 10);
+       //var depuracion = new cc.PhysicsDebugNode(this.space);
+       //this.addChild(depuracion, 10);
         animationManager=new AnimationManager();
         //Cargamos el Mapa
         this.cargarMapa();
@@ -105,10 +105,7 @@ console.log("he salido de save");
                  }
             }
             //Eliminar octorock si impacta, mas adelante se recorreran todos los enemigos
-                        for(var j=0;j<this.zonaActual.enemigos.length;j++)
-                        {
-                            this.zonaActual.eliminarEnemigo(i);
-                        }
+             this.zonaActual.eliminarEnemigo(shape);
             for(var i = 0; i< this.corazones.length; i++){
                 if(this.corazones[i].shape===shape) {
                    this.corazones[i].eliminar();
@@ -136,16 +133,21 @@ console.log("he salido de save");
            /* if(this.soldado.shape == shape){
                 this.soldado.eliminar();
             }*/
-            shapesToRemove=[];
+            this.shapesToRemove=[];
         }
         //Actualizar enemigos de la mazmorra
-                 /*for(var i=0;i<this.zonas.length;i++)
-                 {
-                    for(var j=0;j<this.zonas[i].enemigos.length;j++)
+            if(this.zonaActual!=null){
+                    for(var j=0;j<this.zonaActual.enemigos.length;j++)
                     {
-                        this.zonas[i].enemigos[j].update(dt);
+                        this.zonaActual.enemigos[j].update(dt);
                     }
-                 }*/
+
+        //Enemigos de zona muertos y dicha zona tiene cofre
+        if(this.zonaActual.enemigos.length==0 && this.zonaActual.cofre!=null)
+        {
+            this.cofres[parseInt(this.zonaActual.cofre)-1].cofreAparece();
+        }
+        }
     }, procesarEventosKeyboard: function (keyCode, event) {
         var instancia = event.getCurrentTarget();
         //Al cambiar de ventana en el navegador entra un 18 no se por que
@@ -265,7 +267,7 @@ console.log("he salido de save");
                                  {
                                      var x = zonasArray[i]["x"];
                                      var y = zonasArray[i]["yZona"];
-                                     var zona = new Zona(this.space,x,this.mapaAlto-(parseInt(y)+zonasArray[i]["height"]),zonasArray[i]["width"],zonasArray[i]["height"],zonasArray[i]["Id"],this);
+                                     var zona = new Zona(this.space,x,this.mapaAlto-(parseInt(y)+zonasArray[i]["height"]),zonasArray[i]["width"],zonasArray[i]["height"],zonasArray[i]["Id"],this,zonasArray[i]["cofre"]);
                                      this.zonas.push(zona);
                                      //Creacion de los enemigos de dicha zona
 

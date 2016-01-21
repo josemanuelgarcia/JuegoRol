@@ -39,7 +39,7 @@
   <object id="311" name="Zona 3" x="417" y="985.333" width="367.333" height="306.667">
    <properties>
     <property name="Id" value="3"/>
-    <property name="yZona" value="985,33"/>
+    <property name="yZona" value="678.66"/>
    </properties>
   </object>
   <object id="312" name="Zona 4" x="787" y="986" width="388" height="306.667">
@@ -63,6 +63,7 @@
   <object id="401" name="Zona 7" x="26.6667" y="970.667" width="383.666" height="338.667">
    <properties>
     <property name="Id" value="7"/>
+    <property name="cofre" value="4"/>
     <property name="yZona" value="970,67"/>
    </properties>
   </object>

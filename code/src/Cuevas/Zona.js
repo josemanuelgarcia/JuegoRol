@@ -9,10 +9,12 @@ var Zona = cc.Class.extend({
     space:null,
     layer:null,
     enemigos:[],
-    ctor: function (space,x,y,ancho,alto,id,layer){
+    cofre:null,
+    ctor: function (space,x,y,ancho,alto,id,layer,cofre){
         this.x=x;
         this.y=y;
         this.ancho=ancho;
+        this.cofre=cofre;
         this.alto=alto;
         this.space=space;
         this.idZona=id;
