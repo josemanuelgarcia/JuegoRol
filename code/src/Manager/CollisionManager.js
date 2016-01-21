@@ -15,6 +15,7 @@ var tipoSoldado=13;
 var tipoBombaRecolectable=14;
 var tipoFlechaRecolectable=15;
 var tipoInterruptor=16;
+var tipoZona = 17;
 var CollisionManager = cc.Class.extend({
 
     space:null,
@@ -71,7 +72,7 @@ var CollisionManager = cc.Class.extend({
 
         this.space.addCollisionHandler(tipoJugador, tipoSoldado, this.reducirVidas.bind(this), null, null, null);
 
-
+        this.space.addCollisionHandler(tipoJugador, tipoZona , this.actualizarCamaraZona(this), null , null , null);
 
     }, collisionObjetoConOctorok: function (arbiter, space) {
              //  this.octorok.haChocado();
@@ -181,6 +182,12 @@ var CollisionManager = cc.Class.extend({
                 }
               }
 
-         }
+    },actualizarCamaraZona: function(arbiter, space){
+        var shapes = arbiter.getShapes();
+        var shape = shapes[1];
+        this.layer.actualizarCamara(shape);
+
+
+    }
 
 });
