@@ -14,9 +14,14 @@ var Zona = cc.Class.extend({
         this.alto=alto;
         this.idZona=id;
 
-        this.shape = new cp.BoxShape(this.body,ancho, alto
+        var body = new cp.StaticBody();
+        body.setPos(cc.p(x,y));
+        body.setAngle(0);
+        body.e = 0;
+        this.shape = new cp.BoxShape(body,ancho, alto);
         this.shape.setCollisionType(tipoZona);
-        space.addShape(this.shape);
+        this.shape.sensor = true;
+        space.addStaticShape(this.shape);
         return true;
     }
 

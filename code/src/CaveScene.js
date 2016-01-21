@@ -18,6 +18,7 @@ var CaveLayer = cc.Layer.extend({
     interruptores:[],
     cofres:[],
     zonas:[],
+    zonaActual: null,
     //Teclado
     teclasPulsadas:[],
 
@@ -291,14 +292,17 @@ console.log("he salido de save");
 
 
 
-    }, actualizarCamara: function (zona) {
+    },cambiarZona:function(zona){
+        this.zonaActual = zona;
+
+    }, actualizarCamara: function () {
         var winSize = cc.winSize;
 
         var x = Math.max(this.link.body.p.x, winSize.width/2);
         var y = Math.max(this.link.body.p.y, winSize.height/2);
 
-        x = Math.min(x, (zona.width * this.mapa.getTileSize().width) - winSize.width / 2);
-        y = Math.min(y, (zona.height *this.mapa.getTileSize().height) - winSize.height/2);
+        x = Math.min(x, (this.mapa.width * this.mapa.getTileSize().width) - winSize.width / 2);
+        y = Math.min(y, (this.mapa.height *this.mapa.getTileSize().height) - winSize.height/2);
         var actualPosition = cc.p(x, y);
 
         var centerOfView = cc.p(winSize.width/2, winSize.height/2);

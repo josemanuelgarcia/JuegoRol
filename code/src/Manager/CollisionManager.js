@@ -72,7 +72,7 @@ var CollisionManager = cc.Class.extend({
 
         this.space.addCollisionHandler(tipoJugador, tipoSoldado, this.reducirVidas.bind(this), null, null, null);
 
-        this.space.addCollisionHandler(tipoJugador, tipoZona , this.actualizarCamaraZona(this), null , null , null);
+        this.space.addCollisionHandler(tipoJugador, tipoZona , this.actualizarCamaraZona.bind(this), null , null , null);
 
     }, collisionObjetoConOctorok: function (arbiter, space) {
              //  this.octorok.haChocado();
@@ -185,7 +185,8 @@ var CollisionManager = cc.Class.extend({
     },actualizarCamaraZona: function(arbiter, space){
         var shapes = arbiter.getShapes();
         var shape = shapes[1];
-        this.layer.actualizarCamara(shape);
+        
+        //this.layer.cambiarZona(shape.getBody().getUserData());
 
 
     }
