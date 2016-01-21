@@ -1,109 +1,429 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.0" orientation="orthogonal" renderorder="right-down" width="100" height="100" tilewidth="16" tileheight="16" nextobjectid="135">
- <tileset firstgid="1" name="First_Dungeon" tilewidth="16" tileheight="16" tilecount="612">
+<map version="1.0" orientation="orthogonal" renderorder="right-down" width="100" height="100" tilewidth="16" tileheight="16" nextobjectid="453">
+ <tileset firstgid="1" name="First_Dungeon" tilewidth="16" tileheight="16" tilecount="480">
   <image source="First_Dungeon.png" width="480" height="256"/>
  </tileset>
  <layer name="Background" width="100" height="100">
   <data encoding="base64" compression="zlib">
-   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
+   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
   </data>
  </layer>
  <layer name="Background Top" width="100" height="100">
   <data encoding="base64" compression="zlib">
-   eJzt1kEKwjAQBdCKehD1/sdKQ2+hiwwGcUoXWoW8ByGBzqJN2vmdJgAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAYGTHw6/vgN7FefzE/BiljTmpqe360ma+pyTrXk3WfN7e51G6wdOp5UP0qzrl/arfw6xmq/IyZ86D5de1PW9kw9o7u7S6ulKz1dbv4zbYeYR+X7JeJD/2I8//S2RC5Mg70a/inxcAYHR3yzcyxg==
+   eJzt21FOwjAYwPEt6jM88gAk6rP4xkk4ALdRb8GLeg0S9ShzcgvbrJWG0O0jdGul/1/yhclK0/Vj/TbJigIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAgP9lVRTb2GPIwVTFTMW8o92SfESnzomNysNm0sQ29nhyN4k9gAuyM/EjbH9s7pfhhpO9SsVjKc+HnXt3jVLbOk9r9fd61cTfvl4GfcHs+fEtbL86oW9V+9cnDwi9mZGP3rnXve4adXg9rO9DpuQjGcsmH5vY40BD34fMyEdS5uQDAAAASN5TWRTPKl7K2COJZ6SOfdxx/IuW/frzkj4kXlUfbyreM87HQ9k+31rbfv15SR8SH6qPTxVfGedDoisfev8NczgYST7uycdguurHOFD9gIwkHyHqB2Qk+aB+DEeSD+pHGItSFj4h7z9wvlHA+w+cj/qRFupHWO79gxu+94+1o36EY9f+w7Dz3VXnQ/7/Cnu+vAAAAABtrrhmTMot+YhCPxdYmfA9I1ib/Tvziv5Unm1X7dlGeEPno3ICe9emPtj1qi7865U7h9Lnnn2qg1ef3H6XuDPHa2tD23d2Z9rVLW2kpOdHrr9LuPPiW4uoH8OhnqfF1gRbR46x65W95gUAAEjdL5UjY9M=
   </data>
  </layer>
  <layer name="Foreground" width="100" height="100">
   <data encoding="base64" compression="zlib">
-   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
+   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
   </data>
  </layer>
  <layer name="Top" width="100" height="100">
   <data encoding="base64" compression="zlib">
-   eJztzrENACAIAEEYyf2HMGykCRULaHOXfP8RAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAC8tm8ru/o9AwAAwHAAMI4CBQ==
+   eJzt299N3EAQx/G9l4RnjjYScRQCSDSQFtJC/pBIUASv5O2owB2cUgjUwKzEJj7jsfewZ2eNvh9pZMSf28E/r/ewTQgAAAAAAAAAAAAAAAAAAAAAAAAAAAAALB2vptfpS83xWrHWUicrm14P6cFD2pdT6vyl5nitoTzmeP3c2jjlkfbl1LqY6XWG8pir19wePKR9eek0ftdYHiV6JY//yIM8tB48kIfegwfy0HvwQB56Dx7IQ+/BA3noPXggD70HD+Sh9+CBPPQePJCH3oMH8tB78EAeeg8eyEPvwUP6/c7I41UPHpgfeg8eDvkdj1ah+Sj1QWrsex9DuNtJbaUO6SfdK+2br6XyaN+vTceGRZV4BmDqOO19PrWfb1LfpX5I/ZS6VnruVuqhnceZQZV4BqDEOFPquLPd9FT7fJXyuDQo6+cALgqNc56x3+N+lfnQyLxoZH40Mk8amS9N+trQz/XlYWXK+VfWjSDrR1xHXJR6NmopeXhrn2OsxyGPce313noc8hh36nC+OiEP1dDfihbjROm9rhXyyB8nSu91r0L48lVq7rGWnofX+6tP8vFng7GWnEep9aPvesmfEJr7MH6d6FBLzsPjfJXGu5Usbsjjn23Yz+PRYN8kfXn8ko9/G4y11Dx2YT+PXeE85l7Pn6T/eIwtNQ+ZD3vr+bZwHhbiMbbUPKL3dP3qQY6neIyRR944XC8Z53G9hDx0zI+6cL29LjGL0tfbrZ81KCmNO7Zdd/rUtu3/D3/rPtA+31eR9bMGJbXvVQ9tN50+c7Zv3Qfa59er1881RNbPGixZibUc+Uqs5cjH/KgLedSFPOpCHnUhj7qQR13II1+815X+rv1rNAZ51IU86kIedSGPupBHXcijLuRRF/KoS+n7H8/2DuGq
   </data>
  </layer>
- <objectgroup name="Zones">
-  <object id="92" name="Zona 1" x="32.6667" y="1296.67" width="367.333" height="306.667"/>
-  <object id="93" name="Zona 2" x="400.667" y="1296" width="383.333" height="305.333"/>
+ <objectgroup name="Zones" visible="0">
+  <object id="309" name="Zona 1" x="416.667" y="1296.67" width="367.333" height="306.667"/>
+  <object id="310" name="Zona 2" x="784.667" y="1296" width="383.333" height="305.333"/>
+  <object id="311" name="Zona 3" x="417" y="985.333" width="367.333" height="306.667"/>
+  <object id="312" name="Zona 4" x="787" y="986" width="388" height="306.667"/>
+  <object id="372" name="Zona 5" x="1179" y="966" width="406" height="328"/>
+  <object id="388" name="Zona 6" x="495" y="638" width="562" height="326"/>
+  <object id="401" name="Zona 7" x="26.6667" y="970.667" width="383.666" height="338.667"/>
+  <object id="434" name="Zona 8" x="1168" y="624.667" width="429.333" height="338"/>
  </objectgroup>
  <objectgroup name="Jarrones">
-  <object id="94" x="128.667" y="1552.67" width="15" height="15"/>
-  <object id="95" x="112" y="1552.67" width="15" height="15"/>
-  <object id="96" x="95.3333" y="1553.33" width="15" height="15"/>
-  <object id="97" x="79.3333" y="1553.33" width="15" height="15"/>
-  <object id="98" x="336.5" y="1552.5" width="15" height="15"/>
-  <object id="99" x="320.833" y="1552.17" width="15" height="15"/>
-  <object id="100" x="304.5" y="1552.5" width="15" height="15"/>
-  <object id="101" x="288.167" y="1552.5" width="15" height="15"/>
-  <object id="102" x="447.5" y="1344" width="15" height="15"/>
-  <object id="103" x="447.5" y="1360" width="15" height="15"/>
-  <object id="104" x="464" y="1344" width="15" height="15"/>
-  <object id="105" x="720" y="1344" width="15" height="15"/>
-  <object id="106" x="704" y="1344" width="15" height="15"/>
-  <object id="107" x="720.5" y="1360.5" width="15" height="15"/>
-  <object id="108" x="720.5" y="1536.5" width="15" height="15"/>
-  <object id="109" x="720.5" y="1553" width="15" height="15"/>
-  <object id="110" x="704" y="1553" width="15" height="15"/>
-  <object id="111" x="447.5" y="1553.5" width="15" height="15"/>
-  <object id="112" x="447" y="1538" width="15" height="15"/>
-  <object id="113" x="463.5" y="1553.5" width="15" height="15"/>
+  <object id="313" x="512.667" y="1552.67" width="15" height="15"/>
+  <object id="314" x="496" y="1552.67" width="15" height="15"/>
+  <object id="315" x="479.333" y="1553.33" width="15" height="15"/>
+  <object id="316" x="463.333" y="1553.33" width="15" height="15"/>
+  <object id="317" x="720.5" y="1552.5" width="15" height="15"/>
+  <object id="318" x="704.833" y="1552.17" width="15" height="15"/>
+  <object id="319" x="688.5" y="1552.5" width="15" height="15"/>
+  <object id="320" x="672.167" y="1552.5" width="15" height="15"/>
+  <object id="321" x="831.5" y="1344" width="15" height="15"/>
+  <object id="322" x="831.5" y="1360" width="15" height="15"/>
+  <object id="323" x="848" y="1344" width="15" height="15"/>
+  <object id="324" x="1104" y="1344" width="15" height="15"/>
+  <object id="325" x="1088" y="1344" width="15" height="15"/>
+  <object id="326" x="1104.5" y="1360.5" width="15" height="15"/>
+  <object id="327" x="1104.5" y="1536.5" width="15" height="15"/>
+  <object id="328" x="1104.5" y="1553" width="15" height="15"/>
+  <object id="329" x="1088" y="1553" width="15" height="15"/>
+  <object id="330" x="831.5" y="1553.5" width="15" height="15"/>
+  <object id="331" x="831" y="1538" width="15" height="15"/>
+  <object id="332" x="847.5" y="1553.5" width="15" height="15"/>
+  <object id="333" x="1231.5" y="1024" width="15" height="15"/>
+  <object id="334" x="1231.5" y="1040.5" width="15" height="15"/>
+  <object id="335" x="1248" y="1024" width="15" height="15"/>
+  <object id="336" x="1520.5" y="1024.5" width="15" height="15"/>
+  <object id="337" x="1504.5" y="1024" width="15" height="15"/>
+  <object id="338" x="1520.5" y="1040.5" width="15" height="15"/>
+  <object id="389" x="543.75" y="688" width="15" height="15"/>
+  <object id="390" x="543.75" y="704" width="15" height="15"/>
+  <object id="391" x="560.25" y="688" width="15" height="15"/>
+  <object id="392" x="560.5" y="704.25" width="15" height="15"/>
+  <object id="393" x="543.75" y="720.5" width="15" height="15"/>
+  <object id="394" x="577" y="688" width="15" height="15"/>
+  <object id="395" x="768.5" y="752.5" width="15" height="15"/>
+  <object id="396" x="768.5" y="768.25" width="15" height="15"/>
+  <object id="397" x="752.5" y="752" width="15" height="15"/>
+  <object id="398" x="768" y="864.5" width="15" height="15"/>
+  <object id="399" x="832.5" y="817.5" width="15" height="15"/>
+  <object id="405" x="79.8333" y="1023.83" width="15" height="15"/>
+  <object id="406" x="79.8333" y="1234.5" width="15" height="15"/>
+  <object id="407" x="351.833" y="1025.83" width="15" height="15"/>
+  <object id="408" x="351.167" y="1231.83" width="15" height="15"/>
  </objectgroup>
  <objectgroup name="Cofres">
-  <object id="114" name="Cofre" x="576" y="1440" width="15" height="15">
+  <object id="339" name="Cofre" x="960" y="1440" width="15" height="15">
    <properties>
     <property name="Cofre" value="1"/>
+    <property name="botin" value="llave"/>
+   </properties>
+  </object>
+  <object id="340" name="Cofre" x="927" y="1184" width="15" height="15">
+   <properties>
+    <property name="Cofre" value="2"/>
+    <property name="botin" value="rupia_azul"/>
+   </properties>
+  </object>
+  <object id="374" name="Cofre" x="977.167" y="752.5" width="15" height="15">
+   <properties>
+    <property name="Cofre" value="3"/>
+    <property name="botin" value="rupia_roja"/>
+   </properties>
+  </object>
+  <object id="400" name="Cofre" x="209.167" y="1040.5" width="15" height="15">
+   <properties>
+    <property name="Cofre" value="5"/>
+    <property name="botin" value="llave"/>
+   </properties>
+  </object>
+  <object id="440" x="1232.5" y="689.167" width="15" height="15"/>
+  <object id="441" x="1231.83" y="897.833" width="15" height="15"/>
+  <object id="442" x="1521.17" y="897.167" width="15" height="15"/>
+  <object id="443" x="1521.83" y="689.833" width="15" height="15"/>
+  <object id="444" x="828.667" y="1127.33">
+   <properties>
+    <property name="tipo" value="octorok"/>
+   </properties>
+  </object>
+  <object id="445" x="868" y="1222.67">
+   <properties>
+    <property name="tipo" value="octorok"/>
    </properties>
   </object>
  </objectgroup>
  <objectgroup name="Interruptores">
-  <object id="115" name="Interruptor" x="656" y="1392.5" width="15" height="15">
+  <object id="341" name="Interruptor" x="1040" y="1392.5" width="15" height="15">
    <properties>
     <property name="Interruptor" value="2"/>
+    <property name="cofre" value="1"/>
    </properties>
   </object>
-  <object id="116" name="Interruptor" x="656" y="1505" width="15" height="15">
+  <object id="342" name="Interruptor" x="1040" y="1505" width="15" height="15">
    <properties>
     <property name="Interruptor" value="4"/>
+    <property name="cofre" value="1"/>
    </properties>
   </object>
-  <object id="117" name="Interruptor" x="496.5" y="1505" width="15" height="15">
-   <properties>
-    <property name="Interruptor" value="3"/>
-   </properties>
-  </object>
-  <object id="118" name="Interruptor" x="496.5" y="1393" width="15" height="15">
+  <object id="344" name="Interruptor" x="880.5" y="1393" width="15" height="15">
    <properties>
     <property name="Interruptor" value="1"/>
+    <property name="cofre" value="1"/>
+   </properties>
+  </object>
+  <object id="379" name="Interruptor" x="800.5" y="703.833" width="15" height="15">
+   <properties>
+    <property name="Interruptor" value="5"/>
+    <property name="cofre" value="4"/>
+   </properties>
+  </object>
+  <object id="387" name="Interruptor" x="880.5" y="1504.5" width="15" height="15">
+   <properties>
+    <property name="Interruptor" value="3"/>
+    <property name="cofre" value="1"/>
    </properties>
   </object>
  </objectgroup>
- <objectgroup name="Animados">
-  <object id="119" name="Antorcha" x="512" y="1392" width="15.5" height="15.5"/>
-  <object id="120" name="Antorcha" x="640.25" y="1392.75" width="15.5" height="15.5"/>
-  <object id="121" name="Antorcha" x="640.25" y="1504.25" width="15.5" height="15.5"/>
-  <object id="122" name="Antorcha" x="512.25" y="1504.25" width="15.5" height="15.5"/>
+ <objectgroup name="Animados"/>
+ <objectgroup name="Enemigos">
+  <object id="414" x="136.667" y="1096.67">
+   <properties>
+    <property name="tipo" value="soldado_verde"/>
+   </properties>
+  </object>
+  <object id="415" x="135.333" y="1144.67">
+   <properties>
+    <property name="tipo" value="soldado_rojo"/>
+   </properties>
+  </object>
+  <object id="416" x="136" y="1190">
+   <properties>
+    <property name="tipo" value="soldado_verde"/>
+   </properties>
+  </object>
+  <object id="417" x="216" y="1094.67">
+   <properties>
+    <property name="tipo" value="soldado_rojo"/>
+   </properties>
+  </object>
+  <object id="418" x="215.333" y="1143.33">
+   <properties>
+    <property name="tipo" value="soldado_verde"/>
+   </properties>
+  </object>
+  <object id="419" x="215.333" y="1192">
+   <properties>
+    <property name="tipo" value="soldado_rojo"/>
+   </properties>
+  </object>
+  <object id="420" x="696.5" y="1144.17">
+   <properties>
+    <property name="tipo" value="octorok"/>
+   </properties>
+  </object>
+  <object id="422" x="584" y="1176.67">
+   <properties>
+    <property name="tipo" value="octorok"/>
+   </properties>
+  </object>
+  <object id="423" x="665" y="1215">
+   <properties>
+    <property name="tipo" value="octorok"/>
+   </properties>
+  </object>
+  <object id="424" x="595.333" y="768">
+   <properties>
+    <property name="tipo" value="octorok"/>
+   </properties>
+  </object>
+  <object id="425" x="708.667" y="843.333">
+   <properties>
+    <property name="tipo" value="octorok"/>
+   </properties>
+  </object>
+  <object id="426" x="1459.33" y="1128.67">
+   <properties>
+    <property name="tipo" value="octorok"/>
+   </properties>
+  </object>
+  <object id="451" x="1387.33" y="756">
+   <properties>
+    <property name="tipo" value="jefe"/>
+   </properties>
+  </object>
  </objectgroup>
- <objectgroup name="Enemigos"/>
  <objectgroup name="Colisiones">
-  <object id="123" x="128.5" y="1408" width="30.5" height="31"/>
-  <object id="124" x="128.5" y="1472.5" width="31" height="30"/>
-  <object id="125" x="273" y="1408.5" width="30" height="30.5"/>
-  <object id="126" x="272" y="1472.5" width="31.5" height="31.5"/>
-  <object id="127" x="78.5" y="1343">
+  <object id="123" x="656.5" y="1472" width="30.5" height="31"/>
+  <object id="124" x="656.5" y="1410.5" width="31" height="30"/>
+  <object id="125" x="512" y="1409.5" width="30" height="30.5"/>
+  <object id="126" x="511" y="1472.5" width="31.5" height="31.5"/>
+  <object id="127" x="461.5" y="1343">
    <polyline points="0,0 -0.5,226.5 128.5,225.5 128.5,253"/>
   </object>
-  <object id="128" x="225" y="1595.5">
-   <polyline points="0,0 -0.5,-27.5 128,-27 127.5,-122.5 222,-122 222,-26 511.5,-26.5 511.5,-252 223.5,-252.5 222.5,-141 127.5,-140.5 127.5,-252 0,-252"/>
+  <object id="128" x="607.667" y="1594.17">
+   <polyline points="0,0 -0.5,-27.5 128,-27 127.5,-122.5 222,-122 222,-26 511.5,-26.5 511.5,-252 223.5,-252.5 222.5,-141 127.5,-140.5 127.5,-252 3.5,-251.5"/>
   </object>
-  <object id="129" x="78.5" y="1341.5">
-   <polyline points="0,0 129.5,1"/>
+  <object id="129" x="461" y="1341.42">
+   <polyline points="0,0 121.5,2"/>
   </object>
-  <object id="130" x="560.5" y="1344" width="30.5" height="30"/>
-  <object id="131" x="592" y="1343.5" width="32.5" height="31"/>
-  <object id="132" x="639.5" y="1424" width="32.5" height="31.5"/>
-  <object id="133" x="560.5" y="1536" width="30.5" height="30.5"/>
-  <object id="134" x="592.5" y="1536" width="31" height="31"/>
+  <object id="130" x="944.5" y="1345" width="30.5" height="30"/>
+  <object id="131" x="977" y="1343.5" width="32.5" height="31"/>
+  <object id="132" x="1023.5" y="1423" width="32.5" height="31.5"/>
+  <object id="133" x="944.5" y="1536" width="30.5" height="30.5"/>
+  <object id="134" x="976.5" y="1536" width="31" height="31"/>
+  <object id="136" x="584" y="1343">
+   <polyline points="0,0 0,-96 -121.5,-95.4947"/>
+  </object>
+  <object id="427" x="461" y="1246">
+   <polyline points="0,0 2,-44 -93,-44 -94,1 -382,4 -381,-225 -89,-225 -92,-68 2,-65 1,-111 34,-112 33,-144 144,-143 140,-173 31,-173 30,-222 192,-221"/>
+  </object>
+  <object id="428" x="653" y="1025">
+   <polyline points="0,0 1,-112 -110,-112 -111,-339 97,-338 98,-289 82,-289 82.5,-273.5 134,-273.5 134,-226 115,-225.5 115,-210.5 147,-209 147,-177.5 99,-176.5 99,-112 22,-111.5 21.5,-0.5 173.5,-2 173,-112.5 116,-112.5 114,-160.5 304.5,-161 304.5,-175.5 166,-176.5 165.5,-192.5 175,-193 175.5,-241 164,-240 163,-225 148,-225.5 147,-272.5 224.5,-272.5 223,-288.5 112.5,-289 111.5,-338 358.5,-338.5 355.5,-222 259,-222 258.5,-258.5 304.5,-258 305.5,-304.5 293.5,-304 293.5,-288.5 245.5,-288.5 243,-223 196.5,-223.5 196,-212.5 340,-210 341,-175.5 324.5,-175 324,-130.5 343,-131 342,-112.5 195.5,-113 197,-2 442.5,-1 442,53.5"/>
+  </object>
+  <object id="429" x="1093.5" y="1077">
+   <polyline points="0,0 -60.5,1.5 -67,25.5 24,25.5 27,74 136.5,74 136.5,-55 266.5,-54.25 266.5,-132.25"/>
+  </object>
+  <object id="430" x="1410.75" y="945.75">
+   <polyline points="-2.5,0 -2.5,76.5 130,76.5 129.5,305.5 -180,304 -178,226.5 -287.5,225 -289,303.5 -432.5,304.5 -432.5,159 -400.5,158.5 -408.5,129.5 -773.5,128.5 -781.5,158.5 -448.5,158.5 -449.5,205.5 -511.5,206 -512,255 -495.5,253.5 -496,222.5 -448,222 -450.5,303 -799,303 -798.75,396.75"/>
+  </object>
+  <object id="431" x="1297" y="1057">
+   <polyline points="0,0 30.5,-0.5 30.5,29.5 0,30 0,-0.5"/>
+  </object>
+  <object id="432" x="1440.5" y="1056.5" width="30.5" height="30.5"/>
+  <object id="433" x="1440.5" y="1167.5" width="31" height="31"/>
+  <object id="439" x="1364" y="944.667">
+   <polyline points="-4,0.25 -4,-31.5833 -133.333,-31.3333 -133.333,-257.333 172.667,-256.667 172.667,-31.3333 44,-32.6667 44.25,1.08333"/>
+  </object>
  </objectgroup>
  <objectgroup name="Puertas"/>
+ <objectgroup name="ObjetosAnimados">
+  <object id="349" x="1248" y="1128.67" width="16" height="16">
+   <properties>
+    <property name="tipo" value="antorchaB_"/>
+   </properties>
+  </object>
+  <object id="350" x="1276.33" y="1128.67" width="16" height="16">
+   <properties>
+    <property name="tipo" value="antorchaB_"/>
+   </properties>
+  </object>
+  <object id="352" x="1330" y="1128.67" width="16" height="16">
+   <properties>
+    <property name="tipo" value="antorchaB_"/>
+   </properties>
+  </object>
+  <object id="353" x="1357" y="1128.67" width="16" height="16">
+   <properties>
+    <property name="tipo" value="antorchaB_"/>
+   </properties>
+  </object>
+  <object id="355" x="1357" y="1087" width="16" height="16">
+   <properties>
+    <property name="tipo" value="antorchaB_"/>
+   </properties>
+  </object>
+  <object id="356" x="1357" y="1066.5" width="16" height="16">
+   <properties>
+    <property name="tipo" value="antorchaB_"/>
+   </properties>
+  </object>
+  <object id="357" x="1357" y="1044.5" width="16" height="16">
+   <properties>
+    <property name="tipo" value="antorchaB_"/>
+   </properties>
+  </object>
+  <object id="358" x="1357" y="1024.5" width="16" height="16">
+   <properties>
+    <property name="tipo" value="antorchaB_"/>
+   </properties>
+  </object>
+  <object id="359" x="1397.25" y="1024" width="16" height="16">
+   <properties>
+    <property name="tipo" value="antorchaB_"/>
+   </properties>
+  </object>
+  <object id="360" x="1397.5" y="1044.5" width="16" height="16">
+   <properties>
+    <property name="tipo" value="antorchaB_"/>
+   </properties>
+  </object>
+  <object id="361" x="1397.5" y="1067.5" width="16" height="16">
+   <properties>
+    <property name="tipo" value="antorchaB_"/>
+   </properties>
+  </object>
+  <object id="362" x="1397.5" y="1089.5" width="16" height="16">
+   <properties>
+    <property name="tipo" value="antorchaB_"/>
+   </properties>
+  </object>
+  <object id="364" x="1398" y="1129" width="16" height="16">
+   <properties>
+    <property name="tipo" value="antorchaB_"/>
+   </properties>
+  </object>
+  <object id="365" x="1398.5" y="1152" width="16" height="16">
+   <properties>
+    <property name="tipo" value="antorchaB_"/>
+   </properties>
+  </object>
+  <object id="366" x="1381.17" y="1176" width="16" height="16">
+   <properties>
+    <property name="tipo" value="antorchaB_"/>
+   </properties>
+  </object>
+  <object id="367" x="1357" y="1176" width="16" height="16">
+   <properties>
+    <property name="tipo" value="antorchaB_"/>
+   </properties>
+  </object>
+  <object id="368" x="1330.17" y="1176.33" width="16" height="16">
+   <properties>
+    <property name="tipo" value="antorchaB_"/>
+   </properties>
+  </object>
+  <object id="370" x="1276" y="1176" width="16" height="16">
+   <properties>
+    <property name="tipo" value="antorchaB_"/>
+   </properties>
+  </object>
+  <object id="371" x="1247.5" y="1176" width="16" height="16">
+   <properties>
+    <property name="tipo" value="antorchaB_"/>
+   </properties>
+  </object>
+  <object id="380" x="1024.36" y="1392" width="16" height="16">
+   <properties>
+    <property name="tipo" value="antorchaB_"/>
+   </properties>
+  </object>
+  <object id="381" x="1023.45" y="1504.18" width="16" height="16">
+   <properties>
+    <property name="tipo" value="antorchaB_"/>
+   </properties>
+  </object>
+  <object id="384" x="896.364" y="1391.82" width="16" height="16">
+   <properties>
+    <property name="tipo" value="antorchaB_"/>
+   </properties>
+  </object>
+  <object id="385" x="896" y="1504" width="16" height="16">
+   <properties>
+    <property name="tipo" value="antorchaB_"/>
+   </properties>
+  </object>
+  <object id="435" x="1279.33" y="719.333" width="16" height="16">
+   <properties>
+    <property name="tipo" value="antorchaB_"/>
+   </properties>
+  </object>
+  <object id="436" x="1472" y="720" width="16" height="16">
+   <properties>
+    <property name="tipo" value="antorchaB_"/>
+   </properties>
+  </object>
+  <object id="437" x="1280" y="864" width="16" height="16">
+   <properties>
+    <property name="tipo" value="antorchaB_"/>
+   </properties>
+  </object>
+  <object id="438" x="1472.67" y="864.667" width="16" height="16">
+   <properties>
+    <property name="tipo" value="antorchaB_"/>
+   </properties>
+  </object>
+ </objectgroup>
+ <objectgroup name="Bloques">
+  <object id="373" name="Cofre" x="639.833" y="799.167" width="15" height="15">
+   <properties>
+    <property name="Cofre" value="4"/>
+    <property name="botin" value="llave_jefe"/>
+   </properties>
+  </object>
+  <object id="375" x="832" y="799.5" width="16" height="16">
+   <properties>
+    <property name="tipo" value="1"/>
+   </properties>
+  </object>
+  <object id="377" x="879.75" y="736" width="16" height="16">
+   <properties>
+    <property name="tipo" value="1"/>
+   </properties>
+  </object>
+  <object id="378" x="959.75" y="847.5" width="16" height="16">
+   <properties>
+    <property name="tipo" value="1"/>
+   </properties>
+  </object>
+ </objectgroup>
+ <objectgroup name="Puertas">
+  <object id="446" x="1360.75" y="992" width="46.75" height="30.3333"/>
+  <object id="447" x="1360.75" y="912.333" width="46.75" height="31.9167"/>
+  <object id="448" x="831.75" y="1007.75" width="16.5" height="15.9167"/>
+  <object id="450" x="591.875" y="1328.04" width="16.5" height="15.9167"/>
+ </objectgroup>
 </map>
