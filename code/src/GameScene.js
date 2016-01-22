@@ -332,6 +332,7 @@ var GameLayer = cc.Layer.extend({
         {
         var nextScene = new CaveScene();
         cc.director.runScene(new cc.TransitionFade(3.0, nextScene));
+         cc.audioEngine.playMusic(res.templo_mp3, true);
         }
     }
 });
@@ -339,6 +340,7 @@ var GameScene = cc.Scene.extend({
     onEnter: function () {
         this._super();
         var layer = new GameLayer();
+        cc.audioEngine.playMusic(res.zeldaFondoDos_mp3, true);
         collisionManager = new CollisionManager(layer.space, layer);
         this.addChild(layer, 0, idCapaJuego);
         iuLayer = new IULayer();
