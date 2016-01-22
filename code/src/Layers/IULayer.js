@@ -366,5 +366,12 @@ console.log("numero de vidas quitadas"+this.vidasQuitadas);
                       this.etiquetaLlavesjefe.setVisible(true);
                      this.addChild(this.etiquetaLlavesjefe);
 
+                this.spriteLlaves.setVisible(true);
+
+
+
+                                    this.spriteLlavesJefe.setVisible(true);
+
+
          }
 });
