@@ -60,12 +60,9 @@ var res = {
     dungeon1_tmx: "res/Mapas/Dungeon1/Dungeon1.tmx",
     first_dungeon_png: "res/Mapas/Dungeon1/First_Dungeon.png",
     objetosAnimados_plist: "res/Animaciones/ObjetosAnimados.plist",
-<<<<<<< HEAD
     objetosAnimados_plist_png: "res/Animaciones/ObjetosAnimados.png",
     objetosMazmorra_plist: "res/Interaccionables/Objetosmazmorra.plist",
     objetosMazmorra_plist_png: "res/Interaccionables/Objetosmazmorra.png",
-
-=======
     zeldaFondo_mp3: "res/sonidos/zeldaFondo.mp3",
     zeldaFondoDos_mp3: "res/sonidos/zeldaFondoDos.mp3",
     templo_mp3: "res/sonidos/templo.mp3",
@@ -81,7 +78,6 @@ var res = {
     jarron_roto_wav: "res/sonidos/jarron_roto.wav",
      recoger_item_wav: "res/sonidos/recoger_item.wav",
     objetosAnimados_plist_png: "res/Animaciones/ObjetosAnimados.png"
->>>>>>> origin/master
 
 };
 

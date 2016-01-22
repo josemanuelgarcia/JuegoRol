@@ -237,7 +237,8 @@ var CollisionManager = cc.Class.extend({
 
             }
         }
-    }, collisionBombaConKeaton function(arbiter, space){
+    },collisionBombaConKeaton: function(arbiter, space){
+
          var shapes = arbiter.getShapes();
          this.layer.shapesToRemove.push(shapes[1]);
     }
