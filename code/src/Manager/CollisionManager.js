@@ -111,11 +111,13 @@ var CollisionManager = cc.Class.extend({
         this.layer.shapesToRemove.push(shapes[1]);
 
     }, collisionJugadorConCorazon: function (arbiter, space) {
+        cc.audioEngine.playEffect(res.recoger_corazon_wav);
         iuLayer.darVidas();
         var shapes = arbiter.getShapes();
         this.layer.shapesToRemove.push(shapes[1]);
 
     }, collisionJugadorConContenedorCorazon: function (arbiter, space) {
+        cc.audioEngine.playEffect(res.recoger_contenedorCorazon_wav);
         iuLayer.nuevoCorazon();
         var shapes = arbiter.getShapes();
         this.layer.shapesToRemove.push(shapes[1]);
@@ -123,6 +125,7 @@ var CollisionManager = cc.Class.extend({
     }, collisionJugadorConBombaRecolectable: function (arbiter, space) {
 
         var shapes = arbiter.getShapes();
+         cc.audioEngine.playEffect(res.recoger_item_wav);
         for (var i = 0; i < this.layer.bombaRecolectable.length; i++) {
             if (this.layer.bombaRecolectable[i].shape === shapes[1]) {
                 this.layer.bombaRecolectable[i].agregarBombas();
@@ -133,6 +136,7 @@ var CollisionManager = cc.Class.extend({
     }, collisionJugadorConFlechaRecolectable: function (arbiter, space) {
 
         var shapes = arbiter.getShapes();
+        cc.audioEngine.playEffect(res.recoger_item_wav);
         for (var i = 0; i < this.layer.flechasRecolectables.length; i++) {
             if (this.layer.flechasRecolectables[i].shape === shapes[1]) {
                 this.layer.flechasRecolectables[i].agregarFlechas();
@@ -143,6 +147,7 @@ var CollisionManager = cc.Class.extend({
     }, collisionJugadorConLlaveNormal: function (arbiter, space) {
 
         var shapes = arbiter.getShapes();
+        cc.audioEngine.playEffect(res.llave_normal_wav);
         for (var i = 0; i < this.layer.llavesNormales.length; i++) {
             if (this.layer.llavesNormales[i].shape === shapes[1]) {
                 this.layer.llavesNormales[i].agregarLlaves();
@@ -153,6 +158,7 @@ var CollisionManager = cc.Class.extend({
     }, collisionJugadorConLlaveJefe: function (arbiter, space) {
 
         var shapes = arbiter.getShapes();
+        cc.audioEngine.playEffect(res.llave_jefe_wav);
         for (var i = 0; i < this.layer.llavesJefe.length; i++) {
             if (this.layer.llavesJefe[i].shape === shapes[1]) {
                 this.layer.llavesJefe[i].agregarLlaves();
@@ -162,9 +168,11 @@ var CollisionManager = cc.Class.extend({
 
     }, collisionJugadorConRupia: function (arbiter, space) {
         var shapes = arbiter.getShapes();
+         cc.audioEngine.playEffect(res.obtener_rupia_wav);
         for (var i = 0; i < this.layer.rupias.length; i++) {
             if (this.layer.rupias[i].shape === shapes[1]) {
                 this.layer.rupias[i].agregarRupias();
+
             }
         }
         this.layer.shapesToRemove.push(shapes[1]);

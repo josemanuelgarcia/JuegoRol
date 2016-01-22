@@ -4,6 +4,20 @@
     <file url="file://$PROJECT_DIR$" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/res/Ravenna.ttf" charset="windows-1252" />
     <file url="file://$PROJECT_DIR$/res/boton_jugar.png" charset="windows-1252" />
+    <file url="file://$PROJECT_DIR$/res/sonidos/arco.wav" charset="windows-1252" />
+    <file url="file://$PROJECT_DIR$/res/sonidos/bomba_estalla.wav" charset="windows-1252" />
+    <file url="file://$PROJECT_DIR$/res/sonidos/boomeran.wav" charset="windows-1252" />
+    <file url="file://$PROJECT_DIR$/res/sonidos/espada.wav" charset="windows-1252" />
+    <file url="file://$PROJECT_DIR$/res/sonidos/jarron_roto.wav" charset="windows-1252" />
+    <file url="file://$PROJECT_DIR$/res/sonidos/llave_jefe.wav" charset="windows-1252" />
+    <file url="file://$PROJECT_DIR$/res/sonidos/llave_normal.wav" charset="windows-1252" />
+    <file url="file://$PROJECT_DIR$/res/sonidos/obtener_Rupia.wav" charset="windows-1252" />
+    <file url="file://$PROJECT_DIR$/res/sonidos/recoger_contenedorCorazon.wav" charset="windows-1252" />
+    <file url="file://$PROJECT_DIR$/res/sonidos/recoger_corazon.wav" charset="windows-1252" />
+    <file url="file://$PROJECT_DIR$/res/sonidos/recoger_item.wav" charset="windows-1252" />
+    <file url="file://$PROJECT_DIR$/res/sonidos/relzaTipico.mp3" charset="windows-1252" />
+    <file url="file://$PROJECT_DIR$/res/sonidos/templo.mp3" charset="windows-1252" />
+    <file url="file://$PROJECT_DIR$/res/sonidos/zeldafondo1.mp3" charset="windows-1252" />
     <file url="file://$PROJECT_DIR$/src/Enemigos/DisparoOctorok.js" charset="windows-1252" />
     <file url="file://$PROJECT_DIR$/src/Enemigos/Octorok.js" charset="windows-1252" />
   </component>

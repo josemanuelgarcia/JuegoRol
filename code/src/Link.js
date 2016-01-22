@@ -115,6 +115,7 @@ var Link = cc.Class.extend({
         this.canMove = true;
         this.body.setPos(pos);
     }, utilizarEspada: function () {
+    cc.audioEngine.playEffect(res.espada_wav);
         if (!this.rolling) {
             this.body.setVel(cp.v(0, 0));
             this.canMove = false;
@@ -237,6 +238,7 @@ var Link = cc.Class.extend({
     }, useWeapon: function () {
 
         if (weapon == "BOOMERANG") {
+        cc.audioEngine.playEffect(res.boomeran_wav);
             this.utilizarBoomerang();
         }
         else if (weapon == "BOMBAS") {
