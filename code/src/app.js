@@ -13,6 +13,7 @@ var MenuLayer = cc.Layer.extend({
         cc.spriteFrameCache.addSpriteFrames(res.explosion_plist);
         cc.spriteFrameCache.addSpriteFrames(res.jarron_plist);
         cc.spriteFrameCache.addSpriteFrames(res.objetosAnimados_plist);
+        cc.spriteFrameCache.addSpriteFrames(res.objetosMazmorra_plist);
 
         // Fondo
         var spriteFondoTitulo = new cc.Sprite(res.fondomenu_png);

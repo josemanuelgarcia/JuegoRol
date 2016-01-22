@@ -7,7 +7,7 @@ var Cofre = cc.Class.extend({
     visible: null,
     botin: null,
     abierto: false,
-    animacionAbrir: null,
+
     ctor: function (space, position, layer, idCofre, botin, visible) {
         this.idCofre = idCofre;
         this.visible = false;
@@ -28,7 +28,7 @@ var Cofre = cc.Class.extend({
         }
 
     }, crearCofre: function () {
-        this.sprite = new cc.PhysicsSprite("#Jarron_normal.png");
+        this.sprite = new cc.PhysicsSprite("#cofre_cerrado.png");
         var tamano = this.sprite.getContentSize();
         this.position = cc.p(this.position.x + tamano.width / 2, this.position.y + tamano.height / 2);
         this.body = new cp.Body(100, Infinity);
@@ -38,37 +38,41 @@ var Cofre = cc.Class.extend({
             this.sprite.getContentSize().width - 2,
             this.sprite.getContentSize().height - 2);
         this.shape.setCollisionType(tipoCofre);
-        this.space.addShape(this.shape);
-
-        var framesDestruir = animationManager.getAnimacion("Jarron_destruir", 7);
-        this.animacionAbrir = new cc.Animation(framesDestruir, 0.05);
+        this.space.addStaticShape(this.shape);
 
         this.layer.mapa.addChild(this.sprite, 2);
         this.visible = true;
 
     }, abrir: function () {
         if (!this.abierto) {
-            var animacion = cc.Animate.create(this.animacionAbrir);
-            var crearColectable = cc.CallFunc.create(this.crearColectable, this);
-            this.abierto = true;
-            this.sprite.runAction(cc.Sequence.create(animacion, crearColectable));
 
+            this.sprite = new cc.PhysicsSprite("#cofre_abierto.png");
+            this.sprite.setBody(this.body);
+            this.shape = new cp.BoxShape(this.body,
+                        this.sprite.getContentSize().width - 2,
+                        this.sprite.getContentSize().height - 2);
+            this.layer.mapa.addChild(this.sprite, 2);
+
+            var crearColectable = cc.CallFunc.create(this.crearColectable, this);
+
+            this.sprite.runAction(cc.Sequence.create(crearColectable));
+            this.abierto = true;
         }
 
     }, crearColectable: function () {
 
         switch (this.botin) {
             case "rupio_azul":
-                this.layer.rupias.push(new Rupia(this.space, this.position, this.layer, "a"));
+                this.layer.rupias.push(new Rupia(this.space, cc.p(this.body.p.x + 25, this.body.p.y), this.layer, "a"));
                 break;
             case "rupia_roja":
-                this.layer.rupias.push(new Rupia(this.space, this.position, this.layer, "r"));
+                this.layer.rupias.push(new Rupia(this.space, cc.p(this.body.p.x + 25, this.body.p.y), this.layer, "r"));
                 break;
             case "llave":
-                this.layer.llavesNormales.push(new LlaveNormal(this.space, this.position, this.layer));
+                this.layer.llavesNormales.push(new LlaveNormal(this.space, cc.p(this.body.p.x + 25, this.body.p.y), this.layer));
                 break;
             case "llave_jefe":
-                this.layer.llavesJefe.push(new LlaveJefe(this.space, this.position, this.layer));
+                this.layer.llavesJefe.push(new LlaveJefe(this.space, cc.p(this.body.p.x + 25, this.body.p.y), this.layer));
                 break;
 
 

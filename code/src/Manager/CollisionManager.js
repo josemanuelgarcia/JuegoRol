@@ -58,6 +58,8 @@ var CollisionManager = cc.Class.extend({
 
         this.space.addCollisionHandler(tipoEspada, tipoCofre, null, this.abrirCofre.bind(this), null, null);
 
+        this.space.addCollisionHandler(tipoBomba, tipoOctorok, null, this.collisionBombaConKeaton.bind(this), null, null);
+
         //Colisiones con Octorok
         this.space.addCollisionHandler(tipoNoPasable, tipoOctorok, null, null, this.collisionObjetoConOctorok.bind(this), null);
 
@@ -188,6 +190,7 @@ var CollisionManager = cc.Class.extend({
                 this.layer.shapesToRemove.push(shapes[1]);
             }
         }
+
     }, reducirVidas: function (arbiter, space) {
         iuLayer.quitarVidas();
 
@@ -221,12 +224,14 @@ var CollisionManager = cc.Class.extend({
                 for (var i=0;i<this.layer.cofres.length;i++) {
                     if (this.layer.cofres[i].shape === shapes[1]) {
                         this.layer.cofres[i].abrir();
-                        //todo creo que falla aqui
                     }
                 }
 
             }
         }
+    }, collisionBombaConKeaton function(arbiter, space){
+         var shapes = arbiter.getShapes();
+         this.layer.shapesToRemove.push(shapes[1]);
     }
 
 });

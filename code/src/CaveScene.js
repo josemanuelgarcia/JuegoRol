@@ -149,6 +149,19 @@ var CaveLayer = cc.Layer.extend({
                 this.cofres[parseInt(this.zonaActual.cofre) - 1].cofreAparece();
             }
         }
+
+            for (var i = 0; i < this.llavesNormales.length; i++) {
+                if (this.llavesNormales[i].shape === shape) {
+                    this.llavesNormales[i].eliminar();
+                    this.llavesNormales.splice(i, 1);
+                }
+            }
+            for (var i = 0; i < this.llavesJefe.length; i++) {
+                if (this.llavesJefe[i].shape === shape) {
+                    this.llavesJefe[i].eliminar();
+                    this.llavesJefe.splice(i, 1);
+                }
+            }
     }, procesarEventosKeyboard: function (keyCode, event) {
         var instancia = event.getCurrentTarget();
         //Al cambiar de ventana en el navegador entra un 18 no se por que

@@ -60,7 +60,10 @@ var res = {
     dungeon1_tmx: "res/Mapas/Dungeon1/Dungeon1.tmx",
     first_dungeon_png: "res/Mapas/Dungeon1/First_Dungeon.png",
     objetosAnimados_plist: "res/Animaciones/ObjetosAnimados.plist",
-    objetosAnimados_plist_png: "res/Animaciones/ObjetosAnimados.png"
+    objetosAnimados_plist_png: "res/Animaciones/ObjetosAnimados.png",
+    objetosMazmorra_plist: "res/Interaccionables/Objetosmazmorra.plist",
+    objetosMazmorra_plist_png: "res/Interaccionables/Objetosmazmorra.png",
+
 
 };
 
