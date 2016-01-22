@@ -238,7 +238,8 @@
  <objectgroup name="Cuevas">
   <object id="195" name="Entrada 1" x="288" y="648" width="29" height="25">
    <properties>
-    <property name="Salida" value="1122,1430"/>
+    <property name="Salida" value="Cueva1"/>
+    <property name="posicion" value="288,648"/>
    </properties>
   </object>
   <object id="196" name="Entrada 2" x="385" y="356" width="29" height="27">

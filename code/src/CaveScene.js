@@ -44,7 +44,6 @@ var CaveLayer = cc.Layer.extend({
         //var depuracion = new cc.PhysicsDebugNode(this.space);
         //this.addChild(depuracion, 10);
         animationManager = new AnimationManager();
-        this.setScale(1.4);
         //Cargamos el Mapa
         this.cargarMapa();
         collisionManager = new CollisionManager(this.space, this);
@@ -128,8 +127,10 @@ var CaveLayer = cc.Layer.extend({
             }
             for (var i = 0; i < this.jarrones.length; i++) {
                 if (this.jarrones[i].shape === shape)
+                {
                     this.jarrones[i].destruir();
-                this.jarrones.splice(i, 1);
+                    this.jarrones.splice(i, 1);
+                }
             }
 
             /* if(this.soldado.shape == shape){
@@ -266,7 +267,18 @@ var CaveLayer = cc.Layer.extend({
 
         }
 
-        cc.log("ENEMIGOS ZONA 7" + this.zonas[6].enemigos.length);
+        //ObjetosAnimados
+               var objetosAnimados = this.mapa.getObjectGroup("ObjetosAnimados");
+               var objetosAnimadosArray = objetosAnimados.getObjects();
+               cc.log("ObjetosAnimados -> " + objetosAnimadosArray.length);
+               for (var i = 0; i < objetosAnimadosArray.length; i++) {
+                   var x = objetosAnimadosArray[i]["x"];
+                   var y = objetosAnimadosArray[i]["y"];
+                   var tipo = objetosAnimadosArray[i]["tipo"];
+                   var objetoAnimado = new ObjetoAnimado(this.space, cc.p(x, y), this, tipo, 4);
+
+               }
+
 
 
     }, cambiarZona: function (zona) {

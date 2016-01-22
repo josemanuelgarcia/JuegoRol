@@ -38,7 +38,14 @@ var Zona = cc.Class.extend({
             if (enemigosArray[j]["IdZona"] == this.idZona) {
                 var xEnemigo = enemigosArray[j]["x"];
                 var yEnemigo = enemigosArray[j]["y"];
+                if(enemigosArray[j]["tipo"]=="soldado_rojo")
+                {
                 enemigosTemp.push(new Soldado(this.space, cc.p(xEnemigo, yEnemigo), this.layer, "r"));
+                }
+                if(enemigosArray[j]["tipo"]=="soldado_verde")
+                {
+                   enemigosTemp.push(new Soldado(this.space, cc.p(xEnemigo, yEnemigo), this.layer, "v"));
+                }
             }
         }
         this.enemigos = enemigosTemp;

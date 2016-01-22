@@ -76,7 +76,7 @@ var GameLayer = cc.Layer.extend({
         this.flechasRecolectables.push(new FlechaRecolectable(this.space, cc.p(500, 400), this));
 
         //Creacion de soldado de prueba
-        this.soldado = new Soldado(this.space, cc.p(600, 200), this, "r");
+        this.soldado = new Soldado(this.space, cc.p(600, 200), this, "v");
 
         //creacion de corazon de prueba
         this.corazones.push(new Corazon(this.space, cc.p(550, 200), this));
@@ -280,7 +280,7 @@ var GameLayer = cc.Layer.extend({
             var x = cuevasArray[i]["x"];
             var y = cuevasArray[i]["y"];
             var salida = cuevasArray[i]["Salida"];
-            var cueva = new Cueva(this.space, new cc.p(x, y), salida);
+            var cueva = new Cueva(this.space, new cc.p(x, y), salida,cuevasArray[i]["posicion"]);
             this.cuevas.push(cueva);
         }
 
@@ -332,9 +332,11 @@ var GameLayer = cc.Layer.extend({
         }
 
         var pos = cueva.getPosSalida();
-        posicion = cc.p(pos.x, this.mapaAlto - pos.y);
+        if(cueva.nombre=="Cueva1")
+        {
         var nextScene = new CaveScene();
         cc.director.runScene(new cc.TransitionFade(3.0, nextScene));
+        }
     }
 });
 var GameScene = cc.Scene.extend({

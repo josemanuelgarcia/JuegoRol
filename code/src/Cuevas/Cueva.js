@@ -1,13 +1,14 @@
 var Cueva = cc.Class.extend({
 
     posSalida:null,
+    nombre:null,
     body:null,
     shape:null,
     space:null,
-    ctor: function (space,posEntrada,posSalida){
+    ctor: function (space,posEntrada,nombre,posSalida){
         this.posSalida = posSalida;
         this.space = space;
-
+        this.nombre=nombre;
         this.body = new cp.StaticBody();
         this.body.setPos(new cc.p(posEntrada.x+15,posEntrada.y+15));
 

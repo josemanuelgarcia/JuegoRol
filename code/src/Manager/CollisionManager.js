@@ -167,17 +167,7 @@ var CollisionManager = cc.Class.extend({
         this.layer.shapesToRemove.push(shapes[1]);
 
     }, transportarLink: function (arbiter, space) {
-        var shapes = arbiter.getShapes();
-        var shape = shapes[1];
-        var cueva = null;
-        for (var i = 0; i < this.layer.cuevas.length; i++) {
-            if (shape === this.layer.cuevas[i].shape)
-                cueva = this.layer.cuevas[i];
-        }
-
-        var pos = cueva.getPosSalida();
-        var newPos = cc.p(pos.x, this.layer.mapaAlto - pos.y);
-        this.layer.transicion();
+        this.layer.transicion(arbiter,space);
 
     }, destruirJarron: function (arbiter, space) {
         var shapes = arbiter.getShapes();
