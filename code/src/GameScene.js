@@ -29,7 +29,6 @@ var GameLayer = cc.Layer.extend({
     cuevas: [],
     jarrones: [],
     bloques: [],
-    soldado: null,
     //Teclado
     teclasPulsadas: [],
 
@@ -53,7 +52,7 @@ var GameLayer = cc.Layer.extend({
         this.cargarMapa();
 
         //Creacion enemigo prueba
-        this.octorok = new Octorok(this.space, cc.p(600, 250), this);
+        this.octorok = new Keaton(this.space, cc.p(600, 250), this);
 
 
         //obtenemos la posicion guardada
@@ -75,9 +74,12 @@ var GameLayer = cc.Layer.extend({
         //creacion de flecha de prueba
         this.flechasRecolectables.push(new FlechaRecolectable(this.space, cc.p(500, 400), this));
 
+<<<<<<< HEAD
         //Creacion de soldado de prueba
         this.soldado = new Soldado(this.space, cc.p(600, 200), this, "v");
 
+=======
+>>>>>>> f587ea38126da77970056a02d6906da1da875188
         //creacion de corazon de prueba
         this.corazones.push(new Corazon(this.space, cc.p(550, 200), this));
 
@@ -128,8 +130,6 @@ var GameLayer = cc.Layer.extend({
         this.actualizarCamara();
         this.octorok.update(dt);
 
-        this.soldado.update(dt);
-
         this.link.update(dt);
         //Eliminar elementos
         for (var i = 0; i < this.shapesToRemove.length; i++) {
@@ -166,9 +166,6 @@ var GameLayer = cc.Layer.extend({
                     this.jarrones[i].destruir();
             }
 
-            if (this.soldado.shape == shape) {
-                this.soldado.eliminar();
-            }
             for (var i = 0; i < this.bombaRecolectable.length; i++) {
                 if (this.bombaRecolectable[i].shape === shape) {
                     this.bombaRecolectable[i].eliminar();

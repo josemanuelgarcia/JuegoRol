@@ -304,7 +304,7 @@
                 <key>textureRotated</key>
                 <false/>
             </dict>
-            <key>Keaton_mover_derecha4.png</key>
+            <key>Keaton_mover_derecha3.png</key>
             <dict>
                 <key>aliases</key>
                 <array/>
@@ -469,7 +469,7 @@
                 <key>textureRotated</key>
                 <false/>
             </dict>
-            <key>Keaton_parado_arriba08.png</key>
+            <key>Keaton_parado_arriba8.png</key>
             <dict>
                 <key>aliases</key>
                 <array/>

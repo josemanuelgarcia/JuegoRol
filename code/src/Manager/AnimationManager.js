@@ -144,9 +144,8 @@ var AnimationManager = cc.Class.extend({
             cc.Animate.create(new cc.Animation(framesMoverDerecha, 0.2)));
 
         //Animacion mover izquierda
-        var framesMoverIzq = this.getAnimacion("Soldado_verde_mover_izq", 2);
         this.objectToBeAnimated.animaciones["MOVER_IZQUIERDA"] = cc.RepeatForever.create(
-            cc.Animate.create(new cc.Animation(framesMoverIzq, 0.2)));
+            cc.Animate.create(new cc.Animation(framesMoverDerecha, 0.2)));
 
     }, addAnimationsSoldadoRojo: function (soldado) {
         this.objectToBeAnimated = soldado;
@@ -188,6 +187,67 @@ var AnimationManager = cc.Class.extend({
 
         this.objectToBeAnimated.animaciones["MOVER_IZQUIERDA"] = cc.RepeatForever.create(
             cc.Animate.create(new cc.Animation(framesMoverDerecha, 0.2)));
+
+    }, addAnimationsKeaton: function (keaton){
+        this.objectToBeAnimated=keaton;
+
+        //Animacion parado Arriba
+        var framesSimple = this.getAnimacion("Keaton_parado_arriba", 9);
+        this.objectToBeAnimated.animaciones["SIMPLE_ARRIBA"] = cc.RepeatForever.create(
+            cc.Sequence.create(cc.Animate.create(new cc.Animation(framesSimple, 0.4)), cc.DelayTime.create(2)));
+
+        //Animacion parado Abajo
+        var framesSimpleAbajo = this.getAnimacion("Keaton_parado_abajo", 9);
+        this.objectToBeAnimated.animaciones["SIMPLE_ABAJO"] = cc.RepeatForever.create(
+            cc.Sequence.create(cc.Animate.create(new cc.Animation(framesSimpleAbajo, 0.4)), cc.DelayTime.create(2)));
+
+        //Animacion parado Derecha
+        var framesSimpleDerecha = this.getAnimacion("Keaton_parado_derecha",9 );
+        this.objectToBeAnimated.animaciones["SIMPLE_DERECHA"] = cc.RepeatForever.create(
+            cc.Sequence.create(cc.Animate.create(new cc.Animation(framesSimpleDerecha, 0.4)), cc.DelayTime.create(2)));
+
+        //Animacion parado Izquierda
+        this.objectToBeAnimated.animaciones["SIMPLE_IZQUIERDA"] = cc.RepeatForever.create(
+            cc.Sequence.create(cc.Animate.create(new cc.Animation(framesSimpleDerecha, 0.4)), cc.DelayTime.create(2)));
+
+        //Animacion mover arriba
+        var framesMoverArriba = this.getAnimacion("Keaton_mover_arriba", 4);
+        this.objectToBeAnimated.animaciones["MOVER_ARRIBA"] = cc.RepeatForever.create(
+            cc.Animate.create(new cc.Animation(framesMoverArriba, 0.2)));
+
+        //Animacion mover abajo
+        var framesMoverAbajo = this.getAnimacion("Keaton_mover_abajo", 4);
+        this.objectToBeAnimated.animaciones["MOVER_ABAJO"] = cc.RepeatForever.create(
+            cc.Animate.create(new cc.Animation(framesMoverAbajo, 0.2)));
+
+        //Animacion mover derecha
+        var framesMoverDerecha = this.getAnimacion("Keaton_mover_derecha", 4);
+        this.objectToBeAnimated.animaciones["MOVER_DERECHA"] = cc.RepeatForever.create(
+            cc.Animate.create(new cc.Animation(framesMoverDerecha, 0.2)));
+
+        this.objectToBeAnimated.animaciones["MOVER_IZQUIERDA"] = cc.RepeatForever.create(
+            cc.Animate.create(new cc.Animation(framesMoverDerecha, 0.2)));
+
+        //Animacion atacar abajo
+         var framesAtacarAbajo = this.getAnimacion("Keaton_atacar_abajo", 3);
+         this.objectToBeAnimated.animaciones["ATACAR_ABAJO"] = cc.RepeatForever.create(
+           cc.Animate.create(new cc.Animation(framesAtacarAbajo, 0.2)));
+
+         //Animacion atacar arriba
+         var framesAtacarArriba = this.getAnimacion("Keaton_atacar_arriba", 3);
+         this.objectToBeAnimated.animaciones["ATACAR_ARRIBA"] = cc.RepeatForever.create(
+            cc.Animate.create(new cc.Animation(framesAtacarArriba, 0.2)));
+
+          //Animacion atacar derecha
+         var framesAtacarDerecha = this.getAnimacion("Keaton_atacar_derecha", 3);
+         this.objectToBeAnimated.animaciones["ATACAR_DERECHA"] = cc.RepeatForever.create(
+             cc.Animate.create(new cc.Animation(framesAtacarArriba, 0.2)));
+
+         //Animacion atacar izquierda
+         this.objectToBeAnimated.animaciones["ATACAR_IZQUIERDA"] = cc.RepeatForever.create(
+               cc.Animate.create(new cc.Animation(framesAtacarArriba, 0.2)));
+
+
 
     }, getAnimacion: function (nombreAnimacion, numFrames) {
         var framesAnimacion = [];

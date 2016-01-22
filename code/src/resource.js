@@ -55,6 +55,8 @@ var res = {
     soldadoVerde_plist: "res/Animaciones/Soldado_Verde.plist",
     soldadoRojo_png: "res/Animaciones/Soldado_Rojo.png",
     soldadoRojo_plist: "res/Animaciones/Soldado_Rojo.plist",
+    keaton_png: "res/Animaciones/Keaton.png",
+    keaton_plist: "res/Animaciones/Keaton.plist",
     dungeon1_tmx: "res/Mapas/Dungeon1/Dungeon1.tmx",
     first_dungeon_png: "res/Mapas/Dungeon1/First_Dungeon.png",
     objetosAnimados_plist: "res/Animaciones/ObjetosAnimados.plist",

@@ -1,6 +1,5 @@
 var Octorok = cc.Class.extend({
     //Variables de clase
-
     space: null,
     layer: null,
     sprite: null,
