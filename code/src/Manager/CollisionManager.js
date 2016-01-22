@@ -20,6 +20,7 @@ var tipoZona = 17;
 var tipoLlaveNormal = 19;
 var tipoLlaveJefe = 20;
 var tipoCofre = 21;
+var tipoKeaton=22;
 
 var CollisionManager = cc.Class.extend({
 

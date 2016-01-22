@@ -74,12 +74,11 @@ var GameLayer = cc.Layer.extend({
         //creacion de flecha de prueba
         this.flechasRecolectables.push(new FlechaRecolectable(this.space, cc.p(500, 400), this));
 
-<<<<<<< HEAD
+
         //Creacion de soldado de prueba
         this.soldado = new Soldado(this.space, cc.p(600, 200), this, "v");
 
-=======
->>>>>>> f587ea38126da77970056a02d6906da1da875188
+
         //creacion de corazon de prueba
         this.corazones.push(new Corazon(this.space, cc.p(550, 200), this));
 
