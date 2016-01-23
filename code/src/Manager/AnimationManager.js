@@ -258,7 +258,16 @@ var AnimationManager = cc.Class.extend({
         }
         return framesAnimacion;
 
-    }
+    }, getAnimacionBasica: function (nombreAnimacion, numFrames) {
+             var framesAnimacion = [];
+             for (var i = 0; i < numFrames; i++) {
+                 var str = nombreAnimacion +  ".png";
+                 var frame = cc.spriteFrameCache.getSpriteFrame(str);
+                 framesAnimacion.push(frame);
+             }
+             return framesAnimacion;
+
+         }
 
 
 });

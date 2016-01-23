@@ -35,7 +35,7 @@ var CaveLayer = cc.Layer.extend({
         cc.spriteFrameCache.addSpriteFrames(res.boomerang_plist);
         cc.spriteFrameCache.addSpriteFrames(res.explosion_plist);
         cc.spriteFrameCache.addSpriteFrames(res.jarron_plist);
-
+        cc.spriteFrameCache.addSpriteFrames(res.objetosMazmorra_plist);
         //Creación del espacio del juego
         this.space = new cp.Space();
         //La gravedad en este juego da igual.

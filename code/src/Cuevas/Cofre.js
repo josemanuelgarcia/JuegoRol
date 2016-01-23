@@ -28,22 +28,22 @@ var Cofre = cc.Class.extend({
         }
 
     }, crearCofre: function () {
-        this.sprite = new cc.PhysicsSprite("#Jarron_normal.png");
+        this.sprite = new cc.PhysicsSprite("#cofre_cerrado.png");
         var tamano = this.sprite.getContentSize();
         this.position = cc.p(this.position.x + tamano.width / 2, this.position.y + tamano.height / 2);
-        this.body = new cp.Body(100, Infinity);
+        this.body = new cp.StaticBody();
         this.body.setPos(this.position);
         this.sprite.setBody(this.body);
         this.shape = new cp.BoxShape(this.body,
             this.sprite.getContentSize().width - 2,
             this.sprite.getContentSize().height - 2);
         this.shape.setCollisionType(tipoCofre);
-        this.space.addShape(this.shape);
+        this.space.addStaticShape(this.shape);
 
-        var framesDestruir = animationManager.getAnimacion("Jarron_destruir", 7);
+        var framesDestruir = animationManager.getAnimacionBasica("cofre_abierto", 1);
         this.animacionAbrir = new cc.Animation(framesDestruir, 0.05);
 
-        this.layer.mapa.addChild(this.sprite, 2);
+        this.layer.mapa.addChild(this.sprite, 3);
         this.visible = true;
 
     }, abrir: function () {
