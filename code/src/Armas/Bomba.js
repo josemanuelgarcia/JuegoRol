@@ -41,10 +41,12 @@ var Bomba = cc.Class.extend({
         layer.mapa.addChild(this.sprite, 2);
         return true;
     }, activarExplosion: function () {
+     cc.audioEngine.playEffect(res.bomba_estalla_wav);
         this.sensor.setCollisionType(tipoBomba);
 
     }, eliminar: function () {
         // quita la forma
+
         this.space.removeShape(this.shape);
         this.space.removeShape(this.sensor);
         this.layer.mapa.removeChild(this.sprite);

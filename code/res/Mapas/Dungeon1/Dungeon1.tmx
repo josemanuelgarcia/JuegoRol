@@ -458,6 +458,7 @@
    </properties>
   </object>
  </objectgroup>
+<<<<<<< HEAD
  <objectgroup name="Pasos">
   <object id="446" x="1360.75" y="992" width="46.75" height="30.3333">
    <properties>
@@ -481,6 +482,12 @@
     <property name="tipo" value="normal"/>
    </properties>
   </object>
+=======
+ <objectgroup name="Puertas">
+  <object id="446" x="1360.75" y="992" width="46.75" height="30.3333"/>
+  <object id="448" x="831.75" y="1007.75" width="16.5" height="15.9167"/>
+  <object id="450" x="591.875" y="1328.04" width="16.5" height="15.9167"/>
+>>>>>>> ec85edff0a0fd96d104399b83aa3a975137633e6
  </objectgroup>
  <objectgroup name="Salida">
   <object id="454" x="591" y="1578.25" width="16" height="16"/>

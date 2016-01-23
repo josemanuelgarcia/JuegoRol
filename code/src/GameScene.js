@@ -74,8 +74,16 @@ var GameLayer = cc.Layer.extend({
         //creacion de flecha de prueba
         this.flechasRecolectables.push(new FlechaRecolectable(this.space, cc.p(500, 400), this));
 
+<<<<<<< HEAD
         //Creacion de soldado de prueba
         this.soldado = new Soldado(this.space, cc.p(600, 200), this, "v");
+=======
+
+        //Creacion de soldado de prueba
+        this.soldado = new Soldado(this.space, cc.p(600, 200), this, "v");
+
+
+>>>>>>> ec85edff0a0fd96d104399b83aa3a975137633e6
         //creacion de corazon de prueba
         this.corazones.push(new Corazon(this.space, cc.p(550, 200), this));
 
@@ -332,6 +340,7 @@ var GameLayer = cc.Layer.extend({
         {
         var nextScene = new CaveScene();
         cc.director.runScene(new cc.TransitionFade(3.0, nextScene));
+         cc.audioEngine.playMusic(res.templo_mp3, true);
         }
     }
 });
@@ -339,6 +348,7 @@ var GameScene = cc.Scene.extend({
     onEnter: function () {
         this._super();
         var layer = new GameLayer();
+        cc.audioEngine.playMusic(res.zeldaFondoDos_mp3, true);
         collisionManager = new CollisionManager(layer.space, layer);
         this.addChild(layer, 0, idCapaJuego);
         iuLayer = new IULayer();

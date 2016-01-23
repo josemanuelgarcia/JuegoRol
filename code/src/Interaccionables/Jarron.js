@@ -39,6 +39,7 @@ var Jarron = cc.Class.extend({
     }, eliminar: function () {
         this.space.removeShape(this.shape);
         this.layer.mapa.removeChild(this.sprite);
+
     }, crearColectableAleatorio() {
         //No siempre dará algo, asi que el random es mayor
         var random = Math.floor(Math.random() * 4);

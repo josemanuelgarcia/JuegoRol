@@ -98,19 +98,6 @@ var Octorok = cc.Class.extend({
     }, disparar: function () {
         this.body.setVel(cp.v(0, 0));
         this.sprite.runAction(this.obtainAnimation("DISPARAR_" + this.orientacion));
-        /*
-                if (this.orientacion == "ARRIBA") {
-                    this.sprite.runAction(animationManager.obtainAnimation("DISPARAR"+this.orientacion));
-                }
-                if (this.orientacion == "DERECHA") {
-                    this.sprite.runAction(this.animDispararDerecha);
-                }
-                if (this.orientacion == "IZQUIERDA") {
-                    this.sprite.runAction(this.animDispararIzquierda);
-                }
-                if (this.orientacion == "ABAJO") {
-                    this.sprite.runAction(this.animDispararAbajo);
-                }*/
 
     }, crearDisparo: function () {
         //Crear el disparo

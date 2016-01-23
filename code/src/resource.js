@@ -61,8 +61,28 @@ var res = {
     first_dungeon_png: "res/Mapas/Dungeon1/First_Dungeon.png",
     objetosAnimados_plist: "res/Animaciones/ObjetosAnimados.plist",
     objetosAnimados_plist_png: "res/Animaciones/ObjetosAnimados.png",
+<<<<<<< HEAD
     objetosMazmorra_plist:"res/Interaccionables/ObjetosMazmorra.plist",
     objetosMazmorra_png:"res/Interaccionables/ObjetosMazmorra.png"
+=======
+    objetosMazmorra_plist: "res/Interaccionables/Objetosmazmorra.plist",
+    objetosMazmorra_plist_png: "res/Interaccionables/Objetosmazmorra.png",
+    zeldaFondo_mp3: "res/sonidos/zeldaFondo.mp3",
+    zeldaFondoDos_mp3: "res/sonidos/zeldaFondoDos.mp3",
+    templo_mp3: "res/sonidos/templo.mp3",
+    recoger_corazon_wav: "res/sonidos/recoger_corazon.wav",
+    recoger_contenedorCorazon_wav: "res/sonidos/recoger_contenedorCorazon.wav",
+    obtener_rupia_wav: "res/sonidos/obtener_Rupia.wav",
+    llave_normal_wav: "res/sonidos/llave_normal.wav",
+    llave_jefe_wav: "res/sonidos/llave_jefe.wav",
+    bomba_estalla_wav: "res/sonidos/bomba_estalla.wav",
+    recoger_item_wav: "res/sonidos/recoger_item.wav",
+    boomeran_wav: "res/sonidos/boomeran.wav",
+    espada_wav: "res/sonidos/espada.wav",
+    jarron_roto_wav: "res/sonidos/jarron_roto.wav",
+     recoger_item_wav: "res/sonidos/recoger_item.wav",
+    objetosAnimados_plist_png: "res/Animaciones/ObjetosAnimados.png"
+>>>>>>> ec85edff0a0fd96d104399b83aa3a975137633e6
 
 };
 

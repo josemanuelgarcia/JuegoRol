@@ -76,6 +76,7 @@ var Boomerang = cc.Class.extend({
         this.layer.removeChild(this.sprite);
     }, update: function (dt) {
         //Si pasa el tiempo o si choca da la vuelta
+
         if (Date.now() - this.timeToChange >= 1500 || this.choco) {
             this.canBeDeleted = true;
             this.sprite.runAction(cc.MoveTo.create(1.5, cc.p(this.layer.link.body.p.x, this.layer.link.body.p.y)));
