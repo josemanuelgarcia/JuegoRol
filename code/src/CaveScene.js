@@ -42,8 +42,7 @@ var CaveLayer = cc.Layer.extend({
         //La gravedad en este juego da igual.
         this.space.gravity = cp.v(0, 0);
         //Add the Debug Layer:
-        var depuracion = new cc.PhysicsDebugNode(this.space);
-        this.addChild(depuracion, 10);
+
         animationManager = new AnimationManager();
         //Cargamos el Mapa
         this.cargarMapa();
@@ -107,7 +106,9 @@ var CaveLayer = cc.Layer.extend({
                 }
             }
             //Eliminar octorock si impacta, mas adelante se recorreran todos los enemigos
+            if(this.zonaActual!=undefined){
             this.zonaActual.eliminarEnemigo(shape);
+            }
             for (var i = 0; i < this.corazones.length; i++) {
                 if (this.corazones[i].shape === shape) {
                     this.corazones[i].eliminar();
@@ -137,8 +138,30 @@ var CaveLayer = cc.Layer.extend({
                if (this.puertas[i].shape === shape)
                {
                         if((iuLayer.llavesJefe>0 && this.puertas[i].tipo!="normal") || (iuLayer.llavesNormales>0 && this.puertas[i].tipo=="normal"))
+                        {
+                              if(this.puertas[i].tipo=="normal")
+                              {
+                                iuLayer.llavesNormales--;
                                 this.puertas[i].eliminar();
                                 this.puertas.splice(i, 1);
+                              }
+                              else
+                              {
+                                iuLayer.llavesJefe--;
+                                this.puertas[i].eliminar();
+                                this.puertas.splice(i, 1);
+                                var id=this.puertas[i].id;
+                                for(var j=0;j<this.puertas.length;j++)
+                                {
+                                    if(this.puertas[j].id==id)
+                                    {
+                                        this.puertas[i].eliminar();
+                                        this.puertas.splice(i, 1);
+                                    }
+                                }
+
+                              }
+                        }
                 }
              }
             /* if(this.soldado.shape == shape){
