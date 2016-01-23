@@ -18,6 +18,7 @@ var CaveLayer = cc.Layer.extend({
     interruptores: [],
     cofres: [],
     zonas: [],
+    puertas:[],
     llavesNormales: [],
     llavesJefe: [],
     zonaActual: null,
@@ -41,8 +42,8 @@ var CaveLayer = cc.Layer.extend({
         //La gravedad en este juego da igual.
         this.space.gravity = cp.v(0, 0);
         //Add the Debug Layer:
-        //var depuracion = new cc.PhysicsDebugNode(this.space);
-        //this.addChild(depuracion, 10);
+        var depuracion = new cc.PhysicsDebugNode(this.space);
+        this.addChild(depuracion, 10);
         animationManager = new AnimationManager();
         //Cargamos el Mapa
         this.cargarMapa();
@@ -132,7 +133,14 @@ var CaveLayer = cc.Layer.extend({
                     this.jarrones.splice(i, 1);
                 }
             }
-
+            for (var i = 0; i < this.puertas.length; i++) {
+               if (this.puertas[i].shape === shape)
+               {
+                        if((iuLayer.llavesJefe>0 && this.puertas[i].tipo!="normal") || (iuLayer.llavesNormales>0 && this.puertas[i].tipo=="normal"))
+                                this.puertas[i].eliminar();
+                                this.puertas.splice(i, 1);
+                }
+             }
             /* if(this.soldado.shape == shape){
                  this.soldado.eliminar();
              }*/
@@ -278,7 +286,17 @@ var CaveLayer = cc.Layer.extend({
                    var objetoAnimado = new ObjetoAnimado(this.space, cc.p(x, y), this, tipo, 4);
 
                }
-
+        //Puertas
+                       var puertas = this.mapa.getObjectGroup("Pasos");
+                       var puertasArray = puertas.getObjects();
+                       for (var i = 0; i < puertasArray.length; i++) {
+                           var x = puertasArray[i]["x"];
+                           var y = puertasArray[i]["y"];
+                           var tipo = puertasArray[i]["tipo"];
+                           var id = puertasArray[i]["id"];
+                           var puerta = new Puerta(this.space, cc.p(x, y), this, tipo, id);
+                            this.puertas.push(puerta);
+                       }
 
 
     }, cambiarZona: function (zona) {
