@@ -21,11 +21,7 @@ var tipoLlaveNormal = 19;
 var tipoLlaveJefe = 20;
 var tipoCofre = 21;
 var tipoKeaton=22;
-<<<<<<< HEAD
 var tipoPuerta=23;
-=======
-
->>>>>>> ec85edff0a0fd96d104399b83aa3a975137633e6
 var CollisionManager = cc.Class.extend({
 
     space: null,
@@ -243,7 +239,6 @@ var CollisionManager = cc.Class.extend({
 
             }
         }
-<<<<<<< HEAD
     },abrirPuerta:function(arbiter,space){
         var shapes=arbiter.getShapes();
          if (this.layer.link.sword) {
@@ -259,12 +254,10 @@ var CollisionManager = cc.Class.extend({
 
             }
          }
-=======
     },collisionBombaConKeaton: function(arbiter, space){
 
          var shapes = arbiter.getShapes();
          this.layer.shapesToRemove.push(shapes[1]);
->>>>>>> ec85edff0a0fd96d104399b83aa3a975137633e6
     }
 
 });
