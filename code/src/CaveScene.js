@@ -19,6 +19,7 @@ var CaveLayer = cc.Layer.extend({
     cofres: [],
     zonas: [],
     puertas:[],
+    salidas:[],
     llavesNormales: [],
     llavesJefe: [],
     zonaActual: null,
@@ -44,6 +45,7 @@ var CaveLayer = cc.Layer.extend({
         this.space.gravity = cp.v(0, 0);
         //Add the Debug Layer:
 
+
         animationManager = new AnimationManager();
         //Cargamos el Mapa
         this.cargarMapa();
@@ -60,10 +62,10 @@ var CaveLayer = cc.Layer.extend({
         }
         //en caso contrario cargamos posicion por defecto
         else {
-            posicion = cc.p(600, 400);
+            posicion = cc.p(600, 50);
         }
         this.link = new Link(this.space, posicion, this);
-
+        this.link.orientacion="ARRIBA";
 
 
         //------------------------------------------------------------------
@@ -131,7 +133,6 @@ var CaveLayer = cc.Layer.extend({
                 if (this.jarrones[i].shape === shape)
                 {
                     this.jarrones[i].destruir();
-                    this.jarrones.splice(i, 1);
                 }
             }
             for (var i = 0; i < this.puertas.length; i++) {
@@ -328,6 +329,15 @@ var CaveLayer = cc.Layer.extend({
                            var puerta = new Puerta(this.space, cc.p(x, y), this, tipo, id);
                             this.puertas.push(puerta);
                        }
+         //Salidas
+                               var salidas = this.mapa.getObjectGroup("Salida");
+                               var salidasArray = salidas.getObjects();
+                               for (var i = 0; i < salidasArray.length; i++) {
+                                   var x = salidasArray[i]["x"];
+                                   var y = salidasArray[i]["y"];
+                                   var salida = new Salida(this.space, cc.p(x, y), this);
+                                    this.salidas.push(salida);
+                               }
 
 
     }, cambiarZona: function (zona) {
@@ -363,11 +373,22 @@ var CaveLayer = cc.Layer.extend({
                 }
             }
         }
-    }, transicion: function () {
+    }
 
-     var nextScene = new GameScene();
-             cc.director.runScene(new cc.TransitionFade(3.0, nextScene));
-              cc.audioEngine.playMusic(res.templo_mp3, true);
+    , transicion: function (arbiter, space) {
+
+             var vidasQuitadas = iuLayer.vidasQuitadas;
+             var corazonesDados = iuLayer.corazonesSumados;
+            saveDollNum("vidasQuitadasTransicion", vidasQuitadas);
+            saveDollNum("corazonesDadosTransicion", corazonesDados);
+            saveDollNum("numBombasTransicion", this.link.numBombas);
+            saveDollNum("rupiasTransicion", iuLayer.rupias);
+            transicion=true;
+            saleCueva=true;
+            this.link.stopped=true;
+            var nextScene2 = new GameScene();
+            cc.director.runScene( nextScene2);
+             cc.audioEngine.playMusic(res.templo_mp3, true);
 
          }
 });

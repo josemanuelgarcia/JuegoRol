@@ -61,7 +61,7 @@ var Boomerang = cc.Class.extend({
         // ejecutar la animación
         this.sprite.runAction(actionAnimacionBucle);
 
-        layer.addChild(this.sprite, 10);
+         this.layer.mapa.addChild(this.sprite, 2);
         return true;
 
     }, getShape: function () {

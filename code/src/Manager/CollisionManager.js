@@ -21,6 +21,7 @@ var tipoLlaveJefe = 20;
 var tipoCofre = 21;
 var tipoKeaton=22;
 var tipoPuerta=23;
+var tipoSalida=24;
 var CollisionManager = cc.Class.extend({
 
     space: null,
@@ -90,6 +91,8 @@ var CollisionManager = cc.Class.extend({
         this.space.addCollisionHandler(tipoJugador, tipoZona, this.actualizarCamaraZona.bind(this), null, null, null);
 
         this.space.addCollisionHandler(tipoJugador, tipoPuerta, null, this.abrirPuerta.bind(this), null,null);
+
+        this.space.addCollisionHandler(tipoJugador, tipoSalida, null, this.transportarLink.bind(this), null,null);
 
     }, collisionObjetoConOctorok: function (arbiter, space) {
         //  this.octorok.haChocado();

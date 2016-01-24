@@ -44,6 +44,7 @@
         "src/Cuevas/Cofre.js",
         "src/Cuevas/Zona.js",
         "src/Cuevas/Puerta.js",
-        "src/Enemigos/Keaton.js"
+        "src/Enemigos/Keaton.js",
+        "src/Cuevas/Salida.js"
     ]
 }
