@@ -7,6 +7,7 @@ var animationManager = null;
 var collisionManager = null;
 var transicion= false;
 var llavesNo=false;
+var saleCueva=false;
 var GameLayer = cc.Layer.extend({
     space: null,
     link: null,
@@ -52,6 +53,8 @@ var GameLayer = cc.Layer.extend({
         this.cargarMapa();
 
 
+        saleCueva=false;
+
 
         //obtenemos la posicion guardada
         var posicionX = parseInt(loadDollNum("xLink", 1));
@@ -61,12 +64,21 @@ var GameLayer = cc.Layer.extend({
         if (cargarPartida && posicionX != 0 && posicionY != 0) {
 
             posicion = cc.p(posicionX, posicionY);
+            this.link = new Link(this.space,posicion, this);
 
-        }else{
+        }
+        if(saleCueva)
+        {
+            posicion=cc.p(400,this.mapaAlto-700);
+             this.link = new Link(this.space,posicion, this);
+             this.link.orientacion="ABAJO";
+        }
+        else
+        {
          posicion =  cc.p(400,400);
+         this.link = new Link(this.space,posicion, this);
         }
 
-        this.link = new Link(this.space,posicion, this);
 
 
 
@@ -141,7 +153,6 @@ var GameLayer = cc.Layer.extend({
                 if (this.jarrones[i].shape === shape)
                 {
                     this.jarrones[i].destruir();
-                    this.jarrones.splice(i,1);
                 }
             }
 
@@ -314,8 +325,6 @@ var GameLayer = cc.Layer.extend({
         if(cueva.nombre=="Cueva1")
         {
         var nextScene = new CaveScene();
-
-
         cc.director.runScene(new cc.TransitionFade(3.0, nextScene));
          cc.audioEngine.playMusic(res.templo_mp3, true);
         }

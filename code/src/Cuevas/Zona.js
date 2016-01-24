@@ -46,6 +46,11 @@ var Zona = cc.Class.extend({
                 {
                    enemigosTemp.push(new Soldado(this.space, cc.p(xEnemigo, yEnemigo), this.layer, "v"));
                 }
+                if(enemigosArray[j]["tipo"]=="jefe")
+                {
+                    enemigosTemp.push( new Keaton(this.space, cc.p(xEnemigo, yEnemigo), this.layer));
+                }
+
             }
         }
         this.enemigos = enemigosTemp;

@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.0" orientation="orthogonal" renderorder="right-down" width="50" height="50" tilewidth="32" tileheight="32" nextobjectid="242">
+<map version="1.0" orientation="orthogonal" renderorder="right-down" width="50" height="50" tilewidth="32" tileheight="32" nextobjectid="257">
  <tileset firstgid="1" name="Outside_A5" tilewidth="32" tileheight="32" tilecount="128">
   <image source="Outside_A5.png" width="256" height="512"/>
  </tileset>
@@ -13,7 +13,7 @@
  </layer>
  <layer name="Background UP" width="50" height="50">
   <data encoding="base64" compression="zlib">
-   eJztmDsOwjAMhtsTwgQdEDDBxAoMiLvxZukAJyKRahFVpG4eTpyST7Iq0pL6j2vHSlH4pyoJJo34HmAS+H2xCL2ulNSNqb8lqcWyxh9hSZ91TkFbl4/tb4wzfX2dMs+PumWceMd2IJMxRO75L8P/bJEaESoPsFqluy/9xzSEQvo4lL6L+94BzISfI2HzRPzVsRD+b4QtE9dxEP6PhR0T1/HvyDom+/5U6oCOqvzWZVMtnHpAiMUk8T0mpu8PYU/lmuHPJbYDDtw142pdpcyHlZh739iqdOuVIQ5XZYz6/A38beuw5Yo/4syv9YUxTIdNbHTfGCW+4iHpG5OqZ76YrKFPHcCt4566d2O9iEmuUuhIlRA5bsu6/BoG6MC+E9O+1sdZiYkOKoakg8v5lQuhdVDleWgd5+bqu5cCHTuN+YaqTw+tg4qsgxegAzOfdPWGtsTQAZxops1knPgATQBd4g==
+   eJztmM0OgjAMx+EJ9YQcjHrCk1f1YHw3FT8uHPSJ3BIaFuIY++jW4X5JQxw4+l9p1yzL3FPmCJMGfA9QeH5fKHyvKyZNa+JvTmyxbNSPkGTMOsegbcjH/jdGmbG+LojnR9MzSnxCO5BIaML3/Lfmf/ZEaoSqVsnuc/8paZhK30V97wCWzM8Zs1Uk/spYM/93zDaR6zgx/+fMzpHr+Hd4HeN9fyx1QEaZd3VZVwulHhBiUUS+x4T0/cnsJVwT9LmFdsCCh2RcrKuY+VCxuY+tVbldrwxxqIUx7PM38Levw5Ra/Yg1v9YXxlQ6TGIj+8YwcRUPztiYlCPzRWcNXeoA7gP3xL1b1Yvo5CqGjljxkeOmbPPOVIAO1Xei29e6OCvR0YHFlHRQOb+ywbcOrDz3rePaXl33UqDjIDHXYPXpvnVgkXTQAnSozCVDvaEpIXQAF5xpEwkrvr/wXRA=
   </data>
  </layer>
  <layer name="Transiciones" width="50" height="50">
@@ -23,7 +23,7 @@
  </layer>
  <layer name="Foreground" width="50" height="50">
   <data encoding="base64" compression="zlib">
-   eJztmk1KQzEQx/MEPw4j4glU0KWudd0z6DEUL6B4BLfqAexeQTftSqj7LnTphL6BIeRrJpP0PfAHw9BHSGbyzyR5bRfGmG+wBcN/muHwalYx/YD9Mv20YlzbnTE7XX77D7OKiaPDvx71KNWDq38uHfS5wej3X4/h1sfUjF+PWrz35nKhXFOoh5RNiGcrIyZu3XKprUcrUA/rtdd7jga+9YV7ea7WFrpflew/tdeND3p2ueeHxeYmyYnOrbSOpfPhnh9jxadHCRqaSGilR617GKKlx3kgRqoJZ//hoqFHjb3K1+csw7Tqw5KqizcTvq/EmJt0HjXqg85paN1JmXk+c/W4hJiuGp95Lm4e+CymB7c+W5ztoTw066MFEj000L6HSvTQWCeh92Mp69Ij9H6cgu61c/JcWh+l94qh6sHNS6pHiNr7VWiPXqcedM5L11WJHqG7VmycEHgXyn1XdNu10IOOU4sW9UHH0QC1OIa1cNKvBw09QnswpZYeu30e69AD59P1KWLtWtTHPBGDlAnZY1qdH1qcQuxnSudH6v3PxT7TuItiDntgB2CHYEdg+12+HiV3UpuHrx649WH58phFuz5ctN/Plx6zaNeHS8n3JTjfy0ib297X1gOR9JuTx0Pva+uBpPqdeGovJ4/H3o9dD2QoevigeVyD3UTajkWPO7D7SFuJHqnf8GPjcKDnwxPYM9gLMyYKfjeEPvUbPmccLR+KhebD7dOH5P8lHJ8TE7dPH3+EMy5U
+   eJztms1KAzEQx7OCHw8j4hOooEc967nPoI+h+AKKj+BVfQB7VkEv7Umo9x706ITuwBDyNZNJ2oX+YAhdQnYm/8wku9uZMeYHbMZov8zq8GoWPv2C/THbcUW/tjtjdrr8/p9m4RNHh7Ue9SjVg6t/Lh2MucEYd63H6ubH2Axfj1p89OZyoZxTqIeUTfBnK8Mnbt5yqa1HK1AP22qv9xwNfOsLa3mu1hZarzj15835XXvd+KB7l7t/WGxskppK51aax9L5cPePoeLTowQNTSS00qPWOQzR0uM84CPVhFN/uGjoUaNW+cacZJhWflhSefFuwueVGFOTjqNGftA5Da07KRPPb64el+DTVeM9z8WNA6/F9ODmZ4u9PRSHZn60QKKHBtrnUIkeGusk9HwsZVl6hJ6PU9BaOyXXpflReq5YVT24cUn1CFG7XoVq9DL1oHNeuq5K9AidtWL3CYFnodxnRbdfCz3ofWrRIj/ofTRALY5hLZz060FDj1ANptTSY7ePYxl64Hy6bYpYvxb5MU34IGVEakyr/UOLU/D9TGn/SD3/udhrGmdRjGEP7ADsEOwIbL/L16PkTGrj8OUDNz8s3x6zaOeHi/bz+dxjFu38cCl5X4LzPY/0ue3b2nogknFz4njo29p6IKlxR57cy4njsW+HrgfC0cP9tsKhND+uwW4ifYeixx3YfaSvJD9S3/Bj9+FA94cnsGewF6ZPFHw3hG3qGz7nPlptyBcaD3dMH5L/l3DaHJ+4Y/r4Bx5fL/g=
   </data>
  </layer>
  <layer name="Top Down" width="50" height="50">
@@ -124,7 +124,7 @@
   <object id="65" x="1283" y="505">
    <polyline points="0,0 249,5 252,-505 -833,-505 -833,-446 -322,-443 -322,-376"/>
   </object>
-  <object id="68" x="417" y="418" width="31" height="28"/>
+  <object id="68" x="384" y="393" width="31" height="28"/>
   <object id="69" x="448" y="287" width="63" height="29"/>
   <object id="70" x="609" y="290" width="33" height="27"/>
   <object id="76" x="994.667" y="576" width="24" height="24"/>
@@ -234,6 +234,7 @@
   <object id="208" x="961" y="288">
    <polyline points="0,0 319,0 319,65"/>
   </object>
+  <object id="256" x="1121" y="1413" width="28" height="25"/>
  </objectgroup>
  <objectgroup name="Cuevas">
   <object id="195" name="Entrada 1" x="288" y="648" width="29" height="25">
@@ -259,18 +260,17 @@
   </object>
  </objectgroup>
  <objectgroup name="Jarrones">
-  <object id="209" x="336" y="1121" width="14" height="16"/>
-  <object id="210" x="336" y="1138" width="14" height="16"/>
-  <object id="211" x="352" y="1121.33" width="14" height="16"/>
-  <object id="212" x="351.667" y="1138" width="14" height="16"/>
-  <object id="213" x="367.333" y="1121.33" width="14" height="16"/>
-  <object id="214" x="367.333" y="1138.33" width="14" height="16"/>
-  <object id="215" x="336" y="1103" width="14" height="16"/>
-  <object id="216" x="352" y="1103" width="14" height="16"/>
-  <object id="217" x="367.333" y="1103" width="14" height="16"/>
-  <object id="218" x="335.667" y="1155.33" width="14" height="16"/>
-  <object id="219" x="335.333" y="1173.33" width="14" height="16"/>
-  <object id="220" x="335" y="1191.33" width="14" height="16"/>
+  <object id="244" x="535" y="1342" width="14" height="16"/>
+  <object id="245" x="572" y="1344" width="14" height="16"/>
+  <object id="246" x="614" y="1344" width="14" height="16"/>
+  <object id="247" x="654" y="1343" width="14" height="16"/>
+  <object id="248" x="550" y="1376" width="14" height="16"/>
+  <object id="249" x="592" y="1375" width="14" height="16"/>
+  <object id="250" x="635" y="1375" width="14" height="16"/>
+  <object id="251" x="535" y="1410" width="14" height="16"/>
+  <object id="252" x="574" y="1408" width="14" height="16"/>
+  <object id="253" x="616" y="1407" width="14" height="16"/>
+  <object id="254" x="657" y="1408" width="14" height="16"/>
  </objectgroup>
  <objectgroup name="Bloques">
   <object id="221" x="449" y="1183" width="18" height="19"/>
@@ -284,56 +284,6 @@
   <object id="228" x="320.333" y="621.333" width="16" height="16">
    <properties>
     <property name="tipo" value="antorchaA_"/>
-   </properties>
-  </object>
-  <object id="232" x="432" y="1060.33" width="16" height="16">
-   <properties>
-    <property name="tipo" value="antorchaB_"/>
-   </properties>
-  </object>
-  <object id="233" x="431.333" y="1036.33" width="16" height="16">
-   <properties>
-    <property name="tipo" value="antorchaC_"/>
-   </properties>
-  </object>
-  <object id="234" x="431.667" y="1012.33" width="16" height="16">
-   <properties>
-    <property name="tipo" value="antorchaC_"/>
-   </properties>
-  </object>
-  <object id="235" x="432" y="989.667" width="16" height="16">
-   <properties>
-    <property name="tipo" value="antorchaC_"/>
-   </properties>
-  </object>
-  <object id="236" x="431.667" y="968" width="16" height="16">
-   <properties>
-    <property name="tipo" value="antorchaB_"/>
-   </properties>
-  </object>
-  <object id="237" x="576.333" y="966" width="16" height="16">
-   <properties>
-    <property name="tipo" value="antorchaB_"/>
-   </properties>
-  </object>
-  <object id="238" x="576" y="989.333" width="16" height="16">
-   <properties>
-    <property name="tipo" value="antorchaC_"/>
-   </properties>
-  </object>
-  <object id="239" x="576" y="1014.33" width="16" height="16">
-   <properties>
-    <property name="tipo" value="antorchaC_"/>
-   </properties>
-  </object>
-  <object id="240" x="576.333" y="1037.33" width="16" height="16">
-   <properties>
-    <property name="tipo" value="antorchaC_"/>
-   </properties>
-  </object>
-  <object id="241" x="576.333" y="1060" width="16" height="16">
-   <properties>
-    <property name="tipo" value="antorchaB_"/>
    </properties>
   </object>
  </objectgroup>

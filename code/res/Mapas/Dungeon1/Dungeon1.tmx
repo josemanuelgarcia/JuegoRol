@@ -226,16 +226,19 @@
   </object>
   <object id="420" x="696.5" y="1144.17">
    <properties>
+    <property name="IdZona" value="3"/>
     <property name="tipo" value="octorok"/>
    </properties>
   </object>
   <object id="422" x="584" y="1176.67">
    <properties>
+    <property name="IdZona" value="3"/>
     <property name="tipo" value="octorok"/>
    </properties>
   </object>
   <object id="423" x="665" y="1215">
    <properties>
+    <property name="IdZona" value="3"/>
     <property name="tipo" value="octorok"/>
    </properties>
   </object>
@@ -256,6 +259,7 @@
   </object>
   <object id="451" x="1387.33" y="756">
    <properties>
+    <property name="IdZona" value="8"/>
     <property name="tipo" value="jefe"/>
    </properties>
   </object>
