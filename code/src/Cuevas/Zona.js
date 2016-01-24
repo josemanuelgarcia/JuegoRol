@@ -51,7 +51,7 @@ var Zona = cc.Class.extend({
             }
         }
         this.enemigos = enemigosTemp;
-        cc.log("ENEMIGOS DE LA ZONA" + this.idZona + "LONGITUD" + this.enemigos.length);
+        
     }, eliminarEnemigo: function (shape) {
         for (var i = 0; i < this.enemigos.length; i++) {
             if (this.enemigos[i].shape === shape) {

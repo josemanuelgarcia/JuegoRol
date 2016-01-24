@@ -224,39 +224,6 @@
     <property name="tipo" value="soldado_rojo"/>
    </properties>
   </object>
-  <object id="420" x="696.5" y="1144.17">
-   <properties>
-    <property name="IdZona" value="3"/>
-    <property name="tipo" value="octorok"/>
-   </properties>
-  </object>
-  <object id="422" x="584" y="1176.67">
-   <properties>
-    <property name="IdZona" value="3"/>
-    <property name="tipo" value="octorok"/>
-   </properties>
-  </object>
-  <object id="423" x="665" y="1215">
-   <properties>
-    <property name="IdZona" value="3"/>
-    <property name="tipo" value="octorok"/>
-   </properties>
-  </object>
-  <object id="424" x="595.333" y="768">
-   <properties>
-    <property name="tipo" value="octorok"/>
-   </properties>
-  </object>
-  <object id="425" x="708.667" y="843.333">
-   <properties>
-    <property name="tipo" value="octorok"/>
-   </properties>
-  </object>
-  <object id="426" x="1459.33" y="1128.67">
-   <properties>
-    <property name="tipo" value="octorok"/>
-   </properties>
-  </object>
   <object id="451" x="1387.33" y="756">
    <properties>
     <property name="IdZona" value="8"/>
