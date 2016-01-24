@@ -55,5 +55,13 @@ var LlaveNormal = cc.Class.extend({
         iuLayer.crearLabelLlaves();
 
 
-    }
+    }, quitarLlaves: function () {
+
+
+             //sera el numero de llaves de link
+             iuLayer.llavesNormales = iuLayer.llavesNormales - this.llaves;
+             iuLayer.crearLabelLlaves();
+
+
+         }
 });

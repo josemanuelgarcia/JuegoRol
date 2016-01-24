@@ -5,8 +5,7 @@ var cargarPartida = false;
 var weapon = "ARCO";
 var animationManager = null;
 var collisionManager = null;
-var posicion = cc.p(400, 400);
-
+var transicion= false;
 var GameLayer = cc.Layer.extend({
     space: null,
     link: null,
@@ -20,7 +19,6 @@ var GameLayer = cc.Layer.extend({
     depuracion: null,
     corazones: [],
     bombaRecolectable: [],
-    flechasRecolectables: [],
     contenedoresCorazon: [],
     llavesNormales: [],
     llavesJefe: [],
@@ -31,6 +29,7 @@ var GameLayer = cc.Layer.extend({
     bloques: [],
     //Teclado
     teclasPulsadas: [],
+    soyCaveScene:false,
 
     ctor: function () {
 
@@ -64,15 +63,16 @@ var GameLayer = cc.Layer.extend({
 
             posicion = cc.p(posicionX, posicionY);
 
+        }else{
+         posicion =  cc.p(400,400);
         }
 
-        this.link = new Link(this.space, posicion, this);
+        this.link = new Link(this.space,posicion, this);
 
         //creacion bomba de prueba
         this.bombaRecolectable.push(new BombaRecolectable(this.space, cc.p(550, 300), this));
 
-        //creacion de flecha de prueba
-        this.flechasRecolectables.push(new FlechaRecolectable(this.space, cc.p(500, 400), this));
+
 
 
         //Creacion de soldado de prueba
@@ -171,12 +171,7 @@ var GameLayer = cc.Layer.extend({
                     this.bombaRecolectable.splice(i, 1);
                 }
             }
-            for (var i = 0; i < this.flechasRecolectables.length; i++) {
-                if (this.flechasRecolectables[i].shape === shape) {
-                    this.flechasRecolectables[i].eliminar();
-                    this.flechasRecolectables.splice(i, 1);
-                }
-            }
+
             for (var i = 0; i < this.contenedoresCorazon.length; i++) {
                 if (this.contenedoresCorazon[i].shape === shape) {
                     this.contenedoresCorazon[i].eliminar();
@@ -319,6 +314,15 @@ var GameLayer = cc.Layer.extend({
         this.setPosition(viewPoint);
 
     }, transicion: function (arbiter, space) {
+
+         var vidasQuitadas = iuLayer.vidasQuitadas;
+         var corazonesDados = iuLayer.corazonesSumados;
+        saveDollNum("vidasQuitadasTransicion", vidasQuitadas);
+        saveDollNum("corazonesDadosTransicion", corazonesDados);
+        saveDollNum("numBombasTransicion", this.link.numBombas);
+        saveDollNum("rupiasTransicion", iuLayer.rupias);
+        transicion=true;
+        iuLayer.activarLlaves();
         var shapes = arbiter.getShapes();
         var shape = shapes[1];
         var cueva = null;
@@ -331,6 +335,8 @@ var GameLayer = cc.Layer.extend({
         if(cueva.nombre=="Cueva1")
         {
         var nextScene = new CaveScene();
+
+
         cc.director.runScene(new cc.TransitionFade(3.0, nextScene));
          cc.audioEngine.playMusic(res.templo_mp3, true);
         }
@@ -339,6 +345,7 @@ var GameLayer = cc.Layer.extend({
 var GameScene = cc.Scene.extend({
     onEnter: function () {
         this._super();
+        this.resume();
         var layer = new GameLayer();
         cc.audioEngine.playMusic(res.zeldaFondoDos_mp3, true);
         collisionManager = new CollisionManager(layer.space, layer);

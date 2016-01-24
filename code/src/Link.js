@@ -21,7 +21,7 @@ var Link = cc.Class.extend({
     velMovimiento: 70,
     velRodar: 180,
     numBombas: 0,
-    numFlechas: 0,
+
     ctor: function (space, posicion, layer) {
         this.space = space;
         this.layer = layer;
@@ -32,18 +32,22 @@ var Link = cc.Class.extend({
 
 
 
-        //numero de bombas y de flechas cuando se guarda
+        //numero de bombas cuando se guarda
         var numBombasGuardadas = parseInt(loadDollNum("numBombas", 1));
-        var numFlechasGuardadas = parseInt(loadDollNum("numFlechas", 1));
+         var numBombasGuardadasTransicion = parseInt(loadDollNum("numBombasTransicion", 1));
         console.log("numero de bombas guardadas" + numBombasGuardadas);
-        if (cargarPartida && numBombasGuardadas != 0 && numFlechasGuardadas != 0) {
+        if (cargarPartida && numBombasGuardadas != 0 ) {
             this.numBombas = numBombasGuardadas;
-            this.numFlechas = numFlechasGuardadas;
+
 
         }
         else {
+        if(transicion && numBombasGuardadasTransicion != 0){
+         this.numBombas = numBombasGuardadasTransicion;
+        }
+        else{
             this.numBombas = 10;
-            this.numFlechas = 10;
+            }
         }
 
         // Cuerpo dinamico, SI le afectan las fuerzas
@@ -77,12 +81,15 @@ var Link = cc.Class.extend({
 
     }, moverArriba: function () {
         if (this.canMove) {
+
+        console.log("me muevo hacia arriva")
             this.orientacion = "ARRIBA";
             this.walking = true;
             this.body.setVel(cp.v(0, this.velMovimiento));
         }
     }, moverAbajo: function () {
         if (this.canMove) {
+        console.log("me muevo hacia abajo")
             this.orientacion = "ABAJO";
             this.walking = true;
             this.body.setVel(cp.v(0, -this.velMovimiento));
@@ -130,8 +137,13 @@ var Link = cc.Class.extend({
         if (this.numBombas > 0) {
             new Bomba(this.space, cc.p(this.body.p.x, this.body.p.y), this.layer);
             this.numBombas--;
+           if (weapon == "BOMBAS") {
+               iuLayer.spriteArmaElegida.setTexture(res.bomba_reducida_png);
+               iuLayer.numeroArmas = this.layer.link.numBombas;
+               iuLayer.crearLabelArmas();
+               iuLayer.numeroDeArmasDisponiblesLabel.setVisible(true);
         }
-    }, rodar: function () {
+    }}, rodar: function () {
         if (this.walking) {
             this.rolling = true;
             this.canMove = false;

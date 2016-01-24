@@ -23,6 +23,7 @@ var CaveLayer = cc.Layer.extend({
     zonaActual: null,
     //Teclado
     teclasPulsadas: [],
+    soyCaveScene:true,
 
     ctor: function () {
 
@@ -106,7 +107,8 @@ var CaveLayer = cc.Layer.extend({
                 }
             }
             //Eliminar octorock si impacta, mas adelante se recorreran todos los enemigos
-            this.zonaActual.eliminarEnemigo(shape);
+            if(this.zonaActual!=null){
+            this.zonaActual.eliminarEnemigo(shape);}
             for (var i = 0; i < this.corazones.length; i++) {
                 if (this.corazones[i].shape === shape) {
                     this.corazones[i].eliminar();
@@ -327,12 +329,19 @@ var CaveLayer = cc.Layer.extend({
                 }
             }
         }
-    }
+    }, transicion: function () {
+
+     var nextScene = new GameScene();
+             cc.director.runScene(new cc.TransitionFade(3.0, nextScene));
+              cc.audioEngine.playMusic(res.templo_mp3, true);
+
+         }
 });
 
 var CaveScene = cc.Scene.extend({
     onEnter: function () {
         this._super();
+        this.resume();
         var layer = new CaveLayer();
         this.addChild(layer, 0, idCapaCueva);
         iuLayer = new IULayer();

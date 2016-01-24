@@ -30,6 +30,7 @@ var Jarron = cc.Class.extend({
 
         return true;
     }, destruir: function () {
+
         var animacion = cc.Animate.create(this.animacionDestruir);
         var crearColectable = cc.CallFunc.create(this.crearColectableAleatorio, this);
         var eliminar = cc.CallFunc.create(this.eliminar, this);
@@ -37,6 +38,7 @@ var Jarron = cc.Class.extend({
         this.sprite.runAction(cc.Sequence.create(animacion, crearColectable, eliminar));
 
     }, eliminar: function () {
+         cc.audioEngine.playEffect(res.jarron_roto_wav);
         this.space.removeShape(this.shape);
         this.layer.mapa.removeChild(this.sprite);
 

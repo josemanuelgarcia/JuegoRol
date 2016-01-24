@@ -54,5 +54,12 @@ var LlaveJefe = cc.Class.extend({
         iuLayer.crearLabelLlaves();
 
 
-    }
+    }, quitarLlaves: function () {
+
+             //sera el numero de llaves de link
+             iuLayer.llavesJefe = iuLayer.llavesJefe - this.llaves;
+             iuLayer.crearLabelLlaves();
+
+
+         }
 });

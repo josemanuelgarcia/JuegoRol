@@ -13,7 +13,6 @@ var tipoJarron = 11;
 var tipoBloque = 12;
 var tipoSoldado = 13;
 var tipoBombaRecolectable = 14;
-var tipoFlechaRecolectable = 15;
 var tipoInterruptor = 16;
 var tipoContenedorCorazon = 18;
 var tipoZona = 17;
@@ -48,8 +47,6 @@ var CollisionManager = cc.Class.extend({
 
         this.space.addCollisionHandler(tipoJugador, tipoBombaRecolectable, null, this.collisionJugadorConBombaRecolectable.bind(this), null, null);
 
-        this.space.addCollisionHandler(tipoJugador, tipoFlechaRecolectable, null, this.collisionJugadorConFlechaRecolectable.bind(this), null, null);
-
         this.space.addCollisionHandler(tipoJugador, tipoRupia, null, this.collisionJugadorConRupia.bind(this), null, null);
 
         this.space.addCollisionHandler(tipoJugador, tipoBomba, this.reducirVidas.bind(this), null, null, null);
@@ -58,7 +55,7 @@ var CollisionManager = cc.Class.extend({
 
         this.space.addCollisionHandler(tipoEspada, tipoCofre, null, this.abrirCofre.bind(this), null, null);
 
-        this.space.addCollisionHandler(tipoBomba, tipoOctorok, null, this.collisionBombaConKeaton.bind(this), null, null);
+        this.space.addCollisionHandler(tipoBomba, tipoKeaton, null, this.collisionBombaConKeaton.bind(this), null, null);
 
         //Colisiones con Octorok
         this.space.addCollisionHandler(tipoNoPasable, tipoOctorok, null, null, this.collisionObjetoConOctorok.bind(this), null);
@@ -87,6 +84,8 @@ var CollisionManager = cc.Class.extend({
         this.space.addCollisionHandler(tipoEspada, tipoSoldado, null, this.collisionEspadaConEnemigo.bind(this), null, null);
 
         this.space.addCollisionHandler(tipoJugador, tipoSoldado, this.reducirVidas.bind(this), null, null, null);
+
+        this.space.addCollisionHandler(tipoJugador, tipoKeaton, this.reducirVidas.bind(this), null, null, null);
 
         this.space.addCollisionHandler(tipoJugador, tipoZona, this.actualizarCamaraZona.bind(this), null, null, null);
 
@@ -133,17 +132,6 @@ var CollisionManager = cc.Class.extend({
         }
         this.layer.shapesToRemove.push(shapes[1]);
 
-    }, collisionJugadorConFlechaRecolectable: function (arbiter, space) {
-
-        var shapes = arbiter.getShapes();
-        cc.audioEngine.playEffect(res.recoger_item_wav);
-        for (var i = 0; i < this.layer.flechasRecolectables.length; i++) {
-            if (this.layer.flechasRecolectables[i].shape === shapes[1]) {
-                this.layer.flechasRecolectables[i].agregarFlechas();
-            }
-        }
-        this.layer.shapesToRemove.push(shapes[1]);
-
     }, collisionJugadorConLlaveNormal: function (arbiter, space) {
 
         var shapes = arbiter.getShapes();
@@ -182,8 +170,10 @@ var CollisionManager = cc.Class.extend({
 
     }, destruirJarron: function (arbiter, space) {
         var shapes = arbiter.getShapes();
+
         if (this.layer.link.sword) {
             if (this.layer.mathUtil.isInViewCone(this.layer.link.body.p, shapes[1].body.p, 0.5, this.layer)) {
+
                 this.layer.shapesToRemove.push(shapes[1]);
             }
         }

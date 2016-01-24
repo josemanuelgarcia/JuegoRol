@@ -72,6 +72,8 @@ var PauseLayer = cc.LayerColor.extend({
 
 
 
+
+
     }, pulsarBotonGuardar: function () {
         var gameScene = this.scene.getChildByTag(1);
         var IULayer = this.scene.getChildByTag(2);
@@ -89,7 +91,11 @@ var PauseLayer = cc.LayerColor.extend({
         saveDollNum("vidasQuitadas", vidasQuitadas);
         saveDollNum("corazonesDados", corazonesDados);
         saveDollNum("numBombas", gameScene.link.numBombas);
-        saveDollNum("numFlechas", gameScene.link.numFlechas);
+        saveDollNum("estoyEnCave",""+gameScene.soyCaveScene);
+        saveDollNum("llavesNormales", IULayer.llavesNormales);
+        saveDollNum("llavesJefe", IULayer.llavesJefe);
+        saveDollNum("rupias", IULayer.rupias);
+
         this.scene.getChildByTag(2).entrar = true;
         this.scene.getChildByTag(2).pause = true;
         cc.director.resume();

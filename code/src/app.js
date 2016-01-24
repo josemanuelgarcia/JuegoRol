@@ -60,9 +60,17 @@ var MenuLayer = cc.Layer.extend({
     }, pulsarBotonJugar: function () {
         cc.director.runScene(new GameScene());
     }, pulsarBotonCargar: function () {
+        var estoyEnCave = loadDollNum("estoyEnCave", 1);
         cargarPartida = true;
+        console.log(""+estoyEnCave);
+        if(estoyEnCave==""+"true"){
         console.log("cargar partida");
-        cc.director.runScene(new GameScene());
+        cc.director.runScene(new CaveScene());
+        }
+        else{
+         console.log("cargar partida");
+                cc.director.runScene(new GameScene());
+        }
     }
 
 });

@@ -32,14 +32,50 @@ var IULayer = cc.Layer.extend({
 
         //se llama par pintar las vidas iniciales
 
-        //Al principio la weapon es el arco
+        //Al principio la weapon es el boomeran
         weapon="BOOMERANG";
 
 
         //-------------------Cargar Partida-------------------------------------
+
+        var rupiasGuardadas = parseInt(loadDollNum("rupias",1));
+        var rupiasGuardadasTransicion = parseInt(loadDollNum("rupiasTransicion",1));
+        var llavesNormalesGuardadas = parseInt(loadDollNum("llavesNormales",1));
+        var llavesJefeGuardadas = parseInt(loadDollNum("llavesJefe",1));
         var vidasGuardadas = parseInt(loadDollNum("corazonesDados",1));
         var vidasPerdidas = parseInt(loadDollNum("vidasQuitadas",1));
-        console.log(""+vidasPerdidas+"  "+vidasGuardadas);
+        var vidasGuardadasTransicion = parseInt(loadDollNum("corazonesDadosTransicion",1));
+        var vidasPerdidasTransicion = parseInt(loadDollNum("vidasQuitadasTransicion",1));
+        console.log("LLaves jefe "+llavesJefeGuardadas+"Lñaves Normales "+llavesNormalesGuardadas);
+         if(cargarPartida && rupiasGuardadas != 0 ){
+
+                                this.rupias=rupiasGuardadas;
+                                }
+
+                                else
+                                {
+                                if(transicion && rupiasGuardadasTransicion != 0)
+                                {
+                                this.rupias=rupiasGuardadasTransicion;
+                                }else
+                                {
+                                this.rupias=0;
+                                }
+
+
+                                }
+          if(cargarPartida && (llavesNormalesGuardadas != 0 || llavesJefeGuardadas != 0)){
+
+                        this.llavesNormales=llavesNormalesGuardadas;
+                        this.llavesJefe=llavesJefeGuardadas;
+                        }
+
+                        else
+                        {
+                         this.llavesNormales=0;
+                         this.llavesJefe=0;
+
+                        }
           if(cargarPartida && (vidasGuardadas != 0 || vidasPerdidas != 0)){
 
                 this.vidasIniciales=this.vidasIniciales+vidasGuardadas;
@@ -52,7 +88,16 @@ var IULayer = cc.Layer.extend({
 
                 else
                 {
-                 this.darVidas();
+                if(transicion && (vidasGuardadasTransicion != 0 || vidasPerdidasTransicion != 0))
+                {
+                  this.vidasIniciales=this.vidasIniciales+vidasGuardadasTransicion;
+                                this.corazones = this.corazones+vidasGuardadasTransicion;
+                                this.corazonesSumados = vidasGuardadasTransicion;
+                                this.darVidas();
+                                for(i=0;i<vidasPerdidasTransicion;i++)
+                                {this.quitarVidas();}
+                }else{
+                 this.darVidas();}
 
                 }
         //----------------------------------------------------------------------
@@ -79,7 +124,7 @@ var IULayer = cc.Layer.extend({
          this.spriteLlaves.setVisible(false);
         this.addChild(this.spriteLlaves);
 
-        this.etiquetaLlaves = new cc.LabelTTF("0", "Helvetica", 20);
+        this.etiquetaLlaves = new cc.LabelTTF(""+this.llavesNormales, "Helvetica", 20);
         this.etiquetaLlaves.setPosition(cc.p(525, 420));
         this.etiquetaLlaves.fillStyle = new cc.Color(255, 255, 255, 255);
          this.etiquetaLlaves.setVisible(false);
@@ -91,7 +136,7 @@ var IULayer = cc.Layer.extend({
          this.spriteLlavesJefe.setVisible(false);
         this.addChild(this.spriteLlavesJefe);
 
-        this.etiquetaLlavesjefe = new cc.LabelTTF("0", "Helvetica", 20);
+        this.etiquetaLlavesjefe = new cc.LabelTTF(""+this.llavesJefe, "Helvetica", 20);
         this.etiquetaLlavesjefe.setPosition(cc.p(425, 420));
         this.etiquetaLlavesjefe.fillStyle = new cc.Color(255, 255, 255, 255);
          this.etiquetaLlavesjefe.setVisible(false);
@@ -103,7 +148,7 @@ var IULayer = cc.Layer.extend({
         this.spriteRupias.setPosition(cc.p(size.width/2, 28));
         this.addChild(this.spriteRupias);
 
-        this.etiquetaMonedas = new cc.LabelTTF("0", "Helvetica", 20);
+        this.etiquetaMonedas = new cc.LabelTTF(""+this.rupias, "Helvetica", 20);
         this.etiquetaMonedas.setPosition(cc.p((size.width/2) + 25, 25));
         this.etiquetaMonedas.fillStyle = new cc.Color(255, 255, 255, 255);
         this.addChild(this.etiquetaMonedas);
@@ -136,6 +181,7 @@ var IULayer = cc.Layer.extend({
         }, this)
 
         this.scheduleUpdate();
+          transicion=false;
         return true;
     }, procesarMouseDown: function (event) {
 
@@ -319,6 +365,14 @@ this.corazones = this.corazones+1;
         this.corazonesBlancos = this.corazonesBlancos+1;
         console.log("numero de vidas quitadas"+this.vidasQuitadas);
         }}
+        //COmprobamos si link esta muerto y lanzamos la layer de game over
+        if(this.vidasQuitadas>=this.vidasIniciales){
+         cc.director.pause();
+                iuLayer.entrar=false;
+                iuLayer.pause=false;
+         console.log("escena"+iuLayer.getParent());
+        iuLayer.getParent().addChild(new GameOverLayer(iuLayer.getParent()), 0, 4);
+        }
     },nuevoCorazon : function() {
 
         this.corazonesSumados=this.corazonesSumados+1;
