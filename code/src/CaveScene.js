@@ -53,8 +53,8 @@ var CaveLayer = cc.Layer.extend({
         this.cargarMapa();
         collisionManager = new CollisionManager(this.space, this);
 
-        var depuracion = new cc.PhysicsDebugNode(this.space);
-        this.addChild(depuracion, 10);
+
+
         //obtenemos la posicion guardada
         var posicionX = parseInt(loadDollNum("xLink", 1));
         var posicionY = parseInt(loadDollNum("yLink", 1));
