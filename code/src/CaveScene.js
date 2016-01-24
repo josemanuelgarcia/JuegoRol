@@ -53,16 +53,13 @@ var CaveLayer = cc.Layer.extend({
         //obtenemos la posicion guardada
         var posicionX = parseInt(loadDollNum("xLink", 1));
         var posicionY = parseInt(loadDollNum("yLink", 1));
-        console.log("he salido de save");
         //Si exista una posicion guiardada y se ha dado a cargar partida entramos
         if (cargarPartida && posicionX != 0 && posicionY != 0) {
-            console.log("he entrado por el if ");
             posicion = cc.p(posicionX, posicionY);
 
         }
         //en caso contrario cargamos posicion por defecto
         else {
-            console.log("he entrado por el else ");
             posicion = cc.p(600, 400);
         }
         this.link = new Link(this.space, posicion, this);
@@ -212,9 +209,7 @@ var CaveLayer = cc.Layer.extend({
         if (instancia.teclasPulsadas.length <= 1)
             instancia.keyPulsada = null;
         else if (instancia.teclasPulsadas.length > 1) {
-            cc.log(instancia.teclasPulsadas);
             instancia.keyPulsada = instancia.teclasPulsadas[instancia.teclasPulsadas.length - 1];
-            cc.log(instancia.keyPulsada);
         }
 
 
@@ -273,7 +268,6 @@ var CaveLayer = cc.Layer.extend({
         //JARRONES
         var jarrones = this.mapa.getObjectGroup("Jarrones");
         var jarronesArray = jarrones.getObjects();
-        cc.log("Jarrones: " + jarronesArray.length);
         for (var i = 0; i < jarronesArray.length; i++) {
             var x = jarronesArray[i]["x"];
             var y = jarronesArray[i]["y"];
@@ -282,7 +276,6 @@ var CaveLayer = cc.Layer.extend({
         }
         //INTERRUPTORES
         var interruptore = this.mapa.getObjectGroup("Interruptores");
-        cc.log(interruptore.length);
         var interruptoresArray = interruptore.getObjects();
         for (var i = 0; i < interruptoresArray.length; i++) {
             var x = interruptoresArray[i]["x"];
@@ -317,7 +310,6 @@ var CaveLayer = cc.Layer.extend({
         //ObjetosAnimados
                var objetosAnimados = this.mapa.getObjectGroup("ObjetosAnimados");
                var objetosAnimadosArray = objetosAnimados.getObjects();
-               cc.log("ObjetosAnimados -> " + objetosAnimadosArray.length);
                for (var i = 0; i < objetosAnimadosArray.length; i++) {
                    var x = objetosAnimadosArray[i]["x"];
                    var y = objetosAnimadosArray[i]["y"];

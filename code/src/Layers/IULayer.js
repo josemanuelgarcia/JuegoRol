@@ -45,7 +45,6 @@ var IULayer = cc.Layer.extend({
         var vidasPerdidas = parseInt(loadDollNum("vidasQuitadas",1));
         var vidasGuardadasTransicion = parseInt(loadDollNum("corazonesDadosTransicion",1));
         var vidasPerdidasTransicion = parseInt(loadDollNum("vidasQuitadasTransicion",1));
-        console.log("LLaves jefe "+llavesJefeGuardadas+"Lñaves Normales "+llavesNormalesGuardadas);
 
          if(cargarPartida && rupiasGuardadas != 0 ){
 
@@ -250,7 +249,6 @@ var IULayer = cc.Layer.extend({
                    eval("variable" +100+i).setPosition(cc.p(this.posicionSpriteCorazones, cc.winSize.height - this.alturaSpriteCOrazones));
                    //y lo añadimos
                    this.addChild(eval("variable" +100+i),0,100+i);
-                   console.log("doy vida");
         }
 
         //solo se ponen una vez
@@ -283,7 +281,6 @@ var IULayer = cc.Layer.extend({
 
             //y lo añadimos
             this.addChild(eval("variable" + this.corazones),0,this.corazones);
-            console.log("Si he llegado al limite" + this.posicionSpriteCorazones);
         } else {
 
             //creamos el sprite
@@ -292,7 +289,6 @@ var IULayer = cc.Layer.extend({
 
             //y lo añadimos
             this.addChild(eval("variable" + this.corazones),0,this.corazones);
-            console.log("variable" + this.corazones);
 
 }
 this.corazones = this.corazones+1;
@@ -335,20 +331,18 @@ this.corazones = this.corazones+1;
 
         //Actualizamos el identificador de los sprite de los corazones blancos
         this.corazonesBlancos = this.corazonesBlancos+1;
-        console.log("numero de vidas quitadas"+this.vidasQuitadas);
         }}
         //COmprobamos si link esta muerto y lanzamos la layer de game over
         if(this.vidasQuitadas>=this.vidasIniciales){
          cc.director.pause();
                 iuLayer.entrar=false;
                 iuLayer.pause=false;
-         console.log("escena"+iuLayer.getParent());
+
         iuLayer.getParent().addChild(new GameOverLayer(iuLayer.getParent()), 0, 4);
         }
     },nuevoCorazon : function() {
 
         this.corazonesSumados=this.corazonesSumados+1;
-console.log("numero de vidas quitadas"+this.vidasQuitadas);
         for(i=0;i<=this.vidasQuitadas;i++)
         {
         this.vidasQuitadas=this.vidasQuitadas+1;

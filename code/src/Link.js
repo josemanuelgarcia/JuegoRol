@@ -35,7 +35,6 @@ var Link = cc.Class.extend({
         //numero de bombas cuando se guarda
         var numBombasGuardadas = parseInt(loadDollNum("numBombas", 1));
          var numBombasGuardadasTransicion = parseInt(loadDollNum("numBombasTransicion", 1));
-        console.log("numero de bombas guardadas" + numBombasGuardadas);
         if (cargarPartida && numBombasGuardadas != 0 ) {
             this.numBombas = numBombasGuardadas;
 
@@ -81,15 +80,12 @@ var Link = cc.Class.extend({
 
     }, moverArriba: function () {
         if (this.canMove) {
-
-        console.log("me muevo hacia arriva")
             this.orientacion = "ARRIBA";
             this.walking = true;
             this.body.setVel(cp.v(0, this.velMovimiento));
         }
     }, moverAbajo: function () {
         if (this.canMove) {
-        console.log("me muevo hacia abajo")
             this.orientacion = "ABAJO";
             this.walking = true;
             this.body.setVel(cp.v(0, -this.velMovimiento));
@@ -162,8 +158,6 @@ var Link = cc.Class.extend({
     }, procesarEventos: function () {
         var keyCode = null;
         if (this.layer.teclasPulsadas.length > 0) { }
-        // cc.log(this.layer.teclasPulsadas);
-
         //Si no se ha pulsado ninguna tecla se deja parado
         if (this.layer.teclasPulsadas.length == 0)
             this.parado();
@@ -203,7 +197,6 @@ var Link = cc.Class.extend({
         }
 
     }, realizarAnimaciones: function () {
-        //cc.log("Sword: "+this.sword +"\n" + "Walking: "+this.walking + "\n" + "Rolling: " + this.rolling);
         if (this.walking && this.canMove)
             this.animacionCaminar();
         else if (this.sword)

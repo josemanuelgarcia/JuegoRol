@@ -5,8 +5,7 @@ function loadDollNum(clave, valor) {
 
     //si no esta registrado no hacemos nada
     if (tempDollNum == null || tempDollNum == "") {
-        console.log("no existe ");
-        return 0;
+            return 0;
 
     }
     // si existe lo obtenemos

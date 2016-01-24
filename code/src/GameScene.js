@@ -76,8 +76,7 @@ var GameLayer = cc.Layer.extend({
 
 
 
-        //Creacion de soldado de prueba
-        this.soldado = new Soldado(this.space, cc.p(600, 200), this, "v");
+
         //creacion de corazon de prueba
         this.corazones.push(new Corazon(this.space, cc.p(550, 200), this));
 
@@ -290,7 +289,6 @@ var GameLayer = cc.Layer.extend({
         //ObjetosAnimados
         var objetosAnimados = this.mapa.getObjectGroup("ObjetosAnimados");
         var objetosAnimadosArray = objetosAnimados.getObjects();
-        cc.log("ObjetosAnimados -> " + objetosAnimadosArray.length);
         for (var i = 0; i < objetosAnimadosArray.length; i++) {
             var x = objetosAnimadosArray[i]["x"];
             var y = objetosAnimadosArray[i]["y"];

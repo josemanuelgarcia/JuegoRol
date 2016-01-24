@@ -16,8 +16,6 @@ var Soldado = cc.Class.extend({
         this.layer = layer;
         this.tiempoEntreMovimientos = 1 + Math.floor(Math.random() * 2);
 
-        console.log(color);
-
         if (color === "r") {
             this.sprite = new cc.PhysicsSprite("#Soldado_rojo_parado_abajo0.png");
             animationManager.addAnimationsSoldadoRojo(this);
