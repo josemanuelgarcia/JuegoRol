@@ -50,11 +50,15 @@ var Zona = cc.Class.extend({
                 {
                     enemigosTemp.push( new Keaton(this.space, cc.p(xEnemigo, yEnemigo), this.layer));
                 }
+                if(enemigosArray[j]["tipo"] == "octorok")
+                {
+                    enemigosTemp.push(new Octorok(this.space, cc.p(xEnemigo, yEnemigo), this.layer));
+                }
 
             }
         }
         this.enemigos = enemigosTemp;
-        cc.log("ENEMIGOS DE LA ZONA" + this.idZona + "LONGITUD" + this.enemigos.length);
+        
     }, eliminarEnemigo: function (shape) {
         for (var i = 0; i < this.enemigos.length; i++) {
             if (this.enemigos[i].shape === shape) {
