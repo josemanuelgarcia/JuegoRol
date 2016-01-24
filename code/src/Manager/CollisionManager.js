@@ -90,7 +90,7 @@ var CollisionManager = cc.Class.extend({
 
         this.space.addCollisionHandler(tipoJugador, tipoZona, this.actualizarCamaraZona.bind(this), null, null, null);
 
-        this.space.addCollisionHandler(tipoJugador, tipoPuerta, null, this.abrirPuerta.bind(this), null,null);
+        this.space.addCollisionHandler(tipoEspada, tipoPuerta, null, this.abrirPuerta.bind(this), null,null);
 
         this.space.addCollisionHandler(tipoJugador, tipoSalida, null, this.transportarLink.bind(this), null,null);
 
