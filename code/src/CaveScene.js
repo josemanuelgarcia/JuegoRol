@@ -103,7 +103,7 @@ var CaveLayer = cc.Layer.extend({
         this.actualizarCamara();
          this.octorok.update(dt);
         this.link.update(dt);
-        
+
         this.abrirCofre();
         //Eliminar elementos
         for (var i = 0; i < this.shapesToRemove.length; i++) {
