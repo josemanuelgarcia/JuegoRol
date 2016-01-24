@@ -103,7 +103,7 @@ var CaveLayer = cc.Layer.extend({
         this.actualizarCamara();
          this.octorok.update(dt);
         this.link.update(dt);
-        console.log(this.link.body.p.x+","+this.link.body.p.y);
+        
         this.abrirCofre();
         //Eliminar elementos
         for (var i = 0; i < this.shapesToRemove.length; i++) {
@@ -161,13 +161,15 @@ var CaveLayer = cc.Layer.extend({
                         {
                               if(this.puertas[i].tipo=="normal")
                               {
-                                iuLayer.llavesNormales--;
+                                iuLayer.llavesNormales = iuLayer.llavesNormales - 1;
+                                            iuLayer.crearLabelLlaves();
                                 this.puertas[i].eliminar();
                                 this.puertas.splice(i, 1);
                               }
                               else
                               {
-                                iuLayer.llavesJefe--;
+                                iuLayer.llavesJefe = iuLayer.llavesJefe - 1;
+                                            iuLayer.crearLabelLlaves();
                                 this.puertas[i].eliminar();
                                 this.puertas.splice(i, 1);
                                 var id=this.puertas[i].id;
@@ -407,7 +409,7 @@ var CaveLayer = cc.Layer.extend({
             this.link.stopped=true;
             var nextScene2 = new GameScene();
             cc.director.runScene( nextScene2);
-             cc.audioEngine.playMusic(res.templo_mp3, true);
+
 
          }
 });
@@ -416,6 +418,7 @@ var CaveScene = cc.Scene.extend({
     onEnter: function () {
         this._super();
         this.resume();
+        cc.audioEngine.playMusic(res.templo_mp3, true);
         var layer = new CaveLayer();
         this.addChild(layer, 0, idCapaCueva);
         iuLayer = new IULayer();
