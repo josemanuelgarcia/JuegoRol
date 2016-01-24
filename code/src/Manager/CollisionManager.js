@@ -23,7 +23,7 @@ var tipoKeaton=22;
 var tipoPuerta=23;
 var tipoSalida=24;
 var CollisionManager = cc.Class.extend({
-
+      vidasKeaton:3,
     space: null,
     layer: null,
     ctor: function (space, layer) {
@@ -56,7 +56,7 @@ var CollisionManager = cc.Class.extend({
 
         this.space.addCollisionHandler(tipoEspada, tipoCofre, null, this.abrirCofre.bind(this), null, null);
 
-        this.space.addCollisionHandler(tipoBomba, tipoKeaton, null, this.collisionBombaConKeaton.bind(this), null, null);
+        this.space.addCollisionHandler(tipoBomba, tipoKeaton, null, null, null, this.collisionBombaConKeaton.bind(this));
 
         //Colisiones con Octorok
         this.space.addCollisionHandler(tipoNoPasable, tipoOctorok, null, null, this.collisionObjetoConOctorok.bind(this), null);
@@ -249,8 +249,11 @@ var CollisionManager = cc.Class.extend({
          }
     },collisionBombaConKeaton: function(arbiter, space){
 
+        this.vidasKeaton = this.vidasKeaton-1;
+                console.log("vidas keaton "+this.vidasKeaton);
+                 if(this.vidasKeaton==0){
          var shapes = arbiter.getShapes();
-         this.layer.shapesToRemove.push(shapes[1]);
+         this.layer.shapesToRemove.push(shapes[1]);}
     }
 
 });

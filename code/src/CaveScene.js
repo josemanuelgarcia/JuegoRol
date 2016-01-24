@@ -9,6 +9,8 @@ var CaveLayer = cc.Layer.extend({
     keyPulsada: null,
     disparosEnemigos: [],
     depuracion: null,
+    octorok:null,
+    contenedoresCorazon: [],
     corazones: [],
     rupias: [],
     shapesToRemove: [],
@@ -65,6 +67,8 @@ var CaveLayer = cc.Layer.extend({
             posicion = cc.p(600, 50);
         }
         this.link = new Link(this.space, posicion, this);
+        //Creacion enemigo prueba
+                         this.octorok = new Keaton(this.space, cc.p(1383, 800), this);
         this.link.orientacion="ARRIBA";
 
 
@@ -94,6 +98,7 @@ var CaveLayer = cc.Layer.extend({
         //Camara mapa inicial del personaje
         this.space.step(dt);
         this.actualizarCamara();
+        this.octorok.update(dt);
         this.link.update(dt);
         this.abrirCofre();
         //Eliminar elementos
@@ -106,7 +111,11 @@ var CaveLayer = cc.Layer.extend({
                 }
             }
             //Eliminar octorock si impacta, mas adelante se recorreran todos los enemigos
-
+         //Eliminar octorock si impacta, mas adelante se recorreran todos los enemigos
+                                     if (this.octorok.shape == shape) {
+                                         this.octorok.crearColectable();
+                                         this.octorok.eliminar();
+                                     }
             if(this.zonaActual!=undefined){
             this.zonaActual.eliminarEnemigo(shape);
             }
@@ -117,6 +126,12 @@ var CaveLayer = cc.Layer.extend({
                     this.corazones.splice(i, 1);
                 }
             }
+             for (var i = 0; i < this.contenedoresCorazon.length; i++) {
+                                         if (this.contenedoresCorazon[i].shape === shape) {
+                                             this.contenedoresCorazon[i].eliminar();
+                                             this.contenedoresCorazon.splice(i, 1);
+                                        }
+                                    }
             for (var i = 0; i < this.rupias.length; i++) {
                 if (this.rupias[i].shape === shape) {
                     this.rupias[i].eliminar();
@@ -142,13 +157,15 @@ var CaveLayer = cc.Layer.extend({
                         {
                               if(this.puertas[i].tipo=="normal")
                               {
-                                iuLayer.llavesNormales--;
+                               iuLayer.llavesNormales = iuLayer.llavesNormales - 1;
+                                iuLayer.crearLabelLlaves();
                                 this.puertas[i].eliminar();
                                 this.puertas.splice(i, 1);
                               }
                               else
                               {
-                                iuLayer.llavesJefe--;
+                               iuLayer.llavesJefe = iuLayer.llavesJefe - 1;
+                                iuLayer.crearLabelLlaves();
                                 this.puertas[i].eliminar();
                                 this.puertas.splice(i, 1);
                                 var id=this.puertas[i].id;
@@ -388,7 +405,7 @@ var CaveLayer = cc.Layer.extend({
             this.link.stopped=true;
             var nextScene2 = new GameScene();
             cc.director.runScene( nextScene2);
-             cc.audioEngine.playMusic(res.templo_mp3, true);
+
 
          }
 });
@@ -397,6 +414,7 @@ var CaveScene = cc.Scene.extend({
     onEnter: function () {
         this._super();
         this.resume();
+        cc.audioEngine.playMusic(res.templo_mp3, true);
         var layer = new CaveLayer();
         this.addChild(layer, 0, idCapaCueva);
         iuLayer = new IULayer();

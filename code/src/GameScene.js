@@ -51,8 +51,7 @@ var GameLayer = cc.Layer.extend({
         animationManager = new AnimationManager();
         //Cargamos el Mapa
         this.cargarMapa();
-        //Creacion enemigo prueba
-        this.octorok = new Keaton(this.space, cc.p(600, 250), this);
+
         saleCueva=false;
 
         //obtenemos la posicion guardada
@@ -79,34 +78,11 @@ var GameLayer = cc.Layer.extend({
         }
 
 
-        //creacion bomba de prueba
-        this.bombaRecolectable.push(new BombaRecolectable(this.space, cc.p(550, 300), this));
+        this.octorok = new Octorok(this.space, cc.p(503, 633), this);
 
 
 
 
-
-        //creacion de corazon de prueba
-        this.corazones.push(new Corazon(this.space, cc.p(550, 200), this));
-
-        //creacion contenedor de corazon de prueba
-        this.contenedoresCorazon.push(new ContenedorCorazon(this.space, cc.p(450, 400), this));
-
-        //creacion de llave normal de prueba
-        this.llavesNormales.push(new LlaveNormal(this.space, cc.p(400, 350), this));
-
-        //creacion de llave de jefe de prueba
-        this.llavesJefe.push(new LlaveJefe(this.space, cc.p(450, 350), this));
-
-        //Creacion de rupias de diferentes colores  de prueba--------------
-        var rupiaRoja = new Rupia(this.space, cc.p(600, 200), this, "r");
-        this.rupias.push(rupiaRoja);
-        var rupiaAzul = new Rupia(this.space, cc.p(650, 200), this, "a");
-        this.rupias.push(rupiaAzul);
-        var rupiaAmarilla = new Rupia(this.space, cc.p(520, 200), this, "m");
-        this.rupias.push(rupiaAmarilla);
-        var rupiaVerde = new Rupia(this.space, cc.p(700, 200), this, "v");
-        this.rupias.push(rupiaVerde);
         this.space.addCollisionHandler(tipoJugador, tipoCueva, this.transicion.bind(this), null, null, null);
         //------------------------------------------------------------------
 
@@ -134,9 +110,10 @@ var GameLayer = cc.Layer.extend({
         //Camara mapa inicial del personaje
         this.space.step(dt);
         this.actualizarCamara();
-        this.octorok.update(dt);
+
 
         this.link.update(dt);
+        this.octorok.update(dt);
         //Eliminar elementos
         for (var i = 0; i < this.shapesToRemove.length; i++) {
             var shape = this.shapesToRemove[i];
@@ -146,10 +123,10 @@ var GameLayer = cc.Layer.extend({
                     this.link.boomerang.eliminar();
                 }
             }
-            //Eliminar octorock si impacta, mas adelante se recorreran todos los enemigos
-            else if (this.octorok.shape == shape) {
-                this.octorok.eliminar();
-            }
+             if (this.octorok.shape == shape) {
+
+                              this.octorok.eliminar();
+                          }
             for (var i = 0; i < this.corazones.length; i++) {
                 if (this.corazones[i].shape === shape) {
                     this.corazones[i].eliminar();

@@ -37,5 +37,12 @@ var ContenedorCorazon = cc.Class.extend({
 
         // quita el sprite
         this.layer.mapa.removeChild(this.sprite);
+         //llamar a la layer de victoria
+                cc.director.pause();
+
+                iuLayer.entrar=false;
+                iuLayer.pause=false;
+                // tenemos el objeto GameScene y le añadimos la nueva layer
+                this.layer.getParent().addChild(new VictoriLayer(this.layer.getParent()), 0, 4);
     }
 });
