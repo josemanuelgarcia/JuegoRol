@@ -43,6 +43,7 @@
         "src/Cuevas/Interruptor.js",
         "src/Cuevas/Cofre.js",
         "src/Cuevas/Zona.js",
+        "src/Cuevas/Puerta.js",
         "src/Enemigos/Keaton.js"
     ]
 }

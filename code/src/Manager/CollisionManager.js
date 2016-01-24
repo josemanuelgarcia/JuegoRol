@@ -20,7 +20,7 @@ var tipoLlaveNormal = 19;
 var tipoLlaveJefe = 20;
 var tipoCofre = 21;
 var tipoKeaton=22;
-
+var tipoPuerta=23;
 var CollisionManager = cc.Class.extend({
 
     space: null,
@@ -75,7 +75,7 @@ var CollisionManager = cc.Class.extend({
         this.space.addCollisionHandler(tipoEspada, tipoOctorok, null, this.collisionEspadaConEnemigo.bind(this), null, null);
 
         this.space.addCollisionHandler(tipoJugador, tipoOctorok, null, null, null, this.reducirVidas.bind(this));
-        this.space.addCollisionHandler(tipoJugador, tipoInterruptor, null, null, null, this.pulsarInterruptor.bind(this));
+        this.space.addCollisionHandler(tipoJugador, tipoInterruptor, this.pulsarInterruptor.bind(this), null, null, null);
         //Colisiones Soldado
         this.space.addCollisionHandler(tipoBoomerang, tipoSoldado, null, this.destruirSegundo.bind(this), null, null);
 
@@ -88,6 +88,8 @@ var CollisionManager = cc.Class.extend({
         this.space.addCollisionHandler(tipoJugador, tipoKeaton, this.reducirVidas.bind(this), null, null, null);
 
         this.space.addCollisionHandler(tipoJugador, tipoZona, this.actualizarCamaraZona.bind(this), null, null, null);
+
+        this.space.addCollisionHandler(tipoJugador, tipoPuerta, null, this.abrirPuerta.bind(this), null,null);
 
     }, collisionObjetoConOctorok: function (arbiter, space) {
         //  this.octorok.haChocado();
@@ -227,6 +229,21 @@ var CollisionManager = cc.Class.extend({
 
             }
         }
+    },abrirPuerta:function(arbiter,space){
+        var shapes=arbiter.getShapes();
+         if (this.layer.link.sword) {
+            if (this.layer.mathUtil.isInViewCone(this.layer.link.body.p, shapes[1].body.p, 0.5, this.layer)) {
+
+                for(var i=0;i<this.layer.puertas.length;i++)
+                 {
+                    if(this.layer.puertas[i].shape==shapes[1])
+                    {
+                        this.layer.shapesToRemove.push(shapes[1]);
+                    }
+                 }
+
+            }
+         }
     },collisionBombaConKeaton: function(arbiter, space){
 
          var shapes = arbiter.getShapes();

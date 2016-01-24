@@ -7,7 +7,7 @@ var Cofre = cc.Class.extend({
     visible: null,
     botin: null,
     abierto: false,
-
+    animacionAbrir: null,
     ctor: function (space, position, layer, idCofre, botin, visible) {
         this.idCofre = idCofre;
         this.visible = false;
@@ -31,7 +31,7 @@ var Cofre = cc.Class.extend({
         this.sprite = new cc.PhysicsSprite("#cofre_cerrado.png");
         var tamano = this.sprite.getContentSize();
         this.position = cc.p(this.position.x + tamano.width / 2, this.position.y + tamano.height / 2);
-        this.body = new cp.Body(100, Infinity);
+        this.body = new cp.StaticBody();
         this.body.setPos(this.position);
         this.sprite.setBody(this.body);
         this.shape = new cp.BoxShape(this.body,
@@ -40,22 +40,23 @@ var Cofre = cc.Class.extend({
         this.shape.setCollisionType(tipoCofre);
         this.space.addStaticShape(this.shape);
 
-        this.layer.mapa.addChild(this.sprite, 2);
+
+        var framesDestruir = animationManager.getAnimacionBasica("cofre_abierto", 1);
+        this.animacionAbrir = new cc.Animation(framesDestruir, 0.05);
+
+
+
+        this.layer.mapa.addChild(this.sprite, 3);
         this.visible = true;
 
     }, abrir: function () {
         if (!this.abierto) {
 
-            this.sprite = new cc.PhysicsSprite("#cofre_abierto.png");
-            this.sprite.setBody(this.body);
-            this.shape = new cp.BoxShape(this.body,
-                        this.sprite.getContentSize().width - 2,
-                        this.sprite.getContentSize().height - 2);
-            this.layer.mapa.addChild(this.sprite, 2);
+
 
             var crearColectable = cc.CallFunc.create(this.crearColectable, this);
 
-            this.sprite.runAction(cc.Sequence.create(crearColectable));
+            this.sprite.runAction(cc.Sequence.create(cc.Animate.create(this.animacionAbrir),crearColectable));
             this.abierto = true;
         }
 

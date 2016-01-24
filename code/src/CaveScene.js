@@ -18,6 +18,7 @@ var CaveLayer = cc.Layer.extend({
     interruptores: [],
     cofres: [],
     zonas: [],
+    puertas:[],
     llavesNormales: [],
     llavesJefe: [],
     zonaActual: null,
@@ -36,14 +37,13 @@ var CaveLayer = cc.Layer.extend({
         cc.spriteFrameCache.addSpriteFrames(res.boomerang_plist);
         cc.spriteFrameCache.addSpriteFrames(res.explosion_plist);
         cc.spriteFrameCache.addSpriteFrames(res.jarron_plist);
-
+        cc.spriteFrameCache.addSpriteFrames(res.objetosMazmorra_plist);
         //Creación del espacio del juego
         this.space = new cp.Space();
         //La gravedad en este juego da igual.
         this.space.gravity = cp.v(0, 0);
         //Add the Debug Layer:
-        //var depuracion = new cc.PhysicsDebugNode(this.space);
-        //this.addChild(depuracion, 10);
+
         animationManager = new AnimationManager();
         //Cargamos el Mapa
         this.cargarMapa();
@@ -107,8 +107,11 @@ var CaveLayer = cc.Layer.extend({
                 }
             }
             //Eliminar octorock si impacta, mas adelante se recorreran todos los enemigos
-            if(this.zonaActual!=null){
-            this.zonaActual.eliminarEnemigo(shape);}
+
+            if(this.zonaActual!=undefined){
+            this.zonaActual.eliminarEnemigo(shape);
+            }
+
             for (var i = 0; i < this.corazones.length; i++) {
                 if (this.corazones[i].shape === shape) {
                     this.corazones[i].eliminar();
@@ -134,7 +137,36 @@ var CaveLayer = cc.Layer.extend({
                     this.jarrones.splice(i, 1);
                 }
             }
+            for (var i = 0; i < this.puertas.length; i++) {
+               if (this.puertas[i].shape === shape)
+               {
+                        if((iuLayer.llavesJefe>0 && this.puertas[i].tipo!="normal") || (iuLayer.llavesNormales>0 && this.puertas[i].tipo=="normal"))
+                        {
+                              if(this.puertas[i].tipo=="normal")
+                              {
+                                iuLayer.llavesNormales--;
+                                this.puertas[i].eliminar();
+                                this.puertas.splice(i, 1);
+                              }
+                              else
+                              {
+                                iuLayer.llavesJefe--;
+                                this.puertas[i].eliminar();
+                                this.puertas.splice(i, 1);
+                                var id=this.puertas[i].id;
+                                for(var j=0;j<this.puertas.length;j++)
+                                {
+                                    if(this.puertas[j].id==id)
+                                    {
+                                        this.puertas[i].eliminar();
+                                        this.puertas.splice(i, 1);
+                                    }
+                                }
 
+                              }
+                        }
+                }
+             }
             /* if(this.soldado.shape == shape){
                  this.soldado.eliminar();
              }*/
@@ -293,7 +325,17 @@ var CaveLayer = cc.Layer.extend({
                    var objetoAnimado = new ObjetoAnimado(this.space, cc.p(x, y), this, tipo, 4);
 
                }
-
+        //Puertas
+                       var puertas = this.mapa.getObjectGroup("Pasos");
+                       var puertasArray = puertas.getObjects();
+                       for (var i = 0; i < puertasArray.length; i++) {
+                           var x = puertasArray[i]["x"];
+                           var y = puertasArray[i]["y"];
+                           var tipo = puertasArray[i]["tipo"];
+                           var id = puertasArray[i]["id"];
+                           var puerta = new Puerta(this.space, cc.p(x, y), this, tipo, id);
+                            this.puertas.push(puerta);
+                       }
 
 
     }, cambiarZona: function (zona) {

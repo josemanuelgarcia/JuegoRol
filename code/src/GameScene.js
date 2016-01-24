@@ -77,8 +77,6 @@ var GameLayer = cc.Layer.extend({
 
         //Creacion de soldado de prueba
         this.soldado = new Soldado(this.space, cc.p(600, 200), this, "v");
-
-
         //creacion de corazon de prueba
         this.corazones.push(new Corazon(this.space, cc.p(550, 200), this));
 
@@ -162,7 +160,10 @@ var GameLayer = cc.Layer.extend({
             }
             for (var i = 0; i < this.jarrones.length; i++) {
                 if (this.jarrones[i].shape === shape)
+                {
                     this.jarrones[i].destruir();
+                    this.jarrones.splice(i,1);
+                }
             }
 
             for (var i = 0; i < this.bombaRecolectable.length; i++) {
