@@ -127,11 +127,7 @@ var GameLayer = cc.Layer.extend({
                     this.link.boomerang.eliminar();
                 }
             }
-            //Eliminar octorock si impacta, mas adelante se recorreran todos los enemigos
-            else if (this.octorok.shape == shape) {
-                this.octorok.crearColectable();
-                this.octorok.eliminar();
-            }
+
             for (var i = 0; i < this.corazones.length; i++) {
                 if (this.corazones[i].shape === shape) {
                     this.corazones[i].eliminar();
