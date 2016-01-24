@@ -105,13 +105,7 @@ var Keaton = cc.Class.extend({
         // quita el sprite
         this.layer.mapa.removeChild(this.sprite);
 
-        //llamar a la layer de victoria
-        cc.director.pause();
 
-        iuLayer.entrar=false;
-        iuLayer.pause=false;
-        // tenemos el objeto GameScene y le añadimos la nueva layer
-        this.layer.getParent().addChild(new VictoriLayer(this.layer.getParent()), 0, 4);
 
     }, obtainAnimation: function (key) {
         return this.animaciones[key];
@@ -140,6 +134,15 @@ var Keaton = cc.Class.extend({
        this.sprite.stopAllActions();
        this.sprite.scaleX = (this.orientacion == "IZQUIERDA" ? -1 : 1);
        this.sprite.runAction(this.obtainAnimation("ATACAR_" + this.orientacion));
-    }
+    }, crearColectable: function () {
+
+
+                    console.log("corazon creado");
+                     this.layer.contenedoresCorazon.push(new ContenedorCorazon(this.space, cc.p(this.body.p.x, this.body.p.y), this.layer));
+
+
+
+             }
+
 
 });

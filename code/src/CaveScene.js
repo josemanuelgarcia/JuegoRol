@@ -8,6 +8,7 @@ var CaveLayer = cc.Layer.extend({
     mapaAlto: null,
     keyPulsada: null,
     disparosEnemigos: [],
+    octorok:null,
     depuracion: null,
     corazones: [],
     rupias: [],
@@ -24,6 +25,7 @@ var CaveLayer = cc.Layer.extend({
     zonaActual: null,
     //Teclado
     teclasPulsadas: [],
+    contenedoresCorazon: [],
     soyCaveScene:true,
 
     ctor: function () {
@@ -65,7 +67,8 @@ var CaveLayer = cc.Layer.extend({
         }
         this.link = new Link(this.space, posicion, this);
 
-
+         //Creacion enemigo prueba
+                this.octorok = new Keaton(this.space, cc.p(1383, 800), this);
 
         //------------------------------------------------------------------
 
@@ -93,7 +96,9 @@ var CaveLayer = cc.Layer.extend({
         //Camara mapa inicial del personaje
         this.space.step(dt);
         this.actualizarCamara();
+         this.octorok.update(dt);
         this.link.update(dt);
+        console.log(this.link.body.p.x+","+this.link.body.p.y);
         this.abrirCofre();
         //Eliminar elementos
         for (var i = 0; i < this.shapesToRemove.length; i++) {
@@ -105,7 +110,11 @@ var CaveLayer = cc.Layer.extend({
                 }
             }
             //Eliminar octorock si impacta, mas adelante se recorreran todos los enemigos
-
+                 //Eliminar octorock si impacta, mas adelante se recorreran todos los enemigos
+                             if (this.octorok.shape == shape) {
+                                this.octorok.crearColectable();
+                                this.octorok.eliminar();
+                            }
             if(this.zonaActual!=undefined){
             this.zonaActual.eliminarEnemigo(shape);
             }
@@ -116,6 +125,12 @@ var CaveLayer = cc.Layer.extend({
                     this.corazones.splice(i, 1);
                 }
             }
+             for (var i = 0; i < this.contenedoresCorazon.length; i++) {
+                            if (this.contenedoresCorazon[i].shape === shape) {
+                                this.contenedoresCorazon[i].eliminar();
+                                this.contenedoresCorazon.splice(i, 1);
+                            }
+                        }
             for (var i = 0; i < this.rupias.length; i++) {
                 if (this.rupias[i].shape === shape) {
                     this.rupias[i].eliminar();
