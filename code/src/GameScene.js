@@ -115,7 +115,7 @@ var GameLayer = cc.Layer.extend({
         //Camara mapa inicial del personaje
         this.space.step(dt);
         this.actualizarCamara();
-        this.octorok.update(dt);
+
 
         this.link.update(dt);
         //Eliminar elementos
