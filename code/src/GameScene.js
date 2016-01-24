@@ -6,6 +6,7 @@ var weapon = "ARCO";
 var animationManager = null;
 var collisionManager = null;
 var transicion= false;
+var llavesNo=false;
 var GameLayer = cc.Layer.extend({
     space: null,
     link: null,
@@ -37,7 +38,7 @@ var GameLayer = cc.Layer.extend({
         var size = cc.winSize;
         this.mathUtil = new MathUtil();
 
-
+        llavesNo=true;
 
         //Creación del espacio del juego
         this.space = new cp.Space();
@@ -323,7 +324,7 @@ var GameLayer = cc.Layer.extend({
         saveDollNum("numBombasTransicion", this.link.numBombas);
         saveDollNum("rupiasTransicion", iuLayer.rupias);
         transicion=true;
-        iuLayer.activarLlaves();
+
         var shapes = arbiter.getShapes();
         var shape = shapes[1];
         var cueva = null;

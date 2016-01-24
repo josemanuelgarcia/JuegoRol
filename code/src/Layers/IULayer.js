@@ -6,7 +6,6 @@ var IULayer = cc.Layer.extend({
     spriteBSumarVidas: null,
     spriteBQuitarVidas: null,
     spriteArmaElegida: null,
-    apriteActivarLlaves:null,
     spriteRupias: null,
     spriteLlaves:null,
     spriteLlavesJefe:null,
@@ -47,6 +46,7 @@ var IULayer = cc.Layer.extend({
         var vidasGuardadasTransicion = parseInt(loadDollNum("corazonesDadosTransicion",1));
         var vidasPerdidasTransicion = parseInt(loadDollNum("vidasQuitadasTransicion",1));
         console.log("LLaves jefe "+llavesJefeGuardadas+"Lñaves Normales "+llavesNormalesGuardadas);
+
          if(cargarPartida && rupiasGuardadas != 0 ){
 
                                 this.rupias=rupiasGuardadas;
@@ -102,21 +102,14 @@ var IULayer = cc.Layer.extend({
                 }
         //----------------------------------------------------------------------
 
-        //boton para comprobar que la activacion de las llaves funciona
-        this.apriteActivarLlaves = cc.Sprite.create(res.llave_jefe_iu_png);
-                this.apriteActivarLlaves.setPosition(cc.p(50, 300));
-                this.addChild(this.apriteActivarLlaves);
 
 
-        // boton para comprobar q se suman corazones (es provisional y lo podeis quitar si quereis)
-        this.spriteBSumarVidas = cc.Sprite.create(res.contenedorCorazon_png);
-        this.spriteBSumarVidas.setPosition(cc.p(50, 150));
-        this.addChild(this.spriteBSumarVidas);
 
-        // boton para comprobar q se quitan vidas (es provisional y lo podeis quitar si quereis)
-        this.spriteBQuitarVidas = cc.Sprite.create(res.corazonnegro_png);
-        this.spriteBQuitarVidas.setPosition(cc.p(30, 250));
-        this.addChild(this.spriteBQuitarVidas);
+
+
+
+
+
 
         //Llaves normales para mazmorras
         this.spriteLlaves = cc.Sprite.create(res.llave_normal_iu_png);
@@ -181,15 +174,19 @@ var IULayer = cc.Layer.extend({
         }, this)
 
         this.scheduleUpdate();
+        var estoyEnCave = loadDollNum("estoyEnCave", 1);
+         if((transicion || estoyEnCave==""+"true")&& !llavesNo){
+                 this.activarLlaves();}
           transicion=false;
         return true;
     }, procesarMouseDown: function (event) {
 
         var instancia = event.getCurrentTarget();
         var areaBoton = instancia.spriteBotonMenu.getBoundingBox();
-        var areaCorazon = instancia.spriteBSumarVidas.getBoundingBox();
-        var areaLlaves = instancia.apriteActivarLlaves.getBoundingBox();
-        var areaQuitarCorazon = instancia.spriteBQuitarVidas.getBoundingBox();
+
+
+
+
         var areaBotonPause = instancia.spriteBotonPause.getBoundingBox();
  var gameScene = instancia.getParent();
   var instanciaIU = event.getCurrentTarget();
@@ -205,25 +202,8 @@ var IULayer = cc.Layer.extend({
 
         }
 }
-        //Pulsacion dentro de corazon lo cual añade una vida
-        if (cc.rectContainsPoint(areaCorazon,
-            cc.p(event.getLocationX(), event.getLocationY()))) {
 
 
-//Es una muñeca número de conservación de datos.
-dollNum = 1;
-
-            // Metodo que suma una vida
-            //instanciaIU.darVidas();
-            instanciaIU.nuevoCorazon();
-
-        }
-         //Pulsacion dentro de llaves lo cual hace visible el contador de llaves de mazmorra
-                if (cc.rectContainsPoint(areaLlaves,
-                    cc.p(event.getLocationX(), event.getLocationY()))) {
-                        console.log("llaves activadas");
-                    instanciaIU.activarLlaves();
-                }
 
         //pulsacion detro del boton de pausa
          if(instanciaIU.entrar){
@@ -239,15 +219,7 @@ dollNum = 1;
                 }
 
 }
-        //Pulsacion dentro de corazon lo cual quita una vida
-        if (cc.rectContainsPoint(areaQuitarCorazon,
-            cc.p(event.getLocationX(), event.getLocationY()))) {
-            var instanciaIU = event.getCurrentTarget();
-            var instanciaIU = event.getCurrentTarget();
 
-            instanciaIU.quitarVidas();
-
-        }
 
     }, agregarRupia: function (rupias) {
         this.rupias= this.rupias+rupias;
